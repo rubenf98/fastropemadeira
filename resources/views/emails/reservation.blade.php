@@ -11,6 +11,8 @@
             <li>Morada: {{$reservation->address}}</li>
             <li>Privado: {{$reservation->private ? "Sim" : "Não"}}</li>
             <li>Data: {{$reservation->date}} {{$reservation->time}}</li>
+            <li>Atividade: {{$reservation->experience->name}}</li>
+            <li>Notas: {{$reservation->notes}}</li>
         </ul>
         <h2>Participantes</h2>
         <ul>
@@ -19,11 +21,7 @@
                 {{$participant->weight}} / {{$participant->height}}cm / {{$participant->shoe}} EU</li>
             @endforeach
         </ul>
-        <h2>Atividade</h2>
-        <ul>
-            <li>Atividade: {{$reservation->experience->activity->name}}</li>
-            <li>Experiência: {{$reservation->experience->name}}</li>
-        </ul>
+
         <h2>Total: {{$reservation->total}}€</h2>
     </div>
 </body>

@@ -63,7 +63,7 @@ const Overlay = styled.div`
     bottom: 0;
     content: '';
     background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,1) 90%); 
+    background: linear-gradient(0deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,1) 100%); 
 `;
 
 const CustomInput = styled(Input)`

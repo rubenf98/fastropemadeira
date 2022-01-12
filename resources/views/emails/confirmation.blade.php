@@ -4,7 +4,7 @@
 <body>
     <div class="email-container" style="max-width: 600px;width: 90%;margin: auto;display: block;">
         <div class="image-container flex-center" style="width: 200px;margin: auto;display: block;margin-bottom: 20px;">
-            <a href="http://edificioplaza2.com/"><img src="http://edificioplaza2.com/logo.png"
+            <a href="https://www.fastropemadeira.com/"><img src="https://www.fastropemadeira.com/logo.png"
                     style="width: 100%;height: auto;"></a>
         </div>
 
@@ -25,7 +25,7 @@
         </div>
 
         <div class="button-container flex-center">
-            <a class="btn-url" href="http://localhost:8000/confirmation/{{$token}}" style="text-decoration: none;">
+            <a class="btn-url" href=https://www.fastropemadeira.com/confirmation/{{$token}}" style="text-decoration: none;">
                 <input class="button btn-slide-line" type="button" value="Confirmar"
                     style="margin: 25px auto;display: block; padding: 24px 36px;outline: none;border: none;text-decoration: none;cursor: pointer;text-transform: uppercase;border-radius: 8px;color: white;background: rgb(52,60,94);font-weight: bold;font-size: .9em;transition: .4s ease-out;">
             </a>

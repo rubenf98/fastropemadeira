@@ -222,7 +222,7 @@ class Homepage extends React.Component {
 
     updateDimensions = () => {
         this.setState({
-            screenHeight: document.body.clientHeight + "px",
+            screenHeight: document.body.clientHeight,
 
         })
     };
@@ -234,6 +234,10 @@ class Homepage extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions);
+    }
+
+    handleScrollClick = () => {
+        window.scrollTo(0, this.state.screenHeight + 150);
     }
 
     render() {
@@ -249,7 +253,7 @@ class Homepage extends React.Component {
                     initForm={this.state.initForm}
                 />
 
-                <Header height={screenHeight}>
+                <Header height={screenHeight + "px"}>
                     <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/pending-video.webm' playing controls={false} />
                     <Overlay />
                     <HeaderContent>
@@ -257,7 +261,7 @@ class Homepage extends React.Component {
                         <div />
                         <h2>{text.header}</h2>
                     </HeaderContent>
-                    <ScrollAction src="/icon/arrow_down.svg" alt="scroll" />
+                    <ScrollAction onClick={this.handleScrollClick} src="/icon/arrow_down.svg" alt="scroll" />
                 </Header>
 
                 <Reservation data={activities} text={text} openForm={this.openForm} />
