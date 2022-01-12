@@ -8,20 +8,13 @@ import Activities from './Home/Activities';
 import Feedback from './Home/Feedback';
 import Team from './Home/Team';
 import Partner from './Home/Partner';
-import { createGlobalStyle } from 'styled-components';
-import EnclaveDemo from '../../../assets/fonts/EnclaveDemoRegular.ttf';
 import { dimensions } from "../../helper";
 import OrderForm from './OrderForm';
 import AnimationContainer from '../common/AnimationContainer';
 
 
 
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'Enclave Demo';
-    src: url(${EnclaveDemo}) format('truetype');
-  }
-`;
+
 
 
 const jump = keyframes`

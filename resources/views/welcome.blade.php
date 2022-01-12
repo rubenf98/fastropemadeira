@@ -22,7 +22,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <title>FastRope</title>
 </head>
+
 <style>
+    @font-face { font-family: Enclave Demo; src: url('{!! asset('fonts/EnclaveDemoRegular.ttf') !!}'); }
+
     html,
     body,
     #index {
