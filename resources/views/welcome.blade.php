@@ -9,8 +9,10 @@
     <meta name="keywords"
         content="Fast, Rope, fastrope, madeira, island, canyoning, canionismo, caminhada, hiking, adventure, experience, aventura">
     <meta name="author" content="Rúben Freitas">
+
     <meta name="description"
         content="Fast Rope is more than a Adventure company, is a team that we all share the passion for Canyoning, Hiking and much more...we also do private and personalized tours, you choose what you want to do and we make it happen.">
+    <link rel="shortcut icon" href="{{{ asset('logo_white.png') }}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -24,7 +26,10 @@
 </head>
 
 <style>
-    @font-face { font-family: Enclave Demo; src: url('{!! asset('fonts/EnclaveDemoRegular.ttf') !!}'); }
+    @font-face {
+        font-family: Enclave Demo;
+        src: url('{!! asset('fonts/EnclaveDemoRegular.ttf') !!}');
+    }
 
     html,
     body,

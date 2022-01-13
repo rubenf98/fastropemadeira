@@ -29,6 +29,7 @@ const ModalContainer = styled(Modal)`
 
 const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0, 0] }) => {
     const [step, setStep] = useState(0);
+    const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [calendarMetadata, setCalendarMetadata] = useState({});
     const [form] = Form.useForm();
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/form");
@@ -36,7 +37,7 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
     const stepItems = [
         <Activity text={text} incrementStep={incrementStep} data={activities.length ? activities : []} />,
         <Location text={text} getActivity={getActivity} decrementStep={decrementStep} incrementStep={incrementStep} updateForm={updateForm} />,
-        <People form={form} text={text} decrementStep={decrementStep} calendarMetadata={calendarMetadata} getExperience={getExperience} incrementStep={incrementStep} updateForm={updateForm} />
+        <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} calendarMetadata={calendarMetadata} getExperience={getExperience} incrementStep={incrementStep} updateForm={updateForm} />
     ]
 
     function incrementStep(formValues) {
@@ -63,15 +64,18 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
     };
 
     function submitForm() {
+        setLoadingSubmit(true);
         var data = form.getFieldValue();
         if (data.person) {
             data.person = data.person.slice(0, data.people);
         }
         data.experience_id = data.experience;
         axios.post(`${window.location.origin}/api/reservation`, data).then((response) => {
+            setLoadingSubmit(false);
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();
         }).catch((error) => {
+            setLoadingSubmit(false);
             let messages = [];
 
             Object.values(error.response.data.errors).map(function (message) {

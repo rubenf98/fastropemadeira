@@ -70,10 +70,10 @@ class ReservationController extends Controller
         }
         DB::commit();
 
-        // dispatch(function () use ($record) {
-        //     Mail::to($record->email)->queue(new ConfirmationMail($record->confirmation_token));
-        // })->afterResponse();
-        ConfirmationEmail::dispatchAfterResponse($record->email, $record->confirmation_token);
+        dispatch(function () use ($record) {
+            Mail::to($record->email)->queue(new ConfirmationMail($record->confirmation_token));
+        })->afterResponse();
+        //ConfirmationEmail::dispatchAfterResponse($record->email, $record->confirmation_token);
 
         return new ReservationResource($record);
     }

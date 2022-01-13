@@ -14,7 +14,6 @@ class ActivitySeeder extends Seeder
      */
     public function run()
     {
-        //
 
         Activity::create([
             'name' => ['en' => "Canyoning", 'pt' => "Canyoning"],
@@ -28,7 +27,7 @@ class ActivitySeeder extends Seeder
         Activity::create([
             'name' => ['en' => "Hiking", 'pt' => "Caminhada"],
             'description' => [
-                'en' => "Dare to explore our walks through fantastic routes full of nature. We have options for all tastes and customized packages!",
+                'en' => "Dare to explore our walks through fantastic routes full of local nature. We have options for all tastes and customized packages that will amaze you!",
                 'pt' => "Atreve-te a explorar as nossas caminhadas através de percursos fantásticos e repletos de natureza. Temos opções para todos os gostos e pacotes personalizados!"
             ],
             'image' => "/hiking.webp"

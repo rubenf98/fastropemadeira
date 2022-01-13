@@ -21,10 +21,13 @@ class ReservationRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $print = new \Symfony\Component\Console\Output\ConsoleOutput();
-        //$print->writeln($formattedDate);
+        $phone = null;
+        if (array_key_exists("code", $this->phone) && array_key_exists("phone", $this->phone)) {
+            $phone = $this->phone["code"] . $this->phone["phone"];
+        }
+
         $this->merge([
-            'phone' => $this->phone["code"] . $this->phone["phone"],
+            'phone' =>  $phone,
             'date' => new Carbon($this->date),
             'confirmation_token' => uniqid(),
             'hasPerson' => $this->experience_id < 15 ?  true : false,
@@ -48,7 +51,7 @@ class ReservationRequest extends FormRequest
             'people' => 'required|integer|min:4|max:15',
             'experience_id' => 'required|exists:experiences,id',
             'private' => 'required|boolean',
-            'phone' => 'required|numeric',
+            'phone' => 'nullable|numeric',
             'person' => 'required_if:hasPerson,true|size:' . $this->people,
             'person.*.birthday' => 'required|date',
             'person.*.gender' => 'required|string',

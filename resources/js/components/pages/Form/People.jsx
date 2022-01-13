@@ -210,7 +210,8 @@ const PriceContainer = styled.div`
 `;
 
 
-const Checkout = styled.div`
+const Checkout = styled(Button)`
+    min-height: 70px;
     box-sizing: border-box;
     cursor: pointer;
     background: rgb(52,60,94);
@@ -231,8 +232,9 @@ const Checkout = styled.div`
         //display: none;
     }
 
-    &:hover {
+    &:hover, &:focus {
         background: #2b3252;
+        color: white;
     }
     
 `;
@@ -305,7 +307,7 @@ const rules = {
     ],
 };
 
-function People({ getExperience, incrementStep, updateForm, calendarMetadata, decrementStep, text, form }) {
+function People({ getExperience, incrementStep, updateForm, calendarMetadata, decrementStep, text, form, loading }) {
     const [data, setData] = useState({});
     const [currentLimit, setCurrentLimit] = useState(15);
     const [people, setPeople] = useState(6);
@@ -322,7 +324,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
         var currentDate = moment(value).format("YYYY-MM-DD");
         if (calendarMetadata.dates[currentDate]) {
             setCurrentLimit(15 - calendarMetadata.dates[currentDate]);
-        }
+        } else setCurrentLimit(15);
 
         updateForm({ date: value });
     }
@@ -611,7 +613,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                     </Disclaimer>
                 </PriceContainer>
 
-                <Checkout onClick={handleSubmit}><span>{text.submit}</span> </Checkout>
+                <Checkout disabled={loading} onClick={handleSubmit}><span>{text.submit}</span> </Checkout>
             </Row>
         </ConfigProvider>
     )

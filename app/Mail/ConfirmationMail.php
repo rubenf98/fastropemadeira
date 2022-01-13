@@ -30,6 +30,6 @@ class ConfirmationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.confirmation')->subject('Fastrope - Confirmation');
+        return $this->view('emails.confirmation')->subject('Finish you reservation with us!');
     }
 }

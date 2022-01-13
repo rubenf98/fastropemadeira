@@ -3,7 +3,7 @@
 </div>
 <br>
 <div class="footer-container text" style="font-size: 1em;">
-    Cumprimentos, <p class="footer" style="font-weight: bold;margin-top: 3px;">Administração Plaza II</p>
+    Cumprimentos, <p class="footer" style="font-weight: bold;margin-top: 3px;">Fast Rope Madeira</p>
 </div>
 
 

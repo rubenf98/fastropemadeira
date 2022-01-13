@@ -14,7 +14,7 @@
             <li>Atividade: {{$reservation->experience->name}}</li>
             <li>Notas: {{$reservation->notes}}</li>
         </ul>
-        <h2>Participantes</h2>
+        <h2>Participantes: {{$reservation->people}}</h2>
         <ul>
             @foreach ($reservation->participants as $key => $participant)
             <li>Participante {{$key + 1}}: {{$participant->birthday}} / {{$participant->gender}} /

@@ -42,15 +42,13 @@ class Reservation extends Model
         $reservations = Reservation::where("date", ">", Carbon::now())->latest()->get();
         $disabled = [];
         $dates = [];
-        $print = new \Symfony\Component\Console\Output\ConsoleOutput();
-
 
         foreach ($reservations as  $reservation) {
 
             if (!in_array($reservation->date, $disabled)) {
                 if (array_key_exists($reservation->date, $dates)) {
-                    $dates[$reservation->date] = $dates[$reservation->date] + $reservation->participants()->count();
-                } else $dates[$reservation->date] = $reservation->participants()->count();
+                    $dates[$reservation->date] = $dates[$reservation->date] + $reservation->people;
+                } else $dates[$reservation->date] = $reservation->people;
 
                 if ($dates[$reservation->date] >= 12 || $reservation->private) {
                     array_push($disabled, $reservation->date);
