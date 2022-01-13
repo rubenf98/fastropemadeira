@@ -1,7 +1,7 @@
 export const text = {
     formTitle: "Contact",
-    formParagraph: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi eum sunt facilis inventore quam quos consequatur magnam beatae. Eius repellat quas maiores autem eos temporibus, adipisci asperiores voluptatibus hic corrupti.",
-    formFeedback: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque consectetur nemo aliquam in unde soluta possimus a esse repellendus quis id officiis, eius natus iste. Dignissimos, suscipit quia. Obcaecati, ab.",
+    formParagraph: "You can contact us using the form below, where you will receive a response via the email address provided. If you prefer, you can contact us using the email address and telephone number in the description.",
+    formFeedback: "Thank you contacting us! We'll try to answer any doubts as soon as possible. You'll receive an update thought the email address provided on the form.",
     form: {
         items: [
             "Name",
