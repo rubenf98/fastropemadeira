@@ -161,6 +161,15 @@ const InfoContainer = styled.div`
         color: #777;
         font-size: 1.2em;
         margin: 0px 0px 15px 0px;
+
+        a{
+            text-decoration: none;
+            color: inherit;
+
+            &:hover{
+                color: #424242;
+            }
+        }
     }
 `;
 
@@ -390,7 +399,7 @@ function Contact() {
                                     name="message"
                                     rules={rules.message}
                                 >
-                                    <TextArea size="large" showCount maxLength={100} />
+                                    <TextArea size="large" showCount maxLength={180} />
                                 </Form.Item>
 
                                 <Form.Item>
@@ -409,7 +418,11 @@ function Contact() {
                         </div>
                         <div>
                             <h3>Email</h3>
-                            <p>madeirafastrope@gmail.com</p>
+                            <p>
+                                <a href="mailto:info@fastropemadeira.com">
+                                    info@fastropemadeira.com
+                                </a>
+                            </p>
                         </div>
                         <div>
                             <h3>{text.form.info[1]}</h3>
@@ -463,7 +476,7 @@ function Contact() {
                                 name="message"
                                 rules={rules.message}
                             >
-                                <TextArea style={{ width: "100%" }} showCount maxLength={150} rows={6} />
+                                <TextArea style={{ width: "100%" }} showCount maxLength={180} rows={6} />
                             </Form.Item>
                         </Col>
                     </FeedbackSectionContainer>

@@ -45,7 +45,7 @@ class ReservationController extends Controller
         $reservation = Reservation::where("confirmation_token", $request->token)->first();
 
         if (!$reservation->confirmation) {
-            NotificationEmail::dispatchAfterResponse($reservation);
+            NotificationEmail::dispatch($reservation)->delay(now()->addSecond());
             $reservation->confirmation = true;
             $reservation->save();
         }
@@ -70,10 +70,8 @@ class ReservationController extends Controller
         }
         DB::commit();
 
-        dispatch(function () use ($record) {
-            Mail::to($record->email)->queue(new ConfirmationMail($record->confirmation_token));
-        })->afterResponse();
-        //ConfirmationEmail::dispatchAfterResponse($record->email, $record->confirmation_token);
+        ConfirmationEmail::dispatch($record->email, $record->confirmation_token)
+            ->delay(now()->addSecond());
 
         return new ReservationResource($record);
     }

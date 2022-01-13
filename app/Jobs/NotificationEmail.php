@@ -33,6 +33,6 @@ class NotificationEmail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to("joseruben98@hotmail.com")->queue(new MailNotificationEmail($this->reservation));
+        Mail::to("info@fastropemadeira.com")->queue(new MailNotificationEmail($this->reservation));
     }
 }

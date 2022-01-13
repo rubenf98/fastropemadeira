@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Jobs\NotifyContactEmail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
@@ -28,15 +29,14 @@ class ContactController extends Controller
     {
         $validator = $request->validated();
         $contact = Contact::create($validator);
-        return $contact;
-        /* NotifyContactEmail::dispatch(User::find($validator['user_id'])->email, $validator['message']);
+        NotifyContactEmail::dispatch($contact)->delay(now()->addSecond());
         return response()->json(
             [
                 'success' => true,
-                'message' => Lang::get('messages.contact.success')
+                'contact' => $contact
             ],
             201
-        );*/
+        );
     }
 
     /**

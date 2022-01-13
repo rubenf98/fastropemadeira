@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FeedbackRequest;
+use App\Jobs\NotifyFeedback;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,14 @@ class FeedbackController extends Controller
     {
         $validator = $request->validated();
         $entry = Feedback::create($validator);
-        return $entry;
+        NotifyFeedback::dispatch($entry)->delay(now()->addSecond());
+        return response()->json(
+            [
+                'success' => true,
+                'feedback' => $entry
+            ],
+            201
+        );
     }
 
     /**
