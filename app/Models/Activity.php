@@ -17,4 +17,9 @@ class Activity extends Model
     {
         return $this->hasMany("App\Models\Experience");
     }
+
+    public function reservations()
+    {
+        return $this->hasManyThrough(Reservation::class, Experience::class);
+    }
 }

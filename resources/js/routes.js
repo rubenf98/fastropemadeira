@@ -8,6 +8,8 @@ import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
 import Confirmation from "./components/pages/Confirmation";
 import Layout from "./components/Layout";
+import Login from "./components/pages/Login";
+import PainelLayout from "./components/dashboard/PainelLayout";
 
 export const history = createBrowserHistory();
 
@@ -28,6 +30,8 @@ function Routes() {
                 <Redirect exact from="/contact" to={getRoute("/contact")} />
                 <Redirect exact from="/about" to={getRoute("/about")} />
                 <Redirect exact from="/confirmation/:token" to={getRoute("/confirmation/:token")} />
+                <Route path="/login" component={Login} />
+                <Route path="/painel" component={PainelLayout} />
 
                 <Layout>
                     <Route exact path="/:language/confirmation/:token" component={withRouter(Confirmation)} />

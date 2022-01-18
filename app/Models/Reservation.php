@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\Activity;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
@@ -23,6 +24,11 @@ class Reservation extends Model
     public function experience()
     {
         return $this->belongsTo('App\Models\Experience');
+    }
+
+    public function activity($id)
+    {
+        return Activity::find($id);
     }
 
     public function storeParticipants($participants)

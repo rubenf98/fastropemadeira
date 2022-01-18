@@ -20,7 +20,6 @@ class CreateExperiencesTable extends Migration
             $table->decimal('private_price', 5, 2)->nullable();
             $table->unsignedBigInteger('activity_id');
             $table->text('description');
-            $table->string('image');
             $table->string('level')->nullable();
             $table->string('distance')->nullable();
             $table->string('height')->nullable();

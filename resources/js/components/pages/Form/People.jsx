@@ -2,34 +2,48 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Row, Form, Input, DatePicker, Calendar, Col, Slider, Select, Button, Switch, Divider } from 'antd';
 import styled from "styled-components";
 import moment from "moment";
-import { dimensions } from "../../../helper";
+import { dimensions, getCarouselBreakpoints } from "../../../helper";
 import axios from "axios";
 import CountryPhoneInput, { ConfigProvider } from 'antd-country-phone-input';
 import en from 'world_countries_lists/data/en/world.json';
 import BackButton from './BackButton';
+import Carousel from 'react-multi-carousel';
 
+const responsive = {
+    general: {
+        breakpoint: { max: 10000, min: 0 },
+        items: 1
+    }
+};
 
 const { TextArea } = Input;
 
+const CustomCarousel = styled(Carousel)`
+    width: 40%;
 
+    @media (max-width: ${dimensions.md}) {
+        width: 80%;
+        margin: auto;
+        display: block;
+    }
+
+    @media (max-width: ${dimensions.sm}) {
+        width: 96%;
+    }
+
+    li  {
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        width: 100%;
+    }
+`;
 const Summary = styled(Row)`
     margin: 30px auto;
 
-    img {
-        width: 40%;
-
-        @media (max-width: ${dimensions.md}) {
-            width: 80%;
-            margin: auto;
-            display: block;
-        }
-
-        @media (max-width: ${dimensions.sm}) {
-            width: 96%;
-        }
-    }
-
-    div {
+    .experience-info {
         width: 55%;
 
         @media (max-width: ${dimensions.md}) {
@@ -338,40 +352,53 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
         <ConfigProvider locale={en}>
             <BackButton decrementStep={decrementStep} text={text.experienceBackButton} />
 
-            {Object.keys(data).length === 0 ? <h1>loading</h1> : <Summary type="flex" justify="space-between">
-                <img src={data.image} alt={data.name[localStorage.getItem("language")]} />
-                <div>
-                    <h3>{data.name[localStorage.getItem("language")]}</h3>
-                    <p>{data.description[localStorage.getItem("language")]}</p>
-                    <Row type="flex" justify="space-around" style={{ width: "100%" }}>
-                        {data.duration &&
+            {Object.keys(data).length === 0 ? <h1>loading</h1> :
+                <Summary type="flex" justify="space-between">
+                    <CustomCarousel
+                        removeArrowOnDeviceType="general"
+                        autoPlay
+                        itemClass="image-item"
+                        infinite
+                        swipeable
+                        responsive={responsive}
+                        showDots={false}
+                    >
+                        {data.images.map((image) => (
+                            <img src={image.image} alt="gallery" />
+                        ))}
+                    </CustomCarousel>
+                    <div className='experience-info'>
+                        <h3>{data.name[localStorage.getItem("language")]}</h3>
+                        <p>{data.description[localStorage.getItem("language")]}</p>
+                        <Row type="flex" justify="space-around" style={{ width: "100%" }}>
+                            {!Array.isArray(data.duration) &&
+                                <Charateristic>
+                                    <img src="/icon/form/time.svg" />   {data.duration[localStorage.getItem("language")]}
+                                </Charateristic>
+                            }
+                            {!Array.isArray(data.height) &&
+                                <Charateristic>
+                                    <img src="/icon/form/height.svg" /> {data.height[localStorage.getItem("language")]}
+                                </Charateristic>
+                            }
+                            {!Array.isArray(data.distance) &&
+                                <Charateristic>
+                                    <img src="/icon/form/distance.svg" /> {data.distance[localStorage.getItem("language")]}
+                                </Charateristic>
+                            }
                             <Charateristic>
-                                <img src="/icon/form/time.svg" />   {data.duration[localStorage.getItem("language")]}
+                                <img src="/icon/form/people.svg" /> Group Experience
                             </Charateristic>
-                        }
-                        {data.height &&
-                            <Charateristic>
-                                <img src="/icon/form/height.svg" /> {data.height[localStorage.getItem("language")]}
-                            </Charateristic>
-                        }
-                        {data.distance &&
-                            <Charateristic>
-                                <img src="/icon/form/distance.svg" /> {data.distance[localStorage.getItem("language")]}
-                            </Charateristic>
-                        }
-                        <Charateristic>
-                            <img src="/icon/form/people.svg" /> Group Experience
-                        </Charateristic>
-                        {data.level &&
-                            <Charateristic>
-                                <img src="/icon/form/difficulty.svg" /> {data.level[localStorage.getItem("language")]}
-                            </Charateristic>
-                        }
+                            {!Array.isArray(data.level) &&
+                                <Charateristic>
+                                    <img src="/icon/form/difficulty.svg" /> {data.level[localStorage.getItem("language")]}
+                                </Charateristic>
+                            }
 
-                    </Row>
-                </div>
+                        </Row>
+                    </div>
 
-            </Summary>}
+                </Summary>}
 
             <h2>{text.formTitle}</h2>
             <Row gutter={16}>

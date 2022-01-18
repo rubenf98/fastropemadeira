@@ -22,7 +22,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        return ReservationResource::collection(Reservation::latest()->paginate(10));
     }
 
     /**

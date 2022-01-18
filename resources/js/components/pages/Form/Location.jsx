@@ -98,15 +98,15 @@ const Disclaimer = styled.div`
 const SelectionItem = ({ element, lg, incrementStep }) => (
     <SelectionContainer xs={24} lg={lg} onClick={() => incrementStep({ experience: element.id })}>
         <div className="selection-sub-container">
-            <Selection className="selection-box" src={element.image} />
+            <Selection className="selection-box" src={element.images[0].image} />
             <Info>
                 <div>
                     <h3>{element.name[localStorage.getItem("language")]}</h3>
                     <p>
-                        {element.duration && <Fragment><img src="/icon/form/time.svg" /> {element.duration[localStorage.getItem("language")]}</Fragment>}
-                        {element.height && <Fragment><img src="/icon/form/height.svg" /> {element.height[localStorage.getItem("language")]}</Fragment>}
-                        {element.distance && <Fragment><img src="/icon/form/distance.svg" /> {element.distance[localStorage.getItem("language")]}</Fragment>}
-                        {element.level && <Fragment><img src="/icon/form/difficulty.svg" /> {element.level[localStorage.getItem("language")]}</Fragment>}
+                        {!Array.isArray(element.duration) && <Fragment><img src="/icon/form/time.svg" /> {element.duration[localStorage.getItem("language")]}</Fragment>}
+                        {!Array.isArray(element.height) && <Fragment><img src="/icon/form/height.svg" /> {element.height[localStorage.getItem("language")]}</Fragment>}
+                        {!Array.isArray(element.distance) && <Fragment><img src="/icon/form/distance.svg" /> {element.distance[localStorage.getItem("language")]}</Fragment>}
+                        {!Array.isArray(element.level) && <Fragment><img src="/icon/form/difficulty.svg" /> {element.level[localStorage.getItem("language")]}</Fragment>}
                     </p>
                 </div>
 
@@ -124,7 +124,9 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
     useEffect(() => {
         let activity = getActivity();
         axios.get(`${window.location.origin}/api/experience?activity=${activity}`).then((response) => {
+            console.log(response.data.data);
             setData(response.data.data);
+
         });
     }, []);
 
@@ -138,7 +140,10 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
                         onClick={() => updateForm({ experience_id: element.id })}
                         key={element.id}
                         incrementStep={incrementStep}
-                        lg={columnSize[index]}
+                        lg={((data.length % 2 != 0) && (data.length - 1 == index)) ?
+                            24
+                            : columnSize[index]
+                        }
                         element={element}
                         text={text.price}
                     />

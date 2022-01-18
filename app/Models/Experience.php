@@ -21,4 +21,9 @@ class Experience extends Model
     {
         return $this->belongsTo("App\Models\Experience");
     }
+
+    public function images()
+    {
+        return $this->hasMany("App\Models\ExperienceImage");
+    }
 }

@@ -1,12 +1,18 @@
 export const maxWidth = "1400px"
 
 export const dimensions = {
-    "xs": "575px",
-    "sm": "576px",
-    "md": "768px",
-    "lg": "992px",
-    "xl": "1200px",
-    "xxl": "1600px",
+	"xs": "575px",
+	"sm": "576px",
+	"md": "768px",
+	"lg": "992px",
+	"xl": "1200px",
+	"xxl": "1600px",
+};
+
+export const colors = {
+	"main": "rgb(52,60,94)",
+	"mainOverlay": "rgba(52,60,94,.7)",
+	"gray": "#777",
 };
 
 export function getCarouselBreakpoints(aItems, aBreakpoints = [[0, 600], [600, 1024], [1024, 1400], [1400, 1800], [1800, 100000]], aItemsToSlide = [1, 1, 1, 1, 1]) {

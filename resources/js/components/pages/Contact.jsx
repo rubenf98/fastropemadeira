@@ -433,7 +433,7 @@ function Contact() {
                                 <Logo href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
                                     <img src={social.whatsapp} alt="whatsapp" />
                                 </Logo>
-                                <Logo href="https://www.instagram.com/fastrope.madeira/" target="_blank" >
+                                <Logo href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
                                     <img src={social.instagram} alt="instagram" />
                                 </Logo>
                                 <Logo href="https://www.tripadvisor.pt/Attraction_Review-g189167-d23713035-Reviews-Fast_Rope_Madeira-Funchal_Madeira_Madeira_Islands.html" target="_blank" >

@@ -16,6 +16,7 @@ function Partner() {
             <Container type="flex" justify="space-around" align="middle">
                 <img src="/partner/thisismadeiraisland.webp" alt="thisismadeiraisland" />
                 <img src="/partner/tripadvisor.webp" alt="tripadvisor" />
+                <img src="/partner/rebolo.webp" alt="rebolo" />
                 <img src="/partner/belocal.webp" alt="belocal" />
             </Container>
         </AnimationContainer>

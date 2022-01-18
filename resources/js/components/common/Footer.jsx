@@ -129,7 +129,7 @@ function Footer() {
                     <Logo href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
                         <img src="/icon/company/whatsapp.svg" alt="whatsapp" />
                     </Logo>
-                    <Logo href="https://www.instagram.com/fastrope.madeira/" target="_blank" >
+                    <Logo href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
                         <img src="/icon/company/instagram.svg" alt="instagram" />
                     </Logo>
                 </Row>
