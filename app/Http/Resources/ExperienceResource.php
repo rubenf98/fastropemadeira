@@ -17,6 +17,7 @@ class ExperienceResource extends JsonResource
         return [
             'id' => $this->id,
             'images' => $this->images,
+            'activity_id' =>  $this->activity_id,
             'name' =>  $this->getTranslations('name'),
             'description' => $this->getTranslations('description'),
             'distance' =>  $this->getTranslations('distance'),
