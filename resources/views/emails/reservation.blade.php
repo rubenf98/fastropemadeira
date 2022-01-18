@@ -22,7 +22,7 @@
             @endforeach
         </ul>
 
-        <h2>Total: {{$reservation->total}}€</h2>
+        <h2>Total: {{$reservation->price}}€</h2>
     </div>
 </body>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Experience;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -26,11 +27,13 @@ class ReservationRequest extends FormRequest
             $phone = $this->phone["code"] . $this->phone["phone"];
         }
 
+        $experience = Experience::find($this->experience_id);
         $this->merge([
             'phone' =>  $phone,
             'date' => new Carbon($this->date),
             'confirmation_token' => uniqid(),
-            'hasPerson' => $this->experience_id < 15 ?  true : false,
+            'hasPerson' => $this->experience_id < 6 ?  true : false,
+            'price' => ($this->private ? $experience->private_price : $experience->price) * $this->people,
         ]);
     }
 
@@ -47,7 +50,8 @@ class ReservationRequest extends FormRequest
             'confirmation_token' => 'required',
             'email' => 'required|email:rfc,dns',
             'name' => 'required|string',
-            'notes' => 'required_if:experience_id,20|string',
+            'price' => 'required',
+            'notes' => 'required_if:experience_id,11|string',
             'people' => 'required|integer|min:4|max:15',
             'experience_id' => 'required|exists:experiences,id',
             'private' => 'required|boolean',

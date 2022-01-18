@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    protected $fillable = ['private', 'people', 'notes', 'name', 'email', 'address', 'phone', 'date', 'experience_id', "confirmation_token"];
-    protected $append = ["total"];
-
-    public function getTotalAttribute()
-    {
-        return ($this->private ? $this->experience->private_price : $this->experience->price) * $this->people;
-    }
+    protected $fillable = ['private', 'price', 'people', 'notes', 'name', 'email', 'address', 'phone', 'date', 'experience_id', "confirmation_token"];
 
     public function participants()
     {
@@ -43,11 +37,12 @@ class Reservation extends Model
     }
 
 
-    public static function disabledDates()
+    public static function disabledDates($people)
     {
         $reservations = Reservation::where("date", ">", Carbon::now())->latest()->get();
         $disabled = [];
         $dates = [];
+        $treshold = $people ? 14 - $people : 12;
 
         foreach ($reservations as  $reservation) {
 
@@ -56,7 +51,7 @@ class Reservation extends Model
                     $dates[$reservation->date] = $dates[$reservation->date] + $reservation->people;
                 } else $dates[$reservation->date] = $reservation->people;
 
-                if ($dates[$reservation->date] >= 12 || $reservation->private) {
+                if ($dates[$reservation->date] >= $treshold || $reservation->private) {
                     array_push($disabled, $reservation->date);
                 }
             }

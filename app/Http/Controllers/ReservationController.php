@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Jobs\ConfirmationEmail;
 use App\Jobs\NotificationEmail;
@@ -30,9 +31,9 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function disabledDates()
+    public function disabledDates(Request $request)
     {
-        return Reservation::disabledDates();
+        return Reservation::disabledDates($request->people);
     }
 
     /**
@@ -84,18 +85,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reservation $reservation)
-    {
-        //
+        return new ReservationResource($reservation);
     }
 
     /**
@@ -105,9 +95,12 @@ class ReservationController extends Controller
      * @param  \App\Models\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        //
+        $validator = $request->validated();
+        $reservation->update($validator);
+
+        return new ReservationResource($reservation);
     }
 
     /**
@@ -118,6 +111,8 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+
+        return response()->json(null, 204);
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Filter from "./Filter";
-import { fetchReservations, fetchReservation } from "../../../../redux/reservation/actions";
+import { fetchReservations, fetchReservation, deleteReservation, updateReservation } from "../../../../redux/reservation/actions";
 import FormContainer from "./FormContainer";
 import { dimensions } from "../../../../helper";
 import TableContainer from "./TableContainer";
@@ -52,10 +52,8 @@ class Reservations extends Component {
     }
 
     setFilters = (aFilters) => {
-        console.log(aFilters);
         var { filters } = this.state;
         filters = { ...filters, ...aFilters };
-        console.log(filters);
         this.setState({ filters });
 
         this.props.fetchReservations(1, filters);
@@ -85,6 +83,8 @@ class Reservations extends Component {
                             data={data}
                             loading={loading}
                             meta={meta}
+                            onDelete={deleteReservation}
+                            onUpdate={updateReservation}
                         />
                     </Table>
                 </ContentContainer>
@@ -97,6 +97,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchReservations: (page, filters) => dispatch(fetchReservations(page, filters)),
         fetchReservation: (id) => dispatch(fetchReservation(id)),
+        updateReservation: (id, data) => dispatch(updateReservation(id, data)),
+        deleteReservation: (id) => dispatch(deleteReservation(id)),
     };
 };
 

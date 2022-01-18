@@ -20,7 +20,7 @@ class ReservationResource extends JsonResource
             'activity' =>  $this->activity($this->experience->activity_id),
             'name' =>   $this->name,
             'email' =>   $this->email,
-            'total' =>   $this->total,
+            'price' =>   $this->price,
             'address' =>   $this->address,
             'phone' =>   $this->phone,
             'date' =>   $this->date,

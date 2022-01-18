@@ -128,7 +128,6 @@ class ExperienceSeeder extends Seeder
                 'pt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.'
             ],
             'activity_id' => 2,
-            'distance' => ['en' => '1000 meters', 'pt' => '1000 metros'],
             'duration' => ['en' => '3 to 4h', 'pt' => '3 a 4h'],
         ]);
         Experience::create([
@@ -140,20 +139,19 @@ class ExperienceSeeder extends Seeder
                 'pt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.'
             ],
             'activity_id' => 2,
-            'distance' => ['en' => '5430 meters', 'pt' => '5430 metros'],
-            'duration' => ['en' => 'Half Day (≤5h)', 'pt' => 'Meio Dia (≤5h)'],
+            'duration' => ['en' => '3 to 4h', 'pt' => '3 a 4h'],
         ]);
         Experience::create([
             'name' => ['en' => "Poço das Pulgas (Laurissilva)", 'pt' => "Poço das Pulgas (Laurissilva)"],
             'price' => 60.00,
             'private_price' => 60,
             'description' => [
-                'en' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.',
-                'pt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.'
+                'en' => 'The hiking trail is located on the ridge of Ponta Delgada, located on the northern part of the Island, right in the heart os Laurissilva Forest. The route is circular, travels the hilly terrain and brooks that run along the coast of Ribeira da Camisa, through a narrow trail, with a stop at the picturesque Poço das Pulgas\' waterfall.',
+                'pt' => 'O percurso situa-se na serra da Ponta Delgada, na zona norte da Ilha, em plena Floresta Laurissilva. O percurso é circular, percorre o terreno montanhoso e ribeiros que percorrem a costa da Ribeira da Camisa, por um trilho estreito, com paragem na pitoresca cascata do Poço das Pulgas.'
             ],
             'activity_id' => 2,
-            'distance' => ['en' => '5430 meters', 'pt' => '5430 metros'],
-            'duration' => ['en' => 'Half Day (≤5h)', 'pt' => 'Meio Dia (≤5h)'],
+            'distance' => ['en' => '8500 meters', 'pt' => '8500 metros'],
+            'duration' => ['en' => 'Around 4h', 'pt' => 'Cerca de 4h'],
         ]);
         Experience::create([
             'name' => ['en' => "Viewpoint of Pico do Areeiro / Pico Ruivo", 'pt' => "Miradouro do Pico do Areeiro / Pico Ruivo"],
@@ -165,7 +163,7 @@ class ExperienceSeeder extends Seeder
             ],
             'activity_id' => 2,
             'distance' => ['en' => '6100 meters', 'pt' => '6100 metros'],
-            'duration' => ['en' => '3-4h', 'pt' => '3-4h'],
+            'duration' => ['en' => 'Around 4h', 'pt' => 'Cerca de 4h'],
         ]);
         Experience::create([
             'name' => ['en' => "Ponta de São Lourenço", 'pt' => "Ponta de São Lourenço"],
@@ -176,8 +174,7 @@ class ExperienceSeeder extends Seeder
                 'pt' => 'O trilho percorre a Ponta de S. Lourenço, península mais a Este da ilha da Madeira, batizada com o nome da caravela de João Gonçalves Zarco, um dos três descobridores da ilha da Madeira. Esta península é de origem vulcânica, na sua maioria basáltica, existindo também formações de sedimentos calcários.'
             ],
             'activity_id' => 2,
-            'distance' => ['en' => '6000 meters', 'pt' => '6000 metros'],
-            'duration' => ['en' => '2-3h', 'pt' => '2-3h'],
+            'duration' => ['en' => 'Around 3h', 'pt' => 'Cerca de 3h'],
         ]);
 
         Experience::create([

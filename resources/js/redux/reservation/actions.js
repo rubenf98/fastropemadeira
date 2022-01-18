@@ -11,7 +11,16 @@ export const fetchReservations = (page = 1, filters = {}) => ({
 
 export const fetchReservation = (id) => ({
     type: types.FETCH_RESERVATION,
-    payload: axios.get(`${window.location.origin}/api/post/${id}`)
+    payload: axios.get(`${window.location.origin}/api/reservation/${id}`)
 })
 
+export const deleteReservation = id => ({
+    type: types.DELETE_RESERVATION,
+    payload: axios.delete(`${window.location.origin}/api/reservation/${id}`),
+    meta: { id }
+});
 
+export const updateReservation = (id, data) => ({
+    type: types.UPDATE_RESERVATION,
+    payload: axios.put(`${window.location.origin}/api/reservation/${id}`, data),
+});

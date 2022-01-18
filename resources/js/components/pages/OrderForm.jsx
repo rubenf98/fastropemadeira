@@ -72,6 +72,7 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
         data.experience_id = data.experience;
         axios.post(`${window.location.origin}/api/reservation`, data).then((response) => {
             setLoadingSubmit(false);
+            getDisabledDates();
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();
         }).catch((error) => {
@@ -92,10 +93,14 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
         onCancel();
     };
 
-    useEffect(() => {
+    function getDisabledDates() {
         axios.get(`${window.location.origin}/api/reservation/disabledDate`).then((response) => {
             setCalendarMetadata(response.data);
         })
+    };
+
+    useEffect(() => {
+        getDisabledDates();
     }, [])
 
     useEffect(() => {
