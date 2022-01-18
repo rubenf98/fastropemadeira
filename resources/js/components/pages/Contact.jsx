@@ -6,6 +6,7 @@ import { dimensions } from "../../helper";
 import SubmitButton from "./Contact/SubmitButton";
 import axios from "axios";
 import { fadeInUp, fadeOut } from 'react-animations'
+import AnimationContainer from '../common/AnimationContainer';
 
 const fadeAnimation = keyframes`${fadeInUp}`;
 const fadeOutA = keyframes`${fadeOut}`;
@@ -63,7 +64,7 @@ const Overlay = styled.div`
     bottom: 0;
     content: '';
     background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,1) 100%); 
+    background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,1) 100%); 
 `;
 
 const CustomInput = styled(Input)`
@@ -356,11 +357,15 @@ function Contact() {
         <div>
             <Container>
                 <Overlay />
+
                 <SubContainer type="flex" justify="space-between">
-                    <Title>
-                        <h1>{text.formTitle}</h1>
-                        <p>{text.formParagraph}</p>
-                    </Title>
+                    <AnimationContainer animation="fadeIn">
+                        <Title>
+                            <h1>{text.formTitle}</h1>
+                            <p>{text.formParagraph}</p>
+                        </Title>
+                    </AnimationContainer>
+
                     <FormContainer type="flex" justify="space-between" align="middle">
                         {submitted ?
                             <FormFeedback>
@@ -411,6 +416,8 @@ function Contact() {
                             </ContactForm>
                         }
                     </FormContainer>
+
+
                     <InfoContainer >
                         <div>
                             <h3>{text.form.info[0]}</h3>
@@ -442,12 +449,15 @@ function Contact() {
                             </Row>
                         </div>
                     </InfoContainer>
+
                 </SubContainer>
 
             </Container>
             <FeedbackContainer>
-                <h2>{text.feedback.title}</h2>
-                <p>{text.feedback.paragraph}</p>
+                <AnimationContainer animation="fadeInUp">
+                    <h2>{text.feedback.title}</h2>
+                    <p>{text.feedback.paragraph}</p>
+                </AnimationContainer>
                 <Form
                     requiredMark={false}
                     name="feedback"
@@ -463,13 +473,13 @@ function Contact() {
                     ]}>
                         <InputNumber />
                     </Form.Item>
-
-                    <FeedbackSectionContainer type="flex" justify="center">
-                        {Object.values(feedback).map((level, index) => (
-                            <FeedbackIcon key={index} onClick={() => handleRatingChange(index)} active={active == index} src={level} alt={"level" + (index + 1)} />
-                        ))}
-                    </FeedbackSectionContainer>
-
+                    <AnimationContainer animation="zoomIn">
+                        <FeedbackSectionContainer type="flex" justify="center">
+                            {Object.values(feedback).map((level, index) => (
+                                <FeedbackIcon key={index} onClick={() => handleRatingChange(index)} active={active == index} src={level} alt={"level" + (index + 1)} />
+                            ))}
+                        </FeedbackSectionContainer>
+                    </AnimationContainer>
                     <FeedbackSectionContainer type="flex" justify="center">
                         <Col xs={23} sm={16} lg={10}>
                             <Form.Item

@@ -4,6 +4,7 @@ import { Row, notification } from 'antd';
 import styled from "styled-components";
 import { dimensions } from '../../helper';
 import moment from 'moment';
+import AnimationContainer from '../common/AnimationContainer';
 
 const Container = styled.div`
     margin: 200px 0px;
@@ -19,9 +20,12 @@ const Summary = styled(Row)`
    
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,.2);
     border-radius: 6px;
-
+.fadeIn {
+    width: 45%;
+    min-height: 500px;
+}
     .image {
-        width: 45%;
+        width: 100%;
         min-height: 500px;
         border-top-left-radius: 6px;
         border-bottom-left-radius: 6px;
@@ -200,29 +204,33 @@ function Confirmation({ match }) {
                         </div>
                     </Loading> :
                     <Fragment>
-                        <Summary type="flex" justify="space-between" image={data.experience.image}>
-                            <div className='image' />
+                        <Summary type="flex" justify="space-between" image={data.experience.images[0].image}>
+                            <AnimationContainer animation="fadeIn">
+                                <div className='image' />
+                            </AnimationContainer>
                             <div className='details-container'>
+
                                 <h3>{data.experience.name[localStorage.getItem("language")]}</h3>
                                 <p>{data.experience.description[localStorage.getItem("language")]}</p>
+                                <AnimationContainer animation="fadeInLeft">
+                                    <Detail><span>{text.details.name}: </span> {data.name} </Detail>
+                                    <Detail><span>{text.details.email}: </span> {data.email} </Detail>
+                                    <Detail><span>{text.details.phone}: </span> {data.phone} </Detail>
+                                    <Detail><span>{text.details.address}: </span> {data.address} </Detail>
+                                    <Detail><span>{text.details.private}: </span> {text.details.privateAnswer[data.private]} </Detail>
+                                    <Detail><span>{text.details.date}: </span> {data.date} {data.time}</Detail>
+                                    <Detail><span>{text.details.created_at}: </span> {data.created_at} </Detail>
+                                    <Detail><span>{text.details.participants}: </span> {data.people} </Detail>
+                                    {data.participants.map((participant, index) => (
+                                        <Detail><span>{text.details.participant} {index + 1}: </span> {participant.birthday} /  {participant.gender} /  {participant.weight} / {participant.height}cm /  {participant.shoe} EU </Detail>
+                                    ))}
 
-                                <Detail><span>{text.details.name}: </span> {data.name} </Detail>
-                                <Detail><span>{text.details.email}: </span> {data.email} </Detail>
-                                <Detail><span>{text.details.phone}: </span> {data.phone} </Detail>
-                                <Detail><span>{text.details.address}: </span> {data.address} </Detail>
-                                <Detail><span>{text.details.private}: </span> {text.details.privateAnswer[data.private]} </Detail>
-                                <Detail><span>{text.details.date}: </span> {data.date} {data.time}</Detail>
-                                <Detail><span>{text.details.created_at}: </span> {data.created_at} </Detail>
-                                <Detail><span>{text.details.participants}: </span> {data.people} </Detail>
-                                {data.participants.map((participant, index) => (
-                                    <Detail><span>{text.details.participant} {index + 1}: </span> {participant.birthday} /  {participant.gender} /  {participant.weight} / {participant.height}cm /  {participant.shoe} EU </Detail>
-                                ))}
-
-                                <Detail><span>{text.details.notes}: </span> {data.notes} </Detail>
+                                    <Detail><span>{text.details.notes}: </span> {data.notes} </Detail>
+                                </AnimationContainer>
                             </div>
 
                             <PriceContainer>
-                                {data.total == 0 ? text.total : data.total + "€"}
+                                {data.price == 0 ? text.price : data.price + "€"}
 
                             </PriceContainer>
                         </Summary>

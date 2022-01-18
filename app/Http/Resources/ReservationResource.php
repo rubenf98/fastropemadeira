@@ -16,7 +16,7 @@ class ReservationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'experience' =>  $this->experience,
+            'experience' => new ExperienceResource($this->experience),
             'activity' =>  $this->activity($this->experience->activity_id),
             'name' =>   $this->name,
             'email' =>   $this->email,
