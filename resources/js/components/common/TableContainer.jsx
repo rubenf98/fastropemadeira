@@ -1,10 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { Table } from "antd";
+import { dimensions } from "../../helper";
 
 const Container = styled.div`
     background: transparent;
     border-radius: 5px;
+
+    .table-row  {
+        &:hover {
+            cursor: pointer;
+        }
+
+        @media (max-width: ${dimensions.sm}){
+            &:hover {
+                cursor: auto;
+            }
+        }
+    }
 `;
 
 
@@ -15,6 +28,7 @@ function TableContainer({ onRow, columns, data, meta, handlePageChange, loading,
         <div>
             <Container>
                 <Table
+                    rowClassName="table-row"
                     bordered={bordered}
                     onRow={onRow}
                     onChange={handlePageChange}

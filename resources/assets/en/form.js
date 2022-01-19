@@ -18,7 +18,7 @@ export const text = {
         },
         address: {
             label: "Please specify your address so we can pick you up",
-            placeholder: "Adress and/or hotel name"
+            placeholder: "Address and/or hotel name"
         },
         notes: {
             label: "Reservation requests and notes",

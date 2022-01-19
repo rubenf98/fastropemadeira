@@ -79,7 +79,7 @@ class ExperienceSeeder extends Seeder
 
 
         $experience = Experience::create([
-            'name' => ['en' => "Ribeira do Passo (São Vicente)", 'pt' => "Ribeira do Passo (São Vicente)"],
+            'name' => ['en' => "Level 4", 'pt' => "Nível 4"],
             'price' => 150,
             'private_price' => 150,
             'description' => [

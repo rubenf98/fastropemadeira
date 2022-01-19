@@ -20,19 +20,20 @@ const Summary = styled(Row)`
    
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,.2);
     border-radius: 6px;
-.fadeIn {
-    width: 45%;
-    min-height: 500px;
-}
-    .image {
+
+    .fadeInUp {
         width: 100%;
+    }
+
+    .fadeIn {
+        width: 45%;
         min-height: 500px;
-        border-top-left-radius: 6px;
-        border-bottom-left-radius: 6px;
         background: ${props => "url(" + props.image + ")"};
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
 
         @media (max-width: ${dimensions.md}) {
             width: 80%;
@@ -206,13 +207,13 @@ function Confirmation({ match }) {
                     <Fragment>
                         <Summary type="flex" justify="space-between" image={data.experience.images[0].image}>
                             <AnimationContainer animation="fadeIn">
-                                <div className='image' />
+
                             </AnimationContainer>
                             <div className='details-container'>
 
                                 <h3>{data.experience.name[localStorage.getItem("language")]}</h3>
                                 <p>{data.experience.description[localStorage.getItem("language")]}</p>
-                                <AnimationContainer animation="fadeInLeft">
+                                <AnimationContainer animation="fadeInUp">
                                     <Detail><span>{text.details.name}: </span> {data.name} </Detail>
                                     <Detail><span>{text.details.email}: </span> {data.email} </Detail>
                                     <Detail><span>{text.details.phone}: </span> {data.phone} </Detail>

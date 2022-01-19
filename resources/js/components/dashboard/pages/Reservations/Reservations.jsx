@@ -6,6 +6,7 @@ import { fetchReservations, fetchReservation, deleteReservation, updateReservati
 import FormContainer from "./FormContainer";
 import { dimensions } from "../../../../helper";
 import TableContainer from "./TableContainer";
+import DrawerContainer from "./DrawerContainer";
 
 const ContentContainer = styled.div`
     width: 70%;
@@ -45,6 +46,7 @@ class Reservations extends Component {
     state = {
         filters: {},
         page: 1,
+        drawerVisible: false
     }
 
     componentDidMount() {
@@ -67,12 +69,16 @@ class Reservations extends Component {
     }
 
     onRowClick = (aRecord) => {
-        this.props.fetchReservation(aRecord);
+        this.props.fetchReservation(aRecord).then(() => {
+            this.setState({
+                drawerVisible: true
+            })
+        });
     }
 
     render() {
         var { data, loading, meta, current } = this.props;
-
+        var { drawerVisible } = this.state;
         return (
             <Container>
                 <ContentContainer>
@@ -88,6 +94,13 @@ class Reservations extends Component {
                         />
                     </Table>
                 </ContentContainer>
+
+                <DrawerContainer
+                    record={current}
+                    onClose={() => this.setState({
+                        drawerVisible: false
+                    })}
+                    visible={drawerVisible} />
             </Container>
         );
     }

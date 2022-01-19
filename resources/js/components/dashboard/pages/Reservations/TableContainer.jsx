@@ -70,7 +70,11 @@ function TableContainer({ loading, data, meta, handlePageChange, onRowClick, onD
                 columns={columns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
-                onRowClick={(aPage) => onRowClick(aPage)}
+                onRow={(record) => {
+                    return {
+                        onClick: () => onRowClick(record.id),
+                    };
+                }}
             />
             <FormContainer
                 visible={visibility}
