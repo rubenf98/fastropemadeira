@@ -584,8 +584,8 @@
                                                                 <p style="line-height: 140%; font-size: 14px;"><span
                                                                         style="font-size: 14px; line-height: 19.6px;"><span
                                                                             style="color: #ecf0f1; font-size: 14px; line-height: 19.6px;"><span
-                                                                                style="line-height: 19.6px; font-size: 14px;">Fast
-                                                                                Rope Madeira &copy;
+                                                                                style="line-height: 19.6px; font-size: 14px;">&copy;
+                                                                                Fast Rope Madeira
                                                                                 <br /></span></span></span></p>
                                                             </div>
 
