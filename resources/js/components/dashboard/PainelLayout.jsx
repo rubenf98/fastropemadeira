@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router";
+import { Switch } from "react-router";
 import styled from "styled-components";
 import NavBar from "./NavBar";
+import Contact from "./pages/Contact/Contact";
+import Feedback from "./pages/Feedback/Feedback";
 import Painel from "./pages/Painel";
 import Reservations from "./pages/Reservations/Reservations";
 import PrivateRoute from "./PrivateRoute";
@@ -33,6 +35,8 @@ export default class PainelLayout extends Component {
                 <NavBarContainer><NavBar /></NavBarContainer>
 
                 <Content>
+                    <PrivateRoute path="/painel/contacto" component={Contact} />
+                    <PrivateRoute path="/painel/avaliacao" component={Feedback} />
                     <PrivateRoute path="/painel/reservas" component={Reservations} />
                     <PrivateRoute path="/painel" component={Painel} />
                 </Content>

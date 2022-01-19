@@ -363,11 +363,16 @@
                                                                     <span
                                                                         style="font-size: 14px; line-height: 12px; color: #666666;"><strong>Preço:
                                                                         </strong>
+                                                                        @if ($changes['price'] == 0)
+                                                                        Sob-Orçamento
+                                                                        @else
                                                                         {{$changes['price']}}&#128;
+                                                                        @endif
                                                                     </span>
                                                                 <p style="font-size: 12px; line-height: 10%;"><span
                                                                         style="font-size: 16px; line-height: 12px; color: #666666;"><span
-                                                                            style="font-size: 12px; line-height: 19.6px; color: #7e8c8d;">Price</span><br />&nbsp;</span>
+                                                                            style="font-size: 12px; line-height: 19.6px; color: #7e8c8d;">Price
+                                                                        </span><br />&nbsp;</span>
                                                                 </p>
                                                                 </p>
                                                                 @endif
