@@ -1,15 +1,79 @@
-<!DOCTYPE html>
-
-<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+<!DOCTYPE HTML
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
-    <title>Fast Rope</title>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
-    <style>
-        * {
-            box-sizing: border-box;
+    <!--[if gte mso 9]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<![endif]-->
+    <title></title>
+
+    <style type="text/css">
+        table,
+        td {
+            color: #000000;
+        }
+
+        a {
+            color: #161a39;
+            text-decoration: underline;
+        }
+
+        @media only screen and (min-width: 620px) {
+            .u-row {
+                width: 600px !important;
+            }
+
+            .u-row .u-col {
+                vertical-align: top;
+            }
+
+            .u-row .u-col-50 {
+                width: 300px !important;
+            }
+
+            .u-row .u-col-100 {
+                width: 600px !important;
+            }
+
+        }
+
+        @media (max-width: 620px) {
+            .u-row-container {
+                max-width: 100% !important;
+                padding-left: 0px !important;
+                padding-right: 0px !important;
+            }
+
+            .u-row .u-col {
+                min-width: 320px !important;
+                max-width: 100% !important;
+                display: block !important;
+            }
+
+            .u-row {
+                width: 100% !important;
+            }
+
+            .u-col {
+                width: 100% !important;
+            }
+
+            .u-col>div {
+                margin: 0 auto;
+            }
         }
 
         body {
@@ -17,213 +81,592 @@
             padding: 0;
         }
 
-        a[x-apple-data-detectors] {
-            color: inherit !important;
-            text-decoration: inherit !important;
-        }
-
-        #MessageViewBody a {
-            color: inherit;
-            text-decoration: none;
+        table,
+        tr,
+        td {
+            vertical-align: top;
+            border-collapse: collapse;
         }
 
         p {
-            line-height: inherit
+            margin: 0;
         }
 
-        @media (max-width:615px) {
-            .icons-inner {
-                text-align: center;
-            }
+        .ie-container table,
+        .mso-container table {
+            table-layout: fixed;
+        }
 
-            .icons-inner td {
-                margin: 0 auto;
-            }
+        * {
+            line-height: inherit;
+        }
 
-            .row-content {
-                width: 100% !important;
-            }
-
-            .stack .column {
-                width: 100%;
-                display: block;
-            }
+        a[x-apple-data-detectors='true'] {
+            color: inherit !important;
+            text-decoration: none !important;
         }
     </style>
+
+
 </head>
 
-<body style="background-color: #FFFFFF; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-    <table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation"
-        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF;" width="100%">
+<body class="clean-body u_body"
+    style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #f9f9f9;color: #000000">
+    <!--[if IE]><div class="ie-container"><![endif]-->
+    <!--[if mso]><div class="mso-container"><![endif]-->
+    <table
+        style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #f9f9f9;width:100%"
+        cellpadding="0" cellspacing="0">
         <tbody>
-            <tr>
-                <td>
-                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1"
-                        role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #343c5e;background: radial-gradient(circle, rgba(52,60,94,1) 0%, rgba(52,60,94,0.97) 60%, rgba(52,60,94,0.86) 100%);"
-                        width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                        class="row-content stack" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 595px;"
-                                        width="595">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="100%">
-                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                        class="image_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td
-                                                                style="width:100%;padding-right:8px;padding-left:8px;padding-bottom:60px;padding-top:60px;">
-                                                                <div align="center" style="line-height:10px"><img
-                                                                        src="https://www.fastropemadeira.com/logo_white.png"
-                                                                        style="display: block; height: auto; border: 0; width: 395px; max-width: 100%;"
-                                                                        width="395" /></div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2"
-                        role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #343c5e;background: radial-gradient(circle, rgba(52,60,94,1) 0%, rgba(52,60,94,0.97) 60%, rgba(52,60,94,0.86) 100%); "
-                        width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                        class="row-content stack" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 595px; border-top-left-radius:6px; border-top-right-radius:6px;"
-                                        width="595">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="100%">
-                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                        class="heading_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td style="width:100%;text-align:center;padding-top:30px;">
-                                                                <h1
-                                                                    style="margin: 0; color: #000000; font-size: 31px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: normal; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
-                                                                    <strong>Está um passo mais próximo de completar a
-                                                                        sua reserva</strong>
-                                                                </h1>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table border="0" cellpadding="10" cellspacing="0"
-                                                        class="text_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td>
-                                                                <div style="font-family: sans-serif">
-                                                                    <div
-                                                                        style="font-size: 14px; mso-line-height-alt: 21px; color: #626262; line-height: 1.5; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;">
-                                                                        <p
-                                                                            style="margin: 0; font-size: 14px; text-align: center;">
-                                                                            You are one step closer to confirm your
-                                                                            reservation</p>
-                                                                    </div>
+            <tr style="vertical-align: top">
+                <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
+                    <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #f9f9f9;"><![endif]-->
+
+
+                    <div class="u-row-container" style="padding: 0px;background-color: #f9f9f9">
+                        <div class="u-row"
+                            style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #f9f9f9;">
+                            <div
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: #f9f9f9;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #f9f9f9;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-100"
+                                    style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:15px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <table height="0px" align="center" border="0"
+                                                                cellpadding="0" cellspacing="0" width="100%"
+                                                                style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #f9f9f9;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                                                <tbody>
+                                                                    <tr style="vertical-align: top">
+                                                                        <td
+                                                                            style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                                                            <span>&#160;</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="u-row-container" style="padding: 0px;background-color: transparent">
+                        <div class="u-row"
+                            style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
+                            <div
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-100"
+                                    style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:25px 10px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <table width="100%" cellpadding="0" cellspacing="0"
+                                                                border="0">
+                                                                <tr>
+                                                                    <td style="padding-right: 0px;padding-left: 0px;"
+                                                                        align="center">
+
+                                                                        <img align="center" border="0"
+                                                                            src="https://www.fastropemadeira.com/logo.png"
+                                                                            alt="Image" title="Image"
+                                                                            style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 29%;max-width: 168.2px;"
+                                                                            width="168.2" />
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="u-row-container" style="padding: 0px;background-color: transparent">
+                        <div class="u-row"
+                            style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #161a39;">
+                            <div
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #161a39;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-100"
+                                    style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:30px 10px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div
+                                                                style="line-height: 140%; text-align: center; word-wrap: break-word;">
+                                                                <p
+                                                                    style="font-size: 14px; line-height: 140%; text-align: center;">
+                                                                    <span
+                                                                        style="font-size: 28px; line-height: 39.2px; color: #ffffff; font-family: Lato, sans-serif;">Confirma&ccedil;&atilde;o
+                                                                        de&nbsp; Reserva<br /></span>
+                                                                </p>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="u-row-container" style="padding: 0px;background-color: transparent">
+                        <div class="u-row"
+                            style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
+                            <div
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-100"
+                                    style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 40px 30px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div
+                                                                style="line-height: 140%; text-align: left; word-wrap: break-word;">
+                                                                <p style="font-size: 14px; line-height: 140%;">
+                                                                    <strong><span
+                                                                            style="font-size: 18px; line-height: 25.2px; color: #666666;">Ol&aacute;,</span></strong>
+                                                                </p>
+                                                                <p style="font-size: 14px; line-height: 140%;"><span
+                                                                        style="font-size: 14px; line-height: 19.6px; color: #7e8c8d;">Hello,</span>
+                                                                </p>
+                                                                <p style="font-size: 14px; line-height: 140%;">&nbsp;
+                                                                </p>
+                                                                <p style="font-size: 14px; line-height: 140%;">
+                                                                    <strong><span
+                                                                            style="font-size: 18px; line-height: 25.2px; color: #666666;">Est&aacute;
+                                                                            um passo
+                                                                            mais pr&oacute;ximo de completar a sua
+                                                                            reserva</span></strong>
+                                                                </p>
+                                                                <p style="font-size: 14px; line-height: 140%;"><span
+                                                                        style="font-size: 18px; line-height: 25.2px; color: #666666;"><span
+                                                                            style="font-size: 14px; line-height: 19.6px; color: #7e8c8d;">You
+                                                                            are one step
+                                                                            closer to confirm your
+                                                                            reservation</span><br />&nbsp;</span></p>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:0px 40px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div align="left">
+                                                                <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:'Lato',sans-serif;"><tr><td style="font-family:'Lato',sans-serif;" align="left"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:52px; v-text-anchor:middle; width:164px;" arcsize="2%" stroke="f" fillcolor="#18163a"><w:anchorlock/><center style="color:#FFFFFF;font-family:'Lato',sans-serif;"><![endif]-->
+                                                                <a href="https://www.fastropemadeira.com/confirmation/{{$token}}"
+                                                                    target="_blank"
+                                                                    style="box-sizing: border-box;display: inline-block;font-family:'Lato',sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #18163a; border-radius: 1px;-webkit-border-radius: 1px; -moz-border-radius: 1px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;">
+                                                                    <span
+                                                                        style="display:block;padding:15px 40px;line-height:120%;"><span
+                                                                            style="font-size: 18px; line-height: 21.6px;">Confirmar&nbsp;</span></span>
+                                                                </a>
+                                                                <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 40px 30px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div
+                                                                style="line-height: 140%; text-align: left; word-wrap: break-word;">
+                                                                <p style="font-size: 14px; line-height: 140%;"><span
+                                                                        style="color: #888888; font-size: 14px; line-height: 19.6px;"><em><span
+                                                                                style="font-size: 16px; line-height: 22.4px;">Ignore
+                                                                                este email caso n&atilde;o
+                                                                                tenha efetuado uma reserva
+                                                                                connosco.</span></em></span></p>
+                                                                <p style="font-size: 14px; line-height: 140%;"><span
+                                                                        style="color: #888888; font-size: 14px; line-height: 19.6px;"><em><span
+                                                                                style="font-size: 16px; line-height: 22.4px;">Please
+                                                                                ignore this email if you
+                                                                                did not request a password
+                                                                                change.</span></em></span><br /><span
+                                                                        style="color: #888888; font-size: 14px; line-height: 19.6px;"><em><span
+                                                                                style="font-size: 16px; line-height: 22.4px;">&nbsp;</span></em></span>
+                                                                </p>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="u-row-container" style="padding: 0px;background-color: transparent">
+                        <div class="u-row"
+                            style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #18163a;">
+                            <div
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #18163a;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="300" style="width: 300px;padding: 20px 20px 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-50"
+                                    style="max-width: 320px;min-width: 300px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 20px 20px 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div
+                                                                style="line-height: 140%; text-align: left; word-wrap: break-word;">
+                                                                <p style="font-size: 14px; line-height: 140%;"><span
+                                                                        style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">+351
+                                                                        933 933
+                                                                        452</span></p>
+                                                                <p style="font-size: 14px; line-height: 140%;"><span
+                                                                        style="font-size: 14px; line-height: 19.6px; color: #ecf0f1;">info@fastropemadeira.com</span>
+                                                                </p>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]><td align="center" width="300" style="width: 300px;padding: 0px 0px 0px 20px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-50"
+                                    style="max-width: 320px;min-width: 300px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 0px 0px 0px 20px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:25px 10px 10px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div align="left">
+                                                                <div style="display: table; max-width:187px;">
+                                                                    <!--[if (mso)|(IE)]><table width="187" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-collapse:collapse;" align="left"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace: 0pt;mso-table-rspace: 0pt; width:187px;"><tr><![endif]-->
+
+
+                                                                    <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 15px;" valign="top"><![endif]-->
+                                                                    <table align="left" border="0" cellspacing="0"
+                                                                        cellpadding="0" width="32" height="32"
+                                                                        style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 15px">
+                                                                        <tbody>
+                                                                            <tr style="vertical-align: top">
+                                                                                <td align="left" valign="middle"
+                                                                                    style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
+                                                                                    <a href="https://www.facebook.com/madeira.fastrope "
+                                                                                        title="Facebook"
+                                                                                        target="_blank">
+                                                                                        <img src="https://www.fastropemadeira.com/icon/company/facebook.png"
+                                                                                            alt="Facebook"
+                                                                                            title="Facebook" width="24"
+                                                                                            style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <!--[if (mso)|(IE)]></td><![endif]-->
+
+                                                                    <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 15px;" valign="top"><![endif]-->
+                                                                    <table align="left" border="0" cellspacing="0"
+                                                                        cellpadding="0" width="32" height="32"
+                                                                        style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 15px">
+                                                                        <tbody>
+                                                                            <tr style="vertical-align: top">
+                                                                                <td align="left" valign="middle"
+                                                                                    style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
+                                                                                    <a href=" https://www.instagram.com/fastrope_madeira/"
+                                                                                        title="Instagram"
+                                                                                        target="_blank">
+                                                                                        <img src="https://www.fastropemadeira.com/icon/company/instagram.png"
+                                                                                            alt="Instagram"
+                                                                                            title="Instagram" width="24"
+                                                                                            style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <!--[if (mso)|(IE)]></td><![endif]-->
+
+                                                                    <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 15px;" valign="top"><![endif]-->
+                                                                    <table align="left" border="0" cellspacing="0"
+                                                                        cellpadding="0" width="32" height="32"
+                                                                        style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 15px">
+                                                                        <tbody>
+                                                                            <tr style="vertical-align: top">
+                                                                                <td align="left" valign="middle"
+                                                                                    style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
+                                                                                    <a href="https://www.tripadvisor.pt/Attraction_Review-g189167-d23713035-Reviews-Fast_Rope_Madeira-Funchal_Madeira_Madeira_Islands.html"
+                                                                                        title="Tripadvisor"
+                                                                                        target="_blank">
+                                                                                        <img src="https://www.fastropemadeira.com/icon/company/tripadvisor.png"
+                                                                                            alt="Tripadvisor"
+                                                                                            title="Tripadvisor"
+                                                                                            width="32"
+                                                                                            style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <!--[if (mso)|(IE)]></td><![endif]-->
+
+                                                                    <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 0px;" valign="top"><![endif]-->
+                                                                    <table align="left" border="0" cellspacing="0"
+                                                                        cellpadding="0" width="32" height="32"
+                                                                        style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 0px">
+                                                                        <tbody>
+                                                                            <tr style="vertical-align: top">
+                                                                                <td align="left" valign="middle"
+                                                                                    style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
+                                                                                    <a href="https://api.whatsapp.com/send?l=en&phone=351933933452"
+                                                                                        title="WhatsApp"
+                                                                                        target="_blank">
+                                                                                        <img src="https://www.fastropemadeira.com/icon/company/whatsapp.png"
+                                                                                            alt="WhatsApp"
+                                                                                            title="WhatsApp" width="24"
+                                                                                            style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <!--[if (mso)|(IE)]></td><![endif]-->
+
+
+                                                                    <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table border="0" cellpadding="0" cellspacing="0"
-                                                        class="button_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td
-                                                                style="text-align:center;padding-top:70px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                                                                <div align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:71px;width:222px;v-text-anchor:middle;" arcsize="9%" stroke="false" fillcolor="#343c5e"><w:anchorlock/><v:textbox inset="0px,5px,0px,0px"><center style="color:#fff; font-family:Arial, sans-serif; font-size:28px"><![endif]-->
-                                                                    <div
-                                                                        style="text-decoration:none;display:inline-block;color:#fff;background-color:#343c5e;border-radius:6px;width:auto;border-top:1px solid #343c5e;border-right:1px solid #343c5e;border-bottom:1px solid #343c5e;border-left:1px solid #343c5e;padding-top:10px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;">
-                                                                        <a href="https://www.fastropemadeira.com/confirmation/{{$token}}"
-                                                                            style="color:#fff;text-decoration:none;padding-left:40px;padding-right:40px;font-size:28px;display:inline-block;letter-spacing:1px;"><span
-                                                                                style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><span
-                                                                                    data-mce-style="font-size: 28px; line-height: 56px;"
-                                                                                    style="font-size: 28px; line-height: 56px;"><strong>Confirmar
-                                                                                        <br /></strong></span></span></a>
-                                                                    </div>
-                                                                    <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3"
-                        role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                        class="row-content stack" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 595px;"
-                                        width="595">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="100%">
-                                                    <table border="0" cellpadding="10" cellspacing="0"
-                                                        class="text_block" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
-                                                        width="100%">
-                                                        <tr>
-                                                            <td>
-                                                                <div style="font-family: sans-serif">
-                                                                    <div
-                                                                        style="font-size: 14px; mso-line-height-alt: 16.8px; color: #7d7d7d; line-height: 1.2; font-family: Arial, Helvetica Neue, Helvetica, sans-serif;">
-                                                                        <p
-                                                                            style="margin: 0; text-align: center; mso-line-height-alt: 16.8px;">
-                                                                             </p>
-                                                                        <p style="margin: 0; text-align: center;">
-                                                                            Copyright © 2022 Fast Rope Madeira. All
-                                                                            rights reserved.</p>
-                                                                        <p
-                                                                            style="margin: 0; text-align: center; mso-line-height-alt: 16.8px;">
-                                                                             </p>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:5px 10px 10px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <div
+                                                                style="line-height: 140%; text-align: left; word-wrap: break-word;">
+                                                                <p style="line-height: 140%; font-size: 14px;"><span
+                                                                        style="font-size: 14px; line-height: 19.6px;"><span
+                                                                            style="color: #ecf0f1; font-size: 14px; line-height: 19.6px;"><span
+                                                                                style="line-height: 19.6px; font-size: 14px;">Fast
+                                                                                Rope Madeira &copy;
+                                                                                <br /></span></span></span></p>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="u-row-container" style="padding: 0px;background-color: #f9f9f9">
+                        <div class="u-row"
+                            style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #1c103b;">
+                            <div
+                                style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: #f9f9f9;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #1c103b;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="u-col u-col-100"
+                                    style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
+                                    <div style="width: 100% !important;">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                                            <!--<![endif]-->
+
+                                            <table style="font-family:'Lato',sans-serif;" role="presentation"
+                                                cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:15px;font-family:'Lato',sans-serif;"
+                                                            align="left">
+
+                                                            <table height="0px" align="center" border="0"
+                                                                cellpadding="0" cellspacing="0" width="100%"
+                                                                style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #1c103b;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                                                <tbody>
+                                                                    <tr style="vertical-align: top">
+                                                                        <td
+                                                                            style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                                                            <span>&#160;</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td><![endif]-->
+                                <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
                 </td>
             </tr>
         </tbody>
-    </table><!-- End -->
+    </table>
+    <!--[if mso]></div><![endif]-->
+    <!--[if IE]></div><![endif]-->
 </body>
 
 </html>
