@@ -23,7 +23,7 @@ class CreateReservationsTable extends Migration
             $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->integer('people');
-            $table->integer('source')->default("website");
+            $table->string('source')->default("website");
             $table->integer('price')->default(0);
             $table->text('notes')->nullable();
             $table->string('phone')->nullable();
