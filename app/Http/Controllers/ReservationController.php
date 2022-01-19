@@ -6,6 +6,7 @@ use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Jobs\ConfirmationEmail;
+use App\Jobs\ModificationEmail;
 use App\Jobs\NotificationEmail;
 use App\Mail\ConfirmationMail;
 use App\Models\Reservation;
@@ -99,7 +100,13 @@ class ReservationController extends Controller
     {
         $validator = $request->validated();
         $reservation->update($validator);
+        $changes = $reservation->getChanges();
+        $filtered_changes = array_filter($changes, function ($k) {
+            return $k != 'updated_at';
+        }, ARRAY_FILTER_USE_KEY);
 
+        ModificationEmail::dispatch($reservation, $filtered_changes)
+            ->delay(now()->addSecond());
         return new ReservationResource($reservation);
     }
 
