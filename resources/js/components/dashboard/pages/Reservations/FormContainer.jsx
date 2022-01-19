@@ -35,7 +35,6 @@ class FormContainer extends Component {
     }
 
     handleModalClose = () => {
-        console.log("end")
         this.formRef.current.resetFields();
         this.setState({
             calendarMetadata: {},
@@ -114,7 +113,7 @@ class FormContainer extends Component {
                                 </Col>
                             </Row>
                             <ButtonContainer type="flex" justify="end">
-                                <Button size="large" width="150px" type="primary" htmlType="submit">
+                                <Button loading={this.props.loading} size="large" width="150px" type="primary" htmlType="submit">
                                     Atualizar Reserva
                                 </Button>
                             </ButtonContainer>
@@ -133,7 +132,13 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+const mapStateToProps = (state) => {
+    return {
+        loading: state.reservation.loading,
+    };
+};
+
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(FormContainer);

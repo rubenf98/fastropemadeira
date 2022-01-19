@@ -108,7 +108,7 @@ class Painel extends Component {
                             <CardContainer
                                 img="/icon/dashboard/feedback.svg"
                                 text="Avaliações na plataforma"
-                                to="/painel/feedback"
+                                to="/painel/avaliacao"
                             />
                         </Col>
                         <Col md={7} sm={24}>

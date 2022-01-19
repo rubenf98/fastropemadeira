@@ -19,10 +19,11 @@ class CreateReservationsTable extends Migration
             $table->boolean('private')->default(false);
             $table->boolean('confirmation')->default(false);
             $table->string('confirmation_token')->unique();
-            $table->string('name');
-            $table->string('email');
-            $table->string('address');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
             $table->integer('people');
+            $table->integer('source')->default("website");
             $table->integer('price')->default(0);
             $table->text('notes')->nullable();
             $table->string('phone')->nullable();
