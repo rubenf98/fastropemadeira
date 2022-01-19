@@ -10,11 +10,24 @@ import { connect } from "react-redux";
 const Container = styled.div`
     width: 100%;
 `;
+
+const Indicator = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: ${props => props.background};
+`;
+
 function TableContainer({ loading, data, meta, handlePageChange, onRowClick, onDelete, updateReservation }) {
     const [visibility, setVisibility] = useState(false);
     const [currentRecord, setCurrentRecord] = useState({});
 
     const columns = [
+        {
+            title: '',
+            dataIndex: 'confirmation',
+            render: (confirmation) => <Indicator background={confirmation ? "#008d09" : "#df0000"} />,
+        },
         {
             title: '#',
             dataIndex: 'id',
