@@ -83,8 +83,7 @@ function History({ text }) {
             <Col md={24} lg={12}>
                 <AnimationContainer animation="fadeIn">
                     <h2>{text.history}</h2>
-                    <p>{text.historyParagraph[0]}</p>
-                    <p>{text.historyParagraph[1]}</p>
+                    <p>{text.historyParagraph}</p>
                 </AnimationContainer>
             </Col>
         </Container>

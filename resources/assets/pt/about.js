@@ -1,9 +1,6 @@
 export const text = {
-    history: "História",
-    historyParagraph: [
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, tempore, totam eius voluptate illo quaerat beatae quasi recusandae repellendus eligendi facilis? Vel rem cum et corrupti obcaecati veniam? Nam, repellendus!",
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, tempore, totam eius voluptate illo quaerat beatae quasi recusandae repellendus eligendi facilis? Vel rem cum et corrupti obcaecati veniam? Nam, repellendus!",
-    ],
+    history: "Nossa Missão",
+    historyParagraph: "Nós somos três amigos, camaradas e parceiros de aventura que partilhamos da paixão pela natureza, aventura e novas experiências. Somos guias altamente treinados e formados. Estamos aqui para vos proporcionar uma experiência unica com os melhores equipamentos, condições de segurança e qualidade.",
     team: {
         title: "Trabalho árduo, honesto e confiável fornecido por guias locais especializados",
         paragraph: "Nós somos três amigos, camaradas e parceiros de aventura que partilhamos da paixão pela natureza, aventura e novas experiências. Somos guias altamente treinados e formados. Estamos aqui para vos proporcionar uma experiência unica com os melhores equipamentos, condições de segurança e qualidade.",
@@ -11,12 +8,12 @@ export const text = {
     services: {
         title: "Serviços",
         items: [
-            { title: "Transporte", paragraph: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Dolor, tempore blanditiis, quia neque iusto repudiandae debitis dignissimos soluta" },
-            { title: "Snacks", paragraph: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Dolor, tempore blanditiis, quia neque iusto repudiandae debitis dignissimos soluta" },
-            { title: "Seguro Pessoal", paragraph: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Dolor, tempore blanditiis, quia neque iusto repudiandae debitis dignissimos soluta" },
-            { title: "Fotografia", paragraph: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Dolor, tempore blanditiis, quia neque iusto repudiandae debitis dignissimos soluta" },
-            { title: "Poliglota", paragraph: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Dolor, tempore blanditiis, quia neque iusto repudiandae debitis dignissimos soluta" },
-            { title: "Surpresa", paragraph: "You can expect a delightful surprise at the end of our activities." },
+            { title: "Transporte", paragraph: "Escolhe onde quer se encontrar e nós fornecemos uma solução." },
+            { title: "Aperitivos", paragraph: "Água e lanches fornecidos ao longo da atividade e incluídos no preço." },
+            { title: "Seguro Pessoal", paragraph: "Seguro da atividade para que não tenha que se preocupar em caso de acidente." },
+            { title: "Fotografia", paragraph: "Vídeos e fotografias são fornecidos com ótima qualidade para mostrar aos seus amigos!" },
+            { title: "Multilíngue", paragraph: "Nós comunicamos em inglês, espanhol e português." },
+            { title: "Surpresa", paragraph: "Podes esperar uma fantástica surpresa no final das nossas atividades." },
         ],
     },
 } 

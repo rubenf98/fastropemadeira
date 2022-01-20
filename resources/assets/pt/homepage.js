@@ -31,14 +31,14 @@ export const text = {
     activities: {
         title: ["Caminhada", "Canyoning"],
         hikingParagraph: [
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dolor doloribus saepe quod veniam! Assumenda, vero ad odit, quidem inventore corporis veniam eaque dignissimos, sint deserunt vitae laudantium expedita excepturi!",
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dolor doloribus saepe quod veniam! Assumenda, vero ad odit, quidem inventore corporis veniam eaque dignissimos, sint deserunt vitae laudantium expedita excepturi!",
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dolor doloribus saepe quod veniam! Assumenda, vero ad odit, quidem inventore corporis veniam eaque dignissimos, sint deserunt vitae laudantium expedita excepturi!",
+            "As altas montanhas, os vales estreitos e a costa íngreme da Madeira formam um belo pano de fundo para caminhadas, fotos e vídeos para recordações futuras.",
+            "Em todas as caminhadas existem tesouros que só quem faz descobre. Caminhar em montanha é um dos mais gratificantes exercícios, não só para o corpo como também para a mente.",
+            "Venha daí conhecer as nossas montanhas, levadas, picos e sítios onde pode observar o melhor que a ilha tem de melhor para oferecer, que é a nossa paisagem.",
         ],
         canyoningParagraph: [
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dolor doloribus saepe quod veniam! Assumenda, vero ad odit, quidem inventore corporis veniam eaque dignissimos, sint deserunt vitae laudantium expedita excepturi!",
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dolor doloribus saepe quod veniam! Assumenda, vero ad odit, quidem inventore corporis veniam eaque dignissimos, sint deserunt vitae laudantium expedita excepturi!",
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus dolor doloribus saepe quod veniam! Assumenda, vero ad odit, quidem inventore corporis veniam eaque dignissimos, sint deserunt vitae laudantium expedita excepturi!"
+            "A actividade Canyoning consiste num emocionante desafio para explorar uma ribeira ou um curso de água vertiginoso,onde os obstáculos são transpostos através de diversas técnicas como escalar, saltar, descer em rappel e nadar.",
+            "Atreva-se a fazer canyoning connosco e sentirá uma incrível onda de adrenalina ao explorar e descobrir o que a ilha tem de mais puro e virgem. ",
+            "Com a ajuda dos nossos Guias, equipamento adequado, recomendado, certificado e de qualidade."
         ],
         price: "Desde"
     },

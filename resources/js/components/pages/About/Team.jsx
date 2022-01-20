@@ -11,6 +11,32 @@ const Container = styled.div`
     max-width: 1600px;
     margin: auto;
     display: block;
+
+    h3 {
+        margin: 80px auto 50px auto;
+        font-size: 2.6em;
+        width: 60%;
+        text-align: center;
+
+        @media (max-width: ${dimensions.lg}) {
+            width: 70%;
+        }
+
+    @media (max-width: ${dimensions.md}) {
+            width: 90%;
+        }
+
+    @media (max-width: ${dimensions.sm}) {
+            font-size: 2em;
+            width: 100%;
+        }
+
+    }
+
+   
+    
+
+        
 `;
 
 const Member = styled.div`
@@ -61,46 +87,6 @@ const Information = styled.div`
     text-align: center;
   
 `;
-
-const SectionTitle = styled(Row)`
-    margin: 80px auto 50px auto;
-    
-    .fadeInLeft {
-        font-size: 2.6em;
-        width: 60%;
-    }
-
-    .fadeInRight {
-        font-size: 1.4em;
-        width: 38%;
-    }
-
-    @media (max-width: ${dimensions.lg}) {
-        .fadeInLeft {
-            font-size: 2.5em;
-        }
-    }
-
-    @media (max-width: ${dimensions.md}) {
-        .fadeInLeft {
-            width: 90%;
-            text-align:center;
-        }
-
-        .fadeInRight {
-            display: none;
-        }
-    }
-
-        @media (max-width: ${dimensions.sm}) {
-        .fadeInLeft {
-            font-size: 2em;
-            width: 100%;
-        }
-    }
-
-`;
-
 const Card = ({ name, image }) => (
     <Member>
         <Picture image={image} />
@@ -113,14 +99,12 @@ const Card = ({ name, image }) => (
 function Team({ text }) {
     return (
         <Container>
-            <SectionTitle type="flex" justify='space-between'>
-                <AnimationContainer animation="fadeInLeft">
-                    <h3>{text.team.title}</h3>
-                </AnimationContainer>
-                <AnimationContainer animation="fadeInRight">
-                    <p>{text.team.paragraph}</p>
-                </AnimationContainer>
-            </SectionTitle>
+
+            <AnimationContainer animation="fadeInLeft">
+                <h3>{text.team.title}</h3>
+            </AnimationContainer>
+
+
             <Row type="flex" justify="space-around" >
                 <Card name="João Alves" image={team.alves} />
                 <Card name="Pedro Faria" image={team.pedro} />

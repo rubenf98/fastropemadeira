@@ -26,7 +26,7 @@ function TableContainer({ loading, data, meta, handlePageChange, onRowClick, onD
         {
             title: '',
             dataIndex: 'confirmation',
-            render: (confirmation) => <Indicator background={confirmation ? "#008d09" : "#df0000"} />,
+            render: (confirmation) => <Indicator background={confirmation != 0 ? "#008d09" : "#df0000"} />,
         },
         {
             title: '#',

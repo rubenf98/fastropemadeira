@@ -28,7 +28,7 @@ class ReservationResource extends JsonResource
             'people' =>   $this->people,
             'notes' =>   $this->notes,
             'private' =>   $this->private,
-            'confirmation' =>   $this->confirmation,
+            'confirmation' =>  (int) $this->confirmation,
             'participants' =>   $this->participants,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
