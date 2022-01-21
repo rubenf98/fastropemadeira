@@ -5,9 +5,12 @@ namespace App\Models;
 use Carbon\Carbon;
 use App\Models\Activity;
 use Illuminate\Database\Eloquent\Model;
+use Cerbero\QueryFilters\FiltersRecords;
 
 class Reservation extends Model
 {
+    use FiltersRecords;
+
     protected $fillable = ['private', 'source', 'price', 'people', 'notes', 'name', 'email', 'address', 'phone', 'date', 'experience_id', "confirmation_token"];
 
     public function participants()

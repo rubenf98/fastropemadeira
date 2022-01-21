@@ -10,6 +10,7 @@ use App\Jobs\ModificationEmail;
 use App\Jobs\NotificationEmail;
 use App\Mail\ConfirmationMail;
 use App\Models\Reservation;
+use App\QueryFilters\ReservationFilter;
 use Illuminate\Http\Request;
 
 use DB;
@@ -22,9 +23,9 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ReservationFilter $filters)
     {
-        return ReservationResource::collection(Reservation::latest()->paginate(10));
+        return ReservationResource::collection(Reservation::filterBy($filters)->latest()->paginate(10));
     }
 
     /**

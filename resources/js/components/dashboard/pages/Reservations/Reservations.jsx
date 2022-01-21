@@ -76,6 +76,16 @@ class Reservations extends Component {
         });
     }
 
+    setFilters = (aFilters) => {
+        console.log(aFilters);
+        var { filters } = this.state;
+        filters = { ...filters, ...aFilters };
+        console.log(filters)
+        this.setState({ filters });
+
+        this.props.fetchReservations(1, filters);
+    }
+
     render() {
         var { data, loading, meta, current } = this.props;
         var { drawerVisible } = this.state;
@@ -84,6 +94,7 @@ class Reservations extends Component {
                 <ContentContainer>
                     <Table>
                         <TableContainer
+                            setFilters={this.setFilters}
                             onRowClick={this.onRowClick}
                             handlePageChange={this.handlePageChange}
                             data={data}
