@@ -24,3 +24,9 @@ export const updateReservation = (id, data) => ({
     type: types.UPDATE_RESERVATION,
     payload: axios.put(`${window.location.origin}/api/reservation/${id}`, data),
 });
+
+export const createExternalReservation = (data) => ({
+    type: types.CREATE_EXTERNAL_RESERVATION,
+    payload: axios.post(`${window.location.origin}/api/external-reservation`, data),
+});
+

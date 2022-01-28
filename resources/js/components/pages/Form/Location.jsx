@@ -124,9 +124,7 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
     useEffect(() => {
         let activity = getActivity();
         axios.get(`${window.location.origin}/api/experience?activity=${activity}`).then((response) => {
-            console.log(response.data.data);
             setData(response.data.data);
-
         });
     }, []);
 

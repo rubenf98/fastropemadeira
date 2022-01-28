@@ -23,7 +23,7 @@ class CreateReservationParticipantsTable extends Migration
             $table->string('shoe');
             $table->timestamps();
 
-            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
         });
     }
 

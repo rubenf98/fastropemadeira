@@ -14,5 +14,7 @@ export const text = {
     },
     total: "Sob-Orçamento",
     feedback: "Reserva confirmada!",
-    feedbackInstruction: "Se existir alguma dúvida, pode nos contactar através de email ou mensagem de telemóvel."
+    feedbackInstruction: "Se existir alguma dúvida, pode nos contactar através de email ou mensagem de telemóvel.",
+    error: "Reserva falhou!",
+    errorInstruction: "Aconteceu algo inesperado e a reserva não foi encontrada"
 } 

@@ -12,6 +12,7 @@ export const dimensions = {
 export const colors = {
 	"main": "rgb(52,60,94)",
 	"mainOverlay": "rgba(52,60,94,.7)",
+	"mainHover": "#2b3252",
 	"gray": "#777",
 };
 

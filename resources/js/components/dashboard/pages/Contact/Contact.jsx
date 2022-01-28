@@ -6,7 +6,7 @@ import { dimensions } from "../../../../helper";
 import TableContainer from "./TableContainer";
 
 const ContentContainer = styled.div`
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -14,7 +14,7 @@ const ContentContainer = styled.div`
     margin: 50px 0px;
 
     @media (max-width: ${dimensions.lg}){
-        width: 90%;
+        width: 100%;
     }
 `;
 

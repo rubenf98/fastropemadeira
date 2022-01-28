@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import Filter from "./Filter";
 import { fetchReservations, fetchReservation, deleteReservation, updateReservation } from "../../../../redux/reservation/actions";
-import FormContainer from "./FormContainer";
 import { dimensions } from "../../../../helper";
 import TableContainer from "./TableContainer";
 import DrawerContainer from "./DrawerContainer";
 
 const ContentContainer = styled.div`
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -17,7 +15,7 @@ const ContentContainer = styled.div`
     margin: 50px 0px;
 
     @media (max-width: ${dimensions.lg}){
-        width: 90%;
+        width: 100%;
     }
 `;
 
@@ -28,14 +26,6 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-const SidePanel = styled.div`
-    width: 25%;
-
-    @media (max-width: ${dimensions.md}){
-        display: none;
-    }
 `;
 
 const Table = styled.div`
@@ -77,10 +67,8 @@ class Reservations extends Component {
     }
 
     setFilters = (aFilters) => {
-        console.log(aFilters);
         var { filters } = this.state;
         filters = { ...filters, ...aFilters };
-        console.log(filters)
         this.setState({ filters });
 
         this.props.fetchReservations(1, filters);
@@ -89,6 +77,7 @@ class Reservations extends Component {
     render() {
         var { data, loading, meta, current } = this.props;
         var { drawerVisible } = this.state;
+
         return (
             <Container>
                 <ContentContainer>
@@ -100,8 +89,7 @@ class Reservations extends Component {
                             data={data}
                             loading={loading}
                             meta={meta}
-                            onDelete={deleteReservation}
-                            onUpdate={updateReservation}
+                            onDelete={this.props.deleteReservation}
                         />
                     </Table>
                 </ContentContainer>

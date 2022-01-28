@@ -124,8 +124,8 @@ class ExperienceSeeder extends Seeder
             'price' => 40.00,
             'private_price' => 40,
             'description' => [
-                'en' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.',
-                'pt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.'
+                'en' => 'Come and enjoy the famous sunrise of Madeira Island! We have several privileged locations for this practice to create magical moments in your life.',
+                'pt' => 'Venha desfrutar do tão famoso nascer do sol da Ilha da Madeira! Temos várias localizações previligiadas para esta prática de modo a criar momento mágicos na sua vida.'
             ],
             'activity_id' => 2,
             'duration' => ['en' => '3 to 4h', 'pt' => '3 a 4h'],
@@ -135,8 +135,8 @@ class ExperienceSeeder extends Seeder
             'price' => 40.00,
             'private_price' => 40,
             'description' => [
-                'en' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.',
-                'pt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.'
+                'en' => 'Come and enjoy the famous sunset of Madeira Island! We have several privileged locations for this practice to create magical moments in your life.',
+                'pt' => 'Venha desfrutar do tão famoso pôr do sol da Ilha da Madeira! Temos várias localizações previligiadas para esta prática de modo a criar momento mágicos na sua vida.'
             ],
             'activity_id' => 2,
             'duration' => ['en' => '3 to 4h', 'pt' => '3 a 4h'],
@@ -182,8 +182,8 @@ class ExperienceSeeder extends Seeder
             'price' => 00.00,
             'private_price' => 0,
             'description' => [
-                'en' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.',
-                'pt' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dicta repellendus alias consequuntur voluptate magni impedit rerum minima nobis dolore, quisquam sint excepturi temporibus incidunt a eveniet ducimus neque nemo.'
+                'en' => 'Contact us about your dream destinations and activities on the island and we will take care of them! We will accompany and provide all the necessary support to get to know the island in the best possible way.',
+                'pt' => 'Contacte-nos relativamente aos seus destinos e atividades de sonhos na ilha que nós trataremos de os realizar! Iremos acompanhar e fornecer todo o apoio necessário para conhecer a ilha da melhor forma possível.'
             ],
             'activity_id' => 2,
         ]);

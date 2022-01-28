@@ -344,7 +344,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
     }
 
     function handleSubmit() {
-        form.validateFields().then((data) => { console.log(data) });
+        form.validateFields();
         incrementStep();
     }
 

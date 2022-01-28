@@ -2,7 +2,7 @@ import { render } from 'react-dom'
 import React from 'react'
 import Routes from "./routes";
 import reducer from './reducer'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import { Provider } from 'react-redux'
@@ -18,15 +18,16 @@ import 'react-multi-carousel/lib/styles.css';
 import moment from 'moment';
 
 let decodedCookie = decodeURIComponent(document.cookie);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
     reducer,
-
-    applyMiddleware(
-        thunk,
-        promise,
+    composeEnhancers(
+        applyMiddleware(
+            thunk,
+            promise,
+        )
     )
-
 )
 
 if (!decodedCookie.includes('language')) {

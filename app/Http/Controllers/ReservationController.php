@@ -12,9 +12,7 @@ use App\Mail\ConfirmationMail;
 use App\Models\Reservation;
 use App\QueryFilters\ReservationFilter;
 use Illuminate\Http\Request;
-
-use DB;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {

@@ -164,6 +164,7 @@ const PriceContainer = styled.div`
 
 function Confirmation({ match }) {
     const [data, setData] = useState({})
+    const [hasError, setHasError] = useState(false)
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/confirmation");
 
 
@@ -183,6 +184,12 @@ function Confirmation({ match }) {
             if (moment(response.data.data.updated_at).isAfter(before)) {
                 openNotification();
             }
+        }).catch((error) => {
+            notification.error({
+                message: text.error,
+                description: text.errorInstruction
+            });
+            setHasError(true);
         })
 
     }, [])
@@ -194,14 +201,17 @@ function Confirmation({ match }) {
                     <Loading>
                         <div className='flex-container'>
                             <img width="250" src="/logo.png" alt="logo" />
-                            <div className="gooey">
-                                <span className="dot"></span>
-                                <div className="dots">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                            {
+                                !hasError &&
+                                <div className="gooey">
+                                    <span className="dot"></span>
+                                    <div className="dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
                     </Loading> :
                     <Fragment>

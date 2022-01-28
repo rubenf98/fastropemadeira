@@ -126,12 +126,6 @@ class FormContainer extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createPost: (data) => dispatch(createPost(data)),
-    };
-};
-
 const mapStateToProps = (state) => {
     return {
         loading: state.reservation.loading,
@@ -140,5 +134,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(FormContainer);

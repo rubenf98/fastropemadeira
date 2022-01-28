@@ -14,5 +14,7 @@ export const text = {
     },
     total: "Pending Budget",
     feedback: "Reservation confirmed!",
-    feedbackInstruction: "If there are any additional doubts, feel free to contact us with an email or phone message."
+    feedbackInstruction: "If there are any additional doubts, feel free to contact us with an email or phone message.",
+    error: "Confirmation failed!",
+    errorInstruction: "Something unexpected happened and reservation was not found"
 } 

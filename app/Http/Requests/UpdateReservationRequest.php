@@ -26,7 +26,7 @@ class UpdateReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'required|date|after:tomorrow',
+            'date' => 'required|date|after:today',
             'price' => 'nullable',
         ];
     }

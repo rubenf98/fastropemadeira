@@ -144,7 +144,7 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
                         onCreate(values);
                     })
                     .catch((info) => {
-                        console.log('Validate Failed:', info);
+                       //
                     });
             }}
         >
