@@ -324,7 +324,7 @@ const rules = {
 function People({ getExperience, incrementStep, updateForm, calendarMetadata, decrementStep, text, form, loading }) {
     const [data, setData] = useState({});
     const [currentLimit, setCurrentLimit] = useState(15);
-    const [people, setPeople] = useState(6);
+    const [people, setPeople] = useState(2);
     const [priv, setPrivate] = useState(false);
 
     useEffect(() => {

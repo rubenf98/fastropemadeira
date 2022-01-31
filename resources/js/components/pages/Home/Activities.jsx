@@ -161,7 +161,7 @@ function Activities({ text }) {
             <CarouselContainer autoPlay itemClass="image-item" centerMode infinite swipeable responsive={getCarouselBreakpoints([1, 1, 2, 2, 3])}>
                 {hiking.map((image, index) => {
                     return (
-                        <img key={index} src={image} alt="" />
+                        <img loading="lazy" key={index} src={image} alt="" />
                     );
                 })}
             </CarouselContainer>
@@ -188,7 +188,7 @@ function Activities({ text }) {
             <CarouselContainer autoPlay itemClass="image-item" centerMode infinite swipeable responsive={getCarouselBreakpoints([1, 1, 2, 2, 3])}>
                 {canyoning.map((image, index) => {
                     return (
-                        <img key={index} src={image} alt="" />
+                        <img loading="lazy" key={index} src={image} alt="" />
                     );
                 })}
             </CarouselContainer>

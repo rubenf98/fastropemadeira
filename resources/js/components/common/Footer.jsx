@@ -7,6 +7,7 @@ import { dimensions } from '../../helper';
 const Container = styled.div`
     max-width: 100%;
     height: 600px;
+    background: white;
     background: url("/footer.webp");
     background-position: center;
     background-size: cover;
@@ -124,13 +125,13 @@ function Footer() {
                 <p>Copyright ©{moment().year()} All rights reserved | Rúben Freitas</p>
                 <Row type="flex" justify="center" align="middle">
                     <Logo href="https://www.facebook.com/madeira.fastrope" target="_blank" >
-                        <img src="/icon/company/facebook.png" alt="facebook" />
+                        <img loading="lazy" src="/icon/company/facebook.png" alt="facebook" />
                     </Logo>
                     <Logo href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
-                        <img src="/icon/company/whatsapp.svg" alt="whatsapp" />
+                        <img loading="lazy" src="/icon/company/whatsapp.svg" alt="whatsapp" />
                     </Logo>
                     <Logo href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
-                        <img src="/icon/company/instagram.svg" alt="instagram" />
+                        <img loading="lazy" src="/icon/company/instagram.svg" alt="instagram" />
                     </Logo>
                 </Row>
             </Disclaimer>

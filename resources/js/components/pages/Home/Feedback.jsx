@@ -71,7 +71,7 @@ const Item = ({ stars, comment, user, avatar }) => (
             <p>"{comment}"</p>
 
             <Row className="user" type="flex" align="middle">
-                <img src={"/feedback/" + avatar + ".webp"} alt="avatar" />
+                <img loading="lazy" src={"/feedback/" + avatar + ".webp"} alt="avatar" />
                 <h3>{user}</h3>
             </Row>
         </AnimationContainer>

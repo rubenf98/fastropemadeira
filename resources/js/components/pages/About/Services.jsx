@@ -66,7 +66,7 @@ const Service = ({ title, description, image }) => (
 
     <ServiceContainer>
         <AnimationContainer animation="fadeInUp">
-            <img src={image} />
+            <img loading="lazy" src={image} alt={title} />
 
             <h4>{title}</h4>
             <p>{description}</p>
