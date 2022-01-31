@@ -20,19 +20,10 @@
     @font-face {
         font-family: Enclave Demo;
         src: url('{!! asset('fonts/EnclaveDemoRegular.ttf') !!}');
-    }
-
-    @font-face {
         font-family: Poppins;
         src: url('{!! asset('fonts/Poppins-Black.ttf') !!}');
-    }
-
-    @font-face {
         font-family: Inter;
         src: url('{!! asset('fonts/Inter-VariableFont_slnt, wght.ttf') !!}');
-    }
-
-    @font-face {
         font-family: Montserrat;
         src: url('{!! asset('fonts/Montserrat-Regular.ttf') !!}');
     }
