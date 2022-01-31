@@ -13,6 +13,11 @@
     <meta name="description"
         content="Fast Rope is more than a Adventure company, is a team that we all share the passion for Canyoning, Hiking and much more...we also do private and personalized tours, you choose what you want to do and we make it happen.">
     <link rel="shortcut icon" href="{{{ asset('logo_white.png') }}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat&family=Poppins:wght@900&display=swap"
+        rel="stylesheet">
     <title>FastRope</title>
 </head>
 
@@ -20,12 +25,6 @@
     @font-face {
         font-family: Enclave Demo;
         src: url('{!! asset('fonts/EnclaveDemoRegular.ttf') !!}');
-        font-family: Poppins;
-        src: url('{!! asset('fonts/Poppins-Black.ttf') !!}');
-        font-family: Inter;
-        src: url('{!! asset('fonts/Inter-VariableFont_slnt, wght.ttf') !!}');
-        font-family: Montserrat;
-        src: url('{!! asset('fonts/Montserrat-Regular.ttf') !!}');
     }
 
     html,
