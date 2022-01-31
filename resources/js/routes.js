@@ -14,8 +14,8 @@ import PainelLayout from "./components/dashboard/PainelLayout";
 export const history = createBrowserHistory();
 
 function Routes() {
-
     const getRoute = (route) => {
+        window.scrollTo(0, 0);
         return "/" + localStorage.getItem("language") + route
     };
 

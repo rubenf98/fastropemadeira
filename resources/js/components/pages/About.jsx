@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from "styled-components";
-import { Row } from "antd";
 import Team from './About/Team';
 import History from './About/History';
 import Services from './About/Services';

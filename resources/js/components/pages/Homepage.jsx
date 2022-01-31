@@ -79,7 +79,6 @@ const HeaderContent = styled.div`
     }
     h2 {
         font-size: 1.3vw;
-        //font-family: 'Anonymous Pro', monospace;
         text-transform: uppercase;
 
         @media (max-width: ${dimensions.xs}){
