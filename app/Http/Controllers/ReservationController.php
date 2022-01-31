@@ -103,9 +103,11 @@ class ReservationController extends Controller
         $filtered_changes = array_filter($changes, function ($k) {
             return $k != 'updated_at';
         }, ARRAY_FILTER_USE_KEY);
+        if (count($filtered_changes)) {
+            ModificationEmail::dispatch($reservation, $filtered_changes)
+                ->delay(now()->addSecond());
+        }
 
-        ModificationEmail::dispatch($reservation, $filtered_changes)
-            ->delay(now()->addSecond());
         return new ReservationResource($reservation);
     }
 

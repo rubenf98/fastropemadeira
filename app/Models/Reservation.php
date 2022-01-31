@@ -45,7 +45,7 @@ class Reservation extends Model
         $reservations = Reservation::where("date", ">", Carbon::now())->latest()->get();
         $disabled = [];
         $dates = [];
-        $treshold = $people ? 14 - $people : 12;
+        $treshold = $people ? 14 - $people : 14;
 
         foreach ($reservations as  $reservation) {
 

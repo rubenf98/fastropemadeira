@@ -443,7 +443,6 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                             disabledDate={(currentDate) => {
                                 return currentDate && (
                                     (currentDate < moment())
-                                    || (currentDate.isoWeekday() > 6)
                                     || (calendarMetadata.disabled.includes(moment(currentDate).format("YYYY-MM-DD"))));
                             }}
                             headerRender={({ value, onChange }) => {
@@ -528,7 +527,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                     </Form.Item>
 
                     <Form.Item name="people" label={text.form.people.label} >
-                        <CustomSlider onChange={(value) => setPeople(value)} min={4} max={currentLimit} />
+                        <CustomSlider onChange={(value) => setPeople(value)} min={2} max={currentLimit} />
                     </Form.Item>
 
                     <Row type="flex" justify="center">
@@ -565,30 +564,18 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                                                 <Form.Item name="height" rules={rules.height}>
                                                     <Select placeholder={text.form.person.height.placeholder}>
                                                         <Select.Option value="120">&lt; 120cm</Select.Option>
-                                                        <Select.Option value="130">130cm</Select.Option>
-                                                        <Select.Option value="140">140cm</Select.Option>
-                                                        <Select.Option value="150">150cm</Select.Option>
-                                                        <Select.Option value="160">160cm</Select.Option>
-                                                        <Select.Option value="170">170cm</Select.Option>
-                                                        <Select.Option value="180">180cm</Select.Option>
-                                                        <Select.Option value="190">190cm</Select.Option>
-                                                        <Select.Option value="200">200cm</Select.Option>
-                                                        <Select.Option value="210">210cm</Select.Option>
+                                                        {[...Array(89)].map((count, index) =>
+                                                            <Select.Option key={index} value={index + 121}>{index + 121}cm</Select.Option>
+                                                        )}
                                                         <Select.Option value="Over 210">&gt; 210cm</Select.Option>
                                                     </Select>
                                                 </Form.Item>
                                                 <Form.Item name="weight" rules={rules.weight}>
                                                     <Select placeholder={text.form.person.weight.placeholder}>
                                                         <Select.Option value="Under 30kg">&lt; 30kg</Select.Option>
-                                                        <Select.Option value="40kg">40kg</Select.Option>
-                                                        <Select.Option value="50kg">50kg</Select.Option>
-                                                        <Select.Option value="60kg">60kg</Select.Option>
-                                                        <Select.Option value="70kg">70kg</Select.Option>
-                                                        <Select.Option value="80kg">80kg</Select.Option>
-                                                        <Select.Option value="90kg">90kg</Select.Option>
-                                                        <Select.Option value="100kg">100kg</Select.Option>
-                                                        <Select.Option value="110kg">110kg</Select.Option>
-                                                        <Select.Option value="120kg">120kg</Select.Option>
+                                                        {[...Array(89)].map((count, index) =>
+                                                            <Select.Option key={index} value={index + 31}>{index + 31}kg</Select.Option>
+                                                        )}
                                                         <Select.Option value="Over 120kg">&gt; 120kg</Select.Option>
                                                     </Select>
                                                 </Form.Item>

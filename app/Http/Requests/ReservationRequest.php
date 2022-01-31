@@ -52,16 +52,16 @@ class ReservationRequest extends FormRequest
             'name' => 'required|string',
             'price' => 'required',
             'notes' => 'required_if:experience_id,11|string',
-            'people' => 'required|integer|min:4|max:15',
+            'people' => 'required|integer|min:2|max:15',
             'experience_id' => 'required|exists:experiences,id',
             'private' => 'required|boolean',
             'phone' => 'nullable|numeric',
             'person' => 'required_if:hasPerson,true|size:' . $this->people,
             'person.*.birthday' => 'required|date',
             'person.*.gender' => 'required|string',
-            'person.*.height' => 'required|string',
+            'person.*.height' => 'required',
             'person.*.shoe' => 'required|string',
-            'person.*.weight' => 'required|string',
+            'person.*.weight' => 'required',
         ];
     }
 

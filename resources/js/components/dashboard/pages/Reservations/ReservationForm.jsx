@@ -90,7 +90,7 @@ class ReservationForm extends Component {
     state = {
         calendarMetadata: {},
         currentLimit: 15,
-        people: 4,
+        people: 2,
         experiences: []
     }
 
@@ -161,7 +161,7 @@ class ReservationForm extends Component {
                             onFinish={this.onFinish}
                             layout="vertical"
                             initialValues={{
-                                people: 4
+                                people: 2
                             }}
                         >
                             <Instruction>Crie uma reserva externa na plataforma </Instruction>
@@ -197,7 +197,6 @@ class ReservationForm extends Component {
                                             disabledDate={(currentDate) => {
                                                 return currentDate && (
                                                     (currentDate < moment())
-                                                    || (currentDate.isoWeekday() > 6)
                                                     || (calendarMetadata.disabled.includes(moment(currentDate).format("YYYY-MM-DD"))));
                                             }}
                                         />
@@ -220,6 +219,7 @@ class ReservationForm extends Component {
                                     >
                                         <Select style={{ width: "100%" }} placeholder="Fonte externa da reserva">
                                             <Option value="tripadvisor">Tripadvisor</Option>
+                                            <Option value="getyorguide">GetYourGuide</Option>
                                             <Option value="thisismadeiraisland">thisismadeiraisland</Option>
                                             <Option value="outro">
                                                 Outro
@@ -241,13 +241,13 @@ class ReservationForm extends Component {
 
                                 <Col span={24}>
                                     <Form.Item name="people" label="Número de participantes" >
-                                        <CustomSlider onChange={(value) => this.setState({ people: value })} min={4} max={currentLimit} />
+                                        <CustomSlider onChange={(value) => this.setState({ people: value })} min={2} max={currentLimit} />
                                     </Form.Item>
                                 </Col>
                             </Row>
                             <ButtonContainer type="flex" justify="end">
                                 <Button loading={this.props.loading} size="large" width="150px" type="primary" htmlType="submit">
-                                    Atualizar Reserva
+                                    Criar Reserva
                                 </Button>
                             </ButtonContainer>
                         </Form>

@@ -45,7 +45,7 @@ class ExternalReservationRequest extends FormRequest
             'email' => 'required|email:rfc,dns',
             'name' => 'required|string',
             'price' => 'required',
-            'people' => 'required|integer|min:4|max:15',
+            'people' => 'required|integer|min:2|max:15',
             'experience_id' => 'required|exists:experiences,id',
         ];
     }

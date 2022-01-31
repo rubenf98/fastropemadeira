@@ -154,7 +154,7 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
                 name="order"
                 requiredMark={false}
                 initialValues={{
-                    people: 6,
+                    people: 2,
                 }}
             >
                 <Content>
