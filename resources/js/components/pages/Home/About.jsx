@@ -128,7 +128,7 @@ function About({ text }) {
             </Section>
             <Section image id="b">
                 <AnimationContainer animation="fadeIn">
-                    <img loading="lazy" src="/about.webp" alt="about-image" />
+                    <img decoding='async' loading="lazy" src="/about.webp" alt="about-image" />
                 </AnimationContainer>
             </Section>
 

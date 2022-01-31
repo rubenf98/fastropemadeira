@@ -1,5 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/fonts/EnclaveDemoRegular.ttf": "/fonts/EnclaveDemoRegular.ttf"
+    "/fonts/EnclaveDemoRegular.ttf": "/fonts/EnclaveDemoRegular.ttf",
+    "/fonts/Inter-VariableFont_slnt,wght.ttf": "/fonts/Inter-VariableFont_slnt,wght.ttf",
+    "/fonts/Montserrat-Regular.ttf": "/fonts/Montserrat-Regular.ttf",
+    "/fonts/Poppins-Black.ttf": "/fonts/Poppins-Black.ttf"
 }
