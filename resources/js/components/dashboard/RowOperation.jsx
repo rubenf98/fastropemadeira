@@ -1,5 +1,7 @@
 import React from "react";
-import { Menu, Dropdown, Popconfirm } from "antd";
+import Menu from "antd/es/menu"
+import Dropdown from "antd/es/dropdown"
+import Popconfirm from "antd/es/popconfirm"
 import styled from "styled-components";
 
 const StyledDropdownLink = styled.div`

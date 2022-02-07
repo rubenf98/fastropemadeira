@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Form } from "antd";
+import Form from "antd/es/form"
 import moment from 'moment';
 
 const FilterContainer = styled.div`

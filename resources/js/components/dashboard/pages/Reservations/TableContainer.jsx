@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Cascader, DatePicker, Input } from "antd";
+import Input from "antd/es/input"
+import Cascader from "antd/es/cascader"
+import DatePicker from "antd/es/date-picker"
 import styled from "styled-components";
 import Table from "../../../common/TableContainer";
 import RowOperation from "../../RowOperation";

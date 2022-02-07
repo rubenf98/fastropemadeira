@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { dimensions, colors } from "../../helper";
-import { Row } from "antd";
+import Row from "antd/es/row"
 import { NavLink } from "react-router-dom";
 
 const Container = styled(Row)`

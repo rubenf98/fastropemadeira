@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { Row } from "antd";
+import Row from "antd/es/row"
 import { team } from "../../../images";
 import { dimensions } from "../../../helper"
 import AnimationContainer from '../../common/AnimationContainer';

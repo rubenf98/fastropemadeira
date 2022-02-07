@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
-import { Row, Col } from "antd";
+import Col from "antd/es/col"
+import Row from "antd/es/row"
 import { texture } from "../../../images"
 import { dimensions } from "../../../helper"
 import AnimationContainer from '../../common/AnimationContainer';

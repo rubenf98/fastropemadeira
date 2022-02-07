@@ -253,7 +253,7 @@ class Homepage extends React.Component {
                 />
 
                 <Header height={screenHeight + "px"}>
-                    <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/pending-video.webm' playing controls={false} />
+                    {/*<Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/pending-video.webm' playing controls={false} />*/}
                     <Overlay />
                     <HeaderContent>
                         <h1>Fast Rope Madeira</h1>

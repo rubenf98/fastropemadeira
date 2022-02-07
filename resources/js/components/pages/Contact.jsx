@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from "styled-components";
-import { Row, Form, Input, Button, Col, InputNumber } from "antd";
+import Row from "antd/es/row"
+import Form from "antd/es/form"
+import Input from "antd/es/input"
+import Button from "antd/es/button"
+import Col from "antd/es/col"
+import InputNumber from "antd/es/input-number"
 import { social, icon, background, feedback } from "../../images";
 import { dimensions } from "../../helper";
 import SubmitButton from "./Contact/SubmitButton";

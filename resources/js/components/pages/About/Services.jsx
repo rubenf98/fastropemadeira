@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { Row } from "antd";
+import Row from "antd/es/row"
 import { services } from "../../../images"
 import SectionTitle from '../../common/SectionTitle';
 import { dimensions } from "../../../helper"
