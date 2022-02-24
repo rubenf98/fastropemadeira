@@ -48,7 +48,7 @@ class ReservationRequest extends FormRequest
             'date' => 'required|date|after:today',
             'address' => 'required|string',
             'confirmation_token' => 'required',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email',
             'name' => 'required|string',
             'price' => 'required',
             'notes' => 'required_if:experience_id,11|string',

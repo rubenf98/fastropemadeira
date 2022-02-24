@@ -42,7 +42,7 @@ class ExternalReservationRequest extends FormRequest
             'confirmation_token' => 'required',
             'source' => 'required',
             'confirmation' => 'required',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email',
             'name' => 'required|string',
             'price' => 'required',
             'people' => 'required|integer|min:2|max:15',
