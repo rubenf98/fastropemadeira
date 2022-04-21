@@ -594,6 +594,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                                                         <Select.Option value="45">10 UK / 45 EU</Select.Option>
                                                         <Select.Option value="46">11 UK / 46 EU</Select.Option>
                                                         <Select.Option value="47">12 UK / 47 EU</Select.Option>
+                                                        <Select.Option value="48">13 UK / 48 EU</Select.Option>
                                                     </Select>
                                                 </Form.Item>
 

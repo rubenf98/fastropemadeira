@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Row } from 'antd';
+import { Row, Spin } from 'antd';
 import styled from "styled-components";
 import axios from 'axios';
 import { dimensions } from '../../../helper';
@@ -121,13 +121,21 @@ const PageDescription = styled(Row)`
    
 `;
 
+const LoadingContainer = styled(Row)`
+    width: 100%;
+    margin: 50px auto;
+    
+`;
+
 
 function Activity({ incrementStep, text }) {
     const [data, setData] = useState([])
-
+    const [loading, setLoading] = useState(true);
+    
     useEffect(() => {
         axios.get(`${window.location.origin}/api/activity?language=${localStorage.getItem('language')}`).then((response) => {
             setData(response.data.data);
+            setLoading(false)
         })
     }, [])
 
@@ -139,15 +147,19 @@ function Activity({ incrementStep, text }) {
             </PageDescription>
 
             <Row type="flex" justify="space-between">
-                {data.map((element) => (
-                    <Element key={element.value} onClick={() => incrementStep({ activity: element.value })} >
-                        <Image src={element.image} />
-                        <CaptionContainer  >
-                            <CaptionTitle>{element.label}</CaptionTitle>
-                            <CaptionDescription> {element.description}</CaptionDescription>
-                        </CaptionContainer>
-                    </Element>
-                ))}
+                {loading ?
+                    <LoadingContainer type="flex" justify="center" align="middle">
+                        <Spin size="large" />
+                    </LoadingContainer> :
+                    data.map((element) => (
+                        <Element key={element.value} onClick={() => incrementStep({ activity: element.value })} >
+                            <Image src={element.image} />
+                            <CaptionContainer  >
+                                <CaptionTitle>{element.label}</CaptionTitle>
+                                <CaptionDescription> {element.description}</CaptionDescription>
+                            </CaptionContainer>
+                        </Element>
+                    ))}
             </Row>
         </Fragment>
     )

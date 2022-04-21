@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import styled from "styled-components";
 import axios from "axios";
 import BackButton from './BackButton';
@@ -117,14 +117,22 @@ const SelectionItem = ({ element, lg, incrementStep }) => (
     </SelectionContainer>
 )
 
+const LoadingContainer = styled(Row)`
+    width: 100%;
+    margin: 50px auto;
+    
+`;
+
 const columnSize = [10, 14, 12, 12, 14, 10, 12, 12, 10, 14, 12, 12, 14, 10]
 function Location({ incrementStep, decrementStep, getActivity, updateForm, text }) {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         let activity = getActivity();
         axios.get(`${window.location.origin}/api/experience?activity=${activity}`).then((response) => {
             setData(response.data.data);
+            setLoading(false)
         });
     }, []);
 
@@ -133,19 +141,23 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
             <BackButton decrementStep={decrementStep} text={text.activityBackButton} />
 
             <ListContainer type="flex" justify="space-between" align="top" gutter={16}>
-                {data.map((element, index) => (
-                    <SelectionItem
-                        onClick={() => updateForm({ experience_id: element.id })}
-                        key={element.id}
-                        incrementStep={incrementStep}
-                        lg={((data.length % 2 != 0) && (data.length - 1 == index)) ?
-                            24
-                            : columnSize[index]
-                        }
-                        element={element}
-                        text={text.price}
-                    />
-                ))}
+                {loading ?
+                    <LoadingContainer type="flex" justify="center" align="middle">
+                        <Spin size="large" />
+                    </LoadingContainer> :
+                    data.map((element, index) => (
+                        <SelectionItem
+                            onClick={() => updateForm({ experience_id: element.id })}
+                            key={element.id}
+                            incrementStep={incrementStep}
+                            lg={((data.length % 2 != 0) && (data.length - 1 == index)) ?
+                                24
+                                : columnSize[index]
+                            }
+                            element={element}
+                            text={text.price}
+                        />
+                    ))}
             </ListContainer>
             <Disclaimer>
                 * {text.price}
