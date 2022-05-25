@@ -6,6 +6,10 @@ export const initialState = {
     links: {},
     loading: false,
     current: {},
+    calendarMetadata: {
+        dates: [],
+        disabled: []
+    },
 }
 
 export default (state = initialState, action = {}) => {
@@ -84,6 +88,12 @@ export default (state = initialState, action = {}) => {
                 links: action.payload.data.links
             };
 
+        case `${types.FETCH_DISABLED_DATES}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                calendarMetadata: action.payload.data,
+            };
         default:
             return state
     }

@@ -7,11 +7,12 @@ import Table from "../../../common/TableContainer";
 import RowOperation from "../../RowOperation";
 import StopPropagation from "../../StopPropagation";
 import FormContainer from "./FormContainer";
-import { updateReservation, createExternalReservation } from "../../../../redux/reservation/actions";
+import { updateReservation, createExternalReservation, blockReservationDate } from "../../../../redux/reservation/actions";
 import { fetchActivities } from "../../../../redux/activity/actions";
 import { connect } from "react-redux";
 import { colors } from "../../../../helper";
 import ReservationForm from "./ReservationForm";
+import BlockReservationForm from "./BlockReservationForm";
 
 const { Search } = Input;
 
@@ -26,18 +27,23 @@ const Indicator = styled.div`
     background: ${props => props.background};
 `;
 
-const AddButton = styled.div`
+const ActionButton = styled.div`
     width: 80px;
     height: 40px;
     float: right;
     background: ${colors.main};
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
     cursor: pointer;
     padding: 10px;
 
     &:hover {
         background: ${colors.mainHover};
+    }
+
+    &:nth-child(1){
+        border-top-right-radius: 6px;
+    }
+    &:nth-child(2){
+        border-top-left-radius: 6px;
     }
 
     img {
@@ -50,6 +56,7 @@ const AddButton = styled.div`
 function TableContainer({ activities, fetchActivities, loading, data, meta, handlePageChange, onRowClick, onDelete, updateReservation, setFilters, createExternalReservation }) {
     const [visibility, setVisibility] = useState(false);
     const [reservationVisibility, setReservationVisibility] = useState(false);
+    const [blockVisibility, setBlockVisibility] = useState(false);
     const [currentRecord, setCurrentRecord] = useState({});
     const [input, setInput] = useState({ client: undefined, activity: undefined });
 
@@ -165,9 +172,12 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
 
     return (
         <Container>
-            <AddButton onClick={() => setReservationVisibility(true)}>
+            <ActionButton onClick={() => setReservationVisibility(true)}>
                 <img src="/icon/add_white.svg" alt="add" />
-            </AddButton>
+            </ActionButton>
+            <ActionButton onClick={() => setBlockVisibility(true)}>
+                <img src="/icon/block_white.svg" alt="block" />
+            </ActionButton>
             <Table
                 loading={loading}
                 data={data}
@@ -191,6 +201,12 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
                 handleModalClose={() => setReservationVisibility(false)}
                 createReservation={createExternalReservation}
             />
+
+            <BlockReservationForm
+                visible={blockVisibility}
+                handleModalClose={() => setBlockVisibility(false)}
+                createReservation={blockReservationDate}
+            />
         </Container>
     )
 }
@@ -198,6 +214,7 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
 const mapDispatchToProps = (dispatch) => {
     return {
         createExternalReservation: (data) => dispatch(createExternalReservation(data)),
+        blockReservationDate: (data) => dispatch(blockReservationDate(data)),
         updateReservation: (id, data) => dispatch(updateReservation(id, data)),
         fetchActivities: (filters) => dispatch(fetchActivities(filters)),
 

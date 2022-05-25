@@ -43,7 +43,12 @@ class Reservation extends Model
     public static function disabledDates($people)
     {
         $reservations = Reservation::where("date", ">", Carbon::now())->latest()->get();
+        $initDisabled = BlockReservationDate::where("date", ">", Carbon::now())->latest()->get();
         $disabled = [];
+
+        foreach ($initDisabled  as $date) {
+            array_push($disabled, $date->date);
+        }
         $dates = [];
         $treshold = $people ? 14 - $people : 14;
 

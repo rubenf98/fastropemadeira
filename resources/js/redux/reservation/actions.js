@@ -14,6 +14,11 @@ export const fetchReservation = (id) => ({
     payload: axios.get(`${window.location.origin}/api/reservation/${id}`)
 })
 
+export const fetchDisabledDate = (page = 1) => ({
+    type: types.FETCH_DISABLED_DATES,
+    payload: axios.get(`${window.location.origin}/api/reservation/disabledDate?page=${page}`)
+})
+
 export const deleteReservation = id => ({
     type: types.DELETE_RESERVATION,
     payload: axios.delete(`${window.location.origin}/api/reservation/${id}`),
@@ -30,3 +35,7 @@ export const createExternalReservation = (data) => ({
     payload: axios.post(`${window.location.origin}/api/external-reservation`, data),
 });
 
+export const blockReservationDate = (data) => ({
+    type: types.BLOCK_RESERVATION_DATE,
+    payload: axios.post(`${window.location.origin}/api/reservation/blockDates`, data),
+});

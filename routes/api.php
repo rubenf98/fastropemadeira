@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlockReservationDateController;
 use App\Http\Controllers\ExternalReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::post('/external-reservation', ExternalReservationController::class);
 
 Route::get('reservation/disabledDate', 'App\Http\Controllers\ReservationController@disabledDates');
 Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationController@showFromToken');
+
+Route::post('reservation/blockDates', BlockReservationDateController::class);
 
 Route::apiResource('contact', 'App\Http\Controllers\ContactController');
 Route::apiResource('feedback', 'App\Http\Controllers\FeedbackController');

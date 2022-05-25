@@ -35,7 +35,7 @@ class ReservationController extends Controller
     {
         return Reservation::disabledDates($request->people);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

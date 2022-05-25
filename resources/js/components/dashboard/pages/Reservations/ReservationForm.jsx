@@ -165,7 +165,7 @@ class ReservationForm extends Component {
                             }}
                         >
                             <Instruction>Crie uma reserva externa na plataforma </Instruction>
-                            <Disclaimer>Ninguém irá ser notificado via email, serverá apenas para realizar a gestão de vagas</Disclaimer>
+                            <Disclaimer>Ninguém irá ser notificado via email, servirá unicamente para gestão de vagas</Disclaimer>
                             <Row gutter={32}>
                                 <Col xs={24} md={12}>
                                     <Form.Item
