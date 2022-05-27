@@ -58,6 +58,7 @@ class BlockReservationForm extends Component {
     };
 
     render() {
+        var { calendarMetadata } = this.props;
 
         return (
             <Container>
@@ -81,7 +82,14 @@ class BlockReservationForm extends Component {
                                 name="dates"
                                 rules={rules.name}
                             >
-                                <RangePicker style={{ width: "100%" }} />
+                                <RangePicker
+                                    disabledDate={(currentDate) => {
+                                        return currentDate && (
+                                            (currentDate < moment())
+                                            || (calendarMetadata.disabled.includes(moment(currentDate).format("YYYY-MM-DD"))));
+                                    }}
+                                    style={{ width: "100%" }}
+                                />
                             </Form.Item>
 
                             <ButtonContainer type="flex" justify="end">
@@ -102,6 +110,7 @@ class BlockReservationForm extends Component {
 const mapStateToProps = (state) => {
     return {
         loading: state.reservation.loading,
+        calendarMetadata: state.reservation.calendarMetadata,
     };
 };
 

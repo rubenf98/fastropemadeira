@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Input from "antd/es/input"
 import Cascader from "antd/es/cascader"
 import DatePicker from "antd/es/date-picker"
+import message from "antd/es/message"
 import styled from "styled-components";
 import Table from "../../../common/TableContainer";
 import RowOperation from "../../RowOperation";
 import StopPropagation from "../../StopPropagation";
 import FormContainer from "./FormContainer";
-import { updateReservation, createExternalReservation, blockReservationDate } from "../../../../redux/reservation/actions";
+import { updateReservation, createExternalReservation, blockReservationDate, fetchDisabledDate } from "../../../../redux/reservation/actions";
 import { fetchActivities } from "../../../../redux/activity/actions";
 import { connect } from "react-redux";
 import { colors } from "../../../../helper";
@@ -15,6 +16,7 @@ import ReservationForm from "./ReservationForm";
 import BlockReservationForm from "./BlockReservationForm";
 
 const { Search } = Input;
+
 
 const Container = styled.div`
     width: 100%;
@@ -53,7 +55,7 @@ const ActionButton = styled.div`
     }
 `;
 
-function TableContainer({ activities, fetchActivities, loading, data, meta, handlePageChange, onRowClick, onDelete, updateReservation, setFilters, createExternalReservation }) {
+function TableContainer({ activities, fetchActivities, loading, data, meta, handlePageChange, onRowClick, onDelete, updateReservation, setFilters, createExternalReservation, fetchDisabledDate }) {
     const [visibility, setVisibility] = useState(false);
     const [reservationVisibility, setReservationVisibility] = useState(false);
     const [blockVisibility, setBlockVisibility] = useState(false);
@@ -61,8 +63,13 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
     const [input, setInput] = useState({ client: undefined, activity: undefined });
 
     useEffect(() => {
+        fetchDisabledDate();
         fetchActivities({ language: "pt" });
     }, [])
+
+    useEffect(() => {
+        fetchDisabledDate();
+    }, [visibility, blockVisibility])
 
     const columns = [
         {
@@ -169,6 +176,16 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
         );
     }
 
+    function handleDateBlock(e) {
+        try {
+            blockReservationDate(e)
+            message.success('Datas bloqueadas com sucesso.');
+        } catch (error) {
+            message.error('Ocorreu um erro no bloqueio das datas, cao o problema persista contacte o programador.');
+        }
+
+    }
+
 
     return (
         <Container>
@@ -205,7 +222,7 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
             <BlockReservationForm
                 visible={blockVisibility}
                 handleModalClose={() => setBlockVisibility(false)}
-                createReservation={blockReservationDate}
+                createReservation={handleDateBlock}
             />
         </Container>
     )
@@ -217,7 +234,7 @@ const mapDispatchToProps = (dispatch) => {
         blockReservationDate: (data) => dispatch(blockReservationDate(data)),
         updateReservation: (id, data) => dispatch(updateReservation(id, data)),
         fetchActivities: (filters) => dispatch(fetchActivities(filters)),
-
+        fetchDisabledDate: (filters) => dispatch(fetchDisabledDate(filters)),
     };
 };
 

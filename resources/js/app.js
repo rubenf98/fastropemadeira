@@ -15,7 +15,6 @@ import {
 import 'antd/dist/antd.css';
 import 'react-multi-carousel/lib/styles.css';
 import "../assets/animate.css";
-
 import moment from 'moment';
 
 let decodedCookie = decodeURIComponent(document.cookie);
