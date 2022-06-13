@@ -37,5 +37,5 @@ export const createExternalReservation = (data) => ({
 
 export const blockReservationDate = (data) => ({
     type: types.BLOCK_RESERVATION_DATE,
-    payload: axios.post(`${window.location.origin}/api/reservation/blockDates`, data),
+    payload: axios.post(`${window.location.origin}/api/reservation/blockDate`, data),
 });

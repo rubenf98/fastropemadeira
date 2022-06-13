@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BlockReservationDateController;
 use App\Http\Controllers\ExternalReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,17 +19,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('login', 'App\Http\Controllers\AuthController@login');
-Route::post('logout', 'AuthController@logout');
-Route::post('refresh', 'AuthController@refresh');
-Route::post('me', 'AuthController@me');
+Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
+Route::post('me', 'App\Http\Controllers\AuthController@me');
 
 Route::post('/external-reservation', ExternalReservationController::class);
 
 Route::get('reservation/disabledDate', 'App\Http\Controllers\ReservationController@disabledDates');
 Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationController@showFromToken');
 
-Route::post('reservation/blockDates', BlockReservationDateController::class);
 
+Route::apiResource('reservation/blockDate', 'App\Http\Controllers\BlockReservationDateController');
 Route::apiResource('contact', 'App\Http\Controllers\ContactController');
 Route::apiResource('feedback', 'App\Http\Controllers\FeedbackController');
 Route::apiResource('reservation', 'App\Http\Controllers\ReservationController');

@@ -8,6 +8,7 @@ import Painel from "./pages/Painel";
 import Reservations from "./pages/Reservations/Reservations";
 import PrivateRoute from "./PrivateRoute";
 import { dimensions } from "../../helper";
+import Blocked from "./pages/Blocked/Blocked";
 
 const PageContainer = styled.div`
     margin: auto;
@@ -58,6 +59,7 @@ export default class PainelLayout extends Component {
                         <PrivateRoute path="/painel/contacto" component={Contact} />
                         <PrivateRoute path="/painel/avaliacao" component={Feedback} />
                         <PrivateRoute path="/painel/reservas" component={Reservations} />
+                        <PrivateRoute path="/painel/bloqueado" component={Blocked} />
                         <PrivateRoute path="/painel" component={Painel} />
                     </Content>
                 </ContentContainer>

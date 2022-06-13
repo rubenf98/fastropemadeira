@@ -19,7 +19,7 @@ class Experience extends Model
 
     public function activity()
     {
-        return $this->belongsTo("App\Models\Experience");
+        return $this->belongsTo("App\Models\Activity");
     }
 
     public function images()
