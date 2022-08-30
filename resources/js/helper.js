@@ -10,10 +10,10 @@ export const dimensions = {
 };
 
 export const colors = {
-	"main": "rgb(52,60,94)",
+	"main": "#7A96B6",
 	"mainOverlay": "rgba(52,60,94,.7)",
-	"mainHover": "#2b3252",
-	"gray": "#777",
+	"mainHover": "#5e748d",
+	"gray": "#707070",
 };
 
 export function getCarouselBreakpoints(aItems, aBreakpoints = [[0, 600], [600, 1024], [1024, 1400], [1400, 1800], [1800, 100000]], aItemsToSlide = [1, 1, 1, 1, 1]) {

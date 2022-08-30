@@ -5,31 +5,45 @@ import {
     Link
 } from "react-router-dom";
 import moment from 'moment';
-import { dimensions } from '../../helper';
+import { colors, dimensions, maxWidth } from '../../helper';
+import AnimationContainer from './AnimationContainer';
 
 const Container = styled.div`
-    height: 80px;
+    height: 90px;
     background: ${props => props.hasbackground ? "#ffffff" : "transparent"};
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
+    box-sizing: border-box;
     position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
     box-sizing: border-box;
     top: 0;
     z-index: 20;
     width: 100%;
+    transition: .5s ease-in-out;
+`;
+
+const Content = styled.div`
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    max-width: ${maxWidth};
     color: white;
     transition: .5s ease-in-out;
-    box-shadow: ${props => props.shadow ? "0px 0px 30px 0px rgba(0,0,0,.3)" : "0px"};
 `;
 
 const Logo = styled(Link)`
-    height: 80%;
+    height: 90%;
     margin: auto 0;
-    margin-left: 30px;
     display: block;
     opacity: ${props => props.visible ? "1" : "0"};
+    z-index: 20;
 
     img {
         height: 100%;
@@ -71,19 +85,19 @@ const OrderButton = styled.div`
     z-index: 20;
     box-sizing: border-box;
     cursor: pointer;
-    background: rgb(52,60,94);
-    padding: 12px 18px;
-    border-radius: 0 0 0 12px;
-    font-size: 1.2em;
+    background: ${colors.main};
+    padding: 16px 18px;
+    font-size: 16px;
     transition: .4s;
     margin-left: 15px;
+    font-weight: bold;
 
     @media (max-width: ${dimensions.md}) {
         display: none;
     }
 
     &:hover {
-        background: #2b3252;
+        background: ${colors.mainHover};
     }
     
 `;
@@ -141,7 +155,7 @@ const CustomDrawer = styled(Drawer)`
     }
 
     .ant-drawer-content {
-        background: #ffffffe4;
+        background: #ffffff;
 
         ul {
             list-style: none;
@@ -158,10 +172,10 @@ const MenuLogo = styled.img`
 `;
 
 const NavbarLink = styled(Link)`
-    color: ${props => props.hasbackground ? "#313131" : "#dddddd !important"};
+    color: ${props => props.hasbackground ? "#313131" : "#ffffff !important"};
     display: block;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 16px;
     text-transform: capitalize;
     cursor: pointer;
     transition: .3s ease-in-out;
@@ -295,40 +309,48 @@ function Navbar({ onOrder }) {
     useEventListener("scroll", handler);
     return (
         <div>
+
             <Container hasbackground={(visible ? 0 : 1) && hasBackground} shadow={(visible ? 0 : 1) && hasShadow}>
-                <Logo to="/" visible={(visible ? 0 : 1)}>
-                    <img src={hasBackground ? "/logo.png" : "/logo_white.png"} alt="logo" />
-                </Logo>
 
-                <MenuContainer>
-                    <NavbarLink hasbackground={hasBackground} to="/">home <div /></NavbarLink>
-                    <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/about">about <div /></NavbarLink>
-                    <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/contact">contact <div /></NavbarLink>
 
-                    <OrderButton onClick={onOrder}>Book An Adventure</OrderButton>
-                    <Menu visible={visible ? 0 : 1} onClick={() => setVisible(visible ? 0 : 1)}>
-                        <img
-                            src={visible ?
-                                "/icon/close.svg" :
-                                (hasBackground ? "/icon/menu.svg" : "/icon/menu_white.svg")
-                            }
-                            alt="menu"
-                        />
-                    </Menu>
-                    <CustomSelect
-                        hasbackground={hasBackground}
-                        onChange={handleLanguageChange}
-                        visible={(visible ? 0 : 1)}
-                        defaultValue={localStorage.getItem("language")}
-                        suffixIcon={
-                            <DropdownIcon src={hasBackground ? "/icon/down_black.svg" : "/icon/down.svg"} alt="open" />
-                        }
-                    >
-                        <Option value="en">  EN</Option>
-                        <Option value="pt">  PT</Option>
-                    </CustomSelect>
-                </MenuContainer>
+                <Content>
+                    <Logo to="/" visible={(visible ? 0 : 1)}>
+                        <img src={hasBackground ? "/logo.png" : "/logo_white.png"} alt="logo" />
+                    </Logo>
+                    <AnimationContainer delay={2000} animation="fadeIn">
+                        <MenuContainer>
+                            <NavbarLink hasbackground={hasBackground} to="/">home <div /></NavbarLink>
+                            <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/about">about <div /></NavbarLink>
+                            <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/contact">contact <div /></NavbarLink>
+
+                            <OrderButton onClick={onOrder}>Book An Adventure</OrderButton>
+                            <Menu visible={visible ? 0 : 1} onClick={() => setVisible(visible ? 0 : 1)}>
+                                <img
+                                    src={visible ?
+                                        "/icon/close.svg" :
+                                        (hasBackground ? "/icon/menu.svg" : "/icon/menu_white.svg")
+                                    }
+                                    alt="menu"
+                                />
+                            </Menu>
+                            <CustomSelect
+                                hasbackground={hasBackground}
+                                onChange={handleLanguageChange}
+                                visible={(visible ? 0 : 1)}
+                                defaultValue={localStorage.getItem("language")}
+                                suffixIcon={
+                                    <DropdownIcon src={hasBackground ? "/icon/down_black.svg" : "/icon/down.svg"} alt="open" />
+                                }
+                            >
+                                <Option value="en">  EN</Option>
+                                <Option value="pt">  PT</Option>
+                            </CustomSelect>
+                        </MenuContainer>
+                    </AnimationContainer>
+                </Content>
+
             </Container>
+
             <CustomDrawer
                 style={{ zIndex: "15" }}
                 placement="right"

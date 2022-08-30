@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat&family=Poppins:wght@900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat&family=Poppins:wght@400;700;900&display=swap"
         rel="stylesheet">
     <title>FastRope</title>
 </head>
@@ -139,19 +139,6 @@
 
 <body>
     <div id="index">
-        <div class="full-page-loader">
-            <div>
-                <img width="250" src="/logo.png" alt="logo" />
-                <div class="gooey">
-                    <span class="dot"></span>
-                    <div class="dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script src="{{mix('js/app.js')}}"></script>
     </div>
 </body>

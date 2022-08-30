@@ -3,66 +3,47 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import { dimensions } from '../../../helper';
+import AnimationContainer from '../../common/AnimationContainer';
 
 const Container = styled.div`
     width: 100%;
     min-height: 200px;
     padding: 32px;
-    background: #14141e;
-
-    
-
 
     @media (max-width: ${dimensions.sm}){
-        padding: 16px;
-    }
-`;
-
-const Title = styled.h1`
-    color: white;
-    text-transform: capitalize;
-    text-align: center;
-    margin: auto 20px;
-`;
-
-const Divider = styled.div`
-    background: white;
-    height: 1px;
-    width: 20%;
-
-    @media (max-width: ${dimensions.xs}){
-        display:none;
+        padding: 0px 20px;
     }
 `;
 
 const FormItem = styled(Cascader)`
-    width: 80%;
-    background-color: #414150 !important;
-    color: #fff;
-    border-radius: 4px !important;
+    width: 100%;
+    color: #707070;
     border: 0px !important;
+    padding: 20px 30px;
+    margin-top: 80px;
 
     @media (max-width: ${dimensions.md}){
-        margin: 10px auto;
+        margin-top: 50px;
         width: 100%;
+        padding: 10px 15px;
     }
 
     .ant-cascader-input {
-        color: #fff;
-        border-radius: 4px !important;
+        color: #707070;
         border: 0px !important;
+        font-weight: bold;
     }
 
     
     .ant-cascader-picker-arrow > svg {
-        color: white;
+        color: #707070;
     }
 `;
 
 
 const FormContainer = styled(Row)`
-    padding: 30px;
-    width: 60%;
+    
+    width: 80%;
     margin: auto;
 
     @media (max-width: ${dimensions.lg}){
@@ -74,42 +55,7 @@ const FormContainer = styled(Row)`
     }
 `;
 
-const Submit = styled(Button)`
-    border-radius: 4px;
-    height: 38px;
-    padding: 0px 10px;
-    border-color: #414150;
-    background: #414150;
-    margin-left: 15px;
-
-    span {
-        display: none;
-        font-weight: bold;
-    }
-    
-
-    @media (max-width: ${dimensions.md}){
-        width: 100%;
-        margin: 10px auto;
-
-        span {
-            display: inline-block;
-        }
-    }
-
-    &:hover, &:focus {
-        border-color: #414150;
-        background: #414150;
-    }
-
-    img {
-        height: 16px;
-        display: inline-block;
-        margin: auto;
-    }
-`;
-
-function Reservation({ text, openForm }) {
+function Reservation({ text, openForm, delaySize }) {
     const [data, setData] = useState([])
     const [experience, setExperience] = useState(undefined)
 
@@ -122,30 +68,20 @@ function Reservation({ text, openForm }) {
 
     return (
         <Container>
-            <Row type="flex" justify="center" align="middle">
-                <Divider />
-                <Title>{text.reservation.title}</Title>
-                <Divider />
-            </Row>
+            <AnimationContainer delay={delaySize} animation="fadeIn">
+                <FormContainer type="flex" align='middle' justify='center'>
 
-            <FormContainer type="flex" align='middle' justify='center'>
-                <FormItem
-                    onChange={(value) => setExperience(value)}
-                    size="large"
-                    expandTrigger="hover"
-                    options={data}
-                    placeholder={text.reservation.formItem}
-                    allowClear={false}
-                />
-                <Submit type="primary" onClick={() => openForm(experience)}>
-                    <span>{text.reservation.submit}</span>
+                    <FormItem
+                        onChange={(value) => openForm(value)}
+                        size="large"
+                        expandTrigger="hover"
+                        options={data}
+                        placeholder={text.reservation.formItem}
+                        allowClear={false}
+                    />
 
-                    <img src="/icon/arrow_right.svg" alt="submit" />
-                </Submit>
-            </FormContainer>
-
-
-
+                </FormContainer>
+            </AnimationContainer>
         </Container>
     )
 }

@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import ReactPlayer from 'react-player';
 import Reservation from './Home/Reservation';
 import About from './Home/About';
-import { maxWidth } from '../../helper';
+import { colors, maxWidth } from '../../helper';
 import Activities from './Home/Activities';
 import Feedback from './Home/Feedback';
 import Team from './Home/Team';
@@ -14,7 +14,39 @@ import AnimationContainer from '../common/AnimationContainer';
 
 
 
+const writingUpAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
+const writingDownAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const changeColor = keyframes`
+  0% {
+    color: black;
+  }
+
+  100% {
+    color: white;
+  }
+`;
 
 
 const jump = keyframes`
@@ -32,81 +64,54 @@ const jump = keyframes`
 `;
 
 const Header = styled.div`
-    background: url("/header_wallpaper.webp");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     position: relative;
     height: ${props => props.height};
     overflow-y: hidden;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 20px;
+    box-sizing: border-box;
+
 `;
 
-const Overlay = styled.div`
-    position: absolute; 
-    left: 0; 
-    right: 0; 
-    top: 0;
-    bottom: 0;
-    background: #000000a2;
+const Letter = styled.div`
+    animation: ${props => props.up ? writingUpAnimation : writingDownAnimation} .3s ease-in both, ${changeColor} .2s linear both;
+    animation-delay: ${props => props.delay}, ${props => props.colorDelay + "ms"};
+    opacity: 0;
+    display: inline-block;
+    margin-right: ${props => props.space ? "1%" : "0px"};
 `;
-
 
 const HeaderContent = styled.div`
     margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    width: 90vw;
-    height: 40vh;
-
-    h1, h2 {
-        color: white;
-        margin: auto;
-        display: block;
-        text-align: center;
+    width: 100%;
+    max-width: ${maxWidth};
+    
+    .left {
+        text-align: left;
     }
+
+    .right {
+        text-align: right;
+    }
+
     h1 {
-        font-size: 7vw;
+        font-size: 3.9vw;
         font-weight: bold;
         margin-bottom: 0px;
-        font-family: 'Enclave Demo';
+        font-family: Poppins;
         line-height: 1em;
+        
 
-        @media (max-width: ${dimensions.xs}){
-            font-size: 8vw;
-        }
-
-    }
-    h2 {
-        font-size: 1.3vw;
-        text-transform: uppercase;
-
-        @media (max-width: ${dimensions.xs}){
-            font-size: .9em;
-        }
-
-    }
-
-    div { 
-        width: 70vw;
-        height: 2px;
-        margin: 20px auto;
-        display: block;
-        position: relative;
-
-        &:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 15%;
-            right: 15%;
-            width: 70%;
-            height: 2px;
-            background-image: linear-gradient(to right, transparent, #8f8f8f, transparent);
+        .blue {
+            color: ${colors.main};
         }
 
         @media (max-width: ${dimensions.xs}){
-            width: 90vw;
+            font-size: 24px;
+            text-align: left !important;
         }
 
     }
@@ -116,6 +121,12 @@ const Player = styled(ReactPlayer)`
     width: 100% !important;
     height: 100% !important;
     overflow: hidden;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    top: 0;
+    bottom: 0;
+    z-index: -2;
 
     video {
         min-width: 100%;
@@ -137,6 +148,11 @@ const ScrollAction = styled.img`
     margin-left: auto;
     cursor: pointer;
     animation: ${jump} 3s ease-in-out infinite;
+
+    @media (max-width: ${dimensions.md}) {
+        width: 40px;
+    }
+
 `;
 
 const Section = styled.div`
@@ -144,6 +160,29 @@ const Section = styled.div`
     margin: 100px auto;
     display: block;
 `;
+
+const BackgroundImage = styled.div`
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+
+    div {
+        width: 100%;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit:cover;
+        }
+    }
+`;
+
 
 const Title = styled.div`
     width: 100%;
@@ -241,7 +280,11 @@ class Homepage extends React.Component {
 
     render() {
         const { text } = require('../../../assets/' + localStorage.getItem('language') + "/homepage");
+        const delaySize = (text.header[0].length + text.header[1].length - 6) * 50;
+        var upCounter = 0;
+        var downCounter = 1;
         const { screenHeight, activities } = this.state;
+
         return (
             <div style={{ position: "relative" }}>
 
@@ -253,17 +296,47 @@ class Homepage extends React.Component {
                 />
 
                 <Header height={screenHeight + "px"}>
-                    {/*<Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/pending-video.webm' playing controls={false} />*/}
-                    <Overlay />
+                    {/* <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/teste.webm' playing controls={false} /> */}
+                    <BackgroundImage>
+                        <AnimationContainer delay={2000} animation="fadeIn">
+                            <picture>
+                                <source srcSet="/wallpaper.jpg" />
+                                <img src="/wallpaper.webp" alt="canyoning wallpaper" loading="eager" />
+                            </picture>
+
+                        </AnimationContainer>
+                    </BackgroundImage>
                     <HeaderContent>
-                        <h1>Fast Rope Madeira</h1>
-                        <div />
-                        <h2>{text.header}</h2>
+                        <h1 className='left'>
+                            {text.header[0].map((letter, index) => {
+                                if (letter) {
+                                    upCounter++;
+                                    return (
+                                        <Letter colorDelay={delaySize} space={text.header[0][index + 1] ? false : true} up delay={50 * upCounter + "ms"}>{letter}</Letter>
+                                    )
+                                }
+                            })}
+                        </h1>
+                        <h1 className='right'>
+                            <Letter space colorDelay={delaySize} delay={upCounter * 50 + "ms"}><span className='blue'>&</span></Letter>
+                            {text.header[1].map((letter, index) => {
+                                if (letter) {
+                                    downCounter++;
+                                    return (
+                                        <Letter colorDelay={delaySize} space={text.header[1][index + 1] ? false : true} up delay={(upCounter * 50) + (50 * downCounter) + "ms"}>{letter}</Letter>
+                                    )
+                                }
+                            })}
+                        </h1>
+
+                        <Reservation delaySize={delaySize} data={activities} text={text} openForm={this.openForm} />
+
                     </HeaderContent>
+
                     <ScrollAction onClick={this.handleScrollClick} src="/icon/arrow_down.svg" alt="scroll" />
                 </Header>
 
-                <Reservation data={activities} text={text} openForm={this.openForm} />
+
                 <Section>
                     <About text={text} />
                 </Section>

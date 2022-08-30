@@ -1,5 +1,8 @@
 export const text = {
-    header: "Atividades ao ar livre em de toda a ilha",
+    header: [
+        ["A", "t", "i", "v", "i", "d", "a", "d", "e", "s", 0, "a", "o", 0, "a", "r", 0, "l", "i", "v", "r", "e"],
+        ["e", "x", "p", "e", "r", "i", "ê", "n", "c", "i", "a", "s", 0, "i", "n", "e", "s", "q", "u", "e", "c", "í", "v", "e", "i", "s"]
+    ],
     titleSection: [
         "Aventura",
         "Experiência",
@@ -12,7 +15,7 @@ export const text = {
         submit: "Reservar",
     },
     subtitleSection: [
-        "Descrobre a Madeira Connosco",
+        "Descobre a Madeira Connosco",
         "O Que Dizem Sobre Nós?",
         "Equipa Altamente Qualificada",
         "Contribuidores Que Nos Suportam"

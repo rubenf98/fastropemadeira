@@ -4,7 +4,7 @@ import Footer from "./common/Footer";
 import styled from "styled-components";
 import { withRouter } from "react-router";
 import OrderForm from "./pages/OrderForm";
-import { dimensions } from "../helper";
+import { colors, dimensions } from "../helper";
 
 const Container = styled.div`
     width: 100%;
@@ -17,40 +17,36 @@ const Container = styled.div`
 
 
 const OrderNow = styled.div`
-   bottom: 80px;
-    width: 75px;
-    background: rgb(52,60,94);
-    height: 70px;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    background: ${colors.main};
+    height: 50px;
     position: fixed;
-    right: 0;
     z-index: 11;
-    color: white;
-    font-size: 1.6em;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
     cursor: pointer;
-    transition: .2 ease-in-out;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    transition: all .2 ease-in-out;
+    border-radius: 50px;
 
     img {
-        width: 35px;
+        width: 25px;
     }
 
     &:hover {
-        background: #2b3252;
+        background: ${colors.mainHover};
     }
 `;
 
 const Whatsapp = styled.a`
-    bottom: 80px;
-    width: 75px;
-    background: rgb(52,60,94);
-    height: 70px;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    background: ${colors.main};
+    height: 60px;
     position: fixed;
-    right: 0;
     z-index: 11;
     color: white;
     font-size: 1.6em;
@@ -59,16 +55,15 @@ const Whatsapp = styled.a`
     align-items: center;
     font-weight: bold;
     cursor: pointer;
-    transition: .2 ease-in-out;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
+    transition: all .2 ease-in-out;
+    border-radius: 70px;
 
     img {
         width: 35px;
     }
 
     &:hover {
-        background: #2b3252;
+        background: ${colors.mainHover};
     }
 `;
 

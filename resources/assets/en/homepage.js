@@ -1,5 +1,8 @@
 export const text = {
-    header: "Outdoor Activities all around the Island",
+    header: [
+        ["O", "u", "t", "d", "o", "o", "r", 0, "a", "c", "t", "i", "v", "i", "t", "i", "e", "s"],
+        ["u", "n", "f", "o", "r", "g", "e", "t", "f", "u", "l", 0, "e", "x", "p", "e", "r", "i", "e", "n", "c", "e", "s"]
+    ],
     titleSection: [
         "Adventure",
         "Experience",
