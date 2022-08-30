@@ -40,13 +40,18 @@ class Reservation extends Model
     }
 
 
-    public static function disabledDates($people)
+    public static function disabledDates($people, $experience)
     {
         $reservations = Reservation::where("date", ">", Carbon::now())->latest()->get();
-        $initDisabled = BlockReservationDate::where("date", ">", Carbon::now())->latest()->get();
+
+        if ($experience) {
+            $initDisabled = BlockReservationDate::where("date", ">", Carbon::now())->where("experience_id", $experience)->latest()->get();
+        } else {
+            $initDisabled = BlockReservationDate::where("date", ">", Carbon::now())->latest()->get();
+        }
         $disabled = [];
 
-        foreach ($initDisabled  as $date) {
+        foreach ($initDisabled as $date) {
             array_push($disabled, $date->date);
         }
         $dates = [];

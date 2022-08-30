@@ -30,14 +30,13 @@ const ModalContainer = styled(Modal)`
 const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0, 0] }) => {
     const [step, setStep] = useState(0);
     const [loadingSubmit, setLoadingSubmit] = useState(false);
-    const [calendarMetadata, setCalendarMetadata] = useState({});
     const [form] = Form.useForm();
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/form");
 
     const stepItems = [
         <Activity text={text} incrementStep={incrementStep} data={activities.length ? activities : []} />,
         <Location text={text} getActivity={getActivity} decrementStep={decrementStep} incrementStep={incrementStep} updateForm={updateForm} />,
-        <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} calendarMetadata={calendarMetadata} getExperience={getExperience} incrementStep={incrementStep} updateForm={updateForm} />
+        <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} getExperience={getExperience} incrementStep={incrementStep} updateForm={updateForm} />
     ]
 
     function incrementStep(formValues) {
@@ -72,7 +71,6 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
         data.experience_id = data.experience;
         axios.post(`${window.location.origin}/api/reservation`, data).then((response) => {
             setLoadingSubmit(false);
-            getDisabledDates();
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();
         }).catch((error) => {
@@ -92,16 +90,6 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
         form.resetFields();
         onCancel();
     };
-
-    function getDisabledDates() {
-        axios.get(`${window.location.origin}/api/reservation/disabledDate`).then((response) => {
-            setCalendarMetadata(response.data);
-        })
-    };
-
-    useEffect(() => {
-        getDisabledDates();
-    }, [])
 
     useEffect(() => {
         if (initForm[1] > 0) {
@@ -144,7 +132,7 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
                         onCreate(values);
                     })
                     .catch((info) => {
-                       //
+                        //
                     });
             }}
         >

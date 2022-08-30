@@ -26,7 +26,12 @@ function TableContainer({ loading, data, meta, handlePageChange, onDelete }) {
             render: (date) => (<span>{moment(date).format('YYYY-MM-DD')}</span>),
         },
         {
-            title: 'Remover',
+            title: 'Atividade',
+            dataIndex: 'experience',
+            render: (experience) => experience.name,
+        },
+        {
+            title: 'Desbloquear',
             dataIndex: 'id',
             render: (text, row) => (
                 <StopPropagation>

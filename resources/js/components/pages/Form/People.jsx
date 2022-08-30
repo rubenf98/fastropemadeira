@@ -8,6 +8,7 @@ import CountryPhoneInput, { ConfigProvider } from 'antd-country-phone-input';
 import en from 'world_countries_lists/data/en/world.json';
 import BackButton from './BackButton';
 import Carousel from 'react-multi-carousel';
+import { connect } from "react-redux";
 
 const responsive = {
     general: {
@@ -633,5 +634,10 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
         </ConfigProvider>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        calendarMetadata: state.reservation.calendarMetadata,
+    };
+};
 
-export default People
+export default connect(mapStateToProps, null)(People);

@@ -24,7 +24,7 @@ class ReservationRequest extends FormRequest
     {
         $phone = null;
         if (array_key_exists("code", $this->phone) && array_key_exists("phone", $this->phone)) {
-            $phone = $this->phone["code"] . $this->phone["phone"];
+            $phone = "+" . $this->phone["code"] . " " . $this->phone["phone"];
         }
 
         $experience = Experience::find($this->experience_id);
@@ -55,7 +55,7 @@ class ReservationRequest extends FormRequest
             'people' => 'required|integer|min:2|max:15',
             'experience_id' => 'required|exists:experiences,id',
             'private' => 'required|boolean',
-            'phone' => 'nullable|numeric',
+            'phone' => 'nullable|string',
             'person' => 'required_if:hasPerson,true|size:' . $this->people,
             'person.*.birthday' => 'required|date',
             'person.*.gender' => 'required|string',

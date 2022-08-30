@@ -14,9 +14,11 @@ export const fetchReservation = (id) => ({
     payload: axios.get(`${window.location.origin}/api/reservation/${id}`)
 })
 
-export const fetchDisabledDate = (page = 1) => ({
+export const fetchDisabledDate = (filters = {}) => ({
     type: types.FETCH_DISABLED_DATES,
-    payload: axios.get(`${window.location.origin}/api/reservation/disabledDate?page=${page}`)
+    payload: axios.get(`${window.location.origin}/api/reservation/disabledDate?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
 })
 
 export const deleteReservation = id => ({

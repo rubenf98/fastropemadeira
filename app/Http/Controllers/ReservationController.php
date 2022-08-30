@@ -33,9 +33,9 @@ class ReservationController extends Controller
      */
     public function disabledDates(Request $request)
     {
-        return Reservation::disabledDates($request->people);
+        return Reservation::disabledDates($request->people, $request->experience);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *

@@ -14,6 +14,14 @@ class BlockReservationResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'experience' =>  [
+                'id' => $this->experience->id,
+                'name' => $this->experience->name,
+            ],
+            'date' =>   $this->date,
+            'created_at' => (string) $this->created_at,
+        ];
     }
 }

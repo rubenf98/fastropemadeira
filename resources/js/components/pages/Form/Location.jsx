@@ -3,7 +3,8 @@ import { Row, Col, Spin } from 'antd';
 import styled from "styled-components";
 import axios from "axios";
 import BackButton from './BackButton';
-
+import { fetchDisabledDate } from "../../../redux/reservation/actions";
+import { connect } from "react-redux";
 
 
 const ListContainer = styled(Row)`
@@ -95,8 +96,8 @@ const Disclaimer = styled.div`
     font-size: 1.2em;
 `;
 
-const SelectionItem = ({ element, lg, incrementStep }) => (
-    <SelectionContainer xs={24} lg={lg} onClick={() => incrementStep({ experience: element.id })}>
+const SelectionItem = ({ element, lg, handleClick }) => (
+    <SelectionContainer xs={24} lg={lg} onClick={() => handleClick(element.id)}>
         <div className="selection-sub-container">
             <Selection className="selection-box" src={element.images[0].image} />
             <Info>
@@ -124,7 +125,7 @@ const LoadingContainer = styled(Row)`
 `;
 
 const columnSize = [10, 14, 12, 12, 14, 10, 12, 12, 10, 14, 12, 12, 14, 10]
-function Location({ incrementStep, decrementStep, getActivity, updateForm, text }) {
+function Location({ fetchDisabledDate, incrementStep, decrementStep, getActivity, updateForm, text }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -135,6 +136,12 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
             setLoading(false)
         });
     }, []);
+
+    function handleClick(experience) {
+        updateForm({ experience_id: experience });
+        fetchDisabledDate({ experience: experience });
+        incrementStep({ experience: experience });
+    }
 
     return (
         <Fragment>
@@ -147,9 +154,8 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
                     </LoadingContainer> :
                     data.map((element, index) => (
                         <SelectionItem
-                            onClick={() => updateForm({ experience_id: element.id })}
                             key={element.id}
-                            incrementStep={incrementStep}
+                            handleClick={handleClick}
                             lg={((data.length % 2 != 0) && (data.length - 1 == index)) ?
                                 24
                                 : columnSize[index]
@@ -166,4 +172,11 @@ function Location({ incrementStep, decrementStep, getActivity, updateForm, text 
     )
 }
 
-export default Location
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchDisabledDate: (filters) => dispatch(fetchDisabledDate(filters)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Location);

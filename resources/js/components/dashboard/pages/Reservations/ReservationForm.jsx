@@ -196,8 +196,7 @@ class ReservationForm extends Component {
                                             style={{ width: "100%" }}
                                             disabledDate={(currentDate) => {
                                                 return currentDate && (
-                                                    (currentDate < moment())
-                                                    || (calendarMetadata.disabled.includes(moment(currentDate).format("YYYY-MM-DD"))));
+                                                    (currentDate < moment()));
                                             }}
                                         />
                                     </Form.Item>

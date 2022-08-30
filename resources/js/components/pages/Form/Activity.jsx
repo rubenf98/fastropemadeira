@@ -139,6 +139,8 @@ function Activity({ incrementStep, text }) {
         })
     }, [])
 
+    
+
     return (
         <Fragment>
             <PageDescription type="flex" justify="space-between" align="middle">
@@ -154,7 +156,7 @@ function Activity({ incrementStep, text }) {
                     data.map((element) => (
                         <Element key={element.value} onClick={() => incrementStep({ activity: element.value })} >
                             <Image src={element.image} />
-                            <CaptionContainer  >
+                            <CaptionContainer>
                                 <CaptionTitle>{element.label}</CaptionTitle>
                                 <CaptionDescription> {element.description}</CaptionDescription>
                             </CaptionContainer>

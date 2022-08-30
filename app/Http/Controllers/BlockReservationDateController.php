@@ -17,7 +17,7 @@ class BlockReservationDateController extends Controller
      */
     public function index(Request $request)
     {
-        return BlockReservationResource::collection(BlockReservationDate::where("date", ">", Carbon::now())->orderBy('date', 'asc')->paginate(10));
+        return BlockReservationResource::collection(BlockReservationDate::where("date", ">", Carbon::now())->orderBy('date', 'DESC')->paginate(10));
     }
 
     /**
@@ -29,11 +29,16 @@ class BlockReservationDateController extends Controller
     public function store(Request $request)
     {
         $period = CarbonPeriod::create($request->dates[0], $request->dates[1])->toArray();
-
-        foreach ($period as $date) {
-            BlockReservationDate::create([
-                'date' => $date->format('Y-m-d')
-            ]);
+        $experiences = $request->experiences;
+        foreach ($experiences as $id => $experience) {
+            if ($experience) {
+                foreach ($period as $date) {
+                    BlockReservationDate::create([
+                        'date' => $date->format('Y-m-d'),
+                        'experience_id' => $id
+                    ]);
+                }
+            }
         }
 
         return response()->json(null, 201);

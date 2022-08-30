@@ -9,5 +9,10 @@ class BlockReservationDate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["date"];
+    protected $fillable = ["date", "experience_id"];
+
+    public function experience()
+    {
+        return $this->belongsTo('App\Models\Experience');
+    }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Modal, Row, Form, DatePicker, Button } from 'antd';
+import { Modal, Row, Form, DatePicker, Button, Input, Checkbox, Col } from 'antd';
 import moment from 'moment';
 import { connect } from "react-redux";
+import { fetchExperiences } from "../../../../redux/experience/actions"
 
 const { RangePicker } = DatePicker;
 
@@ -46,16 +47,22 @@ class BlockReservationForm extends Component {
     }
 
     onFinish = (values) => {
-        var { dates } = this.formRef.current.getFieldsValue();
-
-        dates.map((date) => {
-            date = moment(values.dates).format("YYYY-MM-DD");
+        var formData = this.formRef.current.getFieldsValue();
+        var dates = [];
+        console.log(formData);
+        formData.dates.map((date) => {
+            dates.push(moment(date).format("YYYY-MM-DD"));
         })
 
-
-        this.props.createReservation({ dates: dates });
+        formData = { ...formData, dates };
+        console.log(formData);
+        this.props.createReservation(formData);
         this.handleModalClose();
     };
+
+    componentDidMount() {
+        this.props.fetchExperiences();
+    }
 
     render() {
         var { calendarMetadata } = this.props;
@@ -86,11 +93,24 @@ class BlockReservationForm extends Component {
                                     disabledDate={(currentDate) => {
                                         return currentDate && (
                                             (currentDate < moment())
-                                            || (calendarMetadata.disabled.includes(moment(currentDate).format("YYYY-MM-DD"))));
+                                        );
                                     }}
                                     style={{ width: "100%" }}
                                 />
                             </Form.Item>
+
+                            <Form.List name="experiences" >
+                                {() => (
+                                    <Row>
+                                        {this.props.experiences.map((experience) => (
+                                            <Col xs={12} sm={8} key={experience.id}>
+                                                <Form.Item initialValue={true} name={experience.id} valuePropName="checked">
+                                                    <Checkbox>{experience.name.pt}</Checkbox>
+                                                </Form.Item>
+                                            </Col>
+                                        ))}
+                                    </Row>)}
+                            </Form.List>
 
                             <ButtonContainer type="flex" justify="end">
                                 <Button loading={this.props.loading} size="large" width="150px" type="primary" htmlType="submit">
@@ -111,10 +131,17 @@ const mapStateToProps = (state) => {
     return {
         loading: state.reservation.loading,
         calendarMetadata: state.reservation.calendarMetadata,
+        experiences: state.experience.data,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchExperiences: (page, filters) => dispatch(fetchExperiences(page, filters)),
     };
 };
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(BlockReservationForm);

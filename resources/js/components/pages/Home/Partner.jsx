@@ -17,7 +17,6 @@ function Partner() {
                 <img loading="lazy" src="/partner/thisismadeiraisland.webp" alt="thisismadeiraisland" />
                 <img loading="lazy" src="/partner/tripadvisor.webp" alt="tripadvisor" />
                 <img loading="lazy" src="/partner/rebolo.webp" alt="rebolo" />
-                <img loading="lazy" src="/partner/belocal.webp" alt="belocal" />
             </Container>
         </AnimationContainer>
     )

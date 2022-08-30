@@ -45,7 +45,7 @@ class FormContainer extends Component {
     componentDidUpdate(prevProps) {
         var { visible, record } = this.props;
         if ((prevProps.visible != visible)) {
-            axios.get(`${window.location.origin}/api/reservation/disabledDate?people=${this.props.record.people}`).then((response) => {
+            axios.get(`${window.location.origin}/api/reservation/disabledDate?people=${this.props.record.people}&experience=${this.props.record.experience.id}`).then((response) => {
                 this.setState({
                     calendarMetadata: response.data,
                 });
