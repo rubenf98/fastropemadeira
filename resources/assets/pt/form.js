@@ -14,7 +14,7 @@ export const text = {
         },
         phone: {
             label: "Nº de Telemóvel",
-            placeholder: "Nº de telemóvel opcional para contactos adicionais"
+            placeholder: "Nº de telemóvel para contactos adicionais"
         },
         address: {
             label: "Especifique o seu endereço para transporte",

@@ -55,7 +55,7 @@ class ReservationRequest extends FormRequest
             'people' => 'required|integer|min:2|max:15',
             'experience_id' => 'required|exists:experiences,id',
             'private' => 'required|boolean',
-            'phone' => 'nullable|string',
+            'phone' => 'required|string',
             'person' => 'required_if:hasPerson,true|size:' . $this->people,
             'person.*.birthday' => 'required|date',
             'person.*.gender' => 'required|string',

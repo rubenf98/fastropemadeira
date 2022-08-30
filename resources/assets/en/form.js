@@ -14,7 +14,7 @@ export const text = {
         },
         phone: {
             label: "Phone Number",
-            placeholder: "Optional phone number for further contact"
+            placeholder: "Phone number for further contact"
         },
         address: {
             label: "Please specify your address so we can pick you up",

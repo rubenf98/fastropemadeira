@@ -290,6 +290,18 @@ const rules = {
             message: 'Please input an address!',
         },
     ],
+    phone: [
+        {
+            message: 'Please input a phone number!',
+            validator: (_, value) => {
+                if (value.phone && value.code) {
+                    return Promise.resolve();
+                } else {
+                    return Promise.reject("'phone number' is required");
+                }
+            }
+        }
+    ],
     bday: [
         {
             required: true,
@@ -348,7 +360,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
         form.validateFields();
         incrementStep();
     }
-
+    console.log(form.getFieldsValue())
     return (
         <ConfigProvider locale={en}>
             <BackButton decrementStep={decrementStep} text={text.experienceBackButton} />
@@ -426,6 +438,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                     <Form.Item
                         label={text.form.phone.label}
                         name="phone"
+                        rules={rules.phone}
                         initialValue={{
                             short: 'pt',
                         }}
