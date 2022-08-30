@@ -28,7 +28,7 @@ function TableContainer({ loading, data, meta, handlePageChange, onDelete }) {
         {
             title: 'Atividade',
             dataIndex: 'experience',
-            render: (experience) => experience.name,
+            render: (experience) => experience.name ? experience.name : "Todas",
         },
         {
             title: 'Desbloquear',
