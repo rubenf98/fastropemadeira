@@ -16,10 +16,10 @@ class BlockReservationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'experience' =>  [
+            'experience' =>  $this->experience ? [
                 'id' => $this->experience->id,
                 'name' => $this->experience->name,
-            ],
+            ] : [],
             'date' =>   $this->date,
             'created_at' => (string) $this->created_at,
         ];
