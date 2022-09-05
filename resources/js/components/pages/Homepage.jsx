@@ -118,9 +118,8 @@ const HeaderContent = styled.div`
 `;
 
 const Player = styled(ReactPlayer)`
-    width: 100% !important;
-    height: 100% !important;
-    overflow: hidden;
+    width: 100vw !important;
+    height: 100vh !important;
     position: absolute; 
     left: 0; 
     right: 0; 
@@ -129,9 +128,9 @@ const Player = styled(ReactPlayer)`
     z-index: -2;
 
     video {
-        min-width: 100%;
-        width: auto !important ;
-        height: auto !important ;
+        width:100% ;
+        height: 100% ;
+        object-fit:cover;
     }
 `;
 
@@ -169,7 +168,7 @@ const BackgroundImage = styled.div`
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: -3;
 
     div {
         width: 100%;
@@ -299,7 +298,7 @@ class Homepage extends React.Component {
                     <AnimationContainer delay={2000} animation="fadeIn">
                         <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/fastrope_header.webm' playing controls={false} />
                     </AnimationContainer>
-                    {/* <BackgroundImage>
+                    <BackgroundImage>
                         <AnimationContainer delay={2000} animation="fadeIn">
                             <picture>
                                 <source srcSet="/wallpaper.jpg" />
@@ -307,7 +306,7 @@ class Homepage extends React.Component {
                             </picture>
 
                         </AnimationContainer>
-                    </BackgroundImage> */}
+                    </BackgroundImage>
                     <HeaderContent>
                         <h1 className='left'>
                             {text.header[0].map((letter, index) => {
