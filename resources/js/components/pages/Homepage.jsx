@@ -296,8 +296,10 @@ class Homepage extends React.Component {
                 />
 
                 <Header height={screenHeight + "px"}>
-                    {/* <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/teste.webm' playing controls={false} /> */}
-                    <BackgroundImage>
+                    <AnimationContainer delay={2000} animation="fadeIn">
+                        <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/fastrope_header.webm' playing controls={false} />
+                    </AnimationContainer>
+                    {/* <BackgroundImage>
                         <AnimationContainer delay={2000} animation="fadeIn">
                             <picture>
                                 <source srcSet="/wallpaper.jpg" />
@@ -305,7 +307,7 @@ class Homepage extends React.Component {
                             </picture>
 
                         </AnimationContainer>
-                    </BackgroundImage>
+                    </BackgroundImage> */}
                     <HeaderContent>
                         <h1 className='left'>
                             {text.header[0].map((letter, index) => {
