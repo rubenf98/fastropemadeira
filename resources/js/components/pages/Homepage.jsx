@@ -74,6 +74,18 @@ const Header = styled.div`
     padding: 0px 20px;
     box-sizing: border-box;
 
+    video {
+        width:100%;
+        height: 100% ;
+        object-fit:cover;
+        position: absolute; 
+        left: 0; 
+        right: 0; 
+        top: 0;
+        bottom: 0;
+        z-index: -2;
+    }
+
 `;
 
 const Letter = styled.div`
@@ -116,24 +128,6 @@ const HeaderContent = styled.div`
 
     }
 `;
-
-const Player = styled(ReactPlayer)`
-    width: 100vw !important;
-    height: 100vh !important;
-    position: absolute; 
-    left: 0; 
-    right: 0; 
-    top: 0;
-    bottom: 0;
-    z-index: -2;
-
-    video {
-        width:100% ;
-        height: 100% ;
-        object-fit:cover;
-    }
-`;
-
 const ScrollAction = styled.img`
     width: 60px;
     padding: 10px;
@@ -296,7 +290,13 @@ class Homepage extends React.Component {
 
                 <Header height={screenHeight + "px"}>
                     <AnimationContainer delay={2000} animation="fadeIn">
-                        <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/fastrope_header.webm' playing controls={false} />
+                        {/* <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/fastrope_header.webm' playing controls={false} /> */}
+                        <video preload='auto' playsInline muted loop autoPlay controls={false}>
+                            <source src={"/fastrope_header.webm"} type="video/webm" />
+                            <source src={"/fastrope_header.mp4"} type="video/mp4" />
+                            {text.videoError}
+                        </video>
+
                     </AnimationContainer>
                     <BackgroundImage>
                         <AnimationContainer delay={2000} animation="fadeIn">
