@@ -290,9 +290,7 @@ class Homepage extends React.Component {
 
                 <Header height={screenHeight + "px"}>
                     <AnimationContainer delay={2000} animation="fadeIn">
-                        {/* <Player muted config={{ file: { attributes: { disablePictureInPicture: true } } }} loop url='/fastrope_header.webm' playing controls={false} /> */}
                         <video preload='auto' playsInline muted loop autoPlay controls={false}>
-                            <source src={"/fastrope_header.webm"} type="video/webm" />
                             <source src={"/fastrope_header.mp4"} type="video/mp4" />
                             {text.videoError}
                         </video>
