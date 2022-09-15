@@ -291,10 +291,14 @@ class Homepage extends React.Component {
                 <Header height={screenHeight + "px"}>
                     <AnimationContainer delay={2000} animation="fadeIn">
                         <video preload='auto' playsInline muted loop autoPlay controls={false}>
-                            <source src={"/fastrope_header.mp4"} type="video/mp4" />
+                            <source media="(min-width: 1281px)" srcSet="/header_1920.mp4" />
+                            <source media="(min-width: 721px) and (max-width: 1280px)" srcSet="/header_1280.mp4" />
+                            <source media="(max-width: 541px) and (max-width: 720px)" srcSet="/header_720.mp4" />
+                            <source media="(max-width: 540px)" srcSet="/header_540.mp4" />
+                            <source src="/header_1920.mp4" type="video/mp4" />
+
                             {text.videoError}
                         </video>
-
                     </AnimationContainer>
                     <BackgroundImage>
                         <AnimationContainer delay={2000} animation="fadeIn">
