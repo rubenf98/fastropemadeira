@@ -10,33 +10,21 @@ const Section = styled.div`
     padding: ${props => props.image ? "0px" : "30px"};
 
     p {
-        font-size: 1.6em;
+        font-size: 16px;
 
         @media (max-width: ${dimensions.md}) {
-            font-size: 1.1em;
+            font-size: 14px;
         }
     }
 
-    img {
-        width: 100%;
-        margin: auto;
-        display: block;
-
-        @media (max-width: ${dimensions.sm}) {
-            width: 90% !important;
-        }
-    }
+    
 
     @media (max-width: ${dimensions.lg}) {
         width: ${props => props.items ? "100%" : "50%"};
     }
 
     @media (max-width: ${dimensions.md}) {
-        width: 100%;
-
-        img {
-            width: 60%;
-        }
+        width: 100%;        
     }
 
     
@@ -87,22 +75,48 @@ const Container = styled(Row)`
 `;
 
 const ListItem = styled.div`
-    font-size: 1.6em;
-    background-image: url("/icon/about-list.svg");
-    background-size: 50px 50px;
+    font-size: 16px;
     margin: 20px 0px;
-    background-repeat: no-repeat;
-    background-position-y: 50%;
     padding-left: 60px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
 
     @media (max-width: ${dimensions.lg}) {
-        width: 50%;
+        width: 100%;
+        padding-left: 0px;
     }
 
     @media (max-width: ${dimensions.md}) {
-        font-size: 1.2em;
-        width: 100%;
+        font-size: 14px;
     }
+
+
+    img {
+        width: 55px;
+        height: 55px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    
+
+    
+`;
+
+
+const Image = styled.img`
+
+        width: 100%;
+        margin: auto;
+        display: block;
+
+        @media (max-width: ${dimensions.sm}) {
+            width: 90% !important;
+        }
+    
+    
+
+    
 `;
 
 
@@ -113,22 +127,22 @@ function About({ text }) {
             <Section id="a" items>
                 <Row type="flex" >
                     <AnimationContainer animation="fadeInLeft">
-                        <ListItem>{text.about.item[0]}</ListItem>
+                        <ListItem><img src="/icon/about-list.svg" alt="icon list" />{text.about.item[0]}</ListItem>
                     </AnimationContainer>
                     <AnimationContainer animation="fadeInLeft">
-                        <ListItem>{text.about.item[1]}</ListItem>
+                        <ListItem><img src="/icon/about-list.svg" alt="icon list" />{text.about.item[1]}</ListItem>
                     </AnimationContainer>
                     <AnimationContainer animation="fadeInLeft">
-                        <ListItem>{text.about.item[2]}</ListItem>
+                        <ListItem><img src="/icon/about-list.svg" alt="icon list" />{text.about.item[2]}</ListItem>
                     </AnimationContainer>
                     <AnimationContainer animation="fadeInLeft">
-                        <ListItem>{text.about.item[3]}</ListItem>
+                        <ListItem><img src="/icon/about-list.svg" alt="icon list" />{text.about.item[3]}</ListItem>
                     </AnimationContainer>
                 </Row>
             </Section>
             <Section image id="b">
                 <AnimationContainer animation="fadeIn">
-                    <img decoding='async' loading="lazy" src="/about.webp" alt="about-image" />
+                    <Image decoding='async' loading="lazy" src="/about.webp" alt="about-image" />
                 </AnimationContainer>
             </Section>
 
