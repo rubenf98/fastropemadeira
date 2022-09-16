@@ -17,6 +17,7 @@ class Experience extends Model
         'height', 'duration'
     ];
 
+    protected $fillable = ['price'];
     public function activity()
     {
         return $this->belongsTo("App\Models\Activity");

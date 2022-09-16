@@ -50,7 +50,11 @@ class ExperienceController extends Controller
      */
     public function update(Request $request, Experience $experience)
     {
-        //
+        $experience->update([
+            'price' => $request->price
+        ]);
+
+        return new ExperienceResource($experience);
     }
 
     /**

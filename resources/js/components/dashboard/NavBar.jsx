@@ -119,10 +119,12 @@ class NavBar extends Component {
 
                     <TabList>
                         <li>
+                            <NavBarItem item="" name="home" />
                             <NavBarItem item="reservas" name="reservas" />
                             <NavBarItem item="avaliacao" name="avaliações" />
                             <NavBarItem item="contacto" name="contacto" />
                             <NavBarItem item="bloqueado" name="bloqueado" />
+                            <NavBarItem item="experiencias" name="experiência" />
                         </li>
                     </TabList>
 

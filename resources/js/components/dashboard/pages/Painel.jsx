@@ -15,23 +15,24 @@ const Container = styled.div`
 `;
 
 const CardContent = styled.div`
-    background: white;
-    width: 100%;
-    padding: 50px 20px;
-    text-align: center;
-    min-width: 200px;
-    margin: 50px 0;
-    border-radius: 6px;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
-    transition: .3s ease-in-out;
+    width: 33%;
+    padding: 20px 20px;
+    box-sizing: border-box;
 
-    @media (max-width: ${dimensions.sm}){
-        margin: 10px 0;
-    }
-
-    &:hover {
-        transform: scale(1.01);
-        box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
+    div {
+        background: white;
+        text-align: center;
+        min-width: 200px;
+        border-radius: 6px;
+        box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
+        transition: .3s ease-in-out;
+        padding: 25px;
+        box-sizing: border-box;
+        
+        &:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+        }
     }
 
     img {
@@ -43,18 +44,21 @@ const CardContent = styled.div`
     p {
         font-weight: bold;
         margin: 15px auto;
-        font-size: 1.2em;
+        font-size: 16px;
         color: #222222;
     }
 `;
 
-const Content = styled(Row)`
-    margin: auto;
+const Content = styled.div`
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
 `;
 
 const SubContainer = styled.div`
-    max-width: 1140px;
+    max-width: 1270px;
     width: 90%;
     margin: auto;
 
@@ -84,10 +88,12 @@ const Footer = styled.div`
 
 const CardContainer = ({ img, text, to }) => (
     <CardContent>
-        <Link to={to}>
-            <img src={img} alt="iPhone icon" />
-            <p className="card-text">{text}</p>
-        </Link>
+        <div>
+            <Link to={to}>
+                <img src={img} alt="iPhone icon" />
+                <p className="card-text">{text}</p>
+            </Link>
+        </div>
     </CardContent>
 );
 
@@ -97,28 +103,38 @@ class Painel extends Component {
             <Container>
                 <SubContainer>
                     <h1> Bem vindo de volta ao painel de controlo</h1>
-                    <Content type="flex" align="middle" justify="space-around">
-                        <Col md={7} sm={24}>
-                            <CardContainer
-                                img="/icon/dashboard/reservation.svg"
-                                text="Listagem de reservas"
-                                to="/painel/reservas"
-                            />
-                        </Col>
-                        <Col md={7} sm={24}>
-                            <CardContainer
-                                img="/icon/dashboard/feedback.svg"
-                                text="Avaliações na plataforma"
-                                to="/painel/avaliacao"
-                            />
-                        </Col>
-                        <Col md={7} sm={24}>
-                            <CardContainer
-                                img="/icon/dashboard/contact.svg"
-                                text="Mensagens de clientes"
-                                to="/painel/contacto"
-                            />
-                        </Col>
+                    <Content >
+
+                        <CardContainer
+                            img="/icon/dashboard/reservation.svg"
+                            text="Listagem de reservas"
+                            to="/painel/reservas"
+                        />
+
+                        <CardContainer
+                            img="/icon/dashboard/feedback.svg"
+                            text="Avaliações na plataforma"
+                            to="/painel/avaliacao"
+                        />
+
+                        <CardContainer
+                            img="/icon/dashboard/contact.svg"
+                            text="Mensagens de clientes"
+                            to="/painel/contacto"
+                        />
+
+                        <CardContainer
+                            img="/icon/dashboard/block.svg"
+                            text="Datas bloqueadas"
+                            to="/painel/bloqueado"
+                        />
+
+                        <CardContainer
+                            img="/icon/dashboard/experience.svg"
+                            text="Experiências na plataforma"
+                            to="/painel/experiencias"
+                        />
+
                     </Content>
                     <Footer>
                         <img src="/logo.png" alt="logo" />

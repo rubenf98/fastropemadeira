@@ -8,3 +8,8 @@ export const fetchExperiences = (filters = {}) => ({
         arrayFormat: "index"
     })}`)
 })
+
+export const updateExperience = (id, data) => ({
+    type: types.UPDATE_EXPERIENCE,
+    payload: axios.put(`${window.location.origin}/api/experience/${id}`, data),
+});
