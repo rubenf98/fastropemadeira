@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\BlockReservationDate;
 use App\Models\Experience;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,11 +27,13 @@ class ReservationRequest extends FormRequest
         if (array_key_exists("code", $this->phone) && array_key_exists("phone", $this->phone)) {
             $phone = "+" . $this->phone["code"] . " " . $this->phone["phone"];
         }
+        $date = new Carbon($this->date);
+        $isBlocked = BlockReservationDate::where('date', $date->format('Y-m-d'))->where("experience_id", $this->experience_id)->count();
 
         $experience = Experience::find($this->experience_id);
         $this->merge([
             'phone' =>  $phone,
-            'date' => new Carbon($this->date),
+            'date' => $isBlocked ? null : new Carbon($this->date),
             'confirmation_token' => uniqid(),
             'hasPerson' => $this->experience_id < 6 ?  true : false,
             'price' => ($this->private ? $experience->private_price : $experience->price) * $this->people,
@@ -73,6 +76,7 @@ class ReservationRequest extends FormRequest
     public function messages()
     {
         return [
+            'date.required' => 'Provided date is not available',
             'name.required' => 'Reservation requires a reservation name',
             'email.required' => 'Reservation requires a contact email',
             'address.required' => 'Pickup address is required',

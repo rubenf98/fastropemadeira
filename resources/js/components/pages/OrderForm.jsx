@@ -60,6 +60,7 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
 
     function decrementStep() {
         if (step > 0) setStep(step - 1);
+        form.setFieldsValue({ date: undefined })
     };
 
     function submitForm() {
