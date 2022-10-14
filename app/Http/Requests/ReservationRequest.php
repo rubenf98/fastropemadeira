@@ -31,12 +31,13 @@ class ReservationRequest extends FormRequest
         $isBlocked = BlockReservationDate::where('date', $date->format('Y-m-d'))->where("experience_id", $this->experience_id)->count();
 
         $experience = Experience::find($this->experience_id);
+        $price = $this->private ? 0 : ($experience->price * $this->people);
         $this->merge([
             'phone' =>  $phone,
             'date' => $isBlocked ? null : new Carbon($this->date),
             'confirmation_token' => uniqid(),
             'hasPerson' => $this->experience_id < 6 ?  true : false,
-            'price' => ($this->private ? $experience->private_price : $experience->price) * $this->people,
+            'price' => ($this->address && ($this->experience_id == 1 || $this->experience_id == 2)) ? $price + 5 : $price,
         ]);
     }
 
@@ -49,7 +50,7 @@ class ReservationRequest extends FormRequest
     {
         return [
             'date' => 'required|date|after:today',
-            'address' => 'required|string',
+            'address' => 'nullable|string',
             'confirmation_token' => 'required',
             'email' => 'required|email',
             'name' => 'required|string',

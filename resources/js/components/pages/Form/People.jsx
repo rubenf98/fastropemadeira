@@ -286,7 +286,7 @@ const rules = {
     ],
     address: [
         {
-            required: true,
+            required: false,
             message: 'Please input an address!',
         },
     ],
@@ -336,6 +336,7 @@ const rules = {
 
 function People({ getExperience, incrementStep, updateForm, calendarMetadata, decrementStep, text, form, loading }) {
     const [data, setData] = useState({});
+    const [extra, setExtra] = useState(0);
     const [currentLimit, setCurrentLimit] = useState(15);
     const [people, setPeople] = useState(2);
     const [priv, setPrivate] = useState(false);
@@ -360,7 +361,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
         form.validateFields();
         incrementStep();
     }
-    console.log(form.getFieldsValue())
+    console.log(data)
     return (
         <ConfigProvider locale={en}>
             <BackButton decrementStep={decrementStep} text={text.experienceBackButton} />
@@ -537,7 +538,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                     </Form.Item>
 
                     <Form.Item name="address" label={text.form.address.label} rules={rules.address} >
-                        <Input placeholder={text.form.address.placeholder} />
+                        <Input onChange={(e) => e.target.value ? setExtra(data.id == 1 || data.id == 2 ? 5 : 0) : setExtra(0)} placeholder={text.form.address.placeholder} />
                     </Form.Item>
 
                     <Form.Item name="people" label={text.form.people.label} >
@@ -636,7 +637,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
             <Row type="flex" justify="space-between" style={{ marginTop: "50px" }}>
                 <PriceContainer>
 
-                    <p>TOTAL: {data.price == 0 ? text.price : <span>{(priv ? data.private_price : data.price) * people}€</span>}</p>
+                    <p>TOTAL: {data.price == 0 || priv ? text.price : <span>{(priv ? data.private_price : data.price) * people + extra}€</span>}</p>
                     <Disclaimer>
                         <p>All prices in euro (EUR €)</p>
                     </Disclaimer>

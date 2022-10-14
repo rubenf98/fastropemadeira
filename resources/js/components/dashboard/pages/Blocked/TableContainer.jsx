@@ -4,12 +4,20 @@ import Table from "../../../common/TableContainer";
 import moment from "moment";
 import RowOperation from "../../RowOperation";
 import StopPropagation from "../../StopPropagation";
+import { Button, DatePicker, Input, Space } from "antd";
+import { colors } from "../../../../helper";
 
 const Container = styled.div`
     width: 100%;
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange, onDelete }) {
+const ActionButton = styled.div`
+    float: right;
+    cursor: pointer;
+`;
+
+
+function TableContainer({ loading, data, meta, handlePageChange, onDelete, setFilters }) {
 
     const columns = [
         {
@@ -43,9 +51,11 @@ function TableContainer({ loading, data, meta, handlePageChange, onDelete }) {
         },
     ];
 
-
     return (
         <Container>
+            <ActionButton>
+                <DatePicker onChange={(e) => setFilters({ date: e ? moment(e).format("YYYY-MM-DD") : null })} />
+            </ActionButton>
             <Table
                 loading={loading}
                 data={data}

@@ -69,6 +69,7 @@ class Blocked extends Component {
                             loading={loading}
                             meta={meta}
                             onDelete={this.props.deleteBlockedDate}
+                            setFilters={this.setFilters}
                         />
                     </Table>
                 </ContentContainer>

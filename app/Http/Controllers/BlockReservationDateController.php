@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlockReservationResource;
 use App\Models\BlockReservationDate;
+use App\QueryFilters\BlockReservationFilters;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -15,9 +16,9 @@ class BlockReservationDateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(BlockReservationFilters $filters)
     {
-        return BlockReservationResource::collection(BlockReservationDate::where("date", ">", Carbon::now())->orderBy('date', 'DESC')->paginate(10));
+        return BlockReservationResource::collection(BlockReservationDate::filterBy($filters)->where("date", ">", Carbon::now())->orderBy('date', 'DESC')->paginate(10));
     }
 
     /**
