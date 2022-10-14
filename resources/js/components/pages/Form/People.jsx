@@ -537,7 +537,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
                         <Switch onChange={(value) => setPrivate(value)} checkedChildren={text.form.private.label} unCheckedChildren={text.form.private.label} />
                     </Form.Item>
 
-                    <Form.Item name="address" label={text.form.address.label} rules={rules.address} >
+                    <Form.Item name="address" label={data.id == 1 || data.id == 2 ? text.form.address.label + " (+5€)" : text.form.address.label} rules={rules.address} >
                         <Input onChange={(e) => e.target.value ? setExtra(data.id == 1 || data.id == 2 ? 5 : 0) : setExtra(0)} placeholder={text.form.address.placeholder} />
                     </Form.Item>
 
@@ -645,7 +645,7 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
 
                 <Checkout disabled={loading} onClick={handleSubmit}><span>{text.submit}</span> </Checkout>
             </Row>
-        </ConfigProvider>
+        </ConfigProvider >
     )
 }
 const mapStateToProps = (state) => {
