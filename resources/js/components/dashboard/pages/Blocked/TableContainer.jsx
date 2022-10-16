@@ -23,6 +23,8 @@ function TableContainer({ loading, data, meta, handlePageChange, onDelete, setFi
         {
             title: '#',
             dataIndex: 'id',
+            width: 100,
+            fixed: 'left',
         },
         {
             title: 'Data bloqueada',

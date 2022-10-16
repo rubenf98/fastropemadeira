@@ -19,6 +19,10 @@ const CardContent = styled.div`
     padding: 20px 20px;
     box-sizing: border-box;
 
+    @media (max-width: ${dimensions.md}){
+        width: 100%;
+    }
+
     div {
         background: white;
         text-align: center;

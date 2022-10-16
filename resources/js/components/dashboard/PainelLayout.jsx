@@ -22,9 +22,7 @@ const PageContainer = styled.div`
 
 const ContentContainer = styled.div`
 
-    @media (max-width: ${dimensions.md}){
-        display: none;
-    }
+    //
     
 `;
 
@@ -65,10 +63,6 @@ export default class PainelLayout extends Component {
                         <PrivateRoute path="/painel" component={Painel} />
                     </Content>
                 </ContentContainer>
-
-                <MobileMessage>
-                    O painel de controlo não está disponível na versão mobile, utilize um computador para aceder a todas as funções.
-                </MobileMessage>
             </PageContainer>
         );
     }

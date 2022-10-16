@@ -75,11 +75,15 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
         {
             title: '',
             dataIndex: 'confirmation',
+            fixed: 'left',
+            width: 100,
             render: (confirmation) => <Indicator background={confirmation != 0 ? "#008d09" : "#df0000"} />,
         },
         {
             title: '#',
             dataIndex: 'id',
+            fixed: 'left',
+            width: 100,
         },
         {
             title: 'Fonte',

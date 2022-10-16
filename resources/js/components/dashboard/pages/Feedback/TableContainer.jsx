@@ -13,6 +13,8 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
         {
             title: '#',
             dataIndex: 'id',
+            fixed: 'left',
+            width: 100,
         },
         {
             title: 'Data',

@@ -19,15 +19,19 @@ function TableContainer({ loading, data, meta, handlePageChange, updateExperienc
         {
             title: '#',
             dataIndex: 'id',
+            fixed: 'left',
+            width: 100,
         },
         {
             title: 'Nome',
             dataIndex: 'name',
+            fixed: 'left',
             render: (element) => element.pt,
         },
         {
             title: 'Descrição',
             dataIndex: 'description',
+            width: "60%",
             render: (element) => element.pt,
         },
         {
