@@ -9,6 +9,7 @@ import en from 'world_countries_lists/data/en/world.json';
 import BackButton from './BackButton';
 import Carousel from 'react-multi-carousel';
 import { connect } from "react-redux";
+import { fetchDisabledDate } from '../../../redux/reservation/actions';
 
 const responsive = {
     general: {
@@ -334,7 +335,7 @@ const rules = {
     ],
 };
 
-function People({ getExperience, incrementStep, updateForm, calendarMetadata, decrementStep, text, form, loading }) {
+function People({ getExperience,fetchDisabledDate, incrementStep, updateForm, calendarMetadata, decrementStep, text, form, loading }) {
     const [data, setData] = useState({});
     const [extra, setExtra] = useState(0);
     const [currentLimit, setCurrentLimit] = useState(15);
@@ -342,7 +343,10 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
     const [priv, setPrivate] = useState(false);
 
     useEffect(() => {
+        
+
         let experience = getExperience();
+        fetchDisabledDate({ experience: experience });
         axios.get(`${window.location.origin}/api/experience/${experience}`).then((response) => {
             setData(response.data.data);
         });
@@ -648,10 +652,16 @@ function People({ getExperience, incrementStep, updateForm, calendarMetadata, de
         </ConfigProvider >
     )
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchDisabledDate: (filters) => dispatch(fetchDisabledDate(filters)),
+    };
+};
 const mapStateToProps = (state) => {
     return {
         calendarMetadata: state.reservation.calendarMetadata,
     };
 };
 
-export default connect(mapStateToProps, null)(People);
+export default connect(mapStateToProps, mapDispatchToProps)(People);

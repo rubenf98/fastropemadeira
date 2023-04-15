@@ -13,6 +13,6 @@ const mix = require('laravel-mix');
 
 mix.copyDirectory('resources/assets/fonts', 'public/fonts');
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app15042023.js', 'public/js')
     .react();
     
