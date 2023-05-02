@@ -12,6 +12,7 @@ import SubmitButton from "./Contact/SubmitButton";
 import axios from "axios";
 import { fadeInUp, fadeOut } from 'react-animations'
 import AnimationContainer from '../common/AnimationContainer';
+import RevPartner from './Home/RevPartner';
 
 const fadeAnimation = keyframes`${fadeInUp}`;
 const fadeOutA = keyframes`${fadeOut}`;
@@ -501,6 +502,7 @@ function Contact() {
                 </Form>
 
             </FeedbackContainer>
+            <RevPartner hasReviews={false} />
         </div>
     )
 }

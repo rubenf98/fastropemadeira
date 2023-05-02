@@ -2,110 +2,115 @@ import { Row } from 'antd';
 import React from 'react'
 import styled from "styled-components";
 import moment from "moment";
-import { dimensions } from '../../helper';
+import { dimensions, maxWidth } from '../../helper';
+import {
+    Link
+} from "react-router-dom";
 
-const Container = styled.div`
-    max-width: 100%;
-    height: 600px;
+const Container = styled.section`
+    width: 100%;
+    min-height: 80vh;
     background: white;
-    background: url("/footer.webp");
-    background-position: center;
+    background: url("/images/footer_background.jpg");
+    background-position: left top;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    z-index: 3;
-    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
 
-    @media (max-width: ${dimensions.md}) {
+    /* /* @media (max-width: ${dimensions.md}) {
         height: 400px;
-    }
-    @media (max-width: ${dimensions.sm}) {
-        height: 300px;
+    } */
+    @media (max-width: ${dimensions.md}) {
+        padding-top: 150px;
     }
 `;
 
-const Disclaimer = styled.div`
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 3;
-
-    p{
-        margin: 0px;
-        margin-bottom: 20px;
+const Header = styled.div`
+    width: 40%;
+    
+    h2, p {
         color: white;
-        text-align: center;
-        font-size: 1.3em;
+        margin: 0px;
+    }
 
-        @media (max-width: ${dimensions.md}) {
-            font-size: 1.2em;
-        }
-        @media (max-width: ${dimensions.sm}) {
-            font-size: .8em;
+    p {
+        font-size: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 26px;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        img{
+            width: 20px;
+
         }
     }
-`;
 
+    @media (max-width: ${dimensions.md}){
+        width: 100%;
+        margin: 30px 0px;
+    }
 
-const BackgroundText = styled.div`
-    font-family: 'Poppins', sans-serif;
-    z-index: 2;
-    font-size: 17vw;
-    font-weight: bold;
-    color: #ffffff22;
-    text-transform: uppercase;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-`;
-
-
-const Overlay = styled.div`
-    position: absolute; 
-    left: 0; 
-    right: 0; 
-    top: 0;
-    bottom: 0;
-    background: #0000007b;
-    z-index: 1;
+    @media (max-width: ${dimensions.sm}){
+        margin: 20px 0px;
+    }
 `;
 
 const Content = styled.div`
-    z-index: 3;
-    position: absolute;
-    left: 0; 
-    right: 0; 
-    top: 0;
-    bottom: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 50px 10px;
+    box-sizing: border-box;
+    max-width: ${maxWidth};
+    margin: 0px auto;
+    border-top: 1px solid white;
 
-    h1 {
-        color: white;
-        text-align: center;
-        font-size: 6em;
-        margin: 0px;
+    @media (max-width: ${dimensions.md}){
+        flex-wrap: wrap;
+        border: 0px;
 
-        @media (max-width: ${dimensions.md}) {
-            font-size: 3.5em;
-        }
-        @media (max-width: ${dimensions.sm}) {
-            font-size: 2.5em;
-        }
     }
     
 `;
 
-const Logo = styled.a`
-    width: 26px;
-    margin: 0 10px;
+const LinkContainer = styled.div`
+    width: 20%;
+    
 
-    img{
+    h3 {
+        font-size: 24px;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    a, p {
+        display: block;
+        font-size: 20px;
+        color: white;
+        font-weight: 100;
+        margin: 5px 0px;
+    }
+
+    @media (max-width: ${dimensions.md}){
+        width: ${props => props.fullWidth ? "100%" : "50%"};
+        margin: 30px 0px;
+    }
+
+
+    @media (max-width: ${dimensions.sm}){
         width: 100%;
+        margin: 20px 0px;
     }
 `;
 
@@ -113,28 +118,45 @@ const Logo = styled.a`
 function Footer() {
     return (
         <Container>
-            <Overlay />
-            <BackgroundText>FASTROPE</BackgroundText>
             <Content>
-                <div>
-                    <h1>Fast Rope Madeira</h1>
-                </div>
-            </Content>
+                <Header>
+                    <p>Copyright ©{moment().year()}</p>
+                    <h2>Fast Rope Madeira</h2>
+                    <div type="flex" align="middle">
+                        <a href="https://www.facebook.com/madeira.fastrope" target="_blank" >
+                            <img loading="lazy" src="/icon/company/facebook.png" alt="facebook" />
+                        </a>
+                        <a href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
+                            <img loading="lazy" src="/icon/company/whatsapp.svg" alt="whatsapp" />
+                        </a>
+                        <a href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
+                            <img loading="lazy" src="/icon/company/instagram.svg" alt="instagram" />
+                        </a>
+                    </div>
+                </Header>
 
-            <Disclaimer>
-                <p>Copyright ©{moment().year()} All rights reserved | Rúben Freitas</p>
-                <Row type="flex" justify="center" align="middle">
-                    <Logo href="https://www.facebook.com/madeira.fastrope" target="_blank" >
-                        <img loading="lazy" src="/icon/company/facebook.png" alt="facebook" />
-                    </Logo>
-                    <Logo href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
-                        <img loading="lazy" src="/icon/company/whatsapp.svg" alt="whatsapp" />
-                    </Logo>
-                    <Logo href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
-                        <img loading="lazy" src="/icon/company/instagram.svg" alt="instagram" />
-                    </Logo>
-                </Row>
-            </Disclaimer>
+                <LinkContainer>
+
+                    <h3>Quick Links</h3>
+                    <Link to="/">Home</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/contact">Contact</Link>
+                </LinkContainer>
+                <LinkContainer>
+
+                    <h3>Services</h3>
+                    <Link to="/">Livro de reclamações</Link>
+                    <p>RNTA12312</p>
+                </LinkContainer>
+                <LinkContainer fullWidth>
+                    <h3>Contacts</h3>
+                    <p>Restaurante Tricolore, Estrada Monumental, 9000-096 Funchal</p>
+                    <p>(351) 933 933 452</p>
+                    <p>info@fastropemadeira.com</p>
+                </LinkContainer>
+
+
+            </Content>
         </Container>
     )
 }

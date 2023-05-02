@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Team from './About/Team';
 import History from './About/History';
 import Services from './About/Services';
+import RevPartner from './Home/RevPartner';
 
 const Container = styled.div`
     margin-top: 120px;
@@ -16,6 +17,7 @@ function About() {
             <History text={text} />
             <Team text={text} />
             <Services text={text} />
+            <RevPartner />
         </Container>
     )
 }

@@ -9,8 +9,9 @@ import { colors, dimensions, maxWidth } from '../../helper';
 import AnimationContainer from './AnimationContainer';
 
 const Container = styled.div`
-    height: 90px;
+    height:  ${props => props.hasbackground ? "80px" : "120px"};;
     background: ${props => props.hasbackground ? "#ffffff" : "transparent"};
+    box-shadow: ${props => props.shadow ? "0 0 40px " + colors.main : "0px"};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,11 +30,10 @@ const Container = styled.div`
 const Content = styled.div`
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin: auto;
     width: 100%;
-    max-width: ${maxWidth};
     color: white;
     transition: .5s ease-in-out;
 `;
@@ -44,6 +44,7 @@ const Logo = styled(Link)`
     display: block;
     opacity: ${props => props.visible ? "1" : "0"};
     z-index: 20;
+    transition: opacity .2s ease;
 
     img {
         height: 100%;
@@ -257,7 +258,7 @@ function useEventListener(eventName, handler, element = window) {
 
 function Navbar({ onOrder }) {
     const [hasBackground, setHasBackground] = useState(0);
-    const [hasShadow, setHasShadow] = useState(false);
+    const [hasShadow, setHasShadow] = useState(0);
     const [visible, setVisible] = useState(0);
 
     const handler = useCallback(
@@ -265,12 +266,13 @@ function Navbar({ onOrder }) {
             if (window.location.pathname.length <= 4) {
                 const currentScrollPos = window.pageYOffset;
                 const visible = currentScrollPos > (window.innerHeight / 3);
+                console.log(visible);
                 setHasBackground(visible ? 1 : 0);
-                setHasShadow(visible);
+                setHasShadow(visible ? 1 : 0);
             } else if (window.location.pathname.length > 4) {
                 const currentScrollPos = window.pageYOffset;
                 const visible = currentScrollPos > (window.innerHeight / 3);
-                setHasShadow(visible);
+                setHasShadow(visible ? 1 : 0);
             } else if (!hasBackground) {
                 setHasBackground(1);
             };
@@ -311,42 +313,38 @@ function Navbar({ onOrder }) {
         <div>
 
             <Container hasbackground={(visible ? 0 : 1) && hasBackground} shadow={(visible ? 0 : 1) && hasShadow}>
-
+                <Logo to="/" visible={(visible ? 0 : 1) && hasBackground}>
+                    <img src={hasBackground ? "/logo.png" : "/logo_white.png"} alt="logo" />
+                </Logo>
 
                 <Content>
-                    <Logo to="/" visible={(visible ? 0 : 1)}>
-                        <img src={hasBackground ? "/logo.png" : "/logo_white.png"} alt="logo" />
-                    </Logo>
-                    <AnimationContainer delay={2000} animation="fadeIn">
-                        <MenuContainer>
-                            <NavbarLink hasbackground={hasBackground} to="/">home <div /></NavbarLink>
-                            <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/about">about <div /></NavbarLink>
-                            <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/contact">contact <div /></NavbarLink>
 
-                            <OrderButton onClick={onOrder}>Book An Adventure</OrderButton>
-                            <Menu visible={visible ? 0 : 1} onClick={() => setVisible(visible ? 0 : 1)}>
-                                <img
-                                    src={visible ?
-                                        "/icon/close.svg" :
-                                        (hasBackground ? "/icon/menu.svg" : "/icon/menu_white.svg")
-                                    }
-                                    alt="menu"
-                                />
-                            </Menu>
-                            <CustomSelect
-                                hasbackground={hasBackground}
-                                onChange={handleLanguageChange}
-                                visible={(visible ? 0 : 1)}
-                                defaultValue={localStorage.getItem("language")}
-                                suffixIcon={
-                                    <DropdownIcon src={hasBackground ? "/icon/down_black.svg" : "/icon/down.svg"} alt="open" />
-                                }
-                            >
-                                <Option value="en">  EN</Option>
-                                <Option value="pt">  PT</Option>
-                            </CustomSelect>
-                        </MenuContainer>
-                    </AnimationContainer>
+                    <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/about">about <div /></NavbarLink>
+                    <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/contact">contact <div /></NavbarLink>
+
+                    <OrderButton onClick={onOrder}>Book An Adventure</OrderButton>
+                    <Menu visible={visible ? 0 : 1} onClick={() => setVisible(visible ? 0 : 1)}>
+                        <img
+                            src={visible ?
+                                "/icon/close.svg" :
+                                (hasBackground ? "/icon/menu.svg" : "/icon/menu_white.svg")
+                            }
+                            alt="menu"
+                        />
+                    </Menu>
+                    <CustomSelect
+                        hasbackground={hasBackground}
+                        onChange={handleLanguageChange}
+                        visible={(visible ? 0 : 1)}
+                        defaultValue={localStorage.getItem("language")}
+                        suffixIcon={
+                            <DropdownIcon src={hasBackground ? "/icon/down_black.svg" : "/icon/down.svg"} alt="open" />
+                        }
+                    >
+                        <Option value="en">  EN</Option>
+                        <Option value="pt">  PT</Option>
+                    </CustomSelect>
+
                 </Content>
 
             </Container>

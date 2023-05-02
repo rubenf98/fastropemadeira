@@ -109,7 +109,7 @@ class Layout extends Component {
                     onCancel={this.closeForm}
                 />
 
-                <HiddenButton visibleSmallScreen={true}>
+                {/* <HiddenButton visibleSmallScreen={true}>
                     <Whatsapp href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
                         <img src="/icon/company/whatsapp.svg" alt="whatsapp" />
                     </Whatsapp>
@@ -118,10 +118,10 @@ class Layout extends Component {
                     <OrderNow onClick={this.openForm}>
                         <img src="/icon/order.svg" alt="order" />
                     </OrderNow>
-                </HiddenButton>
+                </HiddenButton> */}
                 <Navbar onOrder={this.openForm} />
 
-                <div> {this.props.children} </div>
+                {this.props.children}
 
 
                 <Footer />
