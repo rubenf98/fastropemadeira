@@ -10,12 +10,13 @@ import PrivateRoute from "./PrivateRoute";
 import { dimensions } from "../../helper";
 import Blocked from "./pages/Blocked/Blocked";
 import Experience from "./pages/Experience/Experience";
+import Review from "./pages/Review/Review";
 
 const PageContainer = styled.div`
     margin: auto;
     display: flex;
     width: 100%;
-    min-height:100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 `;
@@ -23,18 +24,6 @@ const PageContainer = styled.div`
 const ContentContainer = styled.div`
 
     //
-    
-`;
-
-const MobileMessage = styled.div`
-    width: 80%;
-    font-size: 1.4em;
-    font-weight: bold;
-    text-align:center;
-    margin: auto;
-    @media (min-width: ${dimensions.md}){
-        display: none;
-    }
     
 `;
 
@@ -55,6 +44,7 @@ export default class PainelLayout extends Component {
                 <NavBarContainer><NavBar /></NavBarContainer>
                 <ContentContainer>
                     <Content>
+                        <PrivateRoute path="/painel/review" component={Review} />
                         <PrivateRoute path="/painel/contacto" component={Contact} />
                         <PrivateRoute path="/painel/avaliacao" component={Feedback} />
                         <PrivateRoute path="/painel/reservas" component={Reservations} />

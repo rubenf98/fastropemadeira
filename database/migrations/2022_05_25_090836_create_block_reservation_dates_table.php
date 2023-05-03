@@ -16,10 +16,13 @@ class CreateBlockReservationDatesTable extends Migration
         Schema::create('block_reservation_dates', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('experience_id');
+            $table->unsignedBigInteger('reservation_id')->nullable();
+            $table->integer('capacity')->default(100);
             $table->date('date');
             $table->timestamps();
 
-            $table->foreign('experience_id')->references('id')->on('experiences');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->foreign('experience_id')->references('id')->on('experiences')->onDelete('cascade');
         });
     }
 

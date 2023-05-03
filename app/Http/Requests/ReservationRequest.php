@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ReservationRequest extends FormRequest
 {
@@ -28,15 +29,17 @@ class ReservationRequest extends FormRequest
             $phone = "+" . $this->phone["code"] . " " . $this->phone["phone"];
         }
         $date = new Carbon($this->date);
-        $isBlocked = BlockReservationDate::where('date', $date->format('Y-m-d'))->where("experience_id", $this->experience_id)->count();
+        $blockedSum = BlockReservationDate::where('date', $date->format('Y-m-d'))->where("experience_id", $this->experience_id)->sum('capacity');
+        $isBlocked = $blockedSum > (15 - count($this->person));
 
         $experience = Experience::find($this->experience_id);
-        $price = $this->private ? 0 : ($experience->price * $this->people);
+        $price = $this->private ? 0 : ($experience->price * count($this->person));
         $this->merge([
-            'phone' =>  $phone,
+            'people' => count($this->person),
+            'phone' => $phone,
             'date' => $isBlocked ? null : new Carbon($this->date),
             'confirmation_token' => uniqid(),
-            'hasPerson' => $this->experience_id < 6 ?  true : false,
+            'hasPerson' => true,
             'price' => ($this->address && ($this->experience_id == 1 || $this->experience_id == 2)) ? $price + 5 : $price,
         ]);
     }
@@ -60,7 +63,7 @@ class ReservationRequest extends FormRequest
             'experience_id' => 'required|exists:experiences,id',
             'private' => 'required|boolean',
             'phone' => 'required|string',
-            'person' => 'required_if:hasPerson,true|size:' . $this->people,
+            'person' => 'required_if:hasPerson,true',
             'person.*.birthday' => 'required|date',
             'person.*.gender' => 'required|string',
             'person.*.height' => 'required',

@@ -9,17 +9,17 @@ const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
         items: 3,
-        paritialVisibilityGutter: 40
+        partialVisibilityGutter: 40
     },
     tablet: {
         breakpoint: { max: 1024, min: 567 },
         items: 2,
-        paritialVisibilityGutter: 30
+        partialVisibilityGutter: 30
     },
     mobile: {
         breakpoint: { max: 567, min: 0 },
         items: 1,
-        paritialVisibilityGutter: 0
+        partialVisibilityGutter: 0
     }
 };
 
@@ -233,7 +233,7 @@ function Tours() {
             </Title>
             <CarouselContainer
                 ssr
-                partialVisbile
+                partialVisible
                 itemClass="image-item"
                 responsive={responsive}
             >

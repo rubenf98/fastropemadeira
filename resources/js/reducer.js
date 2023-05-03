@@ -7,6 +7,7 @@ import contact from './redux/contact'
 import experience from './redux/experience'
 import activity from './redux/activity'
 import date from './redux/date'
+import review from './redux/review'
 
 const reducer = combineReducers({
     auth,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
     contact,
     activity,
     date,
-    experience
+    experience,
+    review
 })
 
 export default reducer

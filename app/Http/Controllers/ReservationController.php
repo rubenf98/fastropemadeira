@@ -9,6 +9,7 @@ use App\Jobs\ConfirmationEmail;
 use App\Jobs\ModificationEmail;
 use App\Jobs\NotificationEmail;
 use App\Mail\ConfirmationMail;
+use App\Models\BlockReservationDate;
 use App\Models\Reservation;
 use App\QueryFilters\ReservationFilter;
 use Illuminate\Http\Request;
@@ -67,12 +68,17 @@ class ReservationController extends Controller
         DB::beginTransaction();
         $record = Reservation::create($validator);
         if (array_key_exists('person', $validator)) {
+            BlockReservationDate::create([
+                'experience_id' => $validator['experience_id'],
+                'reservation_id' => $record->id,
+                'capacity' => count($validator['person']),
+                'date' => $validator['date']
+            ]);
             $record->storeParticipants($validator['person']);
         }
         DB::commit();
 
-        ConfirmationEmail::dispatch($record->email, $record->confirmation_token)
-            ->delay(now()->addSecond());
+        ConfirmationEmail::dispatch($record->email, $record->confirmation_token);
 
         return new ReservationResource($record);
     }
@@ -119,8 +125,13 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        $reservation->delete();
+        // $dates = BlockReservationDate::where('reservayion_id', $reservation->id)->get();
 
+        // foreach ($dates as $date) {
+        //     $date->delete();
+        // }
+
+        $reservation->delete();
         return response()->json(null, 204);
     }
 }

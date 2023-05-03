@@ -15,21 +15,39 @@ const Container = styled.div`
     position: relative;
 `;
 
-
 const OrderNow = styled.div`
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
+    width: 40px;
     background: ${colors.main};
-    height: 50px;
-    position: fixed;
-    z-index: 11;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: all .2 ease-in-out;
     border-radius: 50px;
+
+    img {
+        width: 20px;
+    }
+
+    &:hover {
+        background: ${colors.mainHover};
+    }
+`;
+
+const Icon = styled.a`
+    width: 40px;
+    background: ${colors.main};
+    height: 40px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .2 ease-in-out;
+    border-radius: 40px;
+    margin-top: 10px;
 
     img {
         width: 25px;
@@ -40,38 +58,16 @@ const OrderNow = styled.div`
     }
 `;
 
-const Whatsapp = styled.a`
+const HiddenButton = styled.div`
+    display: ${props => props.visibleSmallScreen ? "none" : "flex"};
+    flex-direction: column;
+    position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 60px;
-    background: ${colors.main};
-    height: 60px;
-    position: fixed;
     z-index: 11;
-    color: white;
-    font-size: 1.6em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all .2 ease-in-out;
-    border-radius: 70px;
 
-    img {
-        width: 35px;
-    }
-
-    &:hover {
-        background: ${colors.mainHover};
-    }
-`;
-
-const HiddenButton = styled.div`
-   display: ${props => props.visibleSmallScreen ? "block" : "none"};
-
-   @media (max-width: ${dimensions.sm}) {
-    display: ${props => !props.visibleSmallScreen ? "block" : "none"};
+    @media (max-width: ${dimensions.md}) {
+        display: ${props => props.visibleSmallScreen ? "flex" : "none"};
     }
 `;
 
@@ -109,16 +105,22 @@ class Layout extends Component {
                     onCancel={this.closeForm}
                 />
 
-                {/* <HiddenButton visibleSmallScreen={true}>
-                    <Whatsapp href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
+                <HiddenButton>
+                    <Icon href="mailto:info@fastropemadeira.com" target="_blank" >
+                        <img src="/icon/company/mail.svg" alt="email" />
+                    </Icon>
+                    <Icon href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
+                        <img src="/icon/company/instagram.svg" alt="instagram" />
+                    </Icon>
+                    <Icon href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
                         <img src="/icon/company/whatsapp.svg" alt="whatsapp" />
-                    </Whatsapp>
+                    </Icon>
                 </HiddenButton>
-                <HiddenButton visibleSmallScreen={false}>
+                <HiddenButton visibleSmallScreen>
                     <OrderNow onClick={this.openForm}>
                         <img src="/icon/order.svg" alt="order" />
                     </OrderNow>
-                </HiddenButton> */}
+                </HiddenButton>
                 <Navbar onOrder={this.openForm} />
 
                 {this.props.children}

@@ -44,7 +44,7 @@ class FormContainer extends Component {
 
     render() {
         var { record } = this.props;
-        console.log(record);
+
         return (
             <Container>
                 <div>

@@ -14,10 +14,13 @@ const Back = styled.img`
 
 function BackButton({ decrementStep, text }) {
     return (
-        <Breadcrumb>
-            <Breadcrumb.Item>
-                <Back onClick={() => decrementStep()} src="/icon/back.svg" />
-            </Breadcrumb.Item>
+        <Breadcrumb style={{ marginBottom: "30px" }}>
+            {decrementStep &&
+                <Breadcrumb.Item>
+                    <Back onClick={() => decrementStep()} src="/icon/back.svg" />
+                </Breadcrumb.Item>
+            }
+
             <Breadcrumb.Item>
                 <BreadcrumbText>{text}</BreadcrumbText>
             </Breadcrumb.Item>

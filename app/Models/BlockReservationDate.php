@@ -11,7 +11,7 @@ class BlockReservationDate extends Model
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["date", "experience_id"];
+    protected $fillable = ["date", "experience_id", "capacity"];
 
     public function experience()
     {

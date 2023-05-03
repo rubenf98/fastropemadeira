@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Row, Col, Spin } from 'antd';
+import { Row, Col, Spin, Empty } from 'antd';
 import styled from "styled-components";
-import axios from "axios";
 import BackButton from './BackButton';
-import { fetchDisabledDate } from "../../../redux/reservation/actions";
+import { fetchExperiences } from "../../../redux/experience/actions";
+import moment from "moment";
 import { connect } from "react-redux";
 
 
@@ -51,11 +51,11 @@ const Info = styled.div`
     justify-content: space-between;
 
     div {
-        max-width: 75%;
+        flex: 1;
 
         h3, p {
-        padding: 0px;
-        margin: 0px;
+            padding: 0px;
+            margin: 0px;
         }
 
         h3 {
@@ -83,7 +83,7 @@ const Info = styled.div`
     }
 `;
 
-const Price = styled.div`
+const Price = styled.p`
     text-align: right;
     color: rgb(52,60,94);
     font-size: 2em;
@@ -91,23 +91,17 @@ const Price = styled.div`
     font-weight: bold;
 `;
 
-const Disclaimer = styled.div`
-    margin: 0px;
-    font-size: 1.2em;
-`;
-
 const SelectionItem = ({ element, lg, handleClick }) => (
-    <SelectionContainer xs={24} lg={lg} onClick={() => handleClick(element.id)}>
+    <SelectionContainer xs={24} lg={lg} onClick={() => handleClick(element)}>
         <div className="selection-sub-container">
             <Selection className="selection-box" src={element.images[0].image} />
             <Info>
                 <div>
                     <h3>{element.name[localStorage.getItem("language")]}</h3>
                     <p>
-                        {!Array.isArray(element.duration) && <Fragment><img src="/icon/form/time.svg" /> {element.duration[localStorage.getItem("language")]}</Fragment>}
-                        {!Array.isArray(element.height) && <Fragment><img src="/icon/form/height.svg" /> {element.height[localStorage.getItem("language")]}</Fragment>}
-                        {!Array.isArray(element.distance) && <Fragment><img src="/icon/form/distance.svg" /> {element.distance[localStorage.getItem("language")]}</Fragment>}
-                        {!Array.isArray(element.level) && <Fragment><img src="/icon/form/difficulty.svg" /> {element.level[localStorage.getItem("language")]}</Fragment>}
+                        {!Array.isArray(element.duration) && <><img src="/icon/form/time.svg" /> {element.duration[localStorage.getItem("language")]}</>}
+                        {!Array.isArray(element.height) && <><img src="/icon/form/height.svg" /> {element.height[localStorage.getItem("language")]}</>}
+                        {!Array.isArray(element.level) && <><img src="/icon/form/difficulty.svg" /> {element.level[localStorage.getItem("language")]}</>}
                     </p>
                 </div>
 
@@ -124,59 +118,58 @@ const LoadingContainer = styled(Row)`
     
 `;
 
-const columnSize = [10, 14, 12, 12, 14, 10, 12, 12, 10, 14, 12, 12, 14, 10]
-function Location({ fetchDisabledDate, incrementStep, decrementStep, getActivity, updateForm, text }) {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
+const columnSize = [12, 12, 14, 10, 12, 12, 10, 14, 12, 12, 14, 10, 12, 12]
+function Location(props) {
+    const { experiences, loading, text, formContent } = props;
+    const { date } = formContent;
     useEffect(() => {
-        let activity = getActivity();
-        axios.get(`${window.location.origin}/api/experience?activity=${activity}`).then((response) => {
-            setData(response.data.data);
-            setLoading(false)
-        });
+        props.fetchExperiences({ date: moment(date).format('YYYY-MM-DD') });
     }, []);
 
     function handleClick(experience) {
-        updateForm({ experience_id: experience });
-        fetchDisabledDate({ experience: experience });
-        incrementStep({ experience: experience });
+        props.setFormContent({ ...formContent, experience: experience })
+        props.incrementStep({ experience_id: experience });
     }
 
     return (
         <Fragment>
-            <BackButton decrementStep={decrementStep} text={text.activityBackButton} />
+            <BackButton decrementStep={props.decrementStep} text={text.activityBackButton} />
+            {loading ?
+                <LoadingContainer type="flex" justify="center" align="middle">
+                    <Spin size="large" />
+                </LoadingContainer> :
+                <ListContainer type="flex" justify="space-between" align="top" gutter={16}>
 
-            <ListContainer type="flex" justify="space-between" align="top" gutter={16}>
-                {loading ?
-                    <LoadingContainer type="flex" justify="center" align="middle">
-                        <Spin size="large" />
-                    </LoadingContainer> :
-                    data.map((element, index) => (
+                    {experiences.length ? experiences.map((element, index) => (
                         <SelectionItem
                             key={element.id}
                             handleClick={handleClick}
-                            lg={((data.length % 2 != 0) && (data.length - 1 == index)) ?
+                            lg={((experiences.length % 2 != 0) && (experiences.length - 1 == index)) ?
                                 24
                                 : columnSize[index]
                             }
                             element={element}
                             text={text.price}
                         />
-                    ))}
-            </ListContainer>
-            <Disclaimer>
-                * {text.price}
-            </Disclaimer>
+                    )) :
+                        <Empty description={text.nodata} style={{ margin: "auto" }} />}
+                </ListContainer>
+            }
         </Fragment>
     )
 }
 
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        fetchDisabledDate: (filters) => dispatch(fetchDisabledDate(filters)),
+        loading: state.experience.loading,
+        experiences: state.experience.data,
     };
 };
 
-export default connect(null, mapDispatchToProps)(Location);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchExperiences: (filters) => dispatch(fetchExperiences(filters)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Location);

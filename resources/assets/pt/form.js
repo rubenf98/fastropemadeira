@@ -1,8 +1,15 @@
 export const text = {
     instructions: "Explora as nossas atividades e reserva já a tua experiência na Ilha da Madeira! Possuímos percursos fantásticos e pacotes personalizados que sem dúvidas o irão agradar.",
-    activityBackButton: "Voltar às atividades",
-    experienceBackButton: "Voltar às experiências",
+    calendarBackButton: "Seleciona a data para a experiência",
+    activityBackButton: "Escolhe a tua experiência",
+    experienceBackButton: "Preenche os detalhes de reserva",
     formTitle: "Detalhes da Reserva",
+    formSubTitle: "Detalhes dos Partipantes",
+    nodata: "Infelizmente já não possuímos disponibilidade para a data escolhida",
+    calendar: {
+        slider: "Arrasta o slider para o número de participantes",
+        calendar: "Seleciona a data prentendida",
+    },
     form: {
         name: {
             label: "Nome",
@@ -17,7 +24,7 @@ export const text = {
             placeholder: "Nº de telemóvel para contactos adicionais"
         },
         address: {
-            label: "Especifique o seu endereço para transporte",
+            label: "Morada para transporte",
             placeholder: "Endereço e/ou nome do hotel"
         },
         notes: {

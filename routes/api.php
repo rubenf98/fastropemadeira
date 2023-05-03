@@ -31,6 +31,7 @@ Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationControl
 
 Route::apiResource('reservation/blockDate', 'App\Http\Controllers\BlockReservationDateController');
 Route::apiResource('contact', 'App\Http\Controllers\ContactController');
+Route::apiResource('reviews', 'App\Http\Controllers\ReviewController');
 Route::apiResource('feedback', 'App\Http\Controllers\FeedbackController');
 Route::apiResource('reservation', 'App\Http\Controllers\ReservationController');
 Route::apiResource('activity', 'App\Http\Controllers\ActivityController');

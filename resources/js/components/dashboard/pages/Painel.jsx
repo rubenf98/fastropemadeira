@@ -8,7 +8,7 @@ import { dimensions } from "../../../helper";
 
 const Container = styled.div`
     width: 100%;
-    min-height: 100%;
+    min-height: calc(100vh - 80px);
     background: rgb(245, 245, 245);
     flex: 1;
 

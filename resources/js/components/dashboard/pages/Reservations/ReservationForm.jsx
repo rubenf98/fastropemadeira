@@ -227,7 +227,7 @@ class ReservationForm extends Component {
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} md={12}>
-                                    <Form.Item name="experience" label="Número de participantes" >
+                                    <Form.Item name="experience" label="Atividade" >
                                         <Cascader
                                             size="large"
                                             expandTrigger="hover"

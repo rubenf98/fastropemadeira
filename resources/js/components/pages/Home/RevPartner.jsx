@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import AnimationContainer from '../../common/AnimationContainer';
 import Carousel from 'react-multi-carousel';
 import { colors, maxWidth } from '../../../helper';
 import { Rate } from 'antd';
+import { fetchReviews } from '../../../redux/review/actions';
+import { connect } from 'react-redux';
 
 const responsive = {
     desktop: {
@@ -61,6 +63,7 @@ const CarouselContainer = styled(Carousel)`
 
 const Card = styled.div`
     width: 100%;
+    height: 100%;
     padding: 20px;
     box-sizing: border-box;
     /* box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2); */
@@ -101,13 +104,14 @@ const Card = styled.div`
     
 
 `;
-const reviews = [
-    { teste: 1 },
-    { teste: 1 },
-    { teste: 1 },
-    { teste: 1 },
-]
-function RevPartner({ hasReviews = true }) {
+
+function RevPartner({ reviews, fetchReviews, hasReviews = true }) {
+
+    useEffect(() => {
+        fetchReviews();
+
+    }, [])
+
     return (
 
         <Container hasReviews={hasReviews}>
@@ -120,15 +124,15 @@ function RevPartner({ hasReviews = true }) {
                         itemClass="image-item"
                         responsive={responsive}
                     >
-                        {reviews.map((review, index) => (
-                            <Card key={index}>
-                                <Rate allowHalf defaultValue={2.5} />
-                                <p className='description'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum provident sequi sunt necessitatibus a error velit nihil esse cumque placeat possimus tenetur vero rerum sit, perferendis illo deserunt dolorem pariatur?</p>
+                        {reviews.map((review) => (
+                            <Card key={review.id}>
+                                <Rate allowHalf defaultValue={review.rating} />
+                                <p className='description'>{review.comment}</p>
                                 <div className="user">
-                                    <img src="/images/reviews/1.jpg" alt="user" />
+                                    <img src={review.image} alt="user" />
                                     <div className='name'>
-                                        <h3>name</h3>
-                                        <p>2020</p>
+                                        <h3>{review.name}</h3>
+                                        <p>{review.year}</p>
                                     </div>
                                 </div>
                             </Card>
@@ -144,5 +148,17 @@ function RevPartner({ hasReviews = true }) {
         </Container>
     )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchReviews: (page, filters) => dispatch(fetchReviews(page, filters)),
+    };
+};
 
-export default RevPartner
+const mapStateToProps = (state) => {
+    return {
+        loading: state.review.loading,
+        reviews: state.review.data,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RevPartner);

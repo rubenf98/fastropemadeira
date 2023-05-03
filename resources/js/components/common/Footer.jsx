@@ -146,7 +146,7 @@ function Footer() {
 
                     <h3>Services</h3>
                     <Link to="/">Livro de reclamações</Link>
-                    <p>RNTA12312</p>
+                    <p>RNTA549/2021</p>
                 </LinkContainer>
                 <LinkContainer fullWidth>
                     <h3>Contacts</h3>

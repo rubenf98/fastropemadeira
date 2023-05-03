@@ -1,8 +1,15 @@
 export const text = {
     instructions: "Explore our activities and book your Madeira Island experience now! We have fantastic routes and personalized packages that will undoubtedly please you.",
-    activityBackButton: "Pick your activity",
-    experienceBackButton: "Pick your experience",
+    calendarBackButton: "Select the day for your experience",
+    activityBackButton: "Pick your experience",
+    experienceBackButton: "Fill your details",
     formTitle: "Reservation Details",
+    formSubTitle: "Partipants Details",
+    nodata: "Unfortunately we no longer have availability on the chosen date",
+    calendar: {
+        slider: "Drag the slider towards the number of participants",
+        calendar: "Select the preferred date for the activity",
+    },
     form: {
         name: {
             label: "Name",
@@ -17,7 +24,7 @@ export const text = {
             placeholder: "Phone number for further contact"
         },
         address: {
-            label: "Please specify your address so we can pick you up",
+            label: "Pickup address",
             placeholder: "Address and/or hotel name"
         },
         notes: {

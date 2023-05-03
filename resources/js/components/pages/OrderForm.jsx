@@ -1,14 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Modal, Form, notification } from 'antd';
 import styled from "styled-components";
-import Activity from './Form/Activity';
+import moment from 'moment';
 import Location from './Form/Location';
 import People from './Form/People';
 import { dimensions } from "../../helper";
 import axios from "axios";
+import CalendarContainer from './Form/CalendarContainer';
 
 const Content = styled.div`
-    padding: 30px;
+
 
     @media (max-width: ${dimensions.md}) {
         padding: 15px;
@@ -27,36 +28,28 @@ const ModalContainer = styled(Modal)`
     }
 `;
 
-const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0, 0] }) => {
+const OrderForm = ({ visible, onCreate, onCancel, initForm = [0, 0] }) => {
     const [step, setStep] = useState(0);
+    const [formContent, setFormContent] = useState({ people: 3, date: moment().add(2, 'day'), experience: {} });
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [form] = Form.useForm();
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/form");
 
     const stepItems = [
-        <Activity text={text} incrementStep={incrementStep} data={activities.length ? activities : []} />,
-        <Location text={text} getActivity={getActivity} decrementStep={decrementStep} incrementStep={incrementStep} updateForm={updateForm} />,
-        <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} getExperience={getExperience} incrementStep={incrementStep} updateForm={updateForm} />
+        <CalendarContainer text={text} incrementStep={incrementStep} formContent={formContent} setFormContent={setFormContent} />,
+        <Location setFormContent={setFormContent} formContent={formContent} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />,
+        <People formContent={formContent} loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />
     ]
 
-    function incrementStep(formValues) {
-        updateForm(formValues);
+    function incrementStep() {
         if (step < 2) setStep(step + 1);
         else submitForm();
     };
 
     function updateForm(formValues) {
-        form.setFieldsValue({ ...formValues });
-    };
 
-    function getActivity() {
-        return form.getFieldValue('activity');
+        form.setFieldsValue(formValues);
     };
-
-    function getExperience() {
-        return form.getFieldValue('experience');
-    };
-
 
     function decrementStep() {
         if (step > 0) setStep(step - 1);
@@ -65,12 +58,11 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
 
     function submitForm() {
         setLoadingSubmit(true);
-        var data = form.getFieldValue();
+        var data = form.getFieldsValue();
         if (data.person) {
             data.person = data.person.slice(0, data.people);
         }
-        data.experience_id = data.experience;
-        axios.post(`${window.location.origin}/api/reservation`, data).then((response) => {
+        axios.post(`${window.location.origin}/api/reservation`, { ...data, experience_id: formContent.experience.id, date: moment(formContent.date).format('YYYY-MM-DD') }).then((response) => {
             setLoadingSubmit(false);
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();
@@ -114,11 +106,10 @@ const OrderForm = ({ visible, onCreate, onCancel, activities = [], initForm = [0
         });
     };
 
-
     return (
         <ModalContainer
             visible={visible}
-            width={1200}
+            width={720}
             style={{ top: 50 }}
             okText="Next"
             footer={null}

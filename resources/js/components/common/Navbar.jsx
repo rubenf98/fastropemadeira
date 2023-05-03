@@ -51,13 +51,6 @@ const Logo = styled(Link)`
     }
 `;
 
-
-const MenuContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: end;
-`;
-
 const Menu = styled.div`
     z-index: 20;
     box-sizing: border-box;

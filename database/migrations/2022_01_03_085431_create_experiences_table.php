@@ -25,6 +25,7 @@ class CreateExperiencesTable extends Migration
             $table->string('height')->nullable();
             $table->string('duration')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('activity_id')->references('id')->on('activities');
         });
