@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchReviews } from "../../../../redux/review/actions";
+import { deleteReview, fetchReviews } from "../../../../redux/review/actions";
 import { dimensions } from "../../../../helper";
 import TableContainer from "./TableContainer";
 import ReviewForm from "./ReviewForm";
@@ -53,7 +53,7 @@ function Review(props) {
                 <ReviewForm handleModalClose={() => setFormVisibility(false)} visible={formVisibility} />
                 <Table>
                     <TableContainer
-
+                        onDelete={props.deleteReview}
                         setFormVisibility={setFormVisibility}
                         handlePageChange={handlePageChange}
                         data={data}
@@ -70,6 +70,7 @@ function Review(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchReviews: (page, filters) => dispatch(fetchReviews(page, filters)),
+        deleteReview: (id) => dispatch(deleteReview(id)),
     };
 };
 

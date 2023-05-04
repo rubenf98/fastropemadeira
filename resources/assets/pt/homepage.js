@@ -4,10 +4,9 @@ export const text = {
         ["e", "x", "p", "e", "r", "i", "ê", "n", "c", "i", "a", "s", 0, "i", "n", "e", "s", "q", "u", "e", "c", "í", "v", "e", "i", "s"]
     ],
     titleSection: [
-        "Aventura",
-        "Experiência",
-        "Equipa",
-        "Parceiros"
+        "ATIVIDADES RECOMENDADAS",
+        "VÊ O NOSSO VÍDEO",
+        "CONHECE A EQUIPA",
     ],
     reservation: {
         title: "Garante a tua reserva",
@@ -15,11 +14,11 @@ export const text = {
         submit: "Reservar",
     },
     subtitleSection: [
-        "Descobre a Madeira Connosco",
-        "O Que Dizem Sobre Nós?",
-        "Equipa Altamente Qualificada",
-        "Contribuidores Que Nos Suportam"
+        "Viaja longe e encontre-se consigo mesmo",
+        "Faça um tour",
+        "Pessoas que criam a aventura",
     ],
+    team: "Trabalho árduo, honesto e de confiança prestado por guias locais especializados que partilham a paixão pelo Canyoning, Caminhadas e muito mais. Também fazemos tours privados e personalizados, tu escolhes o que queres fazer e nós fazemos acontecer.",
     about: {
         title: "Sobre Nós",
         paragraph: "A Fast Rope é mais do que uma empresa de Aventura, somos uma equipa onde todos partilhamos da paixão pelo Canyoning, Caminhadas e muito mais. Fazemos tours privados e personalizados, tu escolhes o que queres fazer e nós fazemos acontecer.",

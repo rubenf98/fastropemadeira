@@ -2,7 +2,7 @@ export const text = {
     form: {
         title: "Book online",
         disclaimer: "Real-time availability",
-        person: "person",
+        person: "Participants",
     },
     titles: ["Quick details", "Na atividade está incluído", "O que preciso trazer"],
     disclaimer: "Don´t know if this is the appropriate Canyoning Level? Want to know more about it? Send us a message on Whatsapp on  +351 933 933 452 or contact us via email at info@fastropemadeira.com",

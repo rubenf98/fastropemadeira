@@ -1,15 +1,12 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { Row, Form, Input, DatePicker, Calendar, Col, Slider, Select, Button, Switch, Divider } from 'antd';
+import React, { useState } from 'react'
+import { Row, Form, Input, DatePicker, Col, Select, Button, Switch } from 'antd';
 import styled from "styled-components";
-import moment from "moment";
 import { dimensions } from "../../../helper";
-import axios from "axios";
 import CountryPhoneInput, { ConfigProvider } from 'antd-country-phone-input';
 import en from 'world_countries_lists/data/en/world.json';
 import BackButton from './BackButton';
 import Carousel from 'react-multi-carousel';
 import { connect } from "react-redux";
-import { fetchDisabledDate } from '../../../redux/reservation/actions';
 
 const responsive = {
     general: {
@@ -17,8 +14,6 @@ const responsive = {
         items: 1
     }
 };
-
-const { TextArea } = Input;
 
 const CustomCarousel = styled(Carousel)`
     width: 40%;
@@ -269,10 +264,10 @@ const rules = {
     ],
 };
 
-function People({ incrementStep, formContent, decrementStep, text, form, loading }) {
+function People({ incrementStep, fields, decrementStep, text, form, loading }) {
     const [extra, setExtra] = useState(0);
     const [priv, setPrivate] = useState(false);
-    const { experience, people } = formContent;
+    const { experience, people } = fields;
 
     function handleSubmit() {
         form.validateFields();
@@ -378,7 +373,7 @@ function People({ incrementStep, formContent, decrementStep, text, form, loading
                 </Col>
             </Row>
 
-            
+
 
             <h2>{text.formSubTitle}</h2>
             <PersonFormContainer gutter={8} type="flex" justify="flex-start">
@@ -476,15 +471,10 @@ function People({ incrementStep, formContent, decrementStep, text, form, loading
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchDisabledDate: (filters) => dispatch(fetchDisabledDate(filters)),
-    };
-};
 const mapStateToProps = (state) => {
     return {
-        calendarMetadata: state.reservation.calendarMetadata,
+        fields: state.form.fields,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(People);
+export default connect(mapStateToProps, null)(People);

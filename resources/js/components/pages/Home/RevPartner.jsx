@@ -58,7 +58,7 @@ const CarouselContainer = styled(Carousel)`
     padding: 50px 0px;
     box-sizing: border-box;
     margin: auto;
-    background-color: white;
+    background-color: ${props => props.background ? "white" : "transparent"};
 `;
 
 const Card = styled.div`
@@ -119,6 +119,7 @@ function RevPartner({ reviews, fetchReviews, hasReviews = true }) {
             {hasReviews &&
                 <AnimationContainer animation="fadeInUp">
                     <CarouselContainer
+                        background={reviews.length}
                         ssr
                         infinite
                         itemClass="image-item"

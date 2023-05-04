@@ -4,6 +4,8 @@ import { Row, Calendar, Col, Slider, Select } from 'antd';
 import moment from "moment";
 import BackButton from './BackButton';
 import { colors, dimensions } from '../../../helper';
+import { connect } from 'react-redux';
+import { setFormFields } from '../../../redux/form/actions';
 
 const Container = styled.div`
     /* .ant-picker-calendar-date-today {
@@ -118,22 +120,15 @@ const CustomSlider = styled(Slider)`
 `;
 
 function CalendarContainer(props) {
-    const { text, formContent } = props;
-    const { people, date } = formContent;
-
-
-    const dateCellRender = (value) => {
-        return (
-            <Cell >{value.format('DD')}</Cell>
-        );
-    };
+    const { text, fields } = props;
+    const { people, date } = fields;
 
     return (
         <Container>
             <BackButton text={text.calendarBackButton} />
 
             <h3>{text.calendar.slider}</h3>
-            <CustomSlider value={people} onChange={(value) => props.setFormContent({ ...formContent, people: value })} min={2} max={15} />
+            <CustomSlider value={people} onChange={(value) => props.setFormFields({ ...fields, people: value })} min={2} max={15} />
 
             <br />
 
@@ -142,7 +137,7 @@ function CalendarContainer(props) {
                 value={date}
                 fullscreen={false}
                 // dateCellRender={dateCellRender}
-                onSelect={(value) => props.setFormContent({ ...formContent, date: value })}
+                onSelect={(value) => props.setFormFields({ ...fields, date: value })}
                 disabledDate={(currentDate) => {
                     return currentDate && (
                         currentDate < moment().add(1, "day")
@@ -233,5 +228,15 @@ function CalendarContainer(props) {
         </Container>
     )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setFormFields: (data) => dispatch(setFormFields(data)),
+    };
+};
+const mapStateToProps = (state) => {
+    return {
+        fields: state.form.fields,
+    };
+};
 
-export default CalendarContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarContainer);

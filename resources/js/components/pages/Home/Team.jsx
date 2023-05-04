@@ -128,15 +128,16 @@ const Background = styled.img`
     left: 0;
 `;
 
-function Team() {
+function Team({ text }) {
     return (
         <Container>
             <Background src="/images/team_background.jpg" />
             <Content>
                 <Title>
-                    <h3>People that create the adventure</h3>
-                    <h2>MEET OUR TEAM</h2>
-                    <p>Hard, honest and reliable work provided by expert local guides</p>
+                    <h3>{text.subtitleSection[2]}</h3>
+                    <h2>{text.titleSection[2]}</h2>
+
+                    <p>{text.team}</p>
                     <button>View more</button>
                 </Title>
 

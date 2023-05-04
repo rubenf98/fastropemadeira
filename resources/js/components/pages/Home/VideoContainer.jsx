@@ -74,8 +74,9 @@ function VideoContainer({ text }) {
         <Container>
             <Background src="/images/video_background.jpg" />
             <Title>
-                <h2>WATCH OUR VIDEO</h2>
-                <h3>Take a tour</h3>
+                <h2>{text.titleSection[1]}</h2>
+                <h3>{text.subtitleSection[1]}</h3>
+
 
             </Title>
 

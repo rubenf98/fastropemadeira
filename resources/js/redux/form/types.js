@@ -1,0 +1,4 @@
+export const types = {
+    SET_FORM_VISIBILITY: 'SET_FORM_VISIBILITY',
+    SET_FORM_FIELDS: 'SET_FORM_FIELDS',
+};

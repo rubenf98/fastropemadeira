@@ -23,6 +23,11 @@ class Reservation extends Model
         return $this->belongsTo('App\Models\Experience');
     }
 
+    public function blockedDates()
+    {
+        return $this->hasMany('App\Models\BlockReservationDate');
+    }
+
     public function activity($id)
     {
         return Activity::find($id);

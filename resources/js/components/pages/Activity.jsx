@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import styled from "styled-components";
 import CalendarContainer from './Activity/CalendarContainer';
-import { maxWidth } from '../../helper';
+import { dimensions, maxWidth } from '../../helper';
 import RevPartner from './Home/RevPartner';
+import { setFormFields, setFormVisibility } from '../../redux/form/actions';
+import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { fetchExperience } from '../../redux/experience/actions';
 
 const Container = styled.section`
     position: relative;
@@ -15,7 +19,10 @@ const Background = styled.div`
     left: 0;
     height: 500px;
     width: 100vw;
-    background-color:red ;
+    background: url("/images/activities/default.jpg");
+    background-position: left center;
+    background-size: cover;
+    background-repeat: no-repeat;
     z-index: -1;
 `;
 
@@ -26,6 +33,10 @@ const Form = styled.div`
     position: sticky;
     top: 120px;
     left: 0;
+
+    @media (max-width: ${dimensions.lg}) {
+        display: none;
+    }
 `;
 
 const Information = styled.div`
@@ -53,7 +64,18 @@ const Information = styled.div`
         }
     }
 
-    
+    @media (max-width: ${dimensions.lg}) {
+        width: 90%;
+        margin: auto;
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
 `;
 
 const Content = styled.div`
@@ -78,16 +100,21 @@ const Details = styled.div`
     }
 `;
 
-function Activity(props) {
 
+function Activity(props) {
     const [activity, setActivity] = useState("beginner");
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/tour");
 
     useEffect(() => {
+        props.fetchExperience(props.match.params.experience);
         setActivity(props.match.params.activity);
-    }, [])
+    }, []);
 
-    console.log(text["beginner"]);
+    const handleSelect = (fields) => {
+        props.setFormFields({ ...fields, experience: props.experience });
+        props.setFormVisibility(true);
+    }
+
     return (
         <Container>
             <Background />
@@ -125,7 +152,7 @@ function Activity(props) {
                     <p>{text.disclaimer}</p>
                 </Information>
                 <Form>
-                    <CalendarContainer text={{ ...text.form, price: text[activity].price }} />
+                    <CalendarContainer handleSelect={handleSelect} text={{ ...text.form, price: text[activity].price }} />
                 </Form>
             </Content>
 
@@ -134,4 +161,18 @@ function Activity(props) {
     )
 }
 
-export default Activity
+const mapStateToProps = (state) => {
+    return {
+        experience: state.experience.current,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setFormVisibility: (data) => dispatch(setFormVisibility(data)),
+        setFormFields: (data) => dispatch(setFormFields(data)),
+        fetchExperience: (id) => dispatch(fetchExperience(id)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Activity);

@@ -14,13 +14,13 @@ class Homepage extends React.Component {
             <div >
 
 
-                <Header />
+                <Header text={text} />
 
-                <Tours />
+                <Tours text={text} />
 
-                <VideoContainer />
+                <VideoContainer text={text} />
 
-                <Team />
+                <Team text={text} />
 
                 <RevPartner />
             </div>

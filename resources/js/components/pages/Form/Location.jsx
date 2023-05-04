@@ -5,6 +5,7 @@ import BackButton from './BackButton';
 import { fetchExperiences } from "../../../redux/experience/actions";
 import moment from "moment";
 import { connect } from "react-redux";
+import { setFormFields } from '../../../redux/form/actions';
 
 
 const ListContainer = styled(Row)`
@@ -120,14 +121,15 @@ const LoadingContainer = styled(Row)`
 
 const columnSize = [12, 12, 14, 10, 12, 12, 10, 14, 12, 12, 14, 10, 12, 12]
 function Location(props) {
-    const { experiences, loading, text, formContent } = props;
-    const { date } = formContent;
+    const { experiences, loading, text, fields } = props;
+    const { date } = fields;
     useEffect(() => {
         props.fetchExperiences({ date: moment(date).format('YYYY-MM-DD') });
     }, []);
 
     function handleClick(experience) {
-        props.setFormContent({ ...formContent, experience: experience })
+
+        props.setFormFields({ ...fields, experience: experience })
         props.incrementStep({ experience_id: experience });
     }
 
@@ -163,12 +165,14 @@ const mapStateToProps = (state) => {
     return {
         loading: state.experience.loading,
         experiences: state.experience.data,
+        fields: state.form.fields,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchExperiences: (filters) => dispatch(fetchExperiences(filters)),
+        setFormFields: (data) => dispatch(setFormFields(data)),
     };
 };
 

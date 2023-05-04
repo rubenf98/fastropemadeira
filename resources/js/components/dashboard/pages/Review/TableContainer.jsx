@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Table from "../../../common/TableContainer";
 import { Avatar, Rate } from "antd";
 import { colors } from "../../../../helper";
+import RowOperation from "../../RowOperation";
+import StopPropagation from "../../StopPropagation";
 
 const Container = styled.div`
     width: 100%;
@@ -34,7 +36,7 @@ const ActionButton = styled.div`
     }
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange, setFormVisibility }) {
+function TableContainer({ loading, data, meta, handlePageChange, setFormVisibility, onDelete }) {
 
     const columns = [
         {
@@ -68,6 +70,17 @@ function TableContainer({ loading, data, meta, handlePageChange, setFormVisibili
             title: 'Comentário',
             dataIndex: 'comment',
             width: "40%",
+        },
+        {
+            title: "",
+            key: "",
+            render: (text, row) => (
+                <StopPropagation>
+                    <RowOperation
+                        onDeleteConfirm={() => onDelete(row.id)}
+                    />
+                </StopPropagation>
+            ),
         },
     ];
 

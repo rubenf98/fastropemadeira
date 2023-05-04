@@ -2,7 +2,7 @@ export const text = {
     form: {
         title: "Reserva online",
         disclaimer: "Disponibilidade em tempo-real",
-        person: "pessoa",
+        person: "Participantes",
     },
     titles: ["Detalhes", "Na atividade está incluído", "O que preciso trazer"],
     disclaimer: "Don´t know if this is the appropriate Canyoning Level? Want to know more about it? Please check out our Frequently Asked Questions section Here. If your questions aren’t answered there, send us a message on Whatsapp on the following Numbers: +351 913 988 682 or +351 933 668 228 ",

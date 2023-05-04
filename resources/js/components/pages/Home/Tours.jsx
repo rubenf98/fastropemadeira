@@ -202,34 +202,34 @@ const activities = [
         img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         title: "Beginner", price: "60", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/beginner"
+        to: "/tour/beginner/1"
     },
     {
         img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         title: "Adventure", price: "80", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/adventure"
+        to: "/tour/adventure/2"
     },
     {
         img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         title: "Advanced", price: "120", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/advanced"
+        to: "/tour/advanced/3"
     },
     {
         img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         title: "Extreme", price: "200", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/extreme"
+        to: "/tour/extreme/4"
     },
 ];
 
-function Tours() {
+function Tours({ text }) {
     return (
         <Container>
             <Title>
-                <h3>Travel far enough, meet yourself</h3>
-                <h2>MOST POPULAR TOURS</h2>
+                <h3>{text.subtitleSection[0]}</h3>
+                <h2>{text.titleSection[0]}</h2>
             </Title>
             <CarouselContainer
                 ssr

@@ -4,10 +4,9 @@ export const text = {
         ["u", "n", "f", "o", "r", "g", "e", "t", "f", "u", "l", 0, "e", "x", "p", "e", "r", "i", "e", "n", "c", "e", "s"]
     ],
     titleSection: [
-        "Adventure",
-        "Experience",
-        "Team",
-        "Partners"
+        "MOST POPULAR TOURS",
+        "WATCH OUR VIDEO",
+        "MEET OUR TEAM",
     ],
     reservation: {
         title: "Make your reservation",
@@ -15,11 +14,11 @@ export const text = {
         submit: "Book Now",
     },
     subtitleSection: [
-        "Discover Madeira with Us",
-        "What do People Say About Us?",
-        "Our Highly Qualified Team",
-        "Contributors That Support Us"
+        "Travel far enough, meet yourself",
+        "Take a tour",
+        "People that create the adventure",
     ],
+    team: "Hard, honest and reliable work provided by expert local guides which share the passion for Canyoning, Hiking and much more. We also do private and personalized tours, you choose what you want to do and we make it happen.",
     about: {
         title: "About Us",
         paragraph: "Fast Rope is more than a Adventure company, is a team that we all share the passion for Canyoning, Hiking and much more...we also do private and personalized tours, you choose what you want to do and we make it happen.",

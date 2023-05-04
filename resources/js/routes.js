@@ -30,13 +30,13 @@ function Routes() {
                     <Redirect exact from="/contact" to={getRoute("/contact")} />
                     <Redirect exact from="/about" to={getRoute("/about")} />
                     <Redirect exact from="/confirmation/:token" to={getRoute("/confirmation/:token")} />
-                    <Redirect exact from="/tour/:activity" to={getRoute("/tour/:activity")} />
+                    <Redirect exact from="/tour/:activity/:experience" to={getRoute("/tour/:activity/:experience")} />
                     <Route path="/login" component={Login} />
                     <Route path="/painel" component={PainelLayout} />
 
                     <Layout>
                         <Route exact path="/:language/confirmation/:token" component={withRouter(Confirmation)} />
-                        <Route exact path="/:language/tour/:activity" component={withRouter(Activity)} />
+                        <Route exact path="/:language/tour/:activity/:experience" component={withRouter(Activity)} />
                         <Route exact path="/:language/contact" component={Contact} />
                         <Route exact path="/:language/about" component={About} />
                         <Route exact path="/:language/" component={Homepage} />

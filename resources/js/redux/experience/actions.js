@@ -9,6 +9,11 @@ export const fetchExperiences = (filters = {}) => ({
     })}`)
 })
 
+export const fetchExperience = (id) => ({
+    type: types.FETCH_EXPERIENCE,
+    payload: axios.get(`${window.location.origin}/api/experience/${id}`)
+})
+
 export const updateExperience = (id, data) => ({
     type: types.UPDATE_EXPERIENCE,
     payload: axios.put(`${window.location.origin}/api/experience/${id}`, data),

@@ -7,6 +7,8 @@ import People from './Form/People';
 import { dimensions } from "../../helper";
 import axios from "axios";
 import CalendarContainer from './Form/CalendarContainer';
+import { setFormFields, setFormVisibility } from '../../redux/form/actions';
+import { connect } from 'react-redux';
 
 const Content = styled.div`
 
@@ -28,27 +30,31 @@ const ModalContainer = styled(Modal)`
     }
 `;
 
-const OrderForm = ({ visible, onCreate, onCancel, initForm = [0, 0] }) => {
+const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility }) => {
     const [step, setStep] = useState(0);
-    const [formContent, setFormContent] = useState({ people: 3, date: moment().add(2, 'day'), experience: {} });
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [form] = Form.useForm();
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/form");
 
     const stepItems = [
-        <CalendarContainer text={text} incrementStep={incrementStep} formContent={formContent} setFormContent={setFormContent} />,
-        <Location setFormContent={setFormContent} formContent={formContent} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />,
-        <People formContent={formContent} loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />
+        <CalendarContainer text={text} incrementStep={incrementStep} />,
+        <Location text={text} decrementStep={decrementStep} incrementStep={incrementStep} />,
+        <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />
     ]
+
+    useEffect(() => {
+        console.log(fields);
+        if (!visible) {
+            setFormFields({ people: 3, date: moment().add(2, 'day'), experience: {} })
+        } else if (fields.people && fields.date && fields.experience.id) {
+            setStep(2);
+        }
+    }, [visible])
+
 
     function incrementStep() {
         if (step < 2) setStep(step + 1);
         else submitForm();
-    };
-
-    function updateForm(formValues) {
-
-        form.setFieldsValue(formValues);
     };
 
     function decrementStep() {
@@ -62,7 +68,7 @@ const OrderForm = ({ visible, onCreate, onCancel, initForm = [0, 0] }) => {
         if (data.person) {
             data.person = data.person.slice(0, data.people);
         }
-        axios.post(`${window.location.origin}/api/reservation`, { ...data, experience_id: formContent.experience.id, date: moment(formContent.date).format('YYYY-MM-DD') }).then((response) => {
+        axios.post(`${window.location.origin}/api/reservation`, { ...data, experience_id: fields.experience.id, date: moment(fields.date).format('YYYY-MM-DD') }).then((response) => {
             setLoadingSubmit(false);
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();
@@ -81,15 +87,8 @@ const OrderForm = ({ visible, onCreate, onCancel, initForm = [0, 0] }) => {
     function handleClose() {
         setStep(0);
         form.resetFields();
-        onCancel();
+        setFormVisibility(false);
     };
-
-    useEffect(() => {
-        if (initForm[1] > 0) {
-            setStep(2);
-            updateForm({ experience: initForm[1], activity: initForm[0] })
-        };
-    }, [initForm]);
 
     const openNotification = (title, messages, type) => {
         notification[type]({
@@ -145,4 +144,18 @@ const OrderForm = ({ visible, onCreate, onCancel, initForm = [0, 0] }) => {
     );
 };
 
-export default OrderForm;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setFormVisibility: (data) => dispatch(setFormVisibility(data)),
+        setFormFields: (data) => dispatch(setFormFields(data)),
+    };
+};
+const mapStateToProps = (state) => {
+    return {
+        visible: state.form.visible,
+        fields: state.form.fields,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);

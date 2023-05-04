@@ -339,6 +339,8 @@
                                                 </tbody>
                                             </table>
 
+
+
                                             <table style="font-family:'Lato',sans-serif;" role="presentation"
                                                 cellpadding="0" cellspacing="0" width="100%" border="0">
                                                 <tbody>
@@ -362,6 +364,29 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+
+                                            <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                                                border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="overflow-wrap:break-word;word-break:break-word;padding:40px 40px 30px;"
+                                                            align="left">
+
+                                                            <div style="font-family:'Lato',sans-serif;">
+                                                                <p style="font-size: 16px;color: #888888;">
+                                                                    Todos
+                                                                    os pagamentos são realizados após a
+                                                                    atividade</p>
+                                                                <p style="font-size: 14px; color: #888888;">
+                                                                    All payments are made after the activity
+                                                                </p>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
 
                                             <table style="font-family:'Lato',sans-serif;" role="presentation"
                                                 cellpadding="0" cellspacing="0" width="100%" border="0">
@@ -393,6 +418,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+
 
                                             <!--[if (!mso)&(!IE)]><!-->
                                         </div>

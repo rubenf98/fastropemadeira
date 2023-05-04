@@ -1,9 +1,8 @@
-import { Calendar, Col, Radio, Row, Select, Typography } from 'antd';
-import React, { useEffect } from 'react';
+import { Calendar, Col, Row, Select } from 'antd';
+import React, { useState } from 'react';
 import moment from "moment";
 import styled from "styled-components";
-import { fetchDisabledDate } from '../../../redux/reservation/actions';
-import { connect } from 'react-redux';
+import { colors } from '../../../helper';
 
 const Container = styled.div`
     background-color: white;
@@ -40,18 +39,61 @@ const Banner = styled(FlexContainer)`
         border-bottom-right-radius: 12px;
     }
 `;
-
-const Price = styled.p`
-    text-align: right;
-    font-size: 16px;
+const PeopleContainer = styled.div`
+    padding: 0px 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     margin-bottom: 20px;
-    padding: 10px 0px 20px 0px;
+
+    .ant-select-arrow {
+        color: white;
+    }
+
+    .ant-select-selector {
+        background-color: ${colors.main} !important;
+        color: white;
+    }
+`;
+
+const Price = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    flex: 1;
+    font-size: 16px;
+    border-top: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
+    border-right: 1px solid #cecece;
+    padding: 0px 10px;
     box-sizing: border-box;
 
-    span {
-        font-size: 16px;
-        opacity: .7;
+    p {
+        margin: 0px;
     }
+    
+
+    span {
+        color: ${colors.main}
+    }
+`;
+const Button = styled.button`
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 10px 20px 0px;
+    background: ${colors.main};
+    padding: 8px 20px;
+    font-size: 16px;
+    transition: .4s;
+    font-weight: bold;
+    color: white;
+    border: 0px;
+
+    &:hover {
+        background: ${colors.mainHover};
+    }
+    
 `;
 
 const Header = styled.img`
@@ -59,15 +101,14 @@ const Header = styled.img`
 `;
 
 const CalendarContainer = (props) => {
-    const { calendarMetadata, text } = props;
-
-    useEffect(() => {
-        props.fetchDisabledDate({ experience: 1 });
-    }, []);
+    const { text } = props;
+    const [date, setDate] = useState(moment().add(2, "day"))
+    const [people, setPeople] = useState(2)
 
     const onPanelChange = (value, mode) => {
         console.log(value.format('YYYY-MM-DD'), mode);
     };
+
     return (
         <Container>
             <Header src="/canyoning/1.webp" />
@@ -84,13 +125,14 @@ const CalendarContainer = (props) => {
                 fullscreen={false}
                 disabledDate={(currentDate) => {
                     return currentDate && (
-                        (currentDate < moment())
-                        || (calendarMetadata.disabled.includes(moment(currentDate).format("YYYY-MM-DD"))));
+                        currentDate < moment().add(1, "day")
+                    );
                 }}
-                headerRender={({ value, type, onChange, onTypeChange }) => {
+                value={date}
+                onSelect={setDate}
+                headerRender={({ value, _, onChange }) => {
                     const currentDate = moment();
                     const currentYear = currentDate.year();
-                    const currentMonth = currentDate.month();
                     const monthOptions = [];
                     const month = value.month();
                     const year = value.year();
@@ -162,20 +204,82 @@ const CalendarContainer = (props) => {
                 }}
                 onPanelChange={onPanelChange}
             />
-            <Price>€{text.price}<span> /{text.person}</span></Price>
+            <PeopleContainer>
+                <Select
+                    defaultValue="2"
+                    value={people}
+                    onChange={setPeople}
+                    style={{
+                        width: 60,
+                    }}
+                    options={[
+                        {
+                            value: 2,
+                            label: '2',
+                        },
+                        {
+                            value: 3,
+                            label: '3',
+                        },
+                        {
+                            value: 4,
+                            label: '4',
+                        },
+                        {
+                            value: 5,
+                            label: '5',
+                        },
+                        {
+                            value: 6,
+                            label: '6',
+                        },
+                        {
+                            value: 7,
+                            label: '7',
+                        },
+                        {
+                            value: 8,
+                            label: '8',
+                        },
+                        {
+                            value: 9,
+                            label: '9',
+                        },
+                        {
+                            value: 10,
+                            label: '10',
+                        },
+                        {
+                            value: 11,
+                            label: '11',
+                        },
+                        {
+                            value: 12,
+                            label: '12',
+                        },
+                        {
+                            value: 13,
+                            label: '13',
+                        },
+                        {
+                            value: 14,
+                            label: '14',
+                        },
+                        {
+                            value: 15,
+                            label: '15',
+                        },
+                    ]}
+                />
+                <Price><p>{text.person}</p> <p><span>{text.price}€</span></p></Price>
+            </PeopleContainer>
+
+            <Row type="flex" justify='end'>
+                <Button onClick={() => props.handleSelect({ date: date, people: people })}>Pesquisar</Button>
+            </Row>
         </Container>
     );
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchDisabledDate: (filters) => dispatch(fetchDisabledDate(filters)),
-    };
-};
-const mapStateToProps = (state) => {
-    return {
-        calendarMetadata: state.reservation.calendarMetadata,
-    };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarContainer);
+export default CalendarContainer;

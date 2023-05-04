@@ -94,6 +94,9 @@ export default (state = initialState, action = {}) => {
                 loading: false,
                 calendarMetadata: action.payload.data,
             };
+
+
+
         default:
             return state
     }

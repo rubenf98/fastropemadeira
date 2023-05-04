@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { withRouter } from "react-router";
 import OrderForm from "./pages/OrderForm";
 import { colors, dimensions } from "../helper";
+import { setFormVisibility } from "../redux/form/actions";
+import { connect } from "react-redux";
 
 const Container = styled.div`
     width: 100%;
@@ -72,64 +74,42 @@ const HiddenButton = styled.div`
 `;
 
 
-class Layout extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            formVisible: false,
-        }
-    }
+function Layout(props) {
+    return (
+        <Container>
 
-    closeForm = () => {
-        this.setState({
-            formVisible: false,
-        })
-    };
+            <OrderForm />
 
-    openForm = () => {
-        this.setState({
-            formVisible: true,
-        })
-    };
+            <HiddenButton>
+                <Icon href="mailto:info@fastropemadeira.com" target="_blank" >
+                    <img src="/icon/company/mail.svg" alt="email" />
+                </Icon>
+                <Icon href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
+                    <img src="/icon/company/instagram.svg" alt="instagram" />
+                </Icon>
+                <Icon href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
+                    <img src="/icon/company/whatsapp.svg" alt="whatsapp" />
+                </Icon>
+            </HiddenButton>
+            <HiddenButton visibleSmallScreen>
+                <OrderNow onClick={() => props.setFormVisibility(true)}>
+                    <img src="/icon/order.svg" alt="order" />
+                </OrderNow>
+            </HiddenButton>
+            <Navbar onOrder={() => props.setFormVisibility(true)} />
 
-
-
-    render() {
-
-        return (
-            <Container>
-
-                <OrderForm
-                    visible={this.state.formVisible}
-                    onCreate={this.closeForm}
-                    onCancel={this.closeForm}
-                />
-
-                <HiddenButton>
-                    <Icon href="mailto:info@fastropemadeira.com" target="_blank" >
-                        <img src="/icon/company/mail.svg" alt="email" />
-                    </Icon>
-                    <Icon href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
-                        <img src="/icon/company/instagram.svg" alt="instagram" />
-                    </Icon>
-                    <Icon href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
-                        <img src="/icon/company/whatsapp.svg" alt="whatsapp" />
-                    </Icon>
-                </HiddenButton>
-                <HiddenButton visibleSmallScreen>
-                    <OrderNow onClick={this.openForm}>
-                        <img src="/icon/order.svg" alt="order" />
-                    </OrderNow>
-                </HiddenButton>
-                <Navbar onOrder={this.openForm} />
-
-                {this.props.children}
+            {props.children}
 
 
-                <Footer />
-            </Container>
-        );
-    }
+            <Footer />
+        </Container>
+    )
 }
 
-export default withRouter(Layout);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setFormVisibility: (data) => dispatch(setFormVisibility(data)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Layout));
