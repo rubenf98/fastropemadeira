@@ -96,10 +96,10 @@ function ReviewForm(props) {
                             <Col xs={24} md={8}>
                                 <Form.Item
                                     name="rating"
-                                    label="Avaliação (min: 1.0; max:5.0)"
+                                    label="Avaliação"
                                     rules={rules.required}
                                 >
-                                    <InputNumber style={{ width: "100%" }} min={1} max={5} placeholder="Endereço de email" />
+                                    <InputNumber style={{ width: "100%" }} min={1} max={5} placeholder="Avaliação (min: 1.0; max:5.0)" />
                                 </Form.Item>
                             </Col>
                             <Col span={24}>
@@ -113,14 +113,16 @@ function ReviewForm(props) {
                             </Col>
 
                             <Col span={24}>
+                                <p>* Fotografia do cliente (max: 1Mb)</p>
                                 <Dragger
                                     name='file'
                                     accept='.jpg,.jpeg,.png'
                                     onRemove={() => {
                                         setFile(undefined);
                                     }}
+                                    maxCount={1}
                                     multiple={false}
-                                    showUploadList={false}
+                                    showUploadList
                                     onChange={(info) => {
                                         const { status } = info.file;
                                         if (status !== 'uploading') {

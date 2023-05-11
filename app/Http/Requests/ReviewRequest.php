@@ -29,7 +29,7 @@ class ReviewRequest extends FormRequest
             'name' => 'required|string',
             'year' => 'required|string',
             'rating' => 'required|numeric|max:5|min:0',
-            'comment' => 'required|string|max:191|min:3',
+            'comment' => 'required|string|min:3',
             'file' => 'nullable|image|mimes:jpg,jpeg,png',
         ];
     }
