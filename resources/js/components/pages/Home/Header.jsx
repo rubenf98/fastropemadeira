@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
 import { dimensions } from '../../../helper';
+import { connect } from 'react-redux';
+import { setVideoSrc } from "../../../redux/application/actions";
 
 const Container = styled.div`
     position: relative;
@@ -88,7 +90,7 @@ const Cloud = styled.img`
     object-fit: cover;    
 `;
 
-function Header() {
+function Header(props) {
     return (
         <Container>
             <BackgroundImage prio={3}>
@@ -96,8 +98,8 @@ function Header() {
             </BackgroundImage>
             <TitleContainer>
                 <h1>Fast Rope</h1>
-                <button>
-                    Watch video
+                <button onClick={() => props.setVideoSrc("https://www.youtube.com/embed/LpKfx60n5ds")}>
+                    {props.text}
                 </button>
             </TitleContainer>
             <BackgroundImage prio={-1}>
@@ -108,4 +110,10 @@ function Header() {
     )
 }
 
-export default Header
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setVideoSrc: (data) => dispatch(setVideoSrc(data)),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Header);

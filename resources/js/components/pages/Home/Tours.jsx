@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import { dimensions, maxWidth } from '../../../helper';
 import Carousel from 'react-multi-carousel';
 import { colors } from '../../../helper';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setVideoSrc } from "../../../redux/application/actions";
+import { fetchExperiences } from '../../../redux/experience/actions';
 
 const responsive = {
     desktop: {
@@ -56,6 +59,7 @@ const Card = styled.div`
         h3 {
             color: white;
             font-size: 30px;
+            text-transform: capitalize;
         }
 
         div {
@@ -197,34 +201,40 @@ const Title = styled.div`
     }
 `;
 
-const activities = [
-    {
-        img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        title: "Beginner", price: "60", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/beginner/1"
-    },
-    {
-        img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        title: "Adventure", price: "80", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/adventure/2"
-    },
-    {
-        img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        title: "Advanced", price: "120", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/advanced/3"
-    },
-    {
-        img: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        video: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        title: "Extreme", price: "200", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-        to: "/tour/extreme/4"
-    },
-];
 
-function Tours({ text }) {
+// const activities = [
+//     {
+//         img: "/images/activities/beginner.jpg",
+//         video: "https://www.youtube.com/embed/w-Upj6l7KR8",
+//         title: "Beginner", price: "60", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
+//         to: "/tour/beginner/1"
+//     },
+//     {
+//         img: "/images/activities/adventure.jpg",
+//         video: "https://www.youtube.com/embed/jUxO_yq7Vdk",
+//         title: "Adventure", price: "80", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
+//         to: "/tour/adventure/2"
+//     },
+//     {
+//         img: "/images/activities/advanced.jpg",
+//         video: "https://www.youtube.com/embed/5diVXzfUfqg",
+//         title: "Advanced", price: "120", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
+//         to: "/tour/advanced/3"
+//     },
+//     {
+//         img: "/images/activities/extreme.jpg",
+//         video: "https://www.youtube.com/embed/AI5X2f9Y3Rc",
+//         title: "Extreme", price: "200", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
+//         to: "/tour/extreme/4"
+//     },
+// ];
+
+function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
+
+    useEffect(() => {
+        fetchExperiences();
+    }, [])
+
     return (
         <Container>
             <Title>
@@ -237,35 +247,35 @@ function Tours({ text }) {
                 itemClass="image-item"
                 responsive={responsive}
             >
-                {activities.map((activity, index) => (
-                    <Card key={index} background={activity.img}>
+                {experiences.map((experience, index) => (
+                    <Card key={index} background={experience.images[0].image}>
                         <div className='header'>
-                            <div><button><img src="/icon/activities/play.svg" alt="play button" /></button></div>
+                            <div><button onClick={() => setVideoSrc(experience.video)}><img src="/icon/activities/play.svg" alt="play button" /></button></div>
 
 
-                            <h3>{activity.title}</h3>
+                            <h3>{experience.name[localStorage.getItem("language")]}</h3>
                         </div>
                         <div className="content">
                             <div className='chars'>
                                 <div className='char'>
                                     <img src="/icon/activities/time.svg" alt="play button" />
-                                    <span>{activity.chars[0]}</span>
+                                    <span>{experience.duration[localStorage.getItem("language")]}</span>
                                 </div>
                                 <div className='char side-border'>
                                     <img src="/icon/activities/type.svg" alt="play button" />
-                                    <span>{activity.chars[1]}</span>
+                                    <span>{experience.target[localStorage.getItem("language")]}</span>
                                 </div>
                                 <div className='char'>
                                     <img src="/icon/activities/age.svg" alt="play button" />
-                                    <span>{activity.chars[2]}</span>
+                                    <span>+8 {text.tours.age}</span>
                                 </div>
 
                             </div>
-                            <div className='price'>{activity.price}EUR <span>/person</span></div>
-                            <p>{activity.description}</p>
+                            <div className='price'>{experience.price}EUR <span>/{text.tours.person}</span></div>
+                            <p>{experience.description[localStorage.getItem("language")]}</p>
                             <div className='button-container'>
-                                <button className='primary'>Book now</button>
-                                <Link to={activity.to}><button className='secundary'>See more</button></Link>
+                                <button className='primary'>{text.tours.primaryButton}</button>
+                                <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>
 
                             </div>
 
@@ -277,4 +287,18 @@ function Tours({ text }) {
     )
 }
 
-export default Tours
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setVideoSrc: (data) => dispatch(setVideoSrc(data)),
+        fetchExperiences: (data) => dispatch(fetchExperiences(data)),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.experience.loading,
+        experiences: state.experience.data,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tours);

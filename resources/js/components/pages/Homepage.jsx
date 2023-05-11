@@ -14,7 +14,7 @@ class Homepage extends React.Component {
             <div >
 
 
-                <Header text={text} />
+                <Header text={text.header} />
 
                 <Tours text={text} />
 

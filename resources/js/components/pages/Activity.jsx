@@ -7,6 +7,7 @@ import { setFormFields, setFormVisibility } from '../../redux/form/actions';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { fetchExperience } from '../../redux/experience/actions';
+import { Spin } from 'antd';
 
 const Container = styled.section`
     position: relative;
@@ -104,6 +105,8 @@ const Details = styled.div`
 function Activity(props) {
     const [activity, setActivity] = useState("beginner");
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/tour");
+    const { experience, loading } = props;
+
 
     useEffect(() => {
         props.fetchExperience(props.match.params.experience);
@@ -111,51 +114,54 @@ function Activity(props) {
     }, []);
 
     const handleSelect = (fields) => {
-        props.setFormFields({ ...fields, experience: props.experience });
+        props.setFormFields({ ...fields, experience: experience });
         props.setFormVisibility(true);
     }
-
+    console.log(experience)
     return (
         <Container>
             <Background />
-            <Content>
-                <Information>
-                    <div className='title'>
-                        <h1>Canyoning {text[activity]["title"]}</h1>
-                    </div>
+            {!experience.id ? <Spin /> :
+                <Content>
+                    <Information>
+                        <div className='title'>
+                            <h1>Canyoning {experience.name[localStorage.getItem('language')]}</h1>
+                        </div>
 
-                    <Details>
-                        <h3>{text.titles[0]}</h3>
+                        <Details>
+                            <h3>{text.titles[0]}</h3>
+                            <ul>
+                                <li>{experience.duration[localStorage.getItem('language')]}</li>
+                                <li>{experience.height[localStorage.getItem('language')]}</li>
+                                <li>{experience.target[localStorage.getItem('language')]}</li>
+                                <li>+8 {text[activity].age}</li>
+                            </ul>
+                        </Details>
+
+                        {text[activity].paragraphs.map((paragraph, index) => (
+                            <p key={index}>{paragraph}</p>
+                        ))}
+                        <p>{experience.description[localStorage.getItem('language')]}</p>
+
+                        <h3>{text.titles[1]}</h3>
+
                         <ul>
-                            {text[activity].details.map((detail) => (
-                                <li key={detail}>{detail}</li>
+                            {text.included.map((element) => (
+                                <li key={element}>{element}</li>
                             ))}
                         </ul>
-                    </Details>
 
-                    {text[activity].paragraphs.map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
-                    ))}
+                        <h3>{text.titles[2]}</h3>
+                        <p>{text.need}</p>
 
-                    <h3>{text.titles[1]}</h3>
-
-                    <ul>
-                        {text[activity].included.map((element) => (
-                            <li key={element}>{element}</li>
-                        ))}
-                    </ul>
-
-                    <h3>{text.titles[2]}</h3>
-                    <p>{text[activity].need}</p>
-
-                    <br />
-                    <p>{text.disclaimer}</p>
-                </Information>
-                <Form>
-                    <CalendarContainer handleSelect={handleSelect} text={{ ...text.form, price: text[activity].price }} />
-                </Form>
-            </Content>
-
+                        <br />
+                        <p>{text.disclaimer}</p>
+                    </Information>
+                    <Form>
+                        <CalendarContainer handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
+                    </Form>
+                </Content>
+            }
             <RevPartner />
         </Container>
     )
@@ -164,6 +170,7 @@ function Activity(props) {
 const mapStateToProps = (state) => {
     return {
         experience: state.experience.current,
+        loading: state.experience.loading,
     };
 };
 

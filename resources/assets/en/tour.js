@@ -4,70 +4,47 @@ export const text = {
         disclaimer: "Real-time availability",
         person: "Participants",
     },
-    titles: ["Quick details", "Na atividade está incluído", "O que preciso trazer"],
-    disclaimer: "Don´t know if this is the appropriate Canyoning Level? Want to know more about it? Send us a message on Whatsapp on  +351 933 933 452 or contact us via email at info@fastropemadeira.com",
+    titles: ["Quick details", "In the activity it's incldued", "What do I need to bring"],
+    disclaimer: "Don´t know if this is the appropriate Canyoning Level? Want to know more about it? Send us a message on Whatsapp on +351 933 933 452 or contact us via email at info@fastropemadeira.com",
+    included: [
+        "Transport", "Snacks", "Personal Insurance", "Photograhy", "Multilangual", "Surprise"
+    ],
+    need: "To go canyoning on Madeira Island, you need to bring a towel, bathing suit, sports shoes that you don't mind getting wet (sports shoes such as running or mountain boots, never sandals or diving shoes) and a change of clothes.",
     beginner: {
         price: "60",
         title: "begginer",
-        details: [
-            "2-3h", "5 to 18 meters", "Family", "+8 age"
-        ],
+        age: "age",
         paragraphs: [
-            "This Canyoning experience is the best for all people who want to have their first contact with this fantastic sport, through routes such as Ribeira das Cales (Funchal Ecological Park), Rochão (Camacha) or Ribeiro Frio (Santana).",
-            "Astonishing views with impressive geological features are always present and surrounded by the uniqueness of the Macaronesian forest.",
-            "This is the perfect level for all of those who are adventurous and fit or have already had their first contact with this activity, therefore, want some more excitement and thrills, whether it is with big jumps or big waterfalls.",
+            "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
+            "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
         ],
-        included: [
-            "as", "as", "as", "as", "as", "as"
-        ],
-        need: "Para fazer Canyoning na Ilha da Madeira é necessário trazer toalha, fato de banho, calçado desportivo que não se importe de molhar (calçado desportivo como botas de corrida ou de montanha, nunca sandálias ou calçado de mergulho) e muda de roupa.",
+
     },
     adventure: {
         price: "80",
         title: "adventure",
-        details: [
-            "2-3h", "5 to 25 meters", "Family", "+8 age"
-        ],
+        age: "age",
         paragraphs: [
-            "This Canyoning experience is the best for all people who want to have their first contact with this fantastic sport, through routes such as Ribeira das Cales (Funchal Ecological Park), Rochão (Camacha) or Ribeiro Frio (Santana).",
-            "Astonishing views with impressive geological features are always present and surrounded by the uniqueness of the Macaronesian forest.",
-            "This is the perfect level for all of those who are adventurous and fit or have already had their first contact with this activity, therefore, want some more excitement and thrills, whether it is with big jumps or big waterfalls.",
+            "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
+            "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
         ],
-        included: [
-            "as", "as", "as", "as", "as", "as"
-        ],
-        need: "Para fazer Canyoning na Ilha da Madeira é necessário trazer toalha, fato de banho, calçado desportivo que não se importe de molhar (calçado desportivo como botas de corrida ou de montanha, nunca sandálias ou calçado de mergulho) e muda de roupa.",
     },
     advanced: {
         price: "120",
         title: "advanced",
-        details: [
-            "2-3h", "5 to 25 meters", "Family", "+8 age"
-        ],
+        age: "age",
         paragraphs: [
-            "This Canyoning experience is the best for all people who want to have their first contact with this fantastic sport, through routes such as Ribeira das Cales (Funchal Ecological Park), Rochão (Camacha) or Ribeiro Frio (Santana).",
-            "Astonishing views with impressive geological features are always present and surrounded by the uniqueness of the Macaronesian forest.",
-            "This is the perfect level for all of those who are adventurous and fit or have already had their first contact with this activity, therefore, want some more excitement and thrills, whether it is with big jumps or big waterfalls.",
+            "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
+            "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
         ],
-        included: [
-            "as", "as", "as", "as", "as", "as"
-        ],
-        need: "Para fazer Canyoning na Ilha da Madeira é necessário trazer toalha, fato de banho, calçado desportivo que não se importe de molhar (calçado desportivo como botas de corrida ou de montanha, nunca sandálias ou calçado de mergulho) e muda de roupa.",
     },
     extreme: {
         price: "200",
         title: "extreme",
-        details: [
-            "2-3h", "5 to 25 meters", "Family", "+8 age"
-        ],
+        age: "age",
         paragraphs: [
-            "This Canyoning experience is the best for all people who want to have their first contact with this fantastic sport, through routes such as Ribeira das Cales (Funchal Ecological Park), Rochão (Camacha) or Ribeiro Frio (Santana).",
-            "Astonishing views with impressive geological features are always present and surrounded by the uniqueness of the Macaronesian forest.",
-            "This is the perfect level for all of those who are adventurous and fit or have already had their first contact with this activity, therefore, want some more excitement and thrills, whether it is with big jumps or big waterfalls.",
+            "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
+            "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
         ],
-        included: [
-            "as", "as", "as", "as", "as", "as"
-        ],
-        need: "Para fazer Canyoning na Ilha da Madeira é necessário trazer toalha, fato de banho, calçado desportivo que não se importe de molhar (calçado desportivo como botas de corrida ou de montanha, nunca sandálias ou calçado de mergulho) e muda de roupa.",
     },
 } 

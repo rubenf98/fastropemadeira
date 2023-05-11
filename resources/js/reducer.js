@@ -9,6 +9,7 @@ import activity from './redux/activity'
 import date from './redux/date'
 import review from './redux/review'
 import form from './redux/form'
+import application from './redux/application'
 
 const reducer = combineReducers({
     auth,
@@ -19,7 +20,8 @@ const reducer = combineReducers({
     date,
     experience,
     review,
-    form
+    form,
+    application
 })
 
 export default reducer

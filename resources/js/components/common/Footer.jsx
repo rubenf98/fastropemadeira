@@ -116,6 +116,7 @@ const LinkContainer = styled.div`
 
 
 function Footer() {
+    const { text } = require('../../../assets/' + localStorage.getItem('language') + "/footer");
     return (
         <Container>
             <Content>
@@ -137,20 +138,20 @@ function Footer() {
 
                 <LinkContainer>
 
-                    <h3>Quick Links</h3>
-                    <Link to="/">Home</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/contact">Contact</Link>
+                    <h3>{text.sections[0].title}</h3>
+                    <Link to="/">{text.sections[0].items[0]}</Link>
+                    <Link to="/about">{text.sections[0].items[1]}</Link>
+                    <Link to="/contact">{text.sections[0].items[2]}</Link>
                 </LinkContainer>
                 <LinkContainer>
 
-                    <h3>Services</h3>
-                    <Link to="/">Livro de reclamações</Link>
-                    <p>RNTA549/2021</p>
+                    <h3>{text.sections[1].title}</h3>
+                    {/* <Link to="/">{text.sections[1].items[0]}</Link> */}
+                    <p>{text.sections[1].items[1]}</p>
                 </LinkContainer>
                 <LinkContainer fullWidth>
-                    <h3>Contacts</h3>
-                    <p>Restaurante Tricolore, Estrada Monumental, 9000-096 Funchal</p>
+                    <h3>{text.sections[2].title}</h3>
+                    <p>Urbanização Vista Alegre, Caminho Velho da Azenha Loja A, 9125-115 Caniço</p>
                     <p>(351) 933 933 452</p>
                     <p>info@fastropemadeira.com</p>
                 </LinkContainer>

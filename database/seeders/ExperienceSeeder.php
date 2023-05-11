@@ -16,29 +16,34 @@ class ExperienceSeeder extends Seeder
     public function run()
     {
         $experience = Experience::create([
-            'name' => ['en' => "Level 1", 'pt' => "Nível 1"],
+            'name' => ['en' => "beginner", 'pt' => "Principiante"],
             'price' => 60,
             'private_price' => 80,
+            'video' => "https://www.youtube.com/embed/w-Upj6l7KR8",
             'description' => [
                 'en' => 'This Canyoning experience is the best for all people who want to have their first contact with this fantastic sport, through routes such as Ribeira das Cales (Funchal Ecological Park), Rochão (Camacha) or Ribeiro Frio (Santana).',
                 'pt' => 'Esta experiência de Canyoning é a melhor para todas as pessoas que pretendem ter o primeiro contacto com este fantástico desporto, através de percursos como a Ribeira das Cales (Parque ecologico do Funchal), do Rochão (Camacha) ou Ribeiro Frio (Santana).'
             ],
             'activity_id' => 1,
+            'target' => ['en' => 'Family', 'pt' => 'Familia'],
             'level' => ['en' => 'Beginner', 'pt' => 'Iniciante'],
             'height' => ['en' => '5 to 18 meters', 'pt' => '5 a 18 metros'],
-            'duration' => ['en' => 'Half Day (≤5h)', 'pt' => 'Meio Dia (≤5h)'],
+            'duration' => ['en' => '2-3h', 'pt' => '2-3h'],
         ]);
 
         $experience->images()->createMany([
+            ['image' => '/images/activities/beginner.jpg', 'experience_id' => $experience->id],
             ['image' => '/form/n1A.webp', 'experience_id' => 1],
             ['image' => '/form/n1B.webp', 'experience_id' => 1],
             ['image' => '/form/n1C.webp', 'experience_id' => 1],
         ]);
 
         $experience = Experience::create([
-            'name' => ['en' => "Level 2", 'pt' => "Nível 2"],
+            'name' => ['en' => "adventure", 'pt' => "Aventura"],
             'price' => 80,
             'private_price' => 100,
+            'target' => ['en' => 'Family', 'pt' => 'Familia'],
+            'video' => "https://www.youtube.com/embed/jUxO_yq7Vdk",
             'description' => [
                 'en' => 'There are 4 places to practice level 2 canyoning, namely Ribeira do Cidrão (Curral das Freiras), Ribeira do Lajeado (Rabaçal), Ribeira do Alecrim (Rabaçal) and Ribeiro Frio (Santana).',
                 'pt' => 'Existem 4 sitios para a prática do nível 2 de canyoning, nomeadamente a Ribeira do Cidrão (Curral das Freiras), Ribeira do Lajeado (Rabaçal), Ribeira do Alecrim (Rabaçal) e Ribeiro Frio (Santana).'
@@ -46,10 +51,11 @@ class ExperienceSeeder extends Seeder
             'activity_id' => 1,
             'level' => ['en' => 'Intermediate', 'pt' => 'Intermédio'],
             'height' => ['en' => '5 to 25 meters', 'pt' => '5 a 25 metros'],
-            'duration' => ['en' => 'Half Day (≤5h)', 'pt' => 'Meio Dia (≤5h)'],
+            'duration' => ['en' => '2-3h', 'pt' => '2-3h'],
         ]);
 
         $experience->images()->createMany([
+            ['image' => '/images/activities/adventure.jpg', 'experience_id' => $experience->id],
             ['image' => '/form/n2A.webp', 'experience_id' => $experience->id],
             ['image' => '/form/n2B.webp', 'experience_id' => $experience->id],
             ['image' => '/form/n2C.webp', 'experience_id' => $experience->id],
@@ -58,9 +64,11 @@ class ExperienceSeeder extends Seeder
 
 
         $experience = Experience::create([
-            'name' => ['en' => "Level 3", 'pt' => "Nível 3"],
-            'price' => 100,
+            'name' => ['en' => "advanced", 'pt' => "Avançado"],
+            'price' => 120,
             'private_price' => 120,
+            'target' => ['en' => 'Adventurous', 'pt' => 'Aventureiros'],
+            'video' => "https://www.youtube.com/embed/5diVXzfUfqg",
             'description' => [
                 'en' => 'This level already requires some previous experience in our activities and can be carried out in Ribeira Funda (Seixal), Ribeira da Furna (Santana) and Ribeira da Camisa (Ponta Delgada).',
                 'pt' => 'Este nível já requer alguma experiência prévia nas nossas atividades e poderá ser realizado na Ribeira Funda (Seixal), Ribeira da Furna (Santana) e Ribeira da Camisa (Ponta Delgada).'
@@ -68,10 +76,11 @@ class ExperienceSeeder extends Seeder
             'activity_id' => 1,
             'level' => ['en' => 'Difficult', 'pt' => 'Difícil'],
             'height' => ['en' => '15 to 60 meters', 'pt' => '15 a 60 metros'],
-            'duration' => ['en' => 'Half Day (≤5h)', 'pt' => 'Meio Dia (≤5h)'],
+            'duration' => ['en' => '≤5h', 'pt' => '≤5h'],
         ]);
 
         $experience->images()->createMany([
+            ['image' => '/images/activities/advanced.jpg', 'experience_id' => $experience->id],
             ['image' => '/form/n3A.webp', 'experience_id' => $experience->id],
             ['image' => '/form/n3B.webp', 'experience_id' => $experience->id],
             ['image' => '/form/n3C.webp', 'experience_id' => $experience->id],
@@ -79,9 +88,11 @@ class ExperienceSeeder extends Seeder
 
 
         $experience = Experience::create([
-            'name' => ['en' => "Level 4", 'pt' => "Nível 4"],
-            'price' => 150,
-            'private_price' => 150,
+            'name' => ['en' => "extreme", 'pt' => "Extremo"],
+            'price' => 200,
+            'private_price' => 200,
+            'target' => ['en' => 'Experienced', 'pt' => 'Experientes'],
+            'video' => "https://www.youtube.com/embed/AI5X2f9Y3Rc",
             'description' => [
                 'en' => 'Level that requires a certain degree of autonomy in canyoning and experience with us in this type of activity. It can be practiced in Ribeira do Passo (São Vicente), Ribeira da Hortelã (Seixal) or Ribeira do Vimieiro (Seixal).',
                 'pt' => 'Nível que necessita um dado grau de autonomia em canyoning e experiência connosco nesta tipologia de atividades. Pode ser praticado na Ribeira do Passo (São Vicente), Ribeira da Hortelã (Seixal) ou na Ribeira do Vimieiro (Seixal).'
@@ -89,10 +100,11 @@ class ExperienceSeeder extends Seeder
             'activity_id' => 1,
             'level' => ['en' => 'Expert', 'pt' => 'Experiente'],
             'height' => ['en' => '50 to 60 meters', 'pt' => '50 a 60 metros'],
-            'duration' => ['en' => 'Half Day (≤5h)', 'pt' => 'Meio Dia (≤5h)'],
+            'duration' => ['en' => '≤5h', 'pt' => '≤5h'],
         ]);
 
         $experience->images()->createMany([
+            ['image' => '/images/activities/extreme.jpg', 'experience_id' => $experience->id],
             ['image' => '/form/n4A.webp', 'experience_id' => $experience->id],
             ['image' => '/form/n4B.webp', 'experience_id' => $experience->id],
             ['image' => '/form/n4C.webp', 'experience_id' => $experience->id],

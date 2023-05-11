@@ -7,6 +7,7 @@ import OrderForm from "./pages/OrderForm";
 import { colors, dimensions } from "../helper";
 import { setFormVisibility } from "../redux/form/actions";
 import { connect } from "react-redux";
+import VideoContainer from "./common/VideoContainer";
 
 const Container = styled.div`
     width: 100%;
@@ -78,6 +79,7 @@ function Layout(props) {
     return (
         <Container>
 
+            <VideoContainer />
             <OrderForm />
 
             <HiddenButton>

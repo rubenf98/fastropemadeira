@@ -1,8 +1,5 @@
 export const text = {
-    header: [
-        ["A", "t", "i", "v", "i", "d", "a", "d", "e", "s", 0, "a", "o", 0, "a", "r", 0, "l", "i", "v", "r", "e"],
-        ["e", "x", "p", "e", "r", "i", "ê", "n", "c", "i", "a", "s", 0, "i", "n", "e", "s", "q", "u", "e", "c", "í", "v", "e", "i", "s"]
-    ],
+    header: "Ver vídeo",
     titleSection: [
         "ATIVIDADES RECOMENDADAS",
         "VÊ O NOSSO VÍDEO",
@@ -12,6 +9,12 @@ export const text = {
         title: "Garante a tua reserva",
         formItem: "Seleciona a tua aventura",
         submit: "Reservar",
+    },
+    tours: {
+        age: "anos",
+        person: "pessoa",
+        primaryButton: "Reservar",
+        secundaryButton: "Ver mais",
     },
     subtitleSection: [
         "Viaja longe e encontre-se consigo mesmo",

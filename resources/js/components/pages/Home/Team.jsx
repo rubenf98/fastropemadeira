@@ -3,6 +3,7 @@ import React from 'react'
 import styled from "styled-components";
 import { colors, dimensions, maxWidth } from '../../../helper';
 import { team } from "../../../images"
+import { Link } from 'react-router-dom';
 
 const MemberList = styled.div`
     display: flex;
@@ -138,7 +139,8 @@ function Team({ text }) {
                     <h2>{text.titleSection[2]}</h2>
 
                     <p>{text.team}</p>
-                    <button>View more</button>
+                    <Link to="/about"><button>View more</button></Link>
+
                 </Title>
 
                 <MemberList type="flex" justify="space-around" align="middle">

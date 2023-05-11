@@ -16,14 +16,15 @@ class Experience extends Model
 
     public $translatable = [
         'name', 'description', 'level',
-        'distance',
+        'distance', 'target', 'video',
         'height', 'duration'
     ];
 
     protected $casts = [
         'blocked_dates_sum_capacity' => CustomInt::class,
+        'price' => 'integer'
     ];
-
+    // protected $casts = ['price' => 'integer'];
     protected $fillable = ['price'];
     public function activity()
     {
