@@ -20,7 +20,7 @@ const Background = styled.div`
     left: 0;
     height: 500px;
     width: 100vw;
-    background: url("/images/activities/default.jpg");
+    background: ${props => "url(" + props.background + ")"} ;
     background-position: left center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -120,7 +120,7 @@ function Activity(props) {
     console.log(experience)
     return (
         <Container>
-            <Background />
+            <Background background={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} />
             {!experience.id ? <Spin /> :
                 <Content>
                     <Information>
@@ -158,7 +158,7 @@ function Activity(props) {
                         <p>{text.disclaimer}</p>
                     </Information>
                     <Form>
-                        <CalendarContainer handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
+                        <CalendarContainer image={experience.images[0].image} handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
                     </Form>
                 </Content>
             }

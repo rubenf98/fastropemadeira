@@ -111,7 +111,7 @@ const CalendarContainer = (props) => {
 
     return (
         <Container>
-            <Header src="/canyoning/1.webp" />
+            <Header src={props.image} />
             <Banner>
                 <div className='title'>{text.title}</div>
                 <p>
