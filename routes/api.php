@@ -27,6 +27,8 @@ Route::post('/external-reservation', ExternalReservationController::class);
 
 Route::get('reservation/disabledDate', 'App\Http\Controllers\ReservationController@disabledDates');
 Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationController@showFromToken');
+Route::get('reservation/selector/blockDate', 'App\Http\Controllers\BlockReservationDateController@selector');
+
 
 
 Route::apiResource('reservation/blockDate', 'App\Http\Controllers\BlockReservationDateController');

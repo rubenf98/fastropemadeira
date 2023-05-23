@@ -13,7 +13,7 @@ export const text = {
     beginner: {
         price: "60",
         title: "begginer",
-        age: "age",
+        age: "+8 age",
         paragraphs: [
             "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
             "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
@@ -23,7 +23,7 @@ export const text = {
     adventure: {
         price: "80",
         title: "adventure",
-        age: "age",
+        age: "+8 age",
         paragraphs: [
             "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
             "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
@@ -32,7 +32,7 @@ export const text = {
     advanced: {
         price: "120",
         title: "advanced",
-        age: "age",
+        age: "+16 age",
         paragraphs: [
             "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
             "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",
@@ -41,7 +41,7 @@ export const text = {
     extreme: {
         price: "200",
         title: "extreme",
-        age: "age",
+        age: "+18 age",
         paragraphs: [
             "The Canyoning activity is an exciting challenge to explore a stream or a dizzying watercourse, where obstacles are overcome through various techniques such as climbing, jumping, rappelling and swimming.",
             "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.",

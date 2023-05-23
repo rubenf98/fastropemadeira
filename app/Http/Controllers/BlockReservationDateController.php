@@ -21,6 +21,23 @@ class BlockReservationDateController extends Controller
         return BlockReservationResource::collection(BlockReservationDate::filterBy($filters)->where("date", ">", Carbon::now())->orderBy('date', 'DESC')->paginate(10));
     }
 
+    public function selector(Request $request)
+    {
+        $dates =  BlockReservationDate::where('experience_id', $request->experience)->where("date", ">", Carbon::now())->get()->groupBy('date');
+        $collection = [];
+        foreach ($dates as $key => $date) {
+            $sum = 0;
+            foreach ($date as $element) {
+                $sum += $element->capacity;
+            }
+
+            if ($sum > 15 - $request->participants) {
+                array_push($collection, $key);
+            }
+        }
+        return $collection;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

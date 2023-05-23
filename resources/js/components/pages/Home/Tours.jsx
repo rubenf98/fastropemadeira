@@ -267,7 +267,7 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
                                 </div>
                                 <div className='char'>
                                     <img src="/icon/activities/age.svg" alt="play button" />
-                                    <span>+8 {text.tours.age}</span>
+                                    <span>{text.tours.age}</span>
                                 </div>
 
                             </div>

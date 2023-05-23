@@ -9,6 +9,13 @@ export const fetchBlockedDates = (page = 1, filters = {}) => ({
     })}&page=${page}`)
 })
 
+export const fetchBlockedDatesSelector = (filters = {}) => ({
+    type: types.FETCH_BLOCKED_DATES_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/reservation/selector/blockDate?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+})
+
 export const deleteBlockedDate = id => ({
     type: types.DELETE_BLOCKED_DATE,
     payload: axios.delete(`${window.location.origin}/api/reservation/blockDate/${id}`),

@@ -1,5 +1,5 @@
 import { Calendar, Col, Row, Select } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from "moment";
 import styled from "styled-components";
 import { colors } from '../../../helper';
@@ -80,7 +80,6 @@ const Price = styled.div`
 `;
 const Button = styled.button`
     box-sizing: border-box;
-    cursor: pointer;
     margin: 10px 10px 20px 0px;
     background: ${colors.main};
     padding: 8px 20px;
@@ -89,6 +88,9 @@ const Button = styled.button`
     font-weight: bold;
     color: white;
     border: 0px;
+    pointer-events: ${props => props.disabled ? "none" : "default"};
+    cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
+    opacity: ${props => props.disabled ? .3 : 1};
 
     &:hover {
         background: ${colors.mainHover};
@@ -101,9 +103,20 @@ const Header = styled.img`
 `;
 
 const CalendarContainer = (props) => {
-    const { text } = props;
-    const [date, setDate] = useState(moment().add(2, "day"))
+    const { text, blockedDates } = props;
+    const [date, setDate] = useState(undefined)
     const [people, setPeople] = useState(2)
+
+    useEffect(() => {
+        props.handlePeopleChange(people);
+    }, [people])
+
+    useEffect(() => {
+        if (blockedDates.includes(moment(date).format('YYYY-MM-DD'))) {
+            setDate(moment());
+        }
+    }, [blockedDates])
+
 
     const onPanelChange = (value, mode) => {
         console.log(value.format('YYYY-MM-DD'), mode);
@@ -125,7 +138,7 @@ const CalendarContainer = (props) => {
                 fullscreen={false}
                 disabledDate={(currentDate) => {
                     return currentDate && (
-                        currentDate < moment().add(1, "day")
+                        currentDate < moment().add(1, "day") || blockedDates.includes(moment(currentDate).format('YYYY-MM-DD'))
                     );
                 }}
                 value={date}
@@ -275,7 +288,7 @@ const CalendarContainer = (props) => {
             </PeopleContainer>
 
             <Row type="flex" justify='end'>
-                <Button onClick={() => props.handleSelect({ date: date, people: people })}>Pesquisar</Button>
+                <Button disabled={!date} onClick={() => props.handleSelect({ date: date, people: people })}>Pesquisar</Button>
             </Row>
         </Container>
     );

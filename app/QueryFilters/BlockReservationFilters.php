@@ -14,4 +14,9 @@ class BlockReservationFilters extends QueryFilters
     {
         $this->query->where('date', $date);
     }
+
+    public function experience($experience)
+    {
+        $this->query->where('experience_id', $experience);
+    }
 }

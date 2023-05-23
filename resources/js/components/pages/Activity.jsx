@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import CalendarContainer from './Activity/CalendarContainer';
 import { dimensions, maxWidth } from '../../helper';
@@ -7,6 +7,8 @@ import { setFormFields, setFormVisibility } from '../../redux/form/actions';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { fetchExperience } from '../../redux/experience/actions';
+import { fetchBlockedDatesSelector } from '../../redux/date/actions';
+
 import { Spin } from 'antd';
 
 const Container = styled.section`
@@ -105,8 +107,11 @@ const Details = styled.div`
 function Activity(props) {
     const [activity, setActivity] = useState("beginner");
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/tour");
-    const { experience, loading } = props;
+    const { experience, blockedDates } = props;
 
+    const handlePeopleChange = (participants) => {
+        props.fetchBlockedDatesSelector({ experience: props.match.params.experience, participants: participants });
+    }
 
     useEffect(() => {
         props.fetchExperience(props.match.params.experience);
@@ -117,7 +122,7 @@ function Activity(props) {
         props.setFormFields({ ...fields, experience: experience });
         props.setFormVisibility(true);
     }
-    console.log(experience)
+
     return (
         <Container>
             <Background background={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} />
@@ -158,7 +163,7 @@ function Activity(props) {
                         <p>{text.disclaimer}</p>
                     </Information>
                     <Form>
-                        <CalendarContainer image={experience.images[0].image} handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
+                        <CalendarContainer blockedDates={blockedDates} handlePeopleChange={handlePeopleChange} image={experience.images[0].image} handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
                     </Form>
                 </Content>
             }
@@ -169,6 +174,7 @@ function Activity(props) {
 
 const mapStateToProps = (state) => {
     return {
+        blockedDates: state.date.selector,
         experience: state.experience.current,
         loading: state.experience.loading,
     };
@@ -177,6 +183,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setFormVisibility: (data) => dispatch(setFormVisibility(data)),
+        fetchBlockedDatesSelector: (filters) => dispatch(fetchBlockedDatesSelector(filters)),
         setFormFields: (data) => dispatch(setFormFields(data)),
         fetchExperience: (id) => dispatch(fetchExperience(id)),
     };

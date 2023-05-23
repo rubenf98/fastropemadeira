@@ -13,7 +13,7 @@ export const text = {
     beginner: {
         price: "60",
         title: "begginer",
-        age: "anos",
+        age: "+8 anos",
         paragraphs: [
             "A actividade Canyoning consiste num emocionante desafio para explorar uma ribeira ou um curso de água vertiginoso,onde os obstáculos são transpostos através de diversas técnicas como escalar, saltar, descer em rappel e nadar.",
             "Atreva-se a fazer canyoning connosco e sentirá uma incrível onda de adrenalina ao explorar e descobrir o que a ilha tem de mais puro e virgem. ",
@@ -23,7 +23,7 @@ export const text = {
     adventure: {
         price: "80",
         title: "adventure",
-        age: "anos",
+        age: "+8 anos",
         paragraphs: [
             "A actividade Canyoning consiste num emocionante desafio para explorar uma ribeira ou um curso de água vertiginoso,onde os obstáculos são transpostos através de diversas técnicas como escalar, saltar, descer em rappel e nadar.",
             "Atreva-se a fazer canyoning connosco e sentirá uma incrível onda de adrenalina ao explorar e descobrir o que a ilha tem de mais puro e virgem. ",
@@ -32,7 +32,7 @@ export const text = {
     advanced: {
         price: "120",
         title: "advanced",
-        age: "anos",
+        age: "+16 anos",
         paragraphs: [
             "A actividade Canyoning consiste num emocionante desafio para explorar uma ribeira ou um curso de água vertiginoso,onde os obstáculos são transpostos através de diversas técnicas como escalar, saltar, descer em rappel e nadar.",
             "Atreva-se a fazer canyoning connosco e sentirá uma incrível onda de adrenalina ao explorar e descobrir o que a ilha tem de mais puro e virgem. ",
@@ -41,7 +41,7 @@ export const text = {
     extreme: {
         price: "200",
         title: "extreme",
-        age: "anos",
+        age: "+18 anos",
         paragraphs: [
             "A actividade Canyoning consiste num emocionante desafio para explorar uma ribeira ou um curso de água vertiginoso,onde os obstáculos são transpostos através de diversas técnicas como escalar, saltar, descer em rappel e nadar.",
             "Atreva-se a fazer canyoning connosco e sentirá uma incrível onda de adrenalina ao explorar e descobrir o que a ilha tem de mais puro e virgem. ",

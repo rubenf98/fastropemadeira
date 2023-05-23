@@ -2,6 +2,7 @@ import { types } from "./types";
 
 export const initialState = {
     data: [],
+    selector: [],
     meta: {},
     links: {},
     loading: false,
@@ -11,12 +12,27 @@ export const initialState = {
 export default (state = initialState, action = {}) => {
     switch (action.type) {
         case `${types.FETCH_BLOCKED_DATES}_PENDING`:
+        case `${types.FETCH_BLOCKED_DATES_SELECTOR}_PENDING`:
         case `${types.DELETE_BLOCKED_DATE}_PENDING`:
         case `${types.DELETE_BLOCKED_DATE}_REJECTED`:
             return {
                 ...state,
                 loading: true,
 
+            };
+
+        case `${types.FETCH_BLOCKED_DATES_SELECTOR}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                selector: []
+            };
+
+        case `${types.FETCH_BLOCKED_DATES_SELECTOR}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                selector: action.payload.data,
             };
 
         case `${types.FETCH_BLOCKED_DATES}_REJECTED`:
