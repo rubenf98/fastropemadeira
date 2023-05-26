@@ -33,6 +33,12 @@
 
 <style>
 
+    @font-face {
+        font-family: Neutrons Demo;
+        src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
+    }
+
+
     html,
     body,
     #index {

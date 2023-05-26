@@ -42,12 +42,13 @@ const TitleContainer = styled.div`
     justify-content: center;
 
     h1 {
-        font-size: clamp(50px, 15vw, 250px);
+        font-size: clamp(50px, 15vw, 200px);
         z-index: 2;
         color: white;
         display: block;
         line-height: 100%;
         margin: 0px auto;
+        font-family: "Neutrons Demo";
     }
 
     button {
