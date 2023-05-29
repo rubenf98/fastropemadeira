@@ -9,7 +9,7 @@ export const text = {
     included: [
         "Transport", "Snacks", "Personal Insurance", "Photograhy", "Multilangual", "Surprise"
     ],
-    need: "To go canyoning on Madeira Island, you need to bring a towel, bathing suit, sports shoes that you don't mind getting wet (sports shoes such as running or mountain boots, never sandals or diving shoes) and a change of clothes.",
+    need: "To go canyoning on Madeira Island, you need to bring a towel and bathing suit that you don't mind getting wet and a change of clothes.",
     beginner: {
         price: "60",
         title: "begginer",

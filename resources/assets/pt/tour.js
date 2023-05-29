@@ -9,7 +9,7 @@ export const text = {
     included: [
         "Transporte", "Aperitivos", "Seguro Pessoal", "Fotografia", "Multilíngue", "Surpresa"
     ],
-    need: "Para fazer Canyoning na Ilha da Madeira é necessário trazer toalha, fato de banho, calçado desportivo que não se importe de molhar (calçado desportivo como botas de corrida ou de montanha, nunca sandálias ou calçado de mergulho) e muda de roupa.",
+    need: "Para fazer Canyoning na Ilha da Madeira é necessário trazer toalhae e fato de banho que não se importe de molhar e muda de roupa.",
     beginner: {
         price: "60",
         title: "begginer",
