@@ -26,9 +26,10 @@ class Experience extends Model
     ];
     // protected $casts = ['price' => 'integer'];
     protected $fillable = ['price'];
+    
     public function activity()
     {
-        return $this->belongsTo("App\Models\Activity");
+        return $this->belongsTo(Activity::class);
     }
 
     public function blockedDates()

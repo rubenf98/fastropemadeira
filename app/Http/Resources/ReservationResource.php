@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Experience;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReservationResource extends JsonResource
@@ -17,7 +18,7 @@ class ReservationResource extends JsonResource
         return [
             'id' => $this->id,
             'experience' => new ExperienceResource($this->experience),
-            'activity' =>  $this->activity($this->experience->activity_id),
+            'activity' => $this->activity(Experience::where('id', $this->experience_id)->pluck('activity_id')->first()),
             'name' =>   $this->name,
             'email' =>   $this->email,
             'price' =>   $this->price,

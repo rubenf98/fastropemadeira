@@ -99,7 +99,7 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
             title: 'Atividade',
             dataIndex: 'experience',
             filterDropdown: () => (getCascader("activity")),
-            render: (experience, row) => (<span>{row.activity.name.pt} ({experience.name.pt})</span>),
+            render: (experience, row) => row.activity ? (<span>{row.activity.name.pt} ({experience.name.pt})</span>) : "Atividade removida",
         },
         {
             title: 'Pessoas',
