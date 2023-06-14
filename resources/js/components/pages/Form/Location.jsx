@@ -6,6 +6,7 @@ import { fetchExperiences } from "../../../redux/experience/actions";
 import moment from "moment";
 import { connect } from "react-redux";
 import { setFormFields } from '../../../redux/form/actions';
+import { colors } from '../../../helper';
 
 
 const ListContainer = styled(Row)`
@@ -86,7 +87,7 @@ const Info = styled.div`
 
 const Price = styled.p`
     text-align: right;
-    color: rgb(52,60,94);
+    color: ${colors.main};
     font-size: 2em;
     margin: auto 0px auto 20px;
     font-weight: bold;

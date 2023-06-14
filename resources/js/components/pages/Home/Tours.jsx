@@ -36,6 +36,7 @@ const CarouselContainer = styled(Carousel)`
     max-width: calc(100vw  - ((100vw - ${maxWidth}) / 2));
     margin: 100px 0px;
     margin-left: auto;
+    align-items:stretch ;
 `;
 
 const Card = styled.div`

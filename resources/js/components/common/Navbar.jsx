@@ -9,13 +9,13 @@ import { colors, dimensions, maxWidth } from '../../helper';
 import AnimationContainer from './AnimationContainer';
 
 const Container = styled.div`
-    height:  ${props => props.hasbackground ? "80px" : "120px"};;
+    height:  ${props => props.hasbackground ? "100px" : "120px"};;
     background: ${props => props.hasbackground ? "#ffffff" : "transparent"};
     box-shadow: ${props => props.shadow ? "0 0 40px " + colors.main : "0px"};
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     box-sizing: border-box;
     position: fixed;
     left: 50%;
@@ -39,7 +39,7 @@ const Content = styled.div`
 `;
 
 const Logo = styled(Link)`
-    height: 90%;
+    height: 100%;
     margin: auto 0;
     display: block;
     opacity: ${props => props.visible ? "1" : "0"};
@@ -158,9 +158,8 @@ const CustomDrawer = styled(Drawer)`
 `;
 
 const MenuLogo = styled.img`
-    height: 70px;
+    height: 80px;
     margin: auto;
-    margin-top: 40px;
     opacity: 1;
     display: block;
 `;
@@ -307,7 +306,7 @@ function Navbar({ onOrder }) {
 
             <Container hasbackground={(visible ? 0 : 1) && hasBackground} shadow={(visible ? 0 : 1) && hasShadow}>
                 <Logo to="/" visible={(visible ? 0 : 1) && hasBackground}>
-                    <img src={hasBackground ? "/logo.png" : "/logo_white.png"} alt="logo" />
+                    <img src={hasBackground ? "/logo.svg" : "/logo_white.svg"} alt="logo" />
                 </Logo>
 
                 <Content>
@@ -357,7 +356,7 @@ function Navbar({ onOrder }) {
                         <li><MenuLink onClick={() => setVisible(0)} to="/about">about</MenuLink></li>
                         <li><MenuLink onClick={() => setVisible(0)} to="/contact">contact</MenuLink></li>
                         <li>
-                            <MenuLogo src="/logo.png" alt="logo" />
+                            <MenuLogo src="/logo.svg" alt="logo" />
                         </li>
                     </ul>
 

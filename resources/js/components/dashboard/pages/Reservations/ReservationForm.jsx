@@ -4,6 +4,7 @@ import { Modal, Row, Form, DatePicker, Button, InputNumber, Col, Input, Slider, 
 import moment from 'moment';
 import { connect } from "react-redux";
 import axios from "axios";
+import { colors } from "../../../../helper";
 
 const { Option } = Select;
 
@@ -31,18 +32,18 @@ const CustomSlider = styled(Slider)`
     width: 100%;
     &:hover, .ant-slider:hover {
         .ant-slider-track {
-            background-color:#262b44;
+            background-color: ${colors.mainHover};
         }
         .ant-slider-handle{
-            border-color: #262b44;
+            border-color: ${colors.mainHover};
         }
     }
     .ant-slider-track {
-        background-color:rgb(52,60,94);
+        background-color:${colors.main};
     }
 
     .ant-slider-handle{
-        border-color: rgb(52,60,94);
+        border-color: ${colors.main};
     }
 `;
 

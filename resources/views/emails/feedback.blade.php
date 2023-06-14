@@ -82,7 +82,7 @@
                                                             <td
                                                                 style="width:100%;padding-right:8px;padding-left:8px;padding-bottom:60px;padding-top:60px;">
                                                                 <div align="center" style="line-height:10px"><img
-                                                                        src="https://www.fastropemadeira.com/logo_white.png"
+                                                                        src="https://www.fastropemadeira.com/logo_white.svg"
                                                                         style="display: block; height: auto; border: 0; width: 395px; max-width: 100%;"
                                                                         width="395" /></div>
                                                             </td>

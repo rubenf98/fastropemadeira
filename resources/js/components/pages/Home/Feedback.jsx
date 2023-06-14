@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import { Col, Row, Card } from 'antd';
-import { dimensions } from '../../../helper';
+import { colors, dimensions } from '../../../helper';
 import AnimationContainer from '../../common/AnimationContainer';
 
 const Container = styled(Row)`
@@ -12,7 +12,7 @@ const Star = styled.div`
     display: inline-block;
     width: 15px;
     height: 15px;
-    background: rgb(52,60,94);
+    background: ${colors.main};
     border-radius: 50%;
     margin: 5px;
 `;

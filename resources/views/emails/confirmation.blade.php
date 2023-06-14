@@ -207,7 +207,7 @@
                                                                         align="center">
 
                                                                         <img align="center" border="0"
-                                                                            src="https://www.fastropemadeira.com/logo.png"
+                                                                            src="https://www.fastropemadeira.com/logo.svg"
                                                                             alt="Image" title="Image"
                                                                             style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 29%;max-width: 168.2px;"
                                                                             width="168.2" />

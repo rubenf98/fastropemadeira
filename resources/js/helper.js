@@ -10,9 +10,9 @@ export const dimensions = {
 };
 
 export const colors = {
-	"main": "#7A96B6",
-	"mainOverlay": "rgba(52,60,94,.7)",
-	"mainHover": "#5e748d",
+	"main": "#C86C15",
+	"mainOverlay": "rgb(147, 70, 7,.7)",
+	"mainHover": "#D15E00",
 	"gray": "#707070",
 };
 

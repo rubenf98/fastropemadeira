@@ -19,7 +19,7 @@ const Container = styled.div`
 
 const Time = styled.div`
     min-height: 60px;
-    border: 1px solid rgba(52,60,94, .3);
+    border: 1px solid ${colors.mainOverlay};
     padding: 16px 80px;
     box-sizing: border-box;
     border-radius: 12px;
@@ -32,7 +32,7 @@ const Time = styled.div`
     margin: 20px auto;
 
     div {
-        background: rgb(52,60,94);
+        background: ${colors.main};
         position: absolute;
         top: 0px;
         right: 0px;
@@ -57,7 +57,7 @@ const Time = styled.div`
     }
 
     &:hover {
-        background: rgb(52,60,94);
+        background: ${colors.main};
 
         div {
             border-top-right-radius: 6px;
@@ -104,18 +104,18 @@ const Cell = styled.div`
 const CustomSlider = styled(Slider)`
     &:hover, .ant-slider:hover {
         .ant-slider-track {
-            background-color:#262b44;
+            background-color:${colors.mainHover};
         }
         .ant-slider-handle{
-            border-color: #262b44;
+            border-color: ${colors.mainHover};
         }
     }
     .ant-slider-track {
-        background-color:rgb(52,60,94);
+        background-color:${colors.main};
     }
 
     .ant-slider-handle{
-        border-color: rgb(52,60,94);
+        border-color: ${colors.main};
     }
 `;
 

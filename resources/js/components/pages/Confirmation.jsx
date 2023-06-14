@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { Fragment, useEffect, useState } from 'react'
 import { Row, notification } from 'antd';
 import styled from "styled-components";
-import { dimensions } from '../../helper';
+import { colors, dimensions } from '../../helper';
 import moment from 'moment';
 import AnimationContainer from '../common/AnimationContainer';
 
@@ -155,7 +155,7 @@ const Loading = styled.div`
 const PriceContainer = styled.div`
     font-size: 2.6em;
     font-weight: bold;
-    color: rgb(52,60,94);
+    color: ${colors.main};
     position: absolute;
     right: 25px;
     bottom: 25px;    
@@ -200,7 +200,7 @@ function Confirmation({ match }) {
                 (Object.keys(data).length === 0) ?
                     <Loading>
                         <div className='flex-container'>
-                            <img width="250" src="/logo.png" alt="logo" />
+                            <img width="250" src="/logo.svg" alt="logo" />
                             {
                                 !hasError &&
                                 <div className="gooey">

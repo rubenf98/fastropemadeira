@@ -144,7 +144,7 @@ function Activity({ incrementStep, text }) {
     return (
         <Fragment>
             <PageDescription type="flex" justify="space-between" align="middle">
-                <img src="/logo.png" />
+                <img src="/logo.svg" />
                 <div>{text.instructions}</div>
             </PageDescription>
 

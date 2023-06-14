@@ -7,7 +7,7 @@ import Button from "antd/es/button"
 import Col from "antd/es/col"
 import InputNumber from "antd/es/input-number"
 import { social, icon, background, feedback } from "../../images";
-import { dimensions } from "../../helper";
+import { colors, dimensions } from "../../helper";
 import SubmitButton from "./Contact/SubmitButton";
 import axios from "axios";
 import { fadeInUp, fadeOut } from 'react-animations'
@@ -130,7 +130,7 @@ const Title = styled.div`
     z-index: 1;
     margin-bottom: 20px;
     h1 {
-        color: rgb(52, 60, 94);
+        color:${colors.main};
         font-weight: bold;
         font-size: 3em;
         margin: 0px;
@@ -184,7 +184,7 @@ const Logo = styled.a`
     width: 30px;
     height: 30px;
     margin-left: 10px;
-    background: rgb(52, 60, 94);
+    background: ${colors.main};
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -200,13 +200,13 @@ const Logo = styled.a`
 `;
 
 const Submit = styled(Button)`
-    background: rgb(52, 60, 94);
+    background: ${colors.main};
     border: none;
     padding: 10px;
     text-transform: uppercase;
 
     &:hover, &:focus {
-        background: #2b3252;
+        background: ${colors.mainHover};
     }
 
     @media (max-width: ${dimensions.md}){
@@ -285,7 +285,7 @@ const FormFeedback = styled.div`
     z-index: 1;
     width: 80%;
     padding: 20px;
-    border: 1px solid rgb(52,60,94);
+    border: 1px solid ${colors.main};
     text-align: center;
     margin: auto;
     border-radius: 8px;

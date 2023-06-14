@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Row, Form, Input, DatePicker, Col, Select, Button, Switch } from 'antd';
 import styled from "styled-components";
-import { dimensions } from "../../../helper";
+import { colors, dimensions } from "../../../helper";
 import CountryPhoneInput, { ConfigProvider } from 'antd-country-phone-input';
 import en from 'world_countries_lists/data/en/world.json';
 import BackButton from './BackButton';
@@ -145,7 +145,7 @@ const PriceContainer = styled.div`
     p {
         span {
             font-weight: bold;
-            color: rgb(52,60,94);
+            color: ${colors.main};
         }
         margin: 0px;
     }
@@ -158,7 +158,7 @@ const Checkout = styled(Button)`
     min-height: 70px;
     box-sizing: border-box;
     cursor: pointer;
-    background: rgb(52,60,94);
+    background: ${colors.main};
     padding: 12px 28px;
     border-radius: 0 0 0 12px;
     transition: .4s;
@@ -177,7 +177,7 @@ const Checkout = styled(Button)`
     }
 
     &:hover, &:focus {
-        background: #2b3252;
+        background: ${colors.mainHover};
         color: white;
     }
     

@@ -40,15 +40,13 @@ const TitleContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 
-    h1 {
-        font-size: clamp(50px, 15vw, 200px);
+    .logo {
         z-index: 2;
-        color: white;
         display: block;
-        line-height: 100%;
-        margin: 0px auto;
-        font-family: "Neutrons Demo";
+        margin: auto;
+        width: 30%;
     }
 
     button {
@@ -72,6 +70,11 @@ const TitleContainer = styled.div`
     }
 
     @media (max-width: ${dimensions.md}) {
+
+        .logo {
+            width: 70%;
+        }
+
         button {
             padding: 16px 30px;
             margin-top: 20px;
@@ -94,14 +97,8 @@ const Cloud = styled.img`
 function Header(props) {
     return (
         <Container>
-            <BackgroundImage prio={3}>
-                <img src="/images/header.png" alt="madeira island wallpaper" loading="eager" />
-            </BackgroundImage>
             <TitleContainer>
-                <h1>Fast Rope</h1>
-                <button onClick={() => props.setVideoSrc("https://www.youtube.com/embed/LpKfx60n5ds")}>
-                    {props.text}
-                </button>
+                <img className='logo' src="/logo_white.svg" alt="madeira island wallpaper" loading="eager" />
             </TitleContainer>
             <BackgroundImage prio={-1}>
                 <img src="/images/header.jpg" alt="madeira island wallpaper" loading="eager" />
