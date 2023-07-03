@@ -13,6 +13,7 @@ export const text = {
 
     tours: {
         age: "age",
+        ageAll: "All ages",
         person: "person",
         primaryButton: "Book now",
         secundaryButton: "See more",

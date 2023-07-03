@@ -9,7 +9,6 @@ export const texture = "/vintage-wallpaper.png";
 
 export const services = {
     transport: "/icon/services/transport.svg",
-    surprise: "/icon/services/surprise.svg",
     snack: "/icon/services/snack.svg",
     photo: "/icon/services/photo.svg",
     language: "/icon/services/language.svg",

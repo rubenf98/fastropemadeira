@@ -43,7 +43,6 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
     ]
 
     useEffect(() => {
-        console.log(fields);
         if (!visible) {
             setFormFields({ people: 3, date: moment().add(2, 'day'), experience: {} })
         } else if (fields.people && fields.date && fields.experience.id) {
@@ -68,7 +67,8 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
         if (data.person) {
             data.person = data.person.slice(0, data.people);
         }
-        axios.post(`${window.location.origin}/api/reservation`, { ...data, experience_id: fields.experience.id, date: moment(fields.date).format('YYYY-MM-DD') }).then((response) => {
+        console.log(fields);
+        axios.post(`${window.location.origin}/api/reservation`, { ...data, nParticipants: fields.people, experience_id: fields.experience.id, date: moment(fields.date).format('YYYY-MM-DD') }).then((response) => {
             setLoadingSubmit(false);
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();

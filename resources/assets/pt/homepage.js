@@ -12,6 +12,7 @@ export const text = {
     },
     tours: {
         age: "anos",
+        ageAll: "Todas as idades",
         person: "pessoa",
         primaryButton: "Reservar",
         secundaryButton: "Ver mais",

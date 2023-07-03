@@ -105,11 +105,6 @@ function Services({ text }) {
                     image={services.language}
                     description={text.services.items[4].paragraph}
                 />
-                <Service
-                    title={text.services.items[5].title}
-                    image={services.surprise}
-                    description={text.services.items[5].paragraph}
-                />
             </Row>
         </Container>
     )

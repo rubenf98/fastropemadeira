@@ -375,84 +375,87 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
 
 
 
-            <h2>{text.formSubTitle}</h2>
-            <PersonFormContainer gutter={8} type="flex" justify="flex-start">
-                <Form.List name="person">
-                    {() => (
-                        <>
-                            {[...Array(people)].map((p, index) =>
-                                <Form.List key={index} name={index}>
-                                    {() => (
-                                        <PersonForm key={index}>
-                                            <div className='background'>
-                                                <h3>Person {index + 1}</h3>
-                                                <Row gutter={8} type="flex" align="bottom">
-                                                    <Col xs={24} md={12}>
-                                                        <Form.Item name="birthday" rules={rules.bday}>
-                                                            <DatePicker picker="month" placeholder={text.form.person.bday.placeholder} style={{ width: "100%" }} />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col xs={24} md={12}>
-                                                        <Form.Item name="gender" rules={rules.gender}>
-                                                            <Select placeholder={text.form.person.gender.placeholder}>
-                                                                <Select.Option value="male">{text.form.gender[0]}</Select.Option>
-                                                                <Select.Option value="female">{text.form.gender[1]}</Select.Option>
-                                                            </Select>
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col xs={24} md={12}>
-                                                        <Form.Item name="height" rules={rules.height}>
-                                                            <Select placeholder={text.form.person.height.placeholder}>
-                                                                <Select.Option value="120">&lt; 120cm</Select.Option>
-                                                                {[...Array(89)].map((count, index) =>
-                                                                    <Select.Option key={index} value={index + 121}>{index + 121}cm</Select.Option>
-                                                                )}
-                                                                <Select.Option value="Over 210">&gt; 210cm</Select.Option>
-                                                            </Select>
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col xs={24} md={12}>
-                                                        <Form.Item name="weight" rules={rules.weight}>
-                                                            <Select placeholder={text.form.person.weight.placeholder}>
-                                                                <Select.Option value="Under 30kg">&lt; 30kg</Select.Option>
-                                                                {[...Array(89)].map((count, index) =>
-                                                                    <Select.Option key={index} value={index + 31}>{index + 31}kg</Select.Option>
-                                                                )}
-                                                                <Select.Option value="Over 120kg">&gt; 120kg</Select.Option>
-                                                            </Select>
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col span={24}>
-                                                        <Form.Item name="shoe" rules={rules.shoe}>
-                                                            <Select placeholder={text.form.person.shoe.placeholder}>
-                                                                <Select.Option value="35">2 UK / 35 EU</Select.Option>
-                                                                <Select.Option value="36">3 UK / 36 EU</Select.Option>
-                                                                <Select.Option value="37">4 UK / 37 EU</Select.Option>
-                                                                <Select.Option value="38">5 UK / 38 EU</Select.Option>
-                                                                <Select.Option value="39">5.5 UK / 39 EU</Select.Option>
-                                                                <Select.Option value="40">6.5 UK / 40 EU</Select.Option>
-                                                                <Select.Option value="41">7 UK / 41 EU</Select.Option>
-                                                                <Select.Option value="42">8 UK / 42 EU</Select.Option>
-                                                                <Select.Option value="43">9 UK / 42 EU</Select.Option>
-                                                                <Select.Option value="44">9.5 UK / 44 EU</Select.Option>
-                                                                <Select.Option value="45">10 UK / 45 EU</Select.Option>
-                                                                <Select.Option value="46">11 UK / 46 EU</Select.Option>
-                                                                <Select.Option value="47">12 UK / 47 EU</Select.Option>
-                                                                <Select.Option value="48">13 UK / 48 EU</Select.Option>
-                                                            </Select>
-                                                        </Form.Item>
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        </PersonForm>
+
+            {experience.activity_id == 1 &&
+                <>
+                    <h2>{text.formSubTitle}</h2>
+                    <PersonFormContainer gutter={8} type="flex" justify="flex-start">
+                        <Form.List name="person">
+                            {() => (
+                                <>
+                                    {[...Array(people)].map((p, index) =>
+                                        <Form.List key={index} name={index}>
+                                            {() => (
+                                                <PersonForm key={index}>
+                                                    <div className='background'>
+                                                        <h3>Person {index + 1}</h3>
+                                                        <Row gutter={8} type="flex" align="bottom">
+                                                            <Col xs={24} md={12}>
+                                                                <Form.Item name="birthday" rules={rules.bday}>
+                                                                    <DatePicker picker="month" placeholder={text.form.person.bday.placeholder} style={{ width: "100%" }} />
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col xs={24} md={12}>
+                                                                <Form.Item name="gender" rules={rules.gender}>
+                                                                    <Select placeholder={text.form.person.gender.placeholder}>
+                                                                        <Select.Option value="male">{text.form.gender[0]}</Select.Option>
+                                                                        <Select.Option value="female">{text.form.gender[1]}</Select.Option>
+                                                                    </Select>
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col xs={24} md={12}>
+                                                                <Form.Item name="height" rules={rules.height}>
+                                                                    <Select placeholder={text.form.person.height.placeholder}>
+                                                                        <Select.Option value="120">&lt; 120cm</Select.Option>
+                                                                        {[...Array(89)].map((count, index) =>
+                                                                            <Select.Option key={index} value={index + 121}>{index + 121}cm</Select.Option>
+                                                                        )}
+                                                                        <Select.Option value="Over 210">&gt; 210cm</Select.Option>
+                                                                    </Select>
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col xs={24} md={12}>
+                                                                <Form.Item name="weight" rules={rules.weight}>
+                                                                    <Select placeholder={text.form.person.weight.placeholder}>
+                                                                        <Select.Option value="Under 30kg">&lt; 30kg</Select.Option>
+                                                                        {[...Array(89)].map((count, index) =>
+                                                                            <Select.Option key={index} value={index + 31}>{index + 31}kg</Select.Option>
+                                                                        )}
+                                                                        <Select.Option value="Over 120kg">&gt; 120kg</Select.Option>
+                                                                    </Select>
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col span={24}>
+                                                                <Form.Item name="shoe" rules={rules.shoe}>
+                                                                    <Select placeholder={text.form.person.shoe.placeholder}>
+                                                                        <Select.Option value="35">2 UK / 35 EU</Select.Option>
+                                                                        <Select.Option value="36">3 UK / 36 EU</Select.Option>
+                                                                        <Select.Option value="37">4 UK / 37 EU</Select.Option>
+                                                                        <Select.Option value="38">5 UK / 38 EU</Select.Option>
+                                                                        <Select.Option value="39">5.5 UK / 39 EU</Select.Option>
+                                                                        <Select.Option value="40">6.5 UK / 40 EU</Select.Option>
+                                                                        <Select.Option value="41">7 UK / 41 EU</Select.Option>
+                                                                        <Select.Option value="42">8 UK / 42 EU</Select.Option>
+                                                                        <Select.Option value="43">9 UK / 42 EU</Select.Option>
+                                                                        <Select.Option value="44">9.5 UK / 44 EU</Select.Option>
+                                                                        <Select.Option value="45">10 UK / 45 EU</Select.Option>
+                                                                        <Select.Option value="46">11 UK / 46 EU</Select.Option>
+                                                                        <Select.Option value="47">12 UK / 47 EU</Select.Option>
+                                                                        <Select.Option value="48">13 UK / 48 EU</Select.Option>
+                                                                    </Select>
+                                                                </Form.Item>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                </PersonForm>
+                                            )}
+                                        </Form.List>
                                     )}
-                                </Form.List>
-                            )}
-                        </>)}
-                </Form.List>
-            </PersonFormContainer>
-
-
+                                </>)}
+                        </Form.List>
+                    </PersonFormContainer>
+                </>
+            }
 
 
 

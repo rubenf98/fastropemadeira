@@ -251,7 +251,8 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
                 {experiences.map((experience, index) => (
                     <Card key={index} background={experience.images[0].image}>
                         <div className='header'>
-                            <div><button onClick={() => setVideoSrc(experience.video)}><img src="/icon/activities/play.svg" alt="play button" /></button></div>
+                            {experience.video && <div><button onClick={() => setVideoSrc(experience.video)}><img src="/icon/activities/play.svg" alt="play button" /></button></div>}
+
 
 
                             <h3>{experience.name[localStorage.getItem("language")]}</h3>
@@ -268,15 +269,16 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
                                 </div>
                                 <div className='char'>
                                     <img src="/icon/activities/age.svg" alt="play button" />
-                                    <span>{text.tours.age}</span>
+                                    <span>{experience.age ? (experience.age + " " + text.tours.age) : text.tours.ageAll} </span>
                                 </div>
 
                             </div>
                             <div className='price'>{experience.price}EUR <span>/{text.tours.person}</span></div>
                             <p>{experience.description[localStorage.getItem("language")]}</p>
                             <div className='button-container'>
-                                <button className='primary'>{text.tours.primaryButton}</button>
-                                <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>
+                                {/* <button className='primary'>{text.tours.primaryButton}</button> */}
+                                {experience.activity_id === 1 && <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>}
+
 
                             </div>
 

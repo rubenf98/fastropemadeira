@@ -139,7 +139,7 @@ function Activity(props) {
                                 <li>{experience.duration[localStorage.getItem('language')]}</li>
                                 <li>{experience.height[localStorage.getItem('language')]}</li>
                                 <li>{experience.target[localStorage.getItem('language')]}</li>
-                                <li>+8 {text[activity].age}</li>
+                                <li>{text[activity].age}</li>
                             </ul>
                         </Details>
 

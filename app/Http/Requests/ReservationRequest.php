@@ -29,17 +29,18 @@ class ReservationRequest extends FormRequest
             $phone = "+" . $this->phone["code"] . " " . $this->phone["phone"];
         }
         $date = new Carbon($this->date);
+        $nparticipants = $this->person ? count($this->person) : $this->nParticipants;
         $blockedSum = BlockReservationDate::where('date', $date->format('Y-m-d'))->where("experience_id", $this->experience_id)->sum('capacity');
-        $isBlocked = $blockedSum > (15 - count($this->person));
+        $isBlocked = $blockedSum > (15 - $nparticipants);
 
         $experience = Experience::find($this->experience_id);
-        $price = $this->private ? 0 : ($experience->price * count($this->person));
+        $price = $this->private ? 0 : ($experience->price * $nparticipants);
         $this->merge([
-            'people' => count($this->person),
+            'people' => $nparticipants,
             'phone' => $phone,
             'date' => $isBlocked ? null : new Carbon($this->date),
             'confirmation_token' => uniqid(),
-            'hasPerson' => true,
+            'hasPerson' =>  $experience->activity_id == 1,
             'price' => ($this->address && ($this->experience_id == 1 || $this->experience_id == 2)) ? $price + 5 : $price,
         ]);
     }

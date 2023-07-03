@@ -7,7 +7,7 @@ export const text = {
     titles: ["Quick details", "In the activity it's incldued", "What do I need to bring"],
     disclaimer: "Don´t know if this is the appropriate Canyoning Level? Want to know more about it? Send us a message on Whatsapp on +351 933 933 452 or contact us via email at info@fastropemadeira.com",
     included: [
-        "Transport", "Snacks", "Personal Insurance", "Photograhy", "Multilangual", "Surprise"
+        "Transport", "Snacks", "Personal Insurance", "Photograhy", "Multilangual"
     ],
     need: "To go canyoning on Madeira Island, you need to bring a towel and bathing suit that you don't mind getting wet and a change of clothes.",
     beginner: {

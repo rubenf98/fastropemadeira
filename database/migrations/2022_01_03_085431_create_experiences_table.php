@@ -16,6 +16,7 @@ class CreateExperiencesTable extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('age')->nullable();
             $table->decimal('price', 5, 2);
             $table->decimal('private_price', 5, 2)->nullable();
             $table->unsignedBigInteger('activity_id');
