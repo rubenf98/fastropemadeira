@@ -41,7 +41,7 @@ class ReservationRequest extends FormRequest
             'date' => $isBlocked ? null : new Carbon($this->date),
             'confirmation_token' => uniqid(),
             'hasPerson' =>  $experience->activity_id == 1,
-            'price' => ($this->address && ($this->experience_id == 1 || $this->experience_id == 2)) ? $price + 5 : $price,
+            'price' => ($this->address && ($this->experience_id == 1 || $this->experience_id == 2)) ? ($price == 0 ? $price : $price + 5) : $price,
         ]);
     }
 
