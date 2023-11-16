@@ -101,7 +101,7 @@ const CustomSelect = styled(Select)`
     margin-right: 20px;
     margin-left: 15px;
     cursor: pointer;
-    color ${props => props.hasbackground ? "black" : "white"};
+    color: ${props => props.hasbackground ? "black" : "white"};
     font-size: 1.2em;
     display: ${props => props.visible ? "block" : "none"};
 

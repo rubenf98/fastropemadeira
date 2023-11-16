@@ -7,7 +7,7 @@ export const text = {
     formSubTitle: "Partipants Details",
     nodata: "Unfortunately we no longer have availability on the chosen date",
     calendar: {
-        slider: "Drag the slider towards the number of participants",
+        slider: "How many people will participate in the activity?",
         calendar: "Select the preferred date for the activity",
     },
     form: {

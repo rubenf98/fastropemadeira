@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./common/Navbar";
 import Footer from "./common/Footer";
 import styled from "styled-components";
@@ -17,6 +17,101 @@ const Container = styled.div`
     display: block;
     position: relative;
 `;
+
+const Chatbot = styled.div`
+    background: white;
+    position: fixed;
+    bottom: 20px;
+    left: ${props => props.visible ? "20px" : "-470px"};
+    z-index: 100;
+    width: 80vw;
+    max-width: 450px;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,.3);
+    transition: all .5s ease;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: ${colors.main};
+        padding: 20px;
+        box-sizing: border-box;
+        gap: 10px;
+
+        .icon {
+            width: 40px;
+        }
+
+        h3 {
+            flex: 1;
+            font-size: clamp(20px, 3vw, 32px);
+            color: white;
+            margin: 0px;
+            line-height: 100%;
+        }
+
+        .close {
+            width: 15px;
+            cursor: pointer;
+        }
+    }
+
+    .chat {
+        padding: 20px 10px;
+        box-sizing: border-box;
+
+        .messages {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            width: 90%;
+
+            img {
+                width: 40px;
+            }
+
+            div {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                p {
+                    padding: 6px 12px;
+                    box-sizing: border-box;
+                    font-size: 14px;
+                    border: 1px solid black;
+                    border-radius: 6px;
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            margin: 20px 0px;
+
+            button {
+                border: 2px solid ;
+                border-color: ${colors.main};
+                color: ${colors.main};
+                background-color: white;
+                box-shadow: none;
+                padding: 6px 12px;
+                box-sizing: border-box;
+                border-radius: 6px;
+                cursor: pointer;
+
+                a {
+                    color: ${colors.main};
+                }
+            }
+        }
+    }
+`;
+
 
 const OrderNow = styled.div`
     width: 40px;
@@ -76,11 +171,41 @@ const HiddenButton = styled.div`
 
 
 function Layout(props) {
+    const { text } = require('../../assets/' + localStorage.getItem('language') + "/chatbot");
+    const [chatbot, setChatbot] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setChatbot(true)
+        }, 2000);
+    }, [])
+
     return (
         <Container>
 
             <VideoContainer />
             <OrderForm />
+            <Chatbot visible={chatbot}>
+                <div className="header">
+                    <img className="icon" src="/icon/chat.svg" alt="chat" />
+                    <h3>{text.title}</h3>
+                    <img onClick={() => setChatbot(false)} className="close" src="/icon/close-white.svg" alt="close" />
+                </div>
+                <div className="chat">
+                    <div className="messages">
+                        <img src="/logo.svg" alt="logo" />
+                        <div>
+                            <p>{text.messages[0]}</p>
+                            <p>{text.messages[1]}</p>
+                            <p>{text.messages[2]}</p>
+                        </div>
+                    </div>
+                    <div className="buttons">
+                        <button><a href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank">{text.buttons[0]}</a></button>
+                        <button><a href="mailto:info@fastropemadeira.com" target="_blank" >{text.buttons[1]}</a></button>
+                    </div>
+                </div>
+            </Chatbot>
 
             <HiddenButton>
                 <Icon href="mailto:info@fastropemadeira.com" target="_blank" >

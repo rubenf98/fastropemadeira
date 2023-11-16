@@ -44,7 +44,7 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
 
     useEffect(() => {
         if (!visible) {
-            setFormFields({ people: 3, date: moment().add(2, 'day'), experience: {} })
+            setFormFields({ people: 2, date: moment().add(2, 'day'), experience: {} })
         } else if (fields.people && fields.date && fields.experience.id) {
             setStep(2);
         }

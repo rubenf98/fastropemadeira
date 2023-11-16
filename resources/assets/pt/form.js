@@ -7,8 +7,8 @@ export const text = {
     formSubTitle: "Detalhes dos Partipantes",
     nodata: "Infelizmente já não possuímos disponibilidade para a data escolhida",
     calendar: {
-        slider: "Arrasta o slider para o número de participantes",
-        calendar: "Seleciona a data prentendida",
+        slider: "Quantas pessoas que irão participar na atividade?",
+        calendar: "Seleciona a data pretendida",
     },
     form: {
         name: {

@@ -361,8 +361,8 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                 </Col>
 
                 <Col xs={24} md={12}>
-                    <Form.Item name="address" label={experience.id == 1 || experience.id == 2 ? text.form.address.label + " (+5€)" : text.form.address.label} rules={rules.address} >
-                        <Input onChange={(e) => e.target.value ? setExtra(experience.id == 1 || experience.id == 2 ? 5 : 0) : setExtra(0)} placeholder={text.form.address.placeholder} />
+                    <Form.Item name="address" label={text.form.address.label} rules={rules.address} >
+                        <Input placeholder={text.form.address.placeholder} />
                     </Form.Item>
                 </Col>
 

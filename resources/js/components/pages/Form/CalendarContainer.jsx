@@ -87,38 +87,6 @@ const Button = styled.button`
     
 `;
 
-const Cell = styled.div`
-    width: 35px;
-    height: 35px;
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-
-const CustomSlider = styled(Slider)`
-    &:hover, .ant-slider:hover {
-        .ant-slider-track {
-            background-color:${colors.mainHover};
-        }
-        .ant-slider-handle{
-            border-color: ${colors.mainHover};
-        }
-    }
-    .ant-slider-track {
-        background-color:${colors.main};
-    }
-
-    .ant-slider-handle{
-        border-color: ${colors.main};
-    }
-`;
-
 function CalendarContainer(props) {
     const { text, fields } = props;
     const { people, date } = fields;
@@ -128,7 +96,29 @@ function CalendarContainer(props) {
             <BackButton text={text.calendarBackButton} />
 
             <h3>{text.calendar.slider}</h3>
-            <CustomSlider value={people} onChange={(value) => props.setFormFields({ ...fields, people: value })} min={2} max={15} />
+            <Select
+                style={{ width: "100%", marginBottom: "30px" }}
+                size='large'
+                value={people} onChange={(value) => props.setFormFields({ ...fields, people: value })}
+                options={[
+                    { value: 2, label: 2 },
+                    { value: 3, label: 3 },
+                    { value: 4, label: 4 },
+                    { value: 5, label: 5 },
+                    { value: 6, label: 6 },
+                    { value: 7, label: 7 },
+                    { value: 8, label: 8 },
+                    { value: 9, label: 9 },
+                    { value: 10, label: 10 },
+                    { value: 11, label: 11 },
+                    { value: 12, label: 12 },
+                    { value: 13, label: 13 },
+                    { value: 14, label: 14 },
+                    { value: 15, label: 15 },
+                ]}
+            />
+
+
 
             <br />
 
@@ -140,7 +130,7 @@ function CalendarContainer(props) {
                 onSelect={(value) => props.setFormFields({ ...fields, date: value })}
                 disabledDate={(currentDate) => {
                     return currentDate && (
-                        currentDate < moment().add(1, "day")
+                        currentDate < moment().endOf('day')
                     );
                 }}
                 headerRender={({ value, onChange }) => {

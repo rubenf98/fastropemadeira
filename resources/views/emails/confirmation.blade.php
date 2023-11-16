@@ -374,11 +374,13 @@
 
                                                             <div style="font-family:'Lato',sans-serif;">
                                                                 <p style="font-size: 16px;color: #888888;">
-                                                                    Todos
-                                                                    os pagamentos são realizados após a
-                                                                    atividade</p>
+                                                                    No dia anterior à reserva irá ser contactado de
+                                                                    modo a obter mais informações sobre atividade,
+                                                                    incluíndo o pagamento</p>
                                                                 <p style="font-size: 14px; color: #888888;">
-                                                                    All payments are made after the activity
+                                                                    You'll be contacted the day prior to the reservation
+                                                                    with details regarding the activity and payment
+                                                                    information.
                                                                 </p>
                                                             </div>
 
