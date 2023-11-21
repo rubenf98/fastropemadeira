@@ -262,8 +262,8 @@
                                                                 <p
                                                                     style="font-size: 14px; line-height: 140%; text-align: center;">
                                                                     <span
-                                                                        style="font-size: 28px; line-height: 39.2px; color: #ffffff; font-family: Lato, sans-serif;">Confirma&ccedil;&atilde;o
-                                                                        de&nbsp; Reserva<br /></span>
+                                                                        style="font-size: 28px; line-height: 39.2px; color: #ffffff; font-family: Lato, sans-serif;">Confirm
+                                                                        reservation<br /></span>
                                                                 </p>
                                                             </div>
 
@@ -355,7 +355,7 @@
                                                                     style="box-sizing: border-box;display: inline-block;font-family:'Lato',sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #18163a; border-radius: 1px;-webkit-border-radius: 1px; -moz-border-radius: 1px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;">
                                                                     <span
                                                                         style="display:block;padding:15px 40px;line-height:120%;"><span
-                                                                            style="font-size: 18px; line-height: 21.6px;">Confirmar&nbsp;</span></span>
+                                                                            style="font-size: 18px; line-height: 21.6px;">Confirm&nbsp;</span></span>
                                                                 </a>
                                                                 <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->
                                                             </div>
