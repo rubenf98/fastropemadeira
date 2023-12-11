@@ -21,6 +21,7 @@ class CreateExperiencesTable extends Migration
             $table->decimal('private_price', 5, 2)->nullable();
             $table->unsignedBigInteger('activity_id');
             $table->text('description');
+            $table->boolean('priority')->default(false);
             $table->string('video')->nullable();
             $table->string('target')->nullable();
             $table->string('level')->nullable();

@@ -17,7 +17,7 @@ class ExperienceController extends Controller
     public function index(ExperienceFilter $filters)
     {
         // return Experience::filterBy($filters)->get();
-        return ExperienceResource::collection(Experience::filterBy($filters)->get());
+        return ExperienceResource::collection(Experience::filterBy($filters)->orderByDesc('priority')->get());
     }
 
     /**

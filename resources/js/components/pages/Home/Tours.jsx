@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setVideoSrc } from "../../../redux/application/actions";
 import { fetchExperiences } from '../../../redux/experience/actions';
+import { setFormVisibility } from '../../../redux/form/actions';
 
 const responsive = {
     desktop: {
@@ -22,7 +23,7 @@ const responsive = {
     mobile: {
         breakpoint: { max: 567, min: 0 },
         items: 1,
-        partialVisibilityGutter: 0
+        partialVisibilityGutter: 50
     }
 };
 
@@ -55,6 +56,7 @@ const Card = styled.div`
         flex-direction: column;
         padding: 15px;
         box-sizing: border-box;
+        position: relative;
         
 
         h3 {
@@ -74,7 +76,7 @@ const Card = styled.div`
                 float: right;
                 cursor: pointer;
 
-                img {
+                .video-button {
                     width: 20px;
                     margin: auto;
                     display: block;
@@ -82,6 +84,15 @@ const Card = styled.div`
             }
         }
 
+        .sticker {
+            width: 150px;
+            margin: auto;
+            display: block;
+            position: absolute;
+            top: -30px; 
+            left: -50px;
+            rotate: 18deg;
+        }
         
     }
 
@@ -230,7 +241,7 @@ const Title = styled.div`
 //     },
 // ];
 
-function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
+function Tours({ text, setVideoSrc, fetchExperiences, experiences, setFormVisibility }) {
 
     useEffect(() => {
         fetchExperiences();
@@ -251,9 +262,9 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
                 {experiences.map((experience, index) => (
                     <Card key={index} background={experience.images[0].image}>
                         <div className='header'>
-                            {experience.video && <div><button onClick={() => setVideoSrc(experience.video)}><img src="/icon/activities/play.svg" alt="play button" /></button></div>}
+                            {experience.video && <div><button onClick={() => setVideoSrc(experience.video)}><img className='video-button' src="/icon/activities/play.svg" alt="play button" /></button></div>}
 
-
+                            {experience.id == 2 && <img className='sticker' src="/icon/activities/sticker.png" alt="best seller" />}
 
                             <h3>{experience.name[localStorage.getItem("language")]}</h3>
                         </div>
@@ -276,8 +287,8 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences }) {
                             <div className='price'>{experience.price}EUR <span>/{text.tours.person}</span></div>
                             <p>{experience.description[localStorage.getItem("language")]}</p>
                             <div className='button-container'>
-                                {/* <button className='primary'>{text.tours.primaryButton}</button> */}
-                                {experience.activity_id === 1 && <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>}
+                                <button onClick={() => setFormVisibility(true)} className='primary'>{text.tours.primaryButton}</button>
+                                {(experience.activity_id === "1" || experience.activity_id === 1) && <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>}
 
 
                             </div>
@@ -294,6 +305,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setVideoSrc: (data) => dispatch(setVideoSrc(data)),
         fetchExperiences: (data) => dispatch(fetchExperiences(data)),
+        setFormVisibility: (data) => dispatch(setFormVisibility(data)),
     };
 };
 

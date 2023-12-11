@@ -22,11 +22,12 @@ class Experience extends Model
 
     protected $casts = [
         'blocked_dates_sum_capacity' => CustomInt::class,
-        'price' => 'integer'
+        'price' => 'integer',
+        'activity_id' => 'integer'
     ];
     // protected $casts = ['price' => 'integer'];
     protected $fillable = ['price'];
-    
+
     public function activity()
     {
         return $this->belongsTo(Activity::class);
