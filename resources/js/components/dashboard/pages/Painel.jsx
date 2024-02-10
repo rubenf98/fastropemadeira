@@ -140,7 +140,7 @@ class Painel extends Component {
                         />
 
                         <CardContainer
-                            img="/icon/dashboard/experience.svg"
+                            img="/icon/dashboard/partner.svg"
                             text="Parceiros na plataforma"
                             to="/painel/parceiros"
                         />

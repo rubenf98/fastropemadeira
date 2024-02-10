@@ -45,7 +45,7 @@ function TableContainer({ loading, data, meta, handlePageChange, updatePartner, 
     const [edit, setEdit] = useState(false)
 
     const copyToClipboard = (url) => {
-        navigator.clipboard.writeText("https://www.fastropemadeira.com?partnerUrl=" + url);
+        navigator.clipboard.writeText("https://www.fastropemadeira.com/en?partnerUrl=" + url);
         message.info('Link copiado para o clipboard');
     }
 
@@ -64,7 +64,7 @@ function TableContainer({ loading, data, meta, handlePageChange, updatePartner, 
             title: 'Hiperligação',
             dataIndex: 'url',
             render: (url) => (<span onClick={() => copyToClipboard(url)} >
-                {"https://www.fastropemadeira.com?partnerUrl=" + url}
+                {"https://www.fastropemadeira.com/en?partnerUrl=" + url}
             </span>),
 
         },
