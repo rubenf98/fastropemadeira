@@ -12,6 +12,7 @@ import Login from "./components/pages/Login";
 import PainelLayout from "./components/dashboard/PainelLayout";
 import ScrollToTop from "./components/common/ScrollToTop";
 import Activity from "./components/pages/Activity";
+import PartnerForm from "./components/pages/PartnerForm";
 
 export const history = createBrowserHistory();
 
@@ -29,12 +30,14 @@ function Routes() {
                     <Redirect exact from="/" to={getRoute("/")} />
                     <Redirect exact from="/contact" to={getRoute("/contact")} />
                     <Redirect exact from="/about" to={getRoute("/about")} />
+                    <Redirect exact from="/reservation/:partnerUrl" to={getRoute("/reservation/:partnerUrl")} />
                     <Redirect exact from="/confirmation/:token" to={getRoute("/confirmation/:token")} />
                     <Redirect exact from="/tour/:activity/:experience" to={getRoute("/tour/:activity/:experience")} />
                     <Route path="/login" component={Login} />
                     <Route path="/painel" component={PainelLayout} />
 
                     <Layout>
+                        <Route exact path="/:language/reservation/:partnerUrl" component={withRouter(PartnerForm)} />
                         <Route exact path="/:language/confirmation/:token" component={withRouter(Confirmation)} />
                         <Route exact path="/:language/tour/:activity/:experience" component={withRouter(Activity)} />
                         <Route exact path="/:language/contact" component={Contact} />

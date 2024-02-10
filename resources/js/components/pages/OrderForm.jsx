@@ -8,7 +8,9 @@ import { dimensions } from "../../helper";
 import axios from "axios";
 import CalendarContainer from './Form/CalendarContainer';
 import { setFormFields, setFormVisibility } from '../../redux/form/actions';
+import { fetchPartnerFromUrl, resetCurrentPartner } from '../../redux/partner/actions';
 import { connect } from 'react-redux';
+import { useQuery } from '../common/useQuery';
 
 const Content = styled.div`
 
@@ -30,11 +32,12 @@ const ModalContainer = styled(Modal)`
     }
 `;
 
-const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility }) => {
+const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility, fetchPartnerFromUrl, currentPartner, resetCurrentPartner }) => {
     const [step, setStep] = useState(0);
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [form] = Form.useForm();
     const { text } = require('../../../assets/' + localStorage.getItem('language') + "/form");
+    let query = useQuery();
 
     const stepItems = [
         <CalendarContainer text={text} incrementStep={incrementStep} />,
@@ -42,8 +45,16 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
         <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />
     ]
 
+
     useEffect(() => {
+        var partnerUrl = query.get("partnerUrl")
+
+        if (partnerUrl) {
+            fetchPartnerFromUrl({ url: partnerUrl })
+        }
+
         if (!visible) {
+            resetCurrentPartner()
             setFormFields({ people: 2, date: moment().add(2, 'day'), experience: {} })
         } else if (fields.people && fields.date && fields.experience.id) {
             setStep(2);
@@ -68,7 +79,7 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
             data.person = data.person.slice(0, data.people);
         }
         console.log(fields);
-        axios.post(`${window.location.origin}/api/reservation`, { ...data, nParticipants: fields.people, experience_id: fields.experience.id, date: moment(fields.date).format('YYYY-MM-DD') }).then((response) => {
+        axios.post(`${window.location.origin}/api/reservation`, { ...data, nParticipants: fields.people, experience_id: fields.experience.id, date: moment(fields.date).format('YYYY-MM-DD'), partner_id: currentPartner?.id ? currentPartner.id : null }).then((response) => {
             setLoadingSubmit(false);
             openNotification("Reservation success", ["Reservation has been confirmed, check your email for details"], "success");
             handleClose();
@@ -104,7 +115,7 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
 
         });
     };
-
+    console.log(currentPartner)
     return (
         <ModalContainer
             visible={visible}
@@ -149,12 +160,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setFormVisibility: (data) => dispatch(setFormVisibility(data)),
         setFormFields: (data) => dispatch(setFormFields(data)),
+        fetchPartnerFromUrl: (filters) => dispatch(fetchPartnerFromUrl(filters)),
+        resetCurrentPartner: () => dispatch(resetCurrentPartner()),
+
     };
 };
 const mapStateToProps = (state) => {
     return {
         visible: state.form.visible,
         fields: state.form.fields,
+        currentPartner: state.partner.current,
     };
 };
 

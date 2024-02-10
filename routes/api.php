@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExternalReservationController;
+use App\Http\Controllers\FetchPartnerFromUrlInvokable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::post('me', 'App\Http\Controllers\AuthController@me');
 
 Route::post('/external-reservation', ExternalReservationController::class);
 
+Route::get('/partner-from-url', FetchPartnerFromUrlInvokable::class);
+
+
 Route::get('reservation/disabledDate', 'App\Http\Controllers\ReservationController@disabledDates');
 Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationController@showFromToken');
 Route::get('reservation/selector/blockDate', 'App\Http\Controllers\BlockReservationDateController@selector');
@@ -38,3 +42,4 @@ Route::apiResource('feedback', 'App\Http\Controllers\FeedbackController');
 Route::apiResource('reservation', 'App\Http\Controllers\ReservationController');
 Route::apiResource('activity', 'App\Http\Controllers\ActivityController');
 Route::apiResource('experience', 'App\Http\Controllers\ExperienceController');
+Route::apiResource('partners', 'App\Http\Controllers\PartnerController');

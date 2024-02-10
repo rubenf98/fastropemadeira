@@ -16,6 +16,7 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('experience_id');
+            $table->unsignedBigInteger('partner_id')->nullable()->default(null);
             $table->boolean('private')->default(false);
             $table->boolean('confirmation')->default(false);
             $table->string('confirmation_token')->unique();
@@ -32,6 +33,7 @@ class CreateReservationsTable extends Migration
             $table->timestamps();
 
             $table->foreign('experience_id')->references('id')->on('experiences');
+            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('set null');
         });
     }
 

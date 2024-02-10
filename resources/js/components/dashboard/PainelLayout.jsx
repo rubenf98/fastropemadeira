@@ -11,6 +11,7 @@ import { dimensions } from "../../helper";
 import Blocked from "./pages/Blocked/Blocked";
 import Experience from "./pages/Experience/Experience";
 import Review from "./pages/Review/Review";
+import Partner from "./pages/Partner/Partner";
 
 const PageContainer = styled.div`
     margin: auto;
@@ -44,6 +45,7 @@ export default class PainelLayout extends Component {
                 <NavBarContainer><NavBar /></NavBarContainer>
                 <ContentContainer>
                     <Content>
+                        <PrivateRoute path="/painel/parceiros" component={Partner} />
                         <PrivateRoute path="/painel/review" component={Review} />
                         <PrivateRoute path="/painel/contacto" component={Contact} />
                         <PrivateRoute path="/painel/avaliacao" component={Feedback} />

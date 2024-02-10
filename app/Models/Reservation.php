@@ -11,7 +11,7 @@ class Reservation extends Model
 {
     use FiltersRecords;
 
-    protected $fillable = ['private', 'source', 'price', 'people', 'notes', 'name', 'email', 'address', 'phone', 'date', 'experience_id', "confirmation_token", "confirmation"];
+    protected $fillable = ['private', 'partner_id', 'source', 'price', 'people', 'notes', 'name', 'email', 'address', 'phone', 'date', 'experience_id', "confirmation_token", "confirmation"];
 
     public function participants()
     {
@@ -21,6 +21,11 @@ class Reservation extends Model
     public function experience()
     {
         return $this->belongsTo('App\Models\Experience');
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo('App\Models\Partner');
     }
 
     public function blockedDates()

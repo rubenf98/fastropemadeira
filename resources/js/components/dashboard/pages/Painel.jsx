@@ -139,6 +139,13 @@ class Painel extends Component {
                             to="/painel/experiencias"
                         />
 
+                        <CardContainer
+                            img="/icon/dashboard/experience.svg"
+                            text="Parceiros na plataforma"
+                            to="/painel/parceiros"
+                        />
+
+
                     </Content>
                     <Footer>
                         <img src="/logo.svg" alt="logo" />

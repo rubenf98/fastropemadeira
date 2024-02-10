@@ -90,6 +90,11 @@ function TableContainer({ activities, fetchActivities, loading, data, meta, hand
             dataIndex: 'source',
         },
         {
+            title: 'Parceiro',
+            dataIndex: 'partner',
+            render: (partner) => partner?.id ? partner.name : "---",
+        },
+        {
             title: 'Cliente',
             dataIndex: 'name',
             filterDropdown: () => (getFilter("client")),

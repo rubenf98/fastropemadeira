@@ -62,6 +62,7 @@ class ReservationRequest extends FormRequest
             'notes' => 'required_if:experience_id,11|string',
             'people' => 'required|integer|min:2|max:15',
             'experience_id' => 'required|exists:experiences,id',
+            'partner_id' => 'nullable|exists:partners,id',
             'private' => 'required|boolean',
             'phone' => 'required|string',
             'person' => 'required_if:hasPerson,true',

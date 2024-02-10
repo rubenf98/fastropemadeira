@@ -8,6 +8,8 @@ import { colors, dimensions } from "../helper";
 import { setFormVisibility } from "../redux/form/actions";
 import { connect } from "react-redux";
 import VideoContainer from "./common/VideoContainer";
+import { useLocation } from 'react-router-dom';
+import { useQuery } from "./common/useQuery";
 
 const Container = styled.div`
     width: 100%;
@@ -173,6 +175,8 @@ const HiddenButton = styled.div`
 function Layout(props) {
     const { text } = require('../../assets/' + localStorage.getItem('language') + "/chatbot");
     const [chatbot, setChatbot] = useState(false)
+    let query = useQuery();
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -180,9 +184,18 @@ function Layout(props) {
         }, 2000);
     }, [])
 
+    useEffect(() => {
+        var partnerUrl = query.get("partnerUrl")
+        console.log(partnerUrl)
+        if (partnerUrl) {
+            props.setFormVisibility(true)
+        }
+
+    }, [])
+
+
     return (
         <Container>
-
             <VideoContainer />
             <OrderForm />
             <Chatbot visible={chatbot}>

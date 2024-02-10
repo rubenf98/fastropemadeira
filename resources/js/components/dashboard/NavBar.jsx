@@ -126,6 +126,7 @@ class NavBar extends Component {
                             <NavBarItem item="bloqueado" name="bloqueado" />
                             <NavBarItem item="experiencias" name="experiência" />
                             <NavBarItem item="review" name="review" />
+                            <NavBarItem item="parceiros" name="parceiros" />
                         </li>
                     </TabList>
 
