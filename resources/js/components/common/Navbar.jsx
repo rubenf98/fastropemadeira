@@ -335,6 +335,8 @@ function Navbar({ onOrder }) {
                     >
                         <Option value="en">  EN</Option>
                         <Option value="pt">  PT</Option>
+                        <Option value="fr">  FR</Option>
+                        <Option value="de">  DE</Option>
                     </CustomSelect>
 
                 </Content>

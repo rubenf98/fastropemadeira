@@ -38,8 +38,10 @@ function LanguageSelector() {
                 defaultValue={localStorage.getItem("language")}
                 bordered={false}
             >
-                <Option value="en">English (US)</Option>
+                <Option value="en">English</Option>
                 <Option value="pt">Português</Option>
+                <Option value="fr">Français</Option>
+                <Option value="de">Deutsch</Option>
             </CustomSelect>
         </MenuContainer>
     )
