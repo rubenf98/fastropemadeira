@@ -19,4 +19,9 @@ class BlockReservationFilters extends QueryFilters
     {
         $this->query->where('experience_id', $experience);
     }
+
+    public function manual()
+    {
+        $this->query->where('reservation_id', '!=', null);
+    }
 }

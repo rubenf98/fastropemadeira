@@ -16,7 +16,7 @@ class ActivitySeeder extends Seeder
     {
 
         Activity::create([
-            'name' => ['en' => "Canyoning", 'pt' => "Canyoning"],
+            'name' => ['en' => "Canyoning", 'pt' => "Canyoning", 'fr' => "Canyoning", 'de' => "Canyoning"],
             'description' => [
                 'en' => "Progressive exploration of a river, overcoming obstacles, through various techniques, equipment and specialized monitoring by our specialists",
                 'pt' => "Exploração progressiva de um rio, transpondo os obstáculos, através de diversas técnicas, equipamentos e acompanhamento especializado dos nossos especialistas",
@@ -27,7 +27,7 @@ class ActivitySeeder extends Seeder
         ]);
 
         Activity::create([
-            'name' => ['en' => "Hiking", 'pt' => "Caminhada"],
+            'name' => ['en' => "Hiking", 'pt' => "Caminhada", 'fr' => "Randonnée", 'de' => "Wandern"],
             'description' => [
                 'en' => "Dare to explore our walks through fantastic routes full of local nature. We have options for all tastes and customized packages that will amaze you!",
                 'pt' => "Atreve-te a explorar as nossas caminhadas através de percursos fantásticos e repletos de natureza. Temos opções para todos os gostos e pacotes personalizados!",

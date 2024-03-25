@@ -44,7 +44,7 @@ class ExperienceSeeder extends Seeder
             'name' => ['en' => "adventure", 'pt' => "Aventura", 'fr' => 'Aventure', 'de' => 'Abenteuer'],
             'price' => 80,
             'private_price' => 100,
-            'target' => ['en' => 'Family', 'pt' => 'Familia'],
+            'target' => ['en' => 'Family', 'pt' => 'Familia', 'fr' => 'Famille', 'de' => 'Familie'],
             'video' => "https://www.youtube.com/embed/jUxO_yq7Vdk",
             'description' => [
                 'en' => 'There are 4 places to practice level 2 canyoning, namely Ribeira do Cidrão (Curral das Freiras), Ribeira do Lajeado (Rabaçal), Ribeira do Alecrim (Rabaçal) and Ribeiro Frio (Santana).',
@@ -71,7 +71,7 @@ class ExperienceSeeder extends Seeder
             'name' => ['en' => "advanced", 'pt' => "Avançado", 'fr' => 'Avancé', 'de' => 'Fortschrittlich'],
             'price' => 120,
             'private_price' => 120,
-            'target' => ['en' => 'Adventurous', 'pt' => 'Aventureiros'],
+            'target' => ['en' => 'Adventurous', 'pt' => 'Aventureiros', 'fr' => 'Aventureux', 'de' => 'Abenteuerlich'],
             'video' => "https://www.youtube.com/embed/5diVXzfUfqg",
             'description' => [
                 'en' => 'This level already requires some previous experience in our activities and can be carried out in Ribeira Funda (Seixal), Ribeira da Furna (Santana) and Ribeira da Camisa (Ponta Delgada).',
@@ -97,7 +97,7 @@ class ExperienceSeeder extends Seeder
             'name' => ['en' => "extreme", 'pt' => "Extremo", 'fr' => 'Extrême', 'de' => 'Extrem'],
             'price' => 200,
             'private_price' => 200,
-            'target' => ['en' => 'Experienced', 'pt' => 'Experientes'],
+            'target' => ['en' => 'Experienced', 'pt' => 'Experientes', 'fr' => 'Expérimenté', 'de' => 'Erfahren'],
             'video' => "https://www.youtube.com/embed/AI5X2f9Y3Rc",
             'description' => [
                 'en' => 'Level that requires a certain degree of autonomy in canyoning and experience with us in this type of activity. It can be practiced in Ribeira do Passo (São Vicente), Ribeira da Hortelã (Seixal) or Ribeira do Vimieiro (Seixal).',

@@ -33,12 +33,12 @@ const Table = styled.div`
 
 class Blocked extends Component {
     state = {
-        filters: {},
+        filters: { manual: true },
         page: 1,
     }
 
     componentDidMount() {
-        this.props.fetchBlockedDates();
+        this.props.fetchBlockedDates(this.state.filters);
     }
 
     setFilters = (aFilters) => {
