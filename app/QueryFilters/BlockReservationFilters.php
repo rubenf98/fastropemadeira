@@ -22,6 +22,6 @@ class BlockReservationFilters extends QueryFilters
 
     public function manual()
     {
-        $this->query->where('reservation_id', '!=', null);
+        $this->query->where('reservation_id', null);
     }
 }
