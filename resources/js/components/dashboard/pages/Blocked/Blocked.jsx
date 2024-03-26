@@ -38,7 +38,7 @@ class Blocked extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchBlockedDates(this.state.filters);
+        this.props.fetchBlockedDates(1, this.state.filters);
     }
 
     setFilters = (aFilters) => {
