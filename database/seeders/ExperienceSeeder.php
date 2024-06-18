@@ -45,7 +45,7 @@ class ExperienceSeeder extends Seeder
             'price' => 80,
             'private_price' => 100,
             'target' => ['en' => 'Family', 'pt' => 'Familia', 'fr' => 'Famille', 'de' => 'Familie'],
-            'video' => "https://www.youtube.com/embed/jUxO_yq7Vdk",
+            'video' => "https://www.youtube.com/embed/Wj32S0vhnKs?si=z0sLetqtCENr0aLz",
             'description' => [
                 'en' => 'There are 4 places to practice level 2 canyoning, namely Ribeira do Cidrão (Curral das Freiras), Ribeira do Lajeado (Rabaçal), Ribeira do Alecrim (Rabaçal) and Ribeiro Frio (Santana).',
                 'pt' => 'Existem 4 sitios para a prática do nível 2 de canyoning, nomeadamente a Ribeira do Cidrão (Curral das Freiras), Ribeira do Lajeado (Rabaçal), Ribeira do Alecrim (Rabaçal) e Ribeiro Frio (Santana).',

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { fetchExperience } from '../../redux/experience/actions';
 import { fetchBlockedDatesSelector } from '../../redux/date/actions';
+import Carousel from "react-multi-carousel";
 
 import { Spin } from 'antd';
 
@@ -16,17 +17,19 @@ const Container = styled.section`
     margin-top: 80px;
 `;
 
-const Background = styled.div`
+const Background = styled(Carousel)`
     position: absolute;
     top: 0;
     left: 0;
     height: 500px;
     width: 100vw;
-    background: ${props => "url(" + props.background + ")"} ;
-    background-position: left center;
-    background-size: cover;
-    background-repeat: no-repeat;
     z-index: -1;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `;
 
 
@@ -125,7 +128,9 @@ function Activity(props) {
 
     return (
         <Container>
-            <Background background={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} />
+            <Background centerMode partialVisible={false}>
+                <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+            </Background>
             {!experience.id ? <Spin /> :
                 <Content>
                     <Information>
