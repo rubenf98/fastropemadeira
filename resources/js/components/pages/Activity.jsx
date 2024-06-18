@@ -141,9 +141,13 @@ function Activity(props) {
     return (
         <Container>
             <Background autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
-                <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/1.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/2.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/3.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/4.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/5.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/6.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/7.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
             </Background>
             {!experience.id ? <Spin /> :
                 <Content>
