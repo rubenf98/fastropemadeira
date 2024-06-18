@@ -38,6 +38,10 @@ const Background = styled(Carousel)`
         height: 100%;
         object-fit: cover;
     }
+
+    .react-multi-carousel-track {
+        height: 100%;
+    }
 `;
 
 
@@ -136,7 +140,7 @@ function Activity(props) {
 
     return (
         <Container>
-            <Background centerMode partialVisible={false} responsive={responsive}>
+            <Background autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
                 <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
 
