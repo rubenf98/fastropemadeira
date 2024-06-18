@@ -10,6 +10,14 @@ import { fetchExperience } from '../../redux/experience/actions';
 import { fetchBlockedDatesSelector } from '../../redux/date/actions';
 import Carousel from "react-multi-carousel";
 
+const responsive = {
+    mobile: {
+        breakpoint: { max: 10000, min: 0 },
+        items: 1,
+        partialVisibilityGutter: 0 // this is needed to tell the amount of px that should be visible.
+    }
+}
+
 import { Spin } from 'antd';
 
 const Container = styled.section`
@@ -128,8 +136,10 @@ function Activity(props) {
 
     return (
         <Container>
-            <Background centerMode partialVisible={false}>
+            <Background centerMode partialVisible={false} responsive={responsive}>
                 <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+
             </Background>
             {!experience.id ? <Spin /> :
                 <Content>
