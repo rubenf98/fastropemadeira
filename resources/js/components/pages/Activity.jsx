@@ -105,6 +105,10 @@ const Content = styled.div`
     margin: auto;
     padding:0px 0px 100px 0px;
 
+    @media (max-width: ${dimensions.lg}) {
+        flex-wrap: wrap;
+    }
+
 `;
 
 const Details = styled.div`
