@@ -44,7 +44,16 @@ const Form = styled.div`
     left: 0;
 
     @media (max-width: ${dimensions.lg}) {
-        display: none;
+        position: relative;
+        top: 0px;
+        width: 90%;
+        margin: auto;
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
     }
 `;
 
