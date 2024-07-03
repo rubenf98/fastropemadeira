@@ -162,7 +162,7 @@ const CalendarContainer = (props) => {
                 fullscreen={false}
                 disabledDate={(currentDate) => {
                     return currentDate && (
-                        currentDate < moment().add(1, "day") || blockedDates.includes(moment(currentDate).format('YYYY-MM-DD'))
+                        currentDate < moment().endOf('day') || blockedDates.includes(moment(currentDate).format('YYYY-MM-DD'))
                     );
                 }}
                 value={date}
