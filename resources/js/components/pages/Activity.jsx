@@ -8,15 +8,9 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { fetchExperience } from '../../redux/experience/actions';
 import { fetchBlockedDatesSelector } from '../../redux/date/actions';
-import Carousel from "react-multi-carousel";
 
-const responsive = {
-    mobile: {
-        breakpoint: { max: 10000, min: 0 },
-        items: 1,
-        partialVisibilityGutter: 0 // this is needed to tell the amount of px that should be visible.
-    }
-}
+
+
 
 import { Spin } from 'antd';
 
@@ -25,24 +19,20 @@ const Container = styled.section`
     margin-top: 80px;
 `;
 
-const Background = styled(Carousel)`
+const Background = styled.div`
     position: absolute;
     top: 0;
     left: 0;
     height: 500px;
     width: 100vw;
     z-index: -1;
+    background: ${props => "url(" + props.background + ")"} ;
+    background-position: left center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(.6);
-    }
 
-    .react-multi-carousel-track {
-        height: 100%;
-    }
+    
 `;
 
 
@@ -141,7 +131,9 @@ function Activity(props) {
 
     return (
         <Container>
-            <Background autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
+            <Background background={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} />
+
+            {/* <Background autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/1.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/2.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/3.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
@@ -149,7 +141,7 @@ function Activity(props) {
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/5.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/6.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/7.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-            </Background>
+            </Background> */}
             {!experience.id ? <Spin /> :
                 <Content>
                     <Information>
@@ -187,7 +179,7 @@ function Activity(props) {
                         <p>{text.disclaimer}</p>
                     </Information>
                     <Form>
-                        <CalendarContainer blockedDates={blockedDates} handlePeopleChange={handlePeopleChange} image={experience.images[0].image} handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
+                        <CalendarContainer experience={experience} blockedDates={blockedDates} handlePeopleChange={handlePeopleChange} image={experience.images[0].image} handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
                     </Form>
                 </Content>
             }

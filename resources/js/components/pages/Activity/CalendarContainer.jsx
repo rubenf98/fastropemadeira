@@ -3,6 +3,15 @@ import React, { useState, useEffect } from 'react';
 import moment from "moment";
 import styled from "styled-components";
 import { colors } from '../../../helper';
+import Carousel from "react-multi-carousel";
+
+const responsive = {
+    mobile: {
+        breakpoint: { max: 10000, min: 0 },
+        items: 1,
+        partialVisibilityGutter: 0 // this is needed to tell the amount of px that should be visible.
+    }
+}
 
 const Container = styled.div`
     background-color: white;
@@ -98,12 +107,18 @@ const Button = styled.button`
     
 `;
 
-const Header = styled.img`
-    width: 100%;
+const Header = styled(Carousel)`
+    img {
+        width: 100%;
+    }
+
+    .react-multi-carousel-track {
+        height: 100%;
+    }
 `;
 
 const CalendarContainer = (props) => {
-    const { text, blockedDates } = props;
+    const { text, blockedDates, experience } = props;
     const [date, setDate] = useState(undefined)
     const [people, setPeople] = useState(2)
 
@@ -124,7 +139,16 @@ const CalendarContainer = (props) => {
 
     return (
         <Container>
-            <Header src={props.image} />
+            <Header autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/1.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/2.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/3.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/4.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/5.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/6.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+                <img src={experience.id ? "/images/activities/" + experience.name.en + "/7.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+            </Header>
+            {/* <Header src={props.image} /> */}
             <Banner>
                 <div className='title'>{text.title}</div>
                 <p>
