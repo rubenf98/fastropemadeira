@@ -50,7 +50,6 @@ const Form = styled.div`
         margin: auto;
         padding: 0px 20px;
         box-sizing: border-box;
-        order: 1;
     }
 
     @media (max-width: ${dimensions.md}) {
@@ -88,7 +87,6 @@ const Information = styled.div`
         margin: auto;
         padding: 0px 20px;
         box-sizing: border-box;
-        order: 2;
     }
 
     @media (max-width: ${dimensions.md}) {
