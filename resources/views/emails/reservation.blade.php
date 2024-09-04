@@ -322,8 +322,10 @@
                                                                         style="font-size: 18px; line-height: 25.2px; color: #666666;"><span
                                                                             style="font-size: 14px; line-height: 19.6px; color: #7e8c8d;">
                                                                             {{$reservation->name}} reservou uma
-                                                                            {{$reservation->activity($reservation->experience->activity_id)->getTranslation('name', 'pt')}}
-                                                                            ({{$reservation->experience->getTranslation('name', 'pt')}}) para dia
+                                                                            {{$reservation->activity($reservation->experience->activity_id)->getTranslation('name',
+                                                                            'pt')}}
+                                                                            ({{$reservation->experience->getTranslation('name',
+                                                                            'pt')}}) para dia
                                                                             {{$reservation->date}}
                                                                         </span><br />&nbsp;</span></p>
                                                             </div>
