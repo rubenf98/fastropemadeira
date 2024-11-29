@@ -27,12 +27,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Mukta:wght@300;500;700&display=swap"
         rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10807342386"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []; function gtag() {dataLayer.push(arguments);} gtag('js', new Date());
+        gtag('config', 'AW-10807342386');
+    </script>
+
+    <script>
+        gtag('event', 'conversion', {
+    'send_to': 'AW-10807342386/uwk0CIvjze0ZELLqq6E0', 'transaction_id':
+    }); 
+    </script>
+
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-10807342386/ R6UICI7jze0ZELLqq6Eo'});
+    </script>
 
     <title>FastRope</title>
 </head>
 
 <style>
-
     @font-face {
         font-family: Neutrons Demo;
         src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
