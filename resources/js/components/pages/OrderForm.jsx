@@ -40,7 +40,7 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
     let query = useQuery();
 
     const stepItems = [
-        <CalendarContainer text={text} incrementStep={incrementStep} />,
+        <CalendarContainer text={text} incrementStep={incrementStep} experience={fields.experience} />,
         <Location text={text} decrementStep={decrementStep} incrementStep={incrementStep} />,
         <People loading={loadingSubmit} form={form} text={text} decrementStep={decrementStep} incrementStep={incrementStep} />
     ]
@@ -55,8 +55,9 @@ const OrderForm = ({ visible, setFormFields, fields, onCreate, setFormVisibility
 
         if (!visible) {
             resetCurrentPartner()
-            setFormFields({ people: 2, date: moment().add(2, 'day'), experience: {} })
-        } else if (fields.people && fields.date && fields.experience.id) {
+            setFormFields({ people: 2, date: moment().add(2, 'day'), experience: {}, skip: 0 })
+        }
+        else if (fields.people && fields.date && fields.experience.id && fields.skip) {
             setStep(2);
         }
     }, [visible])

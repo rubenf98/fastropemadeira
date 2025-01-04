@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setVideoSrc } from "../../../redux/application/actions";
 import { fetchExperiences } from '../../../redux/experience/actions';
-import { setFormVisibility } from '../../../redux/form/actions';
+import { setFormFields, setFormVisibility } from '../../../redux/form/actions';
 
 const responsive = {
     desktop: {
@@ -241,11 +241,17 @@ const Title = styled.div`
 //     },
 // ];
 
-function Tours({ text, setVideoSrc, fetchExperiences, experiences, setFormVisibility }) {
+function Tours({ text, setVideoSrc, fetchExperiences, experiences, setFormVisibility, setFormFields }) {
 
     useEffect(() => {
         fetchExperiences();
     }, [])
+
+    const handleExperienceClick = (experience) => {
+        setFormFields({ experience: experience, skip: 0 });
+        setFormVisibility(true);
+
+    }
 
     return (
         <Container>
@@ -287,7 +293,7 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences, setFormVisibi
                             <div className='price'>{experience.price}EUR <span>/{text.tours.person}</span></div>
                             <p>{experience.description[localStorage.getItem("language")]}</p>
                             <div className='button-container'>
-                                <button onClick={() => setFormVisibility(true)} className='primary'>{text.tours.primaryButton}</button>
+                                <button onClick={() => handleExperienceClick(experience)} className='primary'>{text.tours.primaryButton}</button>
                                 {(experience.activity_id === "1" || experience.activity_id === 1) && <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>}
 
 
@@ -306,6 +312,7 @@ const mapDispatchToProps = (dispatch) => {
         setVideoSrc: (data) => dispatch(setVideoSrc(data)),
         fetchExperiences: (data) => dispatch(fetchExperiences(data)),
         setFormVisibility: (data) => dispatch(setFormVisibility(data)),
+        setFormFields: (data) => dispatch(setFormFields(data)),
     };
 };
 

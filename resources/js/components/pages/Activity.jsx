@@ -138,7 +138,7 @@ function Activity(props) {
     }, []);
 
     const handleSelect = (fields) => {
-        props.setFormFields({ ...fields, experience: experience });
+        props.setFormFields({ ...fields, experience: experience, skip: 1 });
         props.setFormVisibility(true);
     }
 

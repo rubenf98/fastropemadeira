@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import styled from "styled-components";
 import { Row, Calendar, Col, Slider, Select } from 'antd';
 import moment from "moment";
@@ -6,6 +6,7 @@ import BackButton from './BackButton';
 import { colors, dimensions } from '../../../helper';
 import { connect } from 'react-redux';
 import { setFormFields } from '../../../redux/form/actions';
+import { fetchBlockedDatesSelector } from '../../../redux/date/actions';
 
 const Container = styled.div`
     /* .ant-picker-calendar-date-today {
@@ -88,9 +89,19 @@ const Button = styled.button`
 `;
 
 function CalendarContainer(props) {
-    const { text, fields } = props;
+    const { text, fields, blockedDates } = props;
     const { people, date } = fields;
 
+    useEffect(() => {
+        if (props.experience?.id) {
+            props.fetchBlockedDatesSelector({ experience: props.experience.id, participants: 2 });
+
+        }
+
+    }, [props.experience]);
+
+
+    console.log(blockedDates)
     return (
         <Container>
             <BackButton text={text.calendarBackButton} />
@@ -130,7 +141,7 @@ function CalendarContainer(props) {
                 onSelect={(value) => props.setFormFields({ ...fields, date: value })}
                 disabledDate={(currentDate) => {
                     return currentDate && (
-                        currentDate < moment().endOf('day')
+                        (currentDate < moment().endOf('day')) || (blockedDates.includes(moment(currentDate).format('YYYY-MM-DD')))
                     );
                 }}
                 headerRender={({ value, onChange }) => {
@@ -221,11 +232,15 @@ function CalendarContainer(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         setFormFields: (data) => dispatch(setFormFields(data)),
+        fetchBlockedDatesSelector: (filters) => dispatch(fetchBlockedDatesSelector(filters)),
+
     };
 };
 const mapStateToProps = (state) => {
     return {
         fields: state.form.fields,
+        blockedDates: state.date.selector,
+
     };
 };
 
