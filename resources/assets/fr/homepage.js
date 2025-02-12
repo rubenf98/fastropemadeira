@@ -1,5 +1,25 @@
 export const text = {
-    header: "Regarder la vidéo",
+    header: {
+        title: "Fast Rope Madeira",
+        subtitle: (<>AVENTURE <br /> EXPLORATION & <br />
+            <br /> MOMENTS INOUBLIABLES</>),
+        form: {
+            date: {
+                label: "Date",
+                placeholder: "DD/MM/YYYY",
+            },
+            participants: {
+                label: "Participants",
+                placeholder: "Sélectionnez le nombre de participants",
+            },
+        },
+        charateristics: [
+            { icon: "/icon/header/photo.svg", text: (<>photo et <br /> vidéo incluses</>) },
+            { icon: "/icon/header/equipment.svg", text: (<>équipement <br /> certifié</>) },
+            { icon: "/icon/header/guides.svg", text: (<>guides <br /> certifiés</>) },
+            { icon: "/icon/header/transport.svg", text: (<>prise en charge <br /> et dépose</>) },
+        ]
+    },
     titleSection: [
         "VISITES LES PLUS POPULAIRES",
         "REGARDEZ NOTRE VIDÉO",

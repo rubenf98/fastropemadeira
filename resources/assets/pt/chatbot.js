@@ -1,5 +1,6 @@
 export const text = {
-    title: "Oferta de desconto",
+    title: "Fast Rope Madeira",
+    subtitle: "Fala com",
     messages: [
         "Olá, nós somos a Fast Rope Madeira",
         "Contacta-nos para ofertas imperdíveis disponíveis apenas para quem seja curioso o suficiente para nos contactar!",

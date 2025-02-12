@@ -1,30 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { dimensions, maxWidth } from '../../../helper';
-import Carousel from 'react-multi-carousel';
-import { colors } from '../../../helper';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { dimensions, maxWidth } from "../../../helper";
+import Carousel from "react-multi-carousel";
+import { colors } from "../../../helper";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { setVideoSrc } from "../../../redux/application/actions";
-import { fetchExperiences } from '../../../redux/experience/actions';
-import { setFormFields, setFormVisibility } from '../../../redux/form/actions';
+import { fetchExperiences } from "../../../redux/experience/actions";
+import { setFormFields, setFormVisibility } from "../../../redux/form/actions";
 
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
         items: 3,
-        partialVisibilityGutter: 40
+        partialVisibilityGutter: 40,
     },
     tablet: {
         breakpoint: { max: 1024, min: 567 },
         items: 2,
-        partialVisibilityGutter: 30
+        partialVisibilityGutter: 30,
     },
     mobile: {
         breakpoint: { max: 567, min: 0 },
         items: 1,
-        partialVisibilityGutter: 50
-    }
+        partialVisibilityGutter: 50,
+    },
 };
 
 const Container = styled.section`
@@ -34,10 +34,10 @@ const Container = styled.section`
 
 const CarouselContainer = styled(Carousel)`
     width: 100%;
-    max-width: calc(100vw  - ((100vw - ${maxWidth}) / 2));
+    max-width: calc(100vw - ((100vw - ${maxWidth}) / 2));
     margin: 100px 0px;
     margin-left: auto;
-    align-items:stretch ;
+    align-items: stretch;
 `;
 
 const Card = styled.div`
@@ -47,7 +47,7 @@ const Card = styled.div`
     /* box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2); */
 
     .header {
-        background-image: ${props => "url(" + props.background + ")"};
+        background-image: ${(props) => "url(" + props.background + ")"};
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -57,7 +57,6 @@ const Card = styled.div`
         padding: 15px;
         box-sizing: border-box;
         position: relative;
-        
 
         h3 {
             color: white;
@@ -89,18 +88,17 @@ const Card = styled.div`
             margin: auto;
             display: block;
             position: absolute;
-            top: -30px; 
+            top: -30px;
             left: -50px;
             rotate: 18deg;
         }
-        
     }
 
     .content {
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
         padding-bottom: 20px;
         box-sizing: border-box;
-        
+
         .chars {
             display: flex;
             justify-content: space-between;
@@ -127,31 +125,31 @@ const Card = styled.div`
                 }
 
                 span {
-                color: black;
-                opacity: .6;
-                font-size: 18px;
+                    color: black;
+                    opacity: 0.6;
+                    font-size: 18px;
                 }
             }
         }
         .price {
             margin-top: 20px;
             color: ${colors.main};
-            font-size: 50px; 
+            font-size: 50px;
             margin: auto;
             display: block;
             text-align: center;
 
             span {
                 color: black;
-                opacity: .6;
-                font-size: 20px; 
+                opacity: 0.6;
+                font-size: 20px;
             }
         }
 
         p {
             text-align: center;
             color: black;
-            opacity: .6;
+            opacity: 0.6;
             font-size: 18px;
             margin: 20px auto;
             width: 80%;
@@ -170,10 +168,10 @@ const Card = styled.div`
             background-color: transparent;
             color: ${colors.main};
             border: 2px solid ${colors.main};
-            border-radius :12px;
+            border-radius: 12px;
             padding: 10px 40px;
             box-sizing: border-box;
-            transition: all .3s ease;
+            transition: all 0.3s ease;
 
             &:hover {
                 color: ${colors.mainHover};
@@ -196,14 +194,16 @@ const Card = styled.div`
 const Title = styled.div`
     width: 100%;
 
-    h3, h2 {
-        margin: auto;display: block;
+    h3,
+    h2 {
+        margin: auto;
+        display: block;
         text-align: center;
     }
 
     h3 {
         color: ${colors.main};
-        font-family: 'Allura', cursive;
+        font-family: "Allura", cursive;
         font-size: clamp(26px, 4vw, 40px);
     }
 
@@ -212,7 +212,6 @@ const Title = styled.div`
         font-size: clamp(30px, 4vw, 50px);
     }
 `;
-
 
 // const activities = [
 //     {
@@ -241,20 +240,25 @@ const Title = styled.div`
 //     },
 // ];
 
-function Tours({ text, setVideoSrc, fetchExperiences, experiences, setFormVisibility, setFormFields }) {
-
+function Tours({
+    text,
+    setVideoSrc,
+    fetchExperiences,
+    experiences,
+    setFormVisibility,
+    setFormFields,
+}) {
     useEffect(() => {
         fetchExperiences();
-    }, [])
+    }, []);
 
     const handleExperienceClick = (experience) => {
         setFormFields({ experience: experience, skip: 0 });
         setFormVisibility(true);
-
-    }
+    };
 
     return (
-        <Container>
+        <Container id="activities">
             <Title>
                 <h3>{text.subtitleSection[0]}</h3>
                 <h2>{text.titleSection[0]}</h2>
@@ -267,44 +271,123 @@ function Tours({ text, setVideoSrc, fetchExperiences, experiences, setFormVisibi
             >
                 {experiences.map((experience, index) => (
                     <Card key={index} background={experience.images[0].image}>
-                        <div className='header'>
-                            {experience.video && <div><button onClick={() => setVideoSrc(experience.video)}><img className='video-button' src="/icon/activities/play.svg" alt="play button" /></button></div>}
+                        <div className="header">
+                            {experience.video && (
+                                <div>
+                                    <button
+                                        onClick={() =>
+                                            setVideoSrc(experience.video)
+                                        }
+                                    >
+                                        <img
+                                            className="video-button"
+                                            src="/icon/activities/play.svg"
+                                            alt="play button"
+                                        />
+                                    </button>
+                                </div>
+                            )}
 
-                            {experience.id == 2 && <img className='sticker' src="/icon/activities/sticker.png" alt="best seller" />}
+                            {experience.id == 2 && (
+                                <img
+                                    className="sticker"
+                                    src="/icon/activities/sticker.png"
+                                    alt="best seller"
+                                />
+                            )}
 
-                            <h3>{experience.name[localStorage.getItem("language")]}</h3>
+                            <h3>
+                                {
+                                    experience.name[
+                                        localStorage.getItem("language")
+                                    ]
+                                }
+                            </h3>
                         </div>
                         <div className="content">
-                            <div className='chars'>
-                                <div className='char'>
-                                    <img src="/icon/activities/time.svg" alt="play button" />
-                                    <span>{experience.duration[localStorage.getItem("language")]}</span>
+                            <div className="chars">
+                                <div className="char">
+                                    <img
+                                        src="/icon/activities/time.svg"
+                                        alt="play button"
+                                    />
+                                    <span>
+                                        {
+                                            experience.duration[
+                                                localStorage.getItem("language")
+                                            ]
+                                        }
+                                    </span>
                                 </div>
-                                <div className='char side-border'>
-                                    <img src="/icon/activities/type.svg" alt="play button" />
-                                    <span>{experience.target[localStorage.getItem("language")]}</span>
+                                <div className="char side-border">
+                                    <img
+                                        src="/icon/activities/type.svg"
+                                        alt="play button"
+                                    />
+                                    <span>
+                                        {
+                                            experience.target[
+                                                localStorage.getItem("language")
+                                            ]
+                                        }
+                                    </span>
                                 </div>
-                                <div className='char'>
-                                    <img src="/icon/activities/age.svg" alt="play button" />
-                                    <span>{experience.age ? (experience.age + " " + text.tours.age) : text.tours.ageAll} </span>
+                                <div className="char">
+                                    <img
+                                        src="/icon/activities/age.svg"
+                                        alt="play button"
+                                    />
+                                    <span>
+                                        {experience.age
+                                            ? experience.age +
+                                              " " +
+                                              text.tours.age
+                                            : text.tours.ageAll}{" "}
+                                    </span>
                                 </div>
-
                             </div>
-                            <div className='price'>{experience.price}EUR <span>/{text.tours.person}</span></div>
-                            <p>{experience.description[localStorage.getItem("language")]}</p>
-                            <div className='button-container'>
-                                <button onClick={() => handleExperienceClick(experience)} className='primary'>{text.tours.primaryButton}</button>
-                                {(experience.activity_id === "1" || experience.activity_id === 1) && <Link to={"/tour/" + experience.name.en + "/" + experience.id}><button className='secundary'>{text.tours.secundaryButton}</button></Link>}
-
-
+                            <div className="price">
+                                {experience.price}EUR{" "}
+                                <span>/{text.tours.person}</span>
                             </div>
-
+                            <p>
+                                {
+                                    experience.description[
+                                        localStorage.getItem("language")
+                                    ]
+                                }
+                            </p>
+                            <div className="button-container">
+                                <button
+                                    onClick={() =>
+                                        handleExperienceClick(experience)
+                                    }
+                                    className="primary"
+                                >
+                                    {text.tours.primaryButton}
+                                </button>
+                                {(experience.activity_id === "1" ||
+                                    experience.activity_id === 1) && (
+                                    <Link
+                                        to={
+                                            "/tour/" +
+                                            experience.name.en +
+                                            "/" +
+                                            experience.id
+                                        }
+                                    >
+                                        <button className="secundary">
+                                            {text.tours.secundaryButton}
+                                        </button>
+                                    </Link>
+                                )}
+                            </div>
                         </div>
                     </Card>
                 ))}
             </CarouselContainer>
         </Container>
-    )
+    );
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -52,6 +52,11 @@
         src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
     }
 
+    @font-face {
+        font-family: Palestine Border;
+        src: url('{!! asset('fonts/PalestineBorder.ttf') !!}');
+    }
+
 
     html,
     body,

@@ -1,30 +1,27 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import styled, { keyframes } from "styled-components";
-import { Select, Drawer } from 'antd';
-import {
-    Link
-} from "react-router-dom";
-import moment from 'moment';
-import { colors, dimensions, maxWidth } from '../../helper';
-import AnimationContainer from './AnimationContainer';
+import { Select, Drawer } from "antd";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import { colors, dimensions, maxWidth } from "../../helper";
+import AnimationContainer from "./AnimationContainer";
 
 const Container = styled.div`
-    height:  ${props => props.hasbackground ? "100px" : "120px"};;
-    background: ${props => props.hasbackground ? "#ffffff" : "transparent"};
-    box-shadow: ${props => props.shadow ? "0 0 40px " + colors.main : "0px"};
+    height: 100px;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px;
+    border-radius: 40px;
     box-sizing: border-box;
     position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
+    left: 20px;
     box-sizing: border-box;
-    top: 0;
+    top: 20px;
     z-index: 20;
-    width: 100%;
-    transition: .5s ease-in-out;
+    width: calc(100% - 40px);
+    transition: 0.5s ease-in-out;
 `;
 
 const Content = styled.div`
@@ -35,16 +32,16 @@ const Content = styled.div`
     margin: auto;
     width: 100%;
     color: white;
-    transition: .5s ease-in-out;
+    transition: 0.5s ease-in-out;
 `;
 
 const Logo = styled(Link)`
     height: 100%;
     margin: auto 0;
     display: block;
-    opacity: ${props => props.visible ? "1" : "0"};
+    opacity: ${(props) => (props.visible ? "1" : "0")};
     z-index: 20;
-    transition: opacity .2s ease;
+    transition: opacity 0.2s ease;
 
     img {
         height: 100%;
@@ -60,19 +57,18 @@ const Menu = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-right: ${props => props.visible ? "0px" : "10px"};
+    margin-right: ${(props) => (props.visible ? "0px" : "10px")};
 
     @media (max-width: ${dimensions.md}) {
         display: flex;
         order: 2;
     }
-    
+
     img {
         width: 50%;
         display: block;
         margin: auto;
     }
-    
 `;
 
 const OrderButton = styled.div`
@@ -80,11 +76,14 @@ const OrderButton = styled.div`
     box-sizing: border-box;
     cursor: pointer;
     background: ${colors.main};
+    border: 2px solid black;
     padding: 16px 18px;
     font-size: 16px;
-    transition: .4s;
+    transition: 0.4s;
     margin-left: 15px;
     font-weight: bold;
+    border-radius: 16px;
+    text-transform: uppercase;
 
     @media (max-width: ${dimensions.md}) {
         display: none;
@@ -93,7 +92,6 @@ const OrderButton = styled.div`
     &:hover {
         background: ${colors.mainHover};
     }
-    
 `;
 
 const CustomSelect = styled(Select)`
@@ -101,11 +99,11 @@ const CustomSelect = styled(Select)`
     margin-right: 20px;
     margin-left: 15px;
     cursor: pointer;
-    color: ${props => props.hasbackground ? "black" : "white"};
+    color: black;
     font-size: 1.2em;
-    display: ${props => props.visible ? "block" : "none"};
+    display: ${(props) => (props.visible ? "block" : "none")};
 
-    @media (max-width: ${dimensions.xs}){
+    @media (max-width: ${dimensions.xs}) {
         display: none;
     }
 
@@ -113,13 +111,13 @@ const CustomSelect = styled(Select)`
         order: 1;
     }
 
-    .ant-select-selector{
+    .ant-select-selector {
         background: transparent !important;
         border-radius: 0px !important;
         border: 0px !important;
     }
 
-    .ant-select-selection-item{
+    .ant-select-selection-item {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -142,7 +140,6 @@ const DropdownIcon = styled.img`
 `;
 
 const CustomDrawer = styled(Drawer)`
-
     div {
         display: flex;
         align-items: center;
@@ -165,15 +162,17 @@ const MenuLogo = styled.img`
 `;
 
 const NavbarLink = styled(Link)`
-    color: ${props => props.hasbackground ? "#313131" : "#ffffff !important"};
+    color: #313131;
     display: block;
     text-align: center;
     font-size: 16px;
     text-transform: capitalize;
     cursor: pointer;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
     padding: 29px 27px;
     font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
 
     @media (max-width: ${dimensions.md}) {
         display: none;
@@ -182,7 +181,7 @@ const NavbarLink = styled(Link)`
     &:hover {
         outline: none;
         transition-duration: 500ms;
-        color: ${props => props.hasbackground ? "#000" : "#fff !important"};
+        color: #000;
         div {
             width: 100%;
         }
@@ -191,12 +190,10 @@ const NavbarLink = styled(Link)`
     div {
         width: 0px;
         height: 1px;
-        background: ${props => props.hasbackground ? "#000" : "#fff"};
-        transition: .3s ease-in-out;
+        background: #000;
+        transition: 0.3s ease-in-out;
     }
-    
 `;
-
 
 const MenuLink = styled(Link)`
     color: black !important;
@@ -205,73 +202,18 @@ const MenuLink = styled(Link)`
     font-size: 3em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: .3s ease-in-out;
-    font-family: 'Montserrat', sans-serif;
+    transition: 0.3s ease-in-out;
+    font-family: "Montserrat", sans-serif;
 
     &:hover {
-        text-shadow:
-        -1px -1px 0 white,
-        1px -1px 0 white,
-        -1px 1px 0 white,
-        1px 1px 0 white;
+        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+            1px 1px 0 white;
     }
-    
 `;
 
-function useEventListener(eventName, handler, element = window) {
-    // Create a ref that stores handler
-    const savedHandler = useRef();
-
-    useEffect(() => {
-        savedHandler.current = handler;
-    }, [handler]);
-
-    useEffect(
-        () => {
-            // Make sure element supports addEventListener
-            // On
-            const isSupported = element && element.addEventListener;
-            if (!isSupported) return;
-
-            // Create event listener that calls handler function stored in ref
-            const eventListener = (event) => savedHandler.current(event);
-
-            // Add event listener
-            element.addEventListener(eventName, eventListener);
-
-            // Remove event listener on cleanup
-            return () => {
-                element.removeEventListener(eventName, eventListener);
-            };
-        },
-        [eventName, element] // Re-run if eventName or element changes
-    );
-}
-
 function Navbar({ onOrder }) {
-    const [hasBackground, setHasBackground] = useState(0);
     const [hasShadow, setHasShadow] = useState(0);
     const [visible, setVisible] = useState(0);
-
-    const handler = useCallback(
-        ({ }) => {
-            if (window.location.pathname.length <= 4) {
-                const currentScrollPos = window.pageYOffset;
-                const visible = currentScrollPos > (window.innerHeight / 3);
-                console.log(visible);
-                setHasBackground(visible ? 1 : 0);
-                setHasShadow(visible ? 1 : 0);
-            } else if (window.location.pathname.length > 4) {
-                const currentScrollPos = window.pageYOffset;
-                const visible = currentScrollPos > (window.innerHeight / 3);
-                setHasShadow(visible ? 1 : 0);
-            } else if (!hasBackground) {
-                setHasBackground(1);
-            };
-
-        },
-        [setHasBackground]
-    );
 
     const onClose = () => {
         setVisible(0);
@@ -283,64 +225,70 @@ function Navbar({ onOrder }) {
 
     const handleLanguageChange = (e) => {
         localStorage.setItem("language", e);
-        document.cookie = "language=" + e + "; path=/; expires=" + moment().add(10, "y").format("ddd, D MMM YYYY, H:mm:ss") + " GMT";
+        document.cookie =
+            "language=" +
+            e +
+            "; path=/; expires=" +
+            moment().add(10, "y").format("ddd, D MMM YYYY, H:mm:ss") +
+            " GMT";
         //location.reload();
-        let path = window.location.pathname.split('/');
+        let path = window.location.pathname.split("/");
         path.splice(0, 2);
         let newPath = "/" + e + "/" + path.join("/");
-        window.location.href = window.location.protocol + "//" + window.location.host + newPath;
-
+        window.location.href =
+            window.location.protocol + "//" + window.location.host + newPath;
     };
 
-
-    useEffect(() => {
-        if (window.location.pathname.length > 4) {
-            setHasBackground(1);
-        }
-    }, [])
-
-
-    useEventListener("scroll", handler);
     return (
         <div>
-
-            <Container hasbackground={(visible ? 0 : 1) && hasBackground} shadow={(visible ? 0 : 1) && hasShadow}>
-                <Logo to="/" visible={(visible ? 0 : 1) && hasBackground}>
-                    <img src={hasBackground ? "/logo.svg" : "/logo_white.svg"} alt="logo" />
+            <Container shadow={(visible ? 0 : 1) && hasShadow}>
+                <Logo to="/" visible={visible ? 0 : 1}>
+                    <img src="/logo_navbar.svg" alt="logo" />
                 </Logo>
 
                 <Content>
+                    <NavbarLink to="/">
+                        home <div />
+                    </NavbarLink>
+                    <NavbarLink to="#activities">
+                        ativities <div />
+                    </NavbarLink>
+                    <NavbarLink to="/about">
+                        about <div />
+                    </NavbarLink>
+                    <NavbarLink to="/contact">
+                        contact <div />
+                    </NavbarLink>
 
-                    <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/about">about <div /></NavbarLink>
-                    <NavbarLink hasbackground={hasBackground} onClick={() => setHasShadow(true)} to="/contact">contact <div /></NavbarLink>
-
-                    <OrderButton onClick={onOrder}>Book An Adventure</OrderButton>
-                    <Menu visible={visible ? 0 : 1} onClick={() => setVisible(visible ? 0 : 1)}>
+                    <OrderButton onClick={onOrder}>
+                        Book An Adventure
+                    </OrderButton>
+                    <Menu
+                        visible={visible ? 0 : 1}
+                        onClick={() => setVisible(visible ? 0 : 1)}
+                    >
                         <img
-                            src={visible ?
-                                "/icon/close.svg" :
-                                (hasBackground ? "/icon/menu.svg" : "/icon/menu_white.svg")
-                            }
+                            src={visible ? "/icon/close.svg" : "/icon/menu.svg"}
                             alt="menu"
                         />
                     </Menu>
                     <CustomSelect
-                        hasbackground={hasBackground}
                         onChange={handleLanguageChange}
-                        visible={(visible ? 0 : 1)}
+                        visible={visible ? 0 : 1}
                         defaultValue={localStorage.getItem("language")}
                         suffixIcon={
-                            <DropdownIcon src={hasBackground ? "/icon/down_black.svg" : "/icon/down.svg"} alt="open" />
+                            <DropdownIcon
+                                src="/icon/down_black.svg"
+                                alt="open"
+                            />
                         }
                     >
-                        <Option value="en">  EN</Option>
-                        <Option value="pt">  PT</Option>
-                        <Option value="fr">  FR</Option>
-                        <Option value="de">  DE</Option>
+                        <Option value="en"> EN</Option>
+                        <Option value="pt"> PT</Option>
+                        <Option value="fr"> FR</Option>
+                        <Option value="de"> DE</Option>
                     </CustomSelect>
-
                 </Content>
-
             </Container>
 
             <CustomDrawer
@@ -354,18 +302,32 @@ function Navbar({ onOrder }) {
             >
                 <div>
                     <ul style={{ padding: "0px" }}>
-                        <li><MenuLink onClick={() => setVisible(0)} to="/">home</MenuLink></li>
-                        <li><MenuLink onClick={() => setVisible(0)} to="/about">about</MenuLink></li>
-                        <li><MenuLink onClick={() => setVisible(0)} to="/contact">contact</MenuLink></li>
+                        <li>
+                            <MenuLink onClick={() => setVisible(0)} to="/">
+                                home
+                            </MenuLink>
+                        </li>
+                        <li>
+                            <MenuLink onClick={() => setVisible(0)} to="/about">
+                                about
+                            </MenuLink>
+                        </li>
+                        <li>
+                            <MenuLink
+                                onClick={() => setVisible(0)}
+                                to="/contact"
+                            >
+                                contact
+                            </MenuLink>
+                        </li>
                         <li>
                             <MenuLogo src="/logo.svg" alt="logo" />
                         </li>
                     </ul>
-
                 </div>
             </CustomDrawer>
         </div>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

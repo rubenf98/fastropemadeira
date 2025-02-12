@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import CalendarContainer from './Activity/CalendarContainer';
-import { dimensions, maxWidth } from '../../helper';
-import RevPartner from './Home/RevPartner';
-import { setFormFields, setFormVisibility } from '../../redux/form/actions';
-import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { fetchExperience } from '../../redux/experience/actions';
-import { fetchBlockedDatesSelector } from '../../redux/date/actions';
+import CalendarContainer from "./Activity/CalendarContainer";
+import { dimensions, maxWidth } from "../../helper";
+import RevPartner from "./Home/RevPartner";
+import { setFormFields, setFormVisibility } from "../../redux/form/actions";
+import { connect } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { fetchExperience } from "../../redux/experience/actions";
+import { fetchBlockedDatesSelector } from "../../redux/date/actions";
 
-
-
-
-import { Spin } from 'antd';
+import { Spin } from "antd";
 
 const Container = styled.section`
     position: relative;
@@ -26,15 +23,11 @@ const Background = styled.div`
     height: 500px;
     width: 100vw;
     z-index: -1;
-    background: ${props => "url(" + props.background + ")"} ;
+    background: ${(props) => "url(" + props.background + ")"};
     background-position: left center;
     background-size: cover;
     background-repeat: no-repeat;
-
-
-    
 `;
-
 
 const Form = styled.div`
     width: 30%;
@@ -60,9 +53,10 @@ const Form = styled.div`
 const Information = styled.div`
     width: 60%;
 
-    p, li {
+    p,
+    li {
         font-size: 18px;
-        opacity: .8;
+        opacity: 0.8;
     }
 
     h3 {
@@ -103,12 +97,11 @@ const Content = styled.div`
     width: 100%;
     max-width: ${maxWidth};
     margin: auto;
-    padding:0px 0px 100px 0px;
+    padding: 0px 0px 100px 0px;
 
     @media (max-width: ${dimensions.lg}) {
         flex-wrap: wrap;
     }
-
 `;
 
 const Details = styled.div`
@@ -122,15 +115,19 @@ const Details = styled.div`
     }
 `;
 
-
 function Activity(props) {
     const [activity, setActivity] = useState("beginner");
-    const { text } = require('../../../assets/' + localStorage.getItem('language') + "/tour");
+    const { text } = require("../../../assets/" +
+        localStorage.getItem("language") +
+        "/tour");
     const { experience, blockedDates } = props;
 
     const handlePeopleChange = (participants) => {
-        props.fetchBlockedDatesSelector({ experience: props.match.params.experience, participants: participants });
-    }
+        props.fetchBlockedDatesSelector({
+            experience: props.match.params.experience,
+            participants: participants,
+        });
+    };
 
     useEffect(() => {
         props.fetchExperience(props.match.params.experience);
@@ -140,11 +137,19 @@ function Activity(props) {
     const handleSelect = (fields) => {
         props.setFormFields({ ...fields, experience: experience, skip: 1 });
         props.setFormVisibility(true);
-    }
+    };
 
     return (
         <Container>
-            <Background background={experience.id ? "/images/activities/default_" + experience.name.en + ".jpg" : "/images/activities/default_beginner.jpg"} />
+            <Background
+                background={
+                    experience.id
+                        ? "/images/activities/default_" +
+                          experience.name.en +
+                          ".jpg"
+                        : "/images/activities/default_beginner.jpg"
+                }
+            />
 
             {/* <Background autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/1.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
@@ -155,19 +160,46 @@ function Activity(props) {
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/6.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/7.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
             </Background> */}
-            {!experience.id ? <Spin /> :
+            {!experience.id ? (
+                <Spin />
+            ) : (
                 <Content>
                     <Information>
-                        <div className='title'>
-                            <h1>Canyoning {experience.name[localStorage.getItem('language')]}</h1>
+                        <div className="title">
+                            <h1>
+                                Canyoning{" "}
+                                {
+                                    experience.name[
+                                        localStorage.getItem("language")
+                                    ]
+                                }
+                            </h1>
                         </div>
 
                         <Details>
                             <h3>{text.titles[0]}</h3>
                             <ul>
-                                <li>{experience.duration[localStorage.getItem('language')]}</li>
-                                <li>{experience.height[localStorage.getItem('language')]}</li>
-                                <li>{experience.target[localStorage.getItem('language')]}</li>
+                                <li>
+                                    {
+                                        experience.duration[
+                                            localStorage.getItem("language")
+                                        ]
+                                    }
+                                </li>
+                                <li>
+                                    {
+                                        experience.height[
+                                            localStorage.getItem("language")
+                                        ]
+                                    }
+                                </li>
+                                <li>
+                                    {
+                                        experience.target[
+                                            localStorage.getItem("language")
+                                        ]
+                                    }
+                                </li>
                                 <li>{text[activity].age}</li>
                             </ul>
                         </Details>
@@ -175,7 +207,13 @@ function Activity(props) {
                         {text[activity].paragraphs.map((paragraph, index) => (
                             <p key={index}>{paragraph}</p>
                         ))}
-                        <p>{experience.description[localStorage.getItem('language')]}</p>
+                        <p>
+                            {
+                                experience.description[
+                                    localStorage.getItem("language")
+                                ]
+                            }
+                        </p>
 
                         <h3>{text.titles[1]}</h3>
 
@@ -192,13 +230,20 @@ function Activity(props) {
                         <p>{text.disclaimer}</p>
                     </Information>
                     <Form>
-                        <CalendarContainer experience={experience} blockedDates={blockedDates} handlePeopleChange={handlePeopleChange} image={experience.images[0].image} handleSelect={handleSelect} text={{ ...text.form, price: experience.price }} />
+                        <CalendarContainer
+                            experience={experience}
+                            blockedDates={blockedDates}
+                            handlePeopleChange={handlePeopleChange}
+                            image={experience.images[0].image}
+                            handleSelect={handleSelect}
+                            text={{ ...text.form, price: experience.price }}
+                        />
                     </Form>
                 </Content>
-            }
+            )}
             <RevPartner />
         </Container>
-    )
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -212,7 +257,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setFormVisibility: (data) => dispatch(setFormVisibility(data)),
-        fetchBlockedDatesSelector: (filters) => dispatch(fetchBlockedDatesSelector(filters)),
+        fetchBlockedDatesSelector: (filters) =>
+            dispatch(fetchBlockedDatesSelector(filters)),
         setFormFields: (data) => dispatch(setFormFields(data)),
         fetchExperience: (id) => dispatch(fetchExperience(id)),
     };

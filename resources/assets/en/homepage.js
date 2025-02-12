@@ -1,5 +1,28 @@
+import { icon } from "../../js/images";
+
 export const text = {
-    header: "Watch video",
+    header: {
+        title: "Fast Rope Madeira",
+        subtitle: (<>ADVENTURE <br /> EXPLORATION & <br />
+            UNFORGETTABLE <br /> MOMENTS</>),
+        form: {
+            date: {
+                label: "Date",
+                placeholder: "DD/MM/YYYY",
+            },
+            participants: {
+                label: "Participants",
+                placeholder: "Select the number of participants",
+            },
+            submit: "Book Now",
+        },
+        charateristics: [
+            { icon: "/icon/header/photo.svg", text: (<>photo and <br /> video included</>) },
+            { icon: "/icon/header/equipment.svg", text: (<>certified <br /> equipment</>) },
+            { icon: "/icon/header/guides.svg", text: (<>certified <br /> guides</>) },
+            { icon: "/icon/header/transport.svg", text: (<>pick-up and <br /> drop-off</>) },
+        ]
+    },
     titleSection: [
         "MOST POPULAR TOURS",
         "WATCH OUR VIDEO",
