@@ -1,20 +1,20 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { Row, Spin } from 'antd';
+import React, { Fragment, useState, useEffect } from "react";
+import { Row, Spin } from "antd";
 import styled from "styled-components";
-import axios from 'axios';
-import { dimensions } from '../../../helper';
+import axios from "axios";
+import { dimensions } from "../../../helper";
 
 const Element = styled.div`
     width: 48%;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 500px;
-	border-radius: 10px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-	overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
     cursor: pointer;
 
     @media (max-width: ${dimensions.lg}) {
@@ -27,29 +27,17 @@ const Element = styled.div`
     }
 
     &:hover {
-		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
 
-		img {
-			transform: scale(1.25);
-		}
+        img {
+            transform: scale(1.25);
+        }
 
-		figcaption {
-			bottom: 0;
-		}
-	}
-
-    h1 {
-        position: absolute;
-		top: 50px;
-		left: 20px;
-		margin: 0;
-		padding: 0;
-		color: white;
-		font-size: 60px;
-		font-weight: 100;
-		line-height: 1;
+        figcaption {
+            bottom: 0;
+        }
     }
-
 `;
 
 const Image = styled.img`
@@ -65,7 +53,7 @@ const CaptionContainer = styled.figcaption`
     margin: 0;
     padding: 30px;
     background-color: #181b2ed7;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     color: white;
     line-height: 1;
     transition: 0.25s;
@@ -77,26 +65,21 @@ const CaptionContainer = styled.figcaption`
     @media (max-width: ${dimensions.xs}) {
         bottom: -30%;
     }
-
 `;
 
 const CaptionDescription = styled.p`
     font-size: 1.2em;
-    
 `;
 
 const CaptionTitle = styled.h3`
     color: white;
     font-size: 1.4em;
     margin: 0 0 30px;
-    padding: 0; 
+    padding: 0;
+    font-family: "Caveat Brush", serif;
 `;
 
-
-
 const PageDescription = styled(Row)`
-
-
     img {
         width: 20%;
         margin: 20px 0px 60px 0px;
@@ -109,7 +92,7 @@ const PageDescription = styled(Row)`
         width: 40%;
         text-align: right;
         margin: 20px 0px 30px 0px;
-        font-size: 1.2em; 
+        font-size: 1.2em;
 
         @media (max-width: ${dimensions.md}) {
             width: 90%;
@@ -118,28 +101,29 @@ const PageDescription = styled(Row)`
             font-size: 1.2em;
         }
     }
-   
 `;
 
 const LoadingContainer = styled(Row)`
     width: 100%;
     margin: 50px auto;
-    
 `;
 
-
 function Activity({ incrementStep, text }) {
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    
-    useEffect(() => {
-        axios.get(`${window.location.origin}/api/activity?language=${localStorage.getItem('language')}`).then((response) => {
-            setData(response.data.data);
-            setLoading(false)
-        })
-    }, [])
 
-    
+    useEffect(() => {
+        axios
+            .get(
+                `${
+                    window.location.origin
+                }/api/activity?language=${localStorage.getItem("language")}`
+            )
+            .then((response) => {
+                setData(response.data.data);
+                setLoading(false);
+            });
+    }, []);
 
     return (
         <Fragment>
@@ -149,22 +133,35 @@ function Activity({ incrementStep, text }) {
             </PageDescription>
 
             <Row type="flex" justify="space-between">
-                {loading ?
-                    <LoadingContainer type="flex" justify="center" align="middle">
+                {loading ? (
+                    <LoadingContainer
+                        type="flex"
+                        justify="center"
+                        align="middle"
+                    >
                         <Spin size="large" />
-                    </LoadingContainer> :
+                    </LoadingContainer>
+                ) : (
                     data.map((element) => (
-                        <Element key={element.value} onClick={() => incrementStep({ activity: element.value })} >
+                        <Element
+                            key={element.value}
+                            onClick={() =>
+                                incrementStep({ activity: element.value })
+                            }
+                        >
                             <Image src={element.image} />
                             <CaptionContainer>
                                 <CaptionTitle>{element.label}</CaptionTitle>
-                                <CaptionDescription> {element.description}</CaptionDescription>
+                                <CaptionDescription>
+                                    {element.description}
+                                </CaptionDescription>
                             </CaptionContainer>
                         </Element>
-                    ))}
+                    ))
+                )}
             </Row>
         </Fragment>
-    )
+    );
 }
 
-export default Activity
+export default Activity;

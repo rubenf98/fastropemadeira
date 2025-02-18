@@ -92,7 +92,7 @@ const Chatbot = styled.div`
                 p {
                     padding: 6px 12px;
                     box-sizing: border-box;
-                    font-size: 16px;
+                    font-size: 14px;
                     background-color: #f5f5f5;
                     border-radius: 6px;
                 }

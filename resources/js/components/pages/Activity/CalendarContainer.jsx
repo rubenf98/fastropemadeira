@@ -1,21 +1,21 @@
-import { Calendar, Col, Row, Select } from 'antd';
-import React, { useState, useEffect } from 'react';
+import { Calendar, Col, Row, Select } from "antd";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import styled from "styled-components";
-import { colors } from '../../../helper';
+import { colors } from "../../../helper";
 import Carousel from "react-multi-carousel";
 
 const responsive = {
     mobile: {
         breakpoint: { max: 10000, min: 0 },
         items: 1,
-        partialVisibilityGutter: 0 // this is needed to tell the amount of px that should be visible.
-    }
-}
+        partialVisibilityGutter: 0, // this is needed to tell the amount of px that should be visible.
+    },
+};
 
 const Container = styled.div`
     background-color: white;
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,.3);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
 `;
 
 const FlexContainer = styled.div`
@@ -43,7 +43,7 @@ const Banner = styled(FlexContainer)`
         color: white;
         padding: 5px 10px;
         box-sizing: border-box;
-        
+
         border-top-right-radius: 12px;
         border-bottom-right-radius: 12px;
     }
@@ -69,7 +69,7 @@ const PeopleContainer = styled.div`
 const Price = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
     flex: 1;
     font-size: 16px;
     border-top: 1px solid #cecece;
@@ -81,10 +81,9 @@ const Price = styled.div`
     p {
         margin: 0px;
     }
-    
 
     span {
-        color: ${colors.main}
+        color: ${colors.main};
     }
 `;
 const Button = styled.button`
@@ -93,18 +92,17 @@ const Button = styled.button`
     background: ${colors.main};
     padding: 8px 20px;
     font-size: 16px;
-    transition: .4s;
+    transition: 0.4s;
     font-weight: bold;
     color: white;
     border: 0px;
-    pointer-events: ${props => props.disabled ? "none" : "default"};
-    cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
-    opacity: ${props => props.disabled ? .3 : 1};
+    pointer-events: ${(props) => (props.disabled ? "none" : "default")};
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+    opacity: ${(props) => (props.disabled ? 0.3 : 1)};
 
     &:hover {
         background: ${colors.mainHover};
     }
-    
 `;
 
 const Header = styled(Carousel)`
@@ -119,40 +117,118 @@ const Header = styled(Carousel)`
 
 const CalendarContainer = (props) => {
     const { text, blockedDates, experience } = props;
-    const [date, setDate] = useState(undefined)
-    const [people, setPeople] = useState(2)
+    const [date, setDate] = useState(undefined);
+    const [people, setPeople] = useState(2);
 
     useEffect(() => {
         props.handlePeopleChange(people);
-    }, [people])
+    }, [people]);
 
     useEffect(() => {
-        if (blockedDates.includes(moment(date).format('YYYY-MM-DD'))) {
+        if (blockedDates.includes(moment(date).format("YYYY-MM-DD"))) {
             setDate(moment());
         }
-    }, [blockedDates])
-
+    }, [blockedDates]);
 
     const onPanelChange = (value, mode) => {
-        console.log(value.format('YYYY-MM-DD'), mode);
+        console.log(value.format("YYYY-MM-DD"), mode);
     };
 
     return (
         <Container>
-            <Header autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/1.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/2.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/3.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/4.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/5.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/6.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
-                <img src={experience.id ? "/images/activities/" + experience.name.en + "/7.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
+            <Header
+                autoPlaySpeed={3000}
+                autoPlay
+                arrows={false}
+                infinite
+                partialVisible={false}
+                responsive={responsive}
+            >
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/1.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/2.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/3.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/4.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/5.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/6.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
+                <img
+                    src={
+                        experience.id
+                            ? "/images/activities/" +
+                              experience.name.en +
+                              "/7.jpg"
+                            : "/images/activities/default_beginner.jpg"
+                    }
+                    alt=""
+                />
             </Header>
             {/* <Header src={props.image} /> */}
             <Banner>
-                <div className='title'>{text.title}</div>
+                <div className="title">{text.title}</div>
                 <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 14 14" width="14" height="14" id="icon-check" class="icon-check" ng-svg="icon-check">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        viewBox="0 0 14 14"
+                        width="14"
+                        height="14"
+                        id="icon-check"
+                        class="icon-check"
+                        ng-svg="icon-check"
+                    >
                         <path d="M0,8.59l1.5-2,4,3.67L11.87,0,14,1.28,6,14Z"></path>
                     </svg>
                     {text.disclaimer}
@@ -161,8 +237,12 @@ const CalendarContainer = (props) => {
             <Calendar
                 fullscreen={false}
                 disabledDate={(currentDate) => {
-                    return currentDate && (
-                        currentDate < moment().endOf('day') || blockedDates.includes(moment(currentDate).format('YYYY-MM-DD'))
+                    return (
+                        currentDate &&
+                        (currentDate < moment().endOf("day") ||
+                            blockedDates.includes(
+                                moment(currentDate).format("YYYY-MM-DD")
+                            ))
                     );
                 }}
                 value={date}
@@ -185,9 +265,12 @@ const CalendarContainer = (props) => {
 
                     for (let index = 0; index < 12; index++) {
                         monthOptions.push(
-                            <Select.Option style={{ width: "100px" }} key={index}>
+                            <Select.Option
+                                style={{ width: "100px" }}
+                                key={index}
+                            >
                                 {months[index]}
-                            </Select.Option>,
+                            </Select.Option>
                         );
                     }
 
@@ -196,12 +279,11 @@ const CalendarContainer = (props) => {
                         options.push(
                             <Select.Option key={i} value={i}>
                                 {i}
-                            </Select.Option>,
+                            </Select.Option>
                         );
                     }
                     return (
                         <div>
-
                             <Row gutter={8}>
                                 <Col>
                                     <Select
@@ -209,9 +291,11 @@ const CalendarContainer = (props) => {
                                         size="small"
                                         dropdownMatchSelectWidth={false}
                                         value={String(month)}
-                                        onChange={selectedMonth => {
+                                        onChange={(selectedMonth) => {
                                             const newValue = value.clone();
-                                            newValue.month(parseInt(selectedMonth, 10));
+                                            newValue.month(
+                                                parseInt(selectedMonth, 10)
+                                            );
                                             onChange(newValue);
                                         }}
                                     >
@@ -223,8 +307,10 @@ const CalendarContainer = (props) => {
                                         style={{ width: "100px" }}
                                         size="small"
                                         dropdownMatchSelectWidth={false}
-                                        onChange={newYear => {
-                                            const now = value.clone().year(newYear);
+                                        onChange={(newYear) => {
+                                            const now = value
+                                                .clone()
+                                                .year(newYear);
                                             onChange(now);
                                         }}
                                         value={String(year)}
@@ -232,10 +318,7 @@ const CalendarContainer = (props) => {
                                         {options}
                                     </Select>
                                 </Col>
-
                             </Row>
-
-
                         </div>
                     );
                 }}
@@ -252,71 +335,82 @@ const CalendarContainer = (props) => {
                     options={[
                         {
                             value: 2,
-                            label: '2',
+                            label: "2",
                         },
                         {
                             value: 3,
-                            label: '3',
+                            label: "3",
                         },
                         {
                             value: 4,
-                            label: '4',
+                            label: "4",
                         },
                         {
                             value: 5,
-                            label: '5',
+                            label: "5",
                         },
                         {
                             value: 6,
-                            label: '6',
+                            label: "6",
                         },
                         {
                             value: 7,
-                            label: '7',
+                            label: "7",
                         },
                         {
                             value: 8,
-                            label: '8',
+                            label: "8",
                         },
                         {
                             value: 9,
-                            label: '9',
+                            label: "9",
                         },
                         {
                             value: 10,
-                            label: '10',
+                            label: "10",
                         },
                         {
                             value: 11,
-                            label: '11',
+                            label: "11",
                         },
                         {
                             value: 12,
-                            label: '12',
+                            label: "12",
                         },
                         {
                             value: 13,
-                            label: '13',
+                            label: "13",
                         },
                         {
                             value: 14,
-                            label: '14',
+                            label: "14",
                         },
                         {
                             value: 15,
-                            label: '15',
+                            label: "15",
                         },
                     ]}
                 />
-                <Price><p>{text.person}</p> <p><span>{text.price}€</span></p></Price>
+                <Price>
+                    <p>{text.person}</p>{" "}
+                    <p>
+                        <span>{text.price}€</span>
+                    </p>
+                </Price>
             </PeopleContainer>
 
-            <Row type="flex" justify='end'>
-                <Button disabled={!date} onClick={() => props.handleSelect({ date: date, people: people })}>Pesquisar</Button>
+            <Row type="flex" justify="end">
+                <Button
+                    disabled={!date}
+                    onClick={() =>
+                        props.handleSelect({ date: date, people: people })
+                    }
+                >
+                    Pesquisar
+                </Button>
             </Row>
         </Container>
     );
 };
-
 
 export default CalendarContainer;

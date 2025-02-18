@@ -4,11 +4,12 @@ import { colors, dimensions } from "../../../helper";
 import { connect } from "react-redux";
 import { setVideoSrc } from "../../../redux/application/actions";
 import { Col, DatePicker, Row, Select } from "antd";
-import { setFormVisibility } from "../../../redux/form/actions";
+import { setFormFields, setFormVisibility } from "../../../redux/form/actions";
 import dayjs from "dayjs";
 
 const Container = styled.div`
     position: relative;
+    height: 100%;
     min-height: 100vh;
     width: 100vw;
     z-index: 10;
@@ -75,7 +76,7 @@ const BackgroundImage = styled.div`
     top: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     z-index: ${(props) => props.prio};
 
     img {
@@ -103,7 +104,7 @@ const TitleContainer = styled.div`
     h2 {
         color: white;
         font-family: "Palestine Border";
-        font-size: clamp(80px, 9vw, 160px);
+        font-size: clamp(50px, 9vw, 120px);
         line-height: 80%;
         letter-spacing: 5%;
     }
@@ -150,7 +151,7 @@ const Form = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 60%;
     padding-left: 20px;
     box-sizing: border-box;
     margin-top: 50px;
@@ -159,7 +160,11 @@ const Form = styled.div`
     input {
         border: 0px;
         box-shadow: 0px;
-        font-size: 18px;
+    }
+
+    input,
+    .ant-select-selection-item {
+        color: white;
     }
 
     .datepicker,
@@ -174,11 +179,9 @@ const Form = styled.div`
         color: white;
         opacity: 0.7;
         margin: 0px;
-        font-size: 18px;
     }
     .ant-select-selector {
         padding: 0px !important;
-        font-size: 18px;
     }
 
     input::placeholder,
@@ -209,7 +212,19 @@ const Form = styled.div`
     }
 
     @media (max-width: ${dimensions.md}) {
-        width: 90%;
+        width: calc(100% - 20px);
+
+        .participants {
+            max-width: 150px;
+        }
+
+        .button {
+            button {
+                img {
+                    width: 20px;
+                }
+            }
+        }
     }
 `;
 
@@ -217,8 +232,16 @@ function Header(props) {
     const { text } = props;
     const [form, setForm] = useState({
         date: undefined,
-        participants: undefined,
+        people: undefined,
     });
+
+    const handleSelect = () => {
+        if (form.date && form.people) {
+            props.setFormFields({ ...form, skip: 1 });
+            props.setFormVisibility(true);
+        }
+    };
+
     return (
         <Container>
             <Content>
@@ -248,7 +271,9 @@ function Header(props) {
                         <div className="participants" span={12}>
                             <p>{text.form.participants.label}</p>
                             <Select
-                                onChange={(e) => setForm({ ...form, time: e })}
+                                onChange={(e) =>
+                                    setForm({ ...form, people: e })
+                                }
                                 style={{ width: "100%" }}
                                 bordered={false}
                                 size="large"
@@ -273,9 +298,7 @@ function Header(props) {
                         </div>
 
                         <div className="button" span={2}>
-                            <button
-                                onClick={() => props.setFormVisibility(true)}
-                            >
+                            <button onClick={handleSelect}>
                                 <img
                                     src="/icon/header/search.svg"
                                     alt="search"
@@ -312,11 +335,23 @@ function Header(props) {
                     </Social>
 
                     <BackgroundImage prio={-1}>
-                        <img
+                        <picture>
+                            <source
+                                type="image/webp"
+                                srcset="/images/header.webp"
+                            />
+                            <img
+                                src="/images/header.jpg"
+                                alt="madeira island wallpaper"
+                                loading="eager"
+                            />
+                        </picture>
+
+                        {/* <img
                             src="/images/header.jpg"
                             alt="madeira island wallpaper"
                             loading="eager"
-                        />
+                        /> */}
                     </BackgroundImage>
                 </div>
                 <div className="charateristics">
@@ -334,6 +369,7 @@ function Header(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setFormFields: (data) => dispatch(setFormFields(data)),
         setFormVisibility: (data) => dispatch(setFormVisibility(data)),
     };
 };

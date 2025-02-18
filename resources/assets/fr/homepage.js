@@ -24,6 +24,7 @@ export const text = {
         "VISITES LES PLUS POPULAIRES",
         "REGARDEZ NOTRE VIDÉO",
         "RENCONTREZ NOTRE ÉQUIPE",
+        "Ne nous croyez pas sur parole",
     ],
     reservation: {
         title: "Faites votre réservation",

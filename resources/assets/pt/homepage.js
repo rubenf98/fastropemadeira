@@ -24,6 +24,7 @@ export const text = {
         "ATIVIDADES RECOMENDADAS",
         "VÊ O NOSSO VÍDEO",
         "CONHECE A EQUIPA",
+        "NÃO ACREDITE EM NOSSA PALAVRA",
     ],
     reservation: {
         title: "Garante a tua reserva",

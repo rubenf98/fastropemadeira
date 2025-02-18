@@ -21,7 +21,7 @@ class Homepage extends React.Component {
 
                 <Team text={text} />
 
-                <RevPartner />
+                <RevPartner text={text} />
             </div>
         );
     }

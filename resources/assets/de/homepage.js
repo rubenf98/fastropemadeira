@@ -24,6 +24,7 @@ export const text = {
         "BELIEBTESTE TOUREN",
         "SEHEN SIE SICH UNSER VIDEO AN",
         "TREFFEN SIE UNSER TEAM",
+        "Nehmen Sie uns nicht beim Wort"
     ],
     reservation: {
         title: "Machen Sie Ihre Reservierung",

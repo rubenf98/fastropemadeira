@@ -17,10 +17,9 @@ const Container = styled.div`
     box-sizing: border-box;
     position: fixed;
     left: 20px;
-    box-sizing: border-box;
     top: 20px;
     z-index: 20;
-    width: calc(100% - 40px);
+    width: calc(100vw - 40px);
     transition: 0.5s ease-in-out;
 `;
 
@@ -30,13 +29,14 @@ const Content = styled.div`
     justify-content: flex-end;
     align-items: center;
     margin: auto;
-    width: 100%;
     color: white;
     transition: 0.5s ease-in-out;
+    flex: 1;
 `;
 
 const Logo = styled(Link)`
     height: 100%;
+
     margin: auto 0;
     display: block;
     opacity: ${(props) => (props.visible ? "1" : "0")};
@@ -45,14 +45,16 @@ const Logo = styled(Link)`
 
     img {
         height: 100%;
+        max-width: 200px;
+        object-fit: contain;
     }
 `;
 
 const Menu = styled.div`
     z-index: 20;
     box-sizing: border-box;
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
     display: none;
     justify-content: center;
     align-items: center;
@@ -155,10 +157,11 @@ const CustomDrawer = styled(Drawer)`
 `;
 
 const MenuLogo = styled.img`
-    height: 80px;
+    height: 100px;
     margin: auto;
     opacity: 1;
     display: block;
+    margin-top: 40px;
 `;
 
 const NavbarLink = styled(Link)`
@@ -199,11 +202,11 @@ const MenuLink = styled(Link)`
     color: black !important;
     display: block;
     text-align: center;
-    font-size: 3em;
+    font-size: clamp(28px, 4vw, 40px);
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Caveat Brush", serif;
 
     &:hover {
         text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
@@ -250,9 +253,9 @@ function Navbar({ onOrder }) {
                     <NavbarLink to="/">
                         home <div />
                     </NavbarLink>
-                    <NavbarLink to="#activities">
+                    {/* <NavbarLink to="#activities">
                         ativities <div />
-                    </NavbarLink>
+                    </NavbarLink> */}
                     <NavbarLink to="/about">
                         about <div />
                     </NavbarLink>

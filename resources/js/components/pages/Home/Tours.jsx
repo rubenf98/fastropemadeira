@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { dimensions, maxWidth } from "../../../helper";
-import Carousel from "react-multi-carousel";
-import { colors } from "../../../helper";
+import { colors, dimensions } from "../../../helper";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setVideoSrc } from "../../../redux/application/actions";
@@ -30,21 +28,28 @@ const responsive = {
 const Container = styled.section`
     width: 100%;
     display: block;
+    padding: 100px 50px;
+    box-sizing: border-box;
+
+    @media (max-width: ${dimensions.md}) {
+        padding: 100px 0px;
+    }
 `;
 
-const CarouselContainer = styled(Carousel)`
+const CarouselContainer = styled.div`
     width: 100%;
-    max-width: calc(100vw - ((100vw - ${maxWidth}) / 2));
-    margin: 100px 0px;
-    margin-left: auto;
-    align-items: stretch;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 `;
 
 const Card = styled.div`
-    width: 100%;
-    padding: 20px 20px;
+    width: 25%;
+    padding: 20px;
     box-sizing: border-box;
-    /* box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2); */
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); */
 
     .header {
         background-image: ${(props) => "url(" + props.background + ")"};
@@ -54,14 +59,19 @@ const Card = styled.div`
         min-height: 300px;
         display: flex;
         flex-direction: column;
-        padding: 15px;
+        padding: 20px;
         box-sizing: border-box;
         position: relative;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
 
         h3 {
             color: white;
-            font-size: 30px;
+            font-size: clamp(20px, 4vw, 50px);
             text-transform: capitalize;
+            font-family: "Palestine Border", sans-serif;
+            margin: 0px;
+            line-height: 100%;
         }
 
         div {
@@ -74,6 +84,8 @@ const Card = styled.div`
                 height: 45px;
                 float: right;
                 cursor: pointer;
+                border: 0px;
+                box-shadow: 0px;
 
                 .video-button {
                     width: 20px;
@@ -96,8 +108,13 @@ const Card = styled.div`
 
     .content {
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         box-sizing: border-box;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
 
         .chars {
             display: flex;
@@ -127,118 +144,92 @@ const Card = styled.div`
                 span {
                     color: black;
                     opacity: 0.6;
-                    font-size: 18px;
+                    font-size: clamp(16px, 2vw, 18px);
                 }
-            }
-        }
-        .price {
-            margin-top: 20px;
-            color: ${colors.main};
-            font-size: 50px;
-            margin: auto;
-            display: block;
-            text-align: center;
-
-            span {
-                color: black;
-                opacity: 0.6;
-                font-size: 20px;
             }
         }
 
         p {
-            text-align: center;
+            text-align: justify;
             color: black;
             opacity: 0.6;
-            font-size: 18px;
-            margin: 20px auto;
-            width: 80%;
+            font-size: clamp(16px, 2vw, 18px);
+            padding: 20px;
+            box-sizing: border-box;
+            width: 100%;
+            flex: 1;
         }
 
         .button-container {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px auto;
-        }
-
-        button {
-            cursor: pointer;
-            display: block;
-            background-color: transparent;
-            color: ${colors.main};
-            border: 2px solid ${colors.main};
-            border-radius: 12px;
-            padding: 10px 40px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
             box-sizing: border-box;
-            transition: all 0.3s ease;
 
-            &:hover {
-                color: ${colors.mainHover};
-                border: 2px solid ${colors.mainHover};
+            .price {
+                color: black;
+                font-size: 28px;
+
+                span {
+                    opacity: 0.6;
+                    font-size: 16px;
+                }
+            }
+
+            .buttons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+
+                button {
+                    cursor: pointer;
+                    display: block;
+                    background-color: transparent;
+                    color: ${colors.main};
+                    border: 2px solid ${colors.main};
+                    border-radius: 8px;
+                    padding: 6px 12px;
+                    box-sizing: border-box;
+                    transition: all 0.3s ease;
+                    font-weight: bold;
+
+                    &:hover {
+                        color: ${colors.mainHover};
+                        border: 2px solid ${colors.mainHover};
+                    }
+                }
+
+                .primary {
+                    color: white;
+                    background-color: ${colors.main};
+
+                    &:hover {
+                        color: white;
+                        background-color: ${colors.mainHover};
+                    }
+                }
             }
         }
+    }
 
-        .primary {
-            color: white;
-            background-color: ${colors.main};
+    @media (max-width: ${dimensions.lg}) {
+        width: 50%;
+    }
 
-            &:hover {
-                color: white;
-                background-color: ${colors.mainHover};
-            }
-        }
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
     }
 `;
 
-const Title = styled.div`
-    width: 100%;
-
-    h3,
-    h2 {
-        margin: auto;
-        display: block;
-        text-align: center;
-    }
-
-    h3 {
-        color: ${colors.main};
-        font-family: "Allura", cursive;
-        font-size: clamp(26px, 4vw, 40px);
-    }
-
-    h2 {
-        font-weight: 900;
-        font-size: clamp(30px, 4vw, 50px);
-    }
+const Title = styled.h2`
+    font-family: "Caveat Brush", serif;
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-weight: 900;
+    font-size: clamp(30px, 5vw, 70px);
 `;
-
-// const activities = [
-//     {
-//         img: "/images/activities/beginner.jpg",
-//         video: "https://www.youtube.com/embed/w-Upj6l7KR8",
-//         title: "Beginner", price: "60", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-//         to: "/tour/beginner/1"
-//     },
-//     {
-//         img: "/images/activities/adventure.jpg",
-//         video: "https://www.youtube.com/embed/jUxO_yq7Vdk",
-//         title: "Adventure", price: "80", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-//         to: "/tour/adventure/2"
-//     },
-//     {
-//         img: "/images/activities/advanced.jpg",
-//         video: "https://www.youtube.com/embed/5diVXzfUfqg",
-//         title: "Advanced", price: "120", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-//         to: "/tour/advanced/3"
-//     },
-//     {
-//         img: "/images/activities/extreme.jpg",
-//         video: "https://www.youtube.com/embed/AI5X2f9Y3Rc",
-//         title: "Extreme", price: "200", description: "Dare to go canyoning with us and you'll feel an incredible rush of adrenaline as you explore and discover the most pure and virgin island.", chars: ["2-3h", "family", "+8 age"],
-//         to: "/tour/extreme/4"
-//     },
-// ];
 
 function Tours({
     text,
@@ -259,10 +250,7 @@ function Tours({
 
     return (
         <Container id="activities">
-            <Title>
-                <h3>{text.subtitleSection[0]}</h3>
-                <h2>{text.titleSection[0]}</h2>
-            </Title>
+            <Title>{text.titleSection[0]}</Title>
             <CarouselContainer
                 ssr
                 partialVisible
@@ -346,10 +334,7 @@ function Tours({
                                     </span>
                                 </div>
                             </div>
-                            <div className="price">
-                                {experience.price}EUR{" "}
-                                <span>/{text.tours.person}</span>
-                            </div>
+
                             <p>
                                 {
                                     experience.description[
@@ -357,30 +342,36 @@ function Tours({
                                     ]
                                 }
                             </p>
+
                             <div className="button-container">
-                                <button
-                                    onClick={() =>
-                                        handleExperienceClick(experience)
-                                    }
-                                    className="primary"
-                                >
-                                    {text.tours.primaryButton}
-                                </button>
-                                {(experience.activity_id === "1" ||
-                                    experience.activity_id === 1) && (
-                                    <Link
-                                        to={
-                                            "/tour/" +
-                                            experience.name.en +
-                                            "/" +
-                                            experience.id
+                                <div className="price">
+                                    {experience.price}€ <span>/p</span>
+                                </div>
+                                <div className="buttons">
+                                    <button
+                                        onClick={() =>
+                                            handleExperienceClick(experience)
                                         }
+                                        className="primary"
                                     >
-                                        <button className="secundary">
-                                            {text.tours.secundaryButton}
-                                        </button>
-                                    </Link>
-                                )}
+                                        {text.tours.primaryButton}
+                                    </button>
+                                    {(experience.activity_id === "1" ||
+                                        experience.activity_id === 1) && (
+                                        <Link
+                                            to={
+                                                "/tour/" +
+                                                experience.name.en +
+                                                "/" +
+                                                experience.id
+                                            }
+                                        >
+                                            <button className="secundary">
+                                                {text.tours.secundaryButton}
+                                            </button>
+                                        </Link>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </Card>

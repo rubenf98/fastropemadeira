@@ -13,14 +13,13 @@ import { Spin } from "antd";
 
 const Container = styled.section`
     position: relative;
-    margin-top: 80px;
 `;
 
 const Background = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    height: 500px;
+    height: 600px;
     width: 100vw;
     z-index: -1;
     background: ${(props) => "url(" + props.background + ")"};
@@ -31,18 +30,20 @@ const Background = styled.div`
 
 const Form = styled.div`
     width: 30%;
-    margin-top: 100px;
+    margin-top: 250px;
     position: sticky;
-    top: 120px;
+    top: 150px;
     left: 0;
 
     @media (max-width: ${dimensions.lg}) {
+        order: 2;
         position: relative;
         top: 0px;
-        width: 90%;
-        margin: auto;
+        width: 100%;
+        margin: 30px auto;
         padding: 0px 20px;
         box-sizing: border-box;
+        position: relative;
     }
 
     @media (max-width: ${dimensions.md}) {
@@ -60,19 +61,25 @@ const Information = styled.div`
     }
 
     h3 {
-        font-size: 20px;
+        font-family: "Caveat Brush", serif;
+        font-weight: 900;
+        font-size: clamp(20px, 3vw, 40px);
     }
 
     .title {
-        height: 500px;
+        padding-top: 100px;
+        box-sizing: border-box;
+        height: 600px;
         display: flex;
         align-items: center;
+        justify-content: flex-start;
 
         h1 {
+            box-sizing: border-box;
+            font-family: "Palestine Border";
             color: white;
-            margin: auto;
-            line-height: 100%;
-            font-size: clamp(30px, 5vw, 90px);
+            line-height: 80%;
+            font-size: clamp(60px, 8vw, 110px);
         }
     }
 
@@ -81,6 +88,11 @@ const Information = styled.div`
         margin: auto;
         padding: 0px 20px;
         box-sizing: border-box;
+        order: 3;
+
+        .title {
+            display: none;
+        }
     }
 
     @media (max-width: ${dimensions.md}) {
@@ -97,7 +109,7 @@ const Content = styled.div`
     width: 100%;
     max-width: ${maxWidth};
     margin: auto;
-    padding: 0px 0px 100px 0px;
+    padding: 30px 0px 100px 0px;
 
     @media (max-width: ${dimensions.lg}) {
         flex-wrap: wrap;
@@ -106,12 +118,42 @@ const Content = styled.div`
 
 const Details = styled.div`
     width: 100%;
-    background-color: #e9e9e9;
-    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
     margin: 50px 0px;
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
     h3 {
         font-size: 20px;
+    }
+`;
+
+const Title = styled.div`
+    padding: 200px 20px 0px 20px;
+    box-sizing: border-box;
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    order: 1;
+
+    h1 {
+        box-sizing: border-box;
+        font-family: "Palestine Border";
+        color: white;
+        line-height: 80%;
+        font-size: clamp(70px, 8vw, 110px);
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+        display: flex;
     }
 `;
 
@@ -151,6 +193,15 @@ function Activity(props) {
                 }
             />
 
+            {experience.id && (
+                <Title>
+                    <h1>
+                        Canyoning <br />
+                        {experience.name[localStorage.getItem("language")]}
+                    </h1>
+                </Title>
+            )}
+
             {/* <Background autoPlaySpeed={3000} autoPlay arrows={false} infinite partialVisible={false} responsive={responsive}>
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/1.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
                 <img src={experience.id ? "/images/activities/" + experience.name.en + "/2.jpg" : "/images/activities/default_beginner.jpg"} alt="" />
@@ -167,7 +218,7 @@ function Activity(props) {
                     <Information>
                         <div className="title">
                             <h1>
-                                Canyoning{" "}
+                                Canyoning <br />
                                 {
                                     experience.name[
                                         localStorage.getItem("language")
@@ -176,32 +227,48 @@ function Activity(props) {
                             </h1>
                         </div>
 
+                        <h3>{text.titles[0]}</h3>
                         <Details>
-                            <h3>{text.titles[0]}</h3>
-                            <ul>
-                                <li>
-                                    {
-                                        experience.duration[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
-                                </li>
-                                <li>
-                                    {
-                                        experience.height[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
-                                </li>
-                                <li>
-                                    {
-                                        experience.target[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
-                                </li>
-                                <li>{text[activity].age}</li>
-                            </ul>
+                            <div>
+                                <img
+                                    src="/icon/activities/activity_type.svg"
+                                    alt="shoe"
+                                />
+                                {
+                                    experience.duration[
+                                        localStorage.getItem("language")
+                                    ]
+                                }
+                            </div>
+                            <div>
+                                <img
+                                    src="/icon/activities/activity_time.svg"
+                                    alt="shoe"
+                                />
+                                {
+                                    experience.height[
+                                        localStorage.getItem("language")
+                                    ]
+                                }
+                            </div>
+                            <div>
+                                <img
+                                    src="/icon/activities/activity_height.svg"
+                                    alt="shoe"
+                                />
+                                {
+                                    experience.target[
+                                        localStorage.getItem("language")
+                                    ]
+                                }
+                            </div>
+                            <div>
+                                <img
+                                    src="/icon/activities/activity_age.svg"
+                                    alt="shoe"
+                                />
+                                {text[activity].age}
+                            </div>
                         </Details>
 
                         {text[activity].paragraphs.map((paragraph, index) => (

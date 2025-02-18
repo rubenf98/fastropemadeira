@@ -58,6 +58,8 @@ export const text = {
             },
         },
     },
+    checkout: (<div><h2>Está quase lá!</h2><p>Falta apenas um passo para garantir a sua reserva! Pode finalizar a sua reserva diretamente aqui no nosso site ou enviando uma mensagem pelo WhatsApp.</p><p>A nossa equipa está pronta para ajudar, responder suas dúvidas e—<strong>um pequeno segredo—costumamos oferecer preços especiais</strong> para quem reserva por mensagem!</p><p>Escolha a sua opção preferida abaixo e conclua sua reserva agora.</p></div>),
     price: "Sob-Orçamento",
-    submit: "SUBMETER"
+    submit: "Concluir reserva online",
+    whatsapp: "Obtenha um preço especial no WhatsApp"
 } 

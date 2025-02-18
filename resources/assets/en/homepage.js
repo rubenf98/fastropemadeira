@@ -27,6 +27,7 @@ export const text = {
         "MOST POPULAR TOURS",
         "WATCH OUR VIDEO",
         "MEET OUR TEAM",
+        "DON’T TAKE OUR WORD FOR IT",
     ],
     reservation: {
         title: "Make your reservation",

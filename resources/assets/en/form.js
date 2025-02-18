@@ -58,6 +58,8 @@ export const text = {
             },
         },
     },
+    checkout: (<div><h2>You're Almost There!</h2><p>You're just one step away from securing your booking! You can finalize your reservation right here on our website or by sending us a message on WhatsApp.</p><p>Our team is ready to assist you, answer any questions, and—here’s a little secret—we often have <strong>special prices</strong> for those who book via message!</p><p>Choose your preferred option below and complete your booking now.</p></div>),
     price: "Pending Budget",
-    submit: "CHECKOUT"
+    submit: "Complete Booking Online",
+    whatsapp: "Get Special Price on WhatsApp"
 } 

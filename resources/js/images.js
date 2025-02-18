@@ -1,7 +1,7 @@
 export const team = {
-    alves: "/team/alves.webp",
-    pedro: "/team/pedro.webp",
-    david: "/team/david.webp",
+    alves: "/team/alves_edited.png",
+    pedro: "/team/pedro_edited.png",
+    david: "/team/david_edited.png",
     davidAbout: "/team/david-about.webp",
 }
 

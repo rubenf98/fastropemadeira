@@ -58,6 +58,9 @@ export const text = {
             },
         },
     },
+    checkout: (<div><h2>Sie sind fast da!</h2><p>Sie sind nur noch einen Schritt davon entfernt, Ihre Buchung zu sichern! Sie können Ihre Reservierung direkt hier auf unserer Website abschließen oder uns eine Nachricht auf WhatsApp senden.</p><p>Unser Team steht bereit, um Ihnen zu helfen, Ihre Fragen zu beantworten und – hier ein kleines Geheimnis – wir bieten oft <strong>Sonderpreise</strong> für diejenigen an, die per Nachricht buchen!</p><p>Wählen Sie unten Ihre bevorzugte Option und schließen Sie Ihre Buchung jetzt ab.</p></div>),
+
     price: "Ausstehendes Budget",
-    submit: "KASSE"
+    submit: "Buchung online abschließen",
+    whatsapp: "Sonderpreis auf WhatsApp erhalten"
 } 
