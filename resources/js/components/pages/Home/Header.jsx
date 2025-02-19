@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors, dimensions } from "../../../helper";
 import { connect } from "react-redux";
 import { setVideoSrc } from "../../../redux/application/actions";
 import { Col, DatePicker, Row, Select } from "antd";
 import { setFormFields, setFormVisibility } from "../../../redux/form/actions";
+import { fetchAllBlockedDatesSelector } from "../../../redux/date/actions";
 import dayjs from "dayjs";
 
 const Container = styled.div`
@@ -229,7 +230,7 @@ const Form = styled.div`
 `;
 
 function Header(props) {
-    const { text } = props;
+    const { text, blockedDates } = props;
     const [form, setForm] = useState({
         date: undefined,
         people: undefined,
@@ -241,6 +242,10 @@ function Header(props) {
             props.setFormVisibility(true);
         }
     };
+
+    useEffect(() => {
+        props.fetchAllBlockedDatesSelector(form);
+    }, []);
 
     return (
         <Container>
@@ -263,7 +268,12 @@ function Header(props) {
                                 disabledDate={(currentDate) => {
                                     return (
                                         currentDate &&
-                                        currentDate <= dayjs().endOf("day")
+                                        (currentDate < dayjs().endOf("day") ||
+                                            blockedDates.includes(
+                                                dayjs(currentDate).format(
+                                                    "YYYY-MM-DD"
+                                                )
+                                            ))
                                     );
                                 }}
                             />
@@ -371,7 +381,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setFormFields: (data) => dispatch(setFormFields(data)),
         setFormVisibility: (data) => dispatch(setFormVisibility(data)),
+        fetchAllBlockedDatesSelector: (filters) =>
+            dispatch(fetchAllBlockedDatesSelector(filters)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+const mapStateToProps = (state) => {
+    return {
+        blockedDates: state.date.selector,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

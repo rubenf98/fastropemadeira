@@ -13,6 +13,8 @@ export default (state = initialState, action = {}) => {
     switch (action.type) {
         case `${types.FETCH_BLOCKED_DATES}_PENDING`:
         case `${types.FETCH_BLOCKED_DATES_SELECTOR}_PENDING`:
+        case `${types.FETCH_ALL_BLOCKED_DATES_SELECTOR}_PENDING`:
+
         case `${types.DELETE_BLOCKED_DATE}_PENDING`:
         case `${types.DELETE_BLOCKED_DATE}_REJECTED`:
             return {
@@ -22,6 +24,7 @@ export default (state = initialState, action = {}) => {
             };
 
         case `${types.FETCH_BLOCKED_DATES_SELECTOR}_REJECTED`:
+        case `${types.FETCH_ALL_BLOCKED_DATES_SELECTOR}_REJECTED`:
             return {
                 ...state,
                 loading: false,
@@ -29,6 +32,7 @@ export default (state = initialState, action = {}) => {
             };
 
         case `${types.FETCH_BLOCKED_DATES_SELECTOR}_FULFILLED`:
+        case `${types.FETCH_ALL_BLOCKED_DATES_SELECTOR}_FULFILLED`:
             return {
                 ...state,
                 loading: false,

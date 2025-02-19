@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExternalReservationController;
+use App\Http\Controllers\FetchAllBlockedDatesInvokable;
 use App\Http\Controllers\FetchPartnerFromUrlInvokable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('/partner-from-url', FetchPartnerFromUrlInvokable::class);
 Route::get('reservation/disabledDate', 'App\Http\Controllers\ReservationController@disabledDates');
 Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationController@showFromToken');
 Route::get('reservation/selector/blockDate', 'App\Http\Controllers\BlockReservationDateController@selector');
+Route::get('fetch-blocked-dates', FetchAllBlockedDatesInvokable::class);
 
 
 
