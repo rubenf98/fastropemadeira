@@ -145,7 +145,7 @@ function Layout(props) {
 
     useEffect(() => {
         var partnerUrl = query.get("partnerUrl");
-        console.log(partnerUrl);
+
         if (partnerUrl) {
             props.setFormVisibility(true);
         }

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
-import Row from "antd/es/row"
+import Row from "antd/es/row";
 import { team } from "../../../images";
-import { dimensions } from "../../../helper"
-import AnimationContainer from '../../common/AnimationContainer';
+import { dimensions } from "../../../helper";
+import AnimationContainer from "../../common/AnimationContainer";
 
 const Container = styled.div`
     margin: 50px 0px 0px 0px;
@@ -14,35 +14,28 @@ const Container = styled.div`
 
     h3 {
         margin: 80px auto 50px auto;
-        font-size: 2.6em;
-        width: 60%;
+        width: 70%;
+        font-family: "Caveat Brush", serif;
+        display: block;
         text-align: center;
+        font-weight: 900;
+        font-size: clamp(30px, 5vw, 70px);
+        line-height: 100%;
 
-        @media (max-width: ${dimensions.lg}) {
-            width: 70%;
-        }
-
-    @media (max-width: ${dimensions.md}) {
+        @media (max-width: ${dimensions.md}) {
             width: 90%;
         }
 
-    @media (max-width: ${dimensions.sm}) {
-            font-size: 2em;
+        @media (max-width: ${dimensions.sm}) {
             width: 100%;
         }
-
     }
-
-   
-    
-
-        
 `;
 
 const Member = styled.div`
     width: 25%;
     border-radius: 6px;
-    box-shadow: 0px -6px 20px 4px rgba(0,0,0,0.1);
+    box-shadow: 0px -6px 20px 4px rgba(0, 0, 0, 0.1);
     position: relative;
 
     @media (max-width: ${dimensions.lg}) {
@@ -58,13 +51,12 @@ const Member = styled.div`
         width: 100%;
         margin: 20px auto;
     }
-
 `;
 
 const Picture = styled.div`
     height: 350px;
     width: 100%;
-    background: ${props => "url(" + props.image + ")"};
+    background: ${(props) => "url(" + props.image + ")"};
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -76,7 +68,9 @@ const Information = styled.div`
     padding: 10px;
     position: absolute;
     bottom: -50px;
-    right: 0px; left: 0px; margin: 0px auto;
+    right: 0px;
+    left: 0px;
+    margin: 0px auto;
     width: 60%;
     background: white;
     min-height: 120px;
@@ -85,33 +79,28 @@ const Information = styled.div`
     font-weight: bold;
     font-size: 1.8em;
     text-align: center;
-  
 `;
 const Card = ({ name, image }) => (
     <Member>
         <Picture image={image} />
-        <Information>
-            {name}
-        </Information >
+        <Information>{name}</Information>
     </Member>
-)
+);
 
 function Team({ text }) {
     return (
         <Container>
-
             <AnimationContainer animation="fadeInLeft">
                 <h3>{text.team.title}</h3>
             </AnimationContainer>
 
-
-            <Row type="flex" justify="space-around" >
+            <Row type="flex" justify="space-around">
                 <Card name="João Alves" image={team.alves} />
                 <Card name="Pedro Faria" image={team.pedro} />
                 <Card name="David Rodrigues" image={team.davidAbout} />
             </Row>
         </Container>
-    )
+    );
 }
 
-export default Team
+export default Team;

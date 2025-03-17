@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
-import Row from "antd/es/row"
-import { services } from "../../../images"
-import SectionTitle from '../../common/SectionTitle';
-import { dimensions } from "../../../helper"
-import AnimationContainer from '../../common/AnimationContainer';
+import Row from "antd/es/row";
+import { services } from "../../../images";
+import SectionTitle from "../../common/SectionTitle";
+import { dimensions } from "../../../helper";
+import AnimationContainer from "../../common/AnimationContainer";
 
 const Container = styled.div`
     width: 90%;
@@ -14,10 +14,10 @@ const Container = styled.div`
 `;
 
 const ServiceContainer = styled.div`
-    width: 30%;
+    width: calc(33% - 40px);
     z-index: 1;
     background: #fafafa;
-    margin: 20px 0px;
+    margin: 20px;
     padding: 30px;
     box-sizing: border-box;
 
@@ -41,12 +41,12 @@ const ServiceContainer = styled.div`
         margin: auto;
         display: block;
         margin-bottom: 1.5rem;
-        transition: .3s ease-in-out;
+        transition: 0.3s ease-in-out;
         box-sizing: border-box;
     }
     h4 {
         font-weight: bold;
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
         font-size: 1.5rem;
         text-align: center;
         box-sizing: border-box;
@@ -62,8 +62,16 @@ const ServiceContainer = styled.div`
     }
 `;
 
-const Service = ({ title, description, image }) => (
+const Title = styled.h2`
+    font-family: "Caveat Brush", serif;
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-weight: 900;
+    font-size: clamp(30px, 5vw, 70px);
+`;
 
+const Service = ({ title, description, image }) => (
     <ServiceContainer>
         <AnimationContainer animation="fadeInUp">
             <img loading="lazy" src={image} alt={title} />
@@ -72,14 +80,14 @@ const Service = ({ title, description, image }) => (
             <p>{description}</p>
         </AnimationContainer>
     </ServiceContainer>
-)
+);
 
 function Services({ text }) {
     return (
         <Container>
-            <SectionTitle title={text.services.title} />
+            <Title>{text.services.title}</Title>
 
-            <Row type="flex" justify="space-around">
+            <Row type="flex" justify="flex-start">
                 <Service
                     title={text.services.items[0].title}
                     image={services.transport}
@@ -107,7 +115,7 @@ function Services({ text }) {
                 />
             </Row>
         </Container>
-    )
+    );
 }
 
-export default Services
+export default Services;
