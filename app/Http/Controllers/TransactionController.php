@@ -117,6 +117,11 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        DB::beginTransaction();
+
+        Tracker::updateValues($transaction->amount, 0, $transaction->type, $transaction->type);
+        $transaction->delete();
+        DB::commit();
+        return response()->json(null, 204);
     }
 }
