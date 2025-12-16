@@ -29,6 +29,16 @@
         href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Mukta:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10807342386"></script>
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJP4VFRN');
+    </script>
+    <!-- End Google Tag Manager -->
+
     <script>
         window.dataLayer = window.dataLayer || []; function gtag() {dataLayer.push(arguments);} gtag('js', new Date());
         gtag('config', 'AW-10807342386');
@@ -44,18 +54,20 @@
         gtag('event', 'conversion', {'send_to': 'AW-10807342386/ R6UICI7jze0ZELLqq6Eo'});
     </script>
 
+
+
     <title>FastRope</title>
 </head>
 
 <style>
     @font-face {
         font-family: Neutrons Demo;
-        src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
+        src: url('{!! asset(' fonts/NeutronsDemoRegular.ttf') !!}');
     }
 
     @font-face {
         font-family: Palestine Border;
-        src: url('{!! asset('fonts/PalestineBorder.ttf') !!}');
+        src: url('{!! asset(' fonts/PalestineBorder.ttf') !!}');
     }
 
 
@@ -161,6 +173,10 @@
 </script>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJP4VFRN" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="index">
         <script src="{{mix('js/app.js')}}"></script>
     </div>
