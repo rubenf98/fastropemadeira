@@ -126,8 +126,7 @@ const OrderForm = ({
         if (data.person) {
             data.person = data.person.slice(0, data.people);
         }
-        console.log(data, "data");
-        console.log(fields);
+
         axios
             .post(`${window.location.origin}/api/reservation`, {
                 ...data,

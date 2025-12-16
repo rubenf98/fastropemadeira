@@ -11,7 +11,6 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    
 `;
 
 const Input = styled.input`
@@ -40,8 +39,8 @@ const Input = styled.input`
 
 const FormContainer = styled.div`
     z-index: 1;
-	position: relative;	
-	height: 450px;
+    position: relative;
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,10 +54,10 @@ const Card = styled.div`
     min-height: 500px;
     display: block;
     padding: 20px;
-    background: linear-gradient(90deg, #4d73f1, #0c2968);		
-	position: relative;	
+    background: linear-gradient(90deg, #4d73f1, #0c2968);
+    position: relative;
     border-radius: 8px;
-	box-shadow: 0px 0px 24px #0000005a;
+    box-shadow: 0px 0px 24px #0000005a;
 
     @media (max-width: ${dimensions.lg}) {
         width: 70%;
@@ -72,8 +71,7 @@ const Card = styled.div`
         width: 100%;
     }
 
-
-    .screen__background {		
+    .screen__background {
         position: absolute;
         top: 0;
         left: 0;
@@ -81,7 +79,7 @@ const Card = styled.div`
         bottom: 0;
         z-index: 0;
         -webkit-clip-path: inset(0 0 0 0);
-        clip-path: inset(0 0 0 0);	
+        clip-path: inset(0 0 0 0);
     }
 
     .screen__background__shape {
@@ -92,18 +90,18 @@ const Card = styled.div`
     .screen__background__shape1 {
         height: 520px;
         width: 520px;
-        background: #FFF;	
+        background: #fff;
         top: -50px;
-        right: 180px;	
+        right: 180px;
         border-radius: 0 72px 0 0;
     }
 
     .screen__background__shape2 {
         height: 220px;
         width: 220px;
-        background: #0144af;	
+        background: #0144af;
         top: -172px;
-        right: 0;	
+        right: 0;
         border-radius: 32px;
     }
 
@@ -112,20 +110,19 @@ const Card = styled.div`
         width: 190px;
         background: linear-gradient(270deg, #2d6df8, rgb(34, 93, 255));
         top: -24px;
-        right: 0;	
+        right: 0;
         border-radius: 32px;
     }
 
     .screen__background__shape4 {
         height: 400px;
         width: 200px;
-        background: #0138af;	
+        background: #0138af;
         top: 420px;
-        right: 50px;	
+        right: 50px;
         border-radius: 60px;
     }
 `;
-
 
 const Button = styled.button`
     margin-top: 30px;
@@ -192,7 +189,6 @@ class Login extends Component {
                         <span className="screen__background__shape screen__background__shape2"></span>
                         <span className="screen__background__shape screen__background__shape1"></span>
                     </div>
-
                 </Card>
             </Container>
         );

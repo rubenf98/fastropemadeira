@@ -3,6 +3,9 @@
 use App\Http\Controllers\ExternalReservationController;
 use App\Http\Controllers\FetchAllBlockedDatesInvokable;
 use App\Http\Controllers\FetchPartnerFromUrlInvokable;
+use App\Http\Controllers\TrackerController;
+use App\Http\Controllers\TransactionCategoryController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,7 @@ Route::get('reservation/disabledDate', 'App\Http\Controllers\ReservationControll
 Route::get('reservation/showFromToken', 'App\Http\Controllers\ReservationController@showFromToken');
 Route::get('reservation/selector/blockDate', 'App\Http\Controllers\BlockReservationDateController@selector');
 Route::get('fetch-blocked-dates', FetchAllBlockedDatesInvokable::class);
+Route::get('transactions-statistics', [TransactionController::class, "barChartStatistics"]);
 
 
 
@@ -45,3 +49,7 @@ Route::apiResource('reservation', 'App\Http\Controllers\ReservationController');
 Route::apiResource('activity', 'App\Http\Controllers\ActivityController');
 Route::apiResource('experience', 'App\Http\Controllers\ExperienceController');
 Route::apiResource('partners', 'App\Http\Controllers\PartnerController');
+
+Route::apiResource('transaction-categories', TransactionCategoryController::class);
+Route::apiResource('transactions', TransactionController::class);
+Route::apiResource('trackers', TrackerController::class);
