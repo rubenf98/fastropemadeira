@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-
+use App\Models\Tracker;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
@@ -26,6 +26,7 @@ class TransactionRequest extends FormRequest
             'transaction_category_id' =>  $this->category[0],
             'transaction_sub_category_id' => $this->category[1],
             'user_id' => auth()->id(),
+            'tracker_id' => Tracker::where("name", $this->type)->first()->id ?? null,
         ]);
     }
 
@@ -37,11 +38,16 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => 'required',
+            'amount' => 'required|numeric',
+            'n_clients' => 'nullable|integer',
             'date' => 'required|date',
-            'type' => 'required|string',
+            'type' => 'required|string|exists:trackers,name',
+            'tracker_id' => 'required|integer|exists:trackers,id',
             'transaction_category_id' => 'required|integer',
             'transaction_sub_category_id' => 'required|integer',
+            'willPay' => 'sometimes|integer',
+            'description' => 'nullable|string',
+            'transaction_partner_id' => 'nullable|integer|exists:transaction_partners,id',
         ];
     }
 

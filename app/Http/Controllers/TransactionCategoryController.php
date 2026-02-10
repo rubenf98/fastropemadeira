@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TransactionCategoryResource;
 use App\Models\TransactionCategory;
+use App\QueryFilters\TransactionCategoryFilters;
 use Illuminate\Http\Request;
 
 class TransactionCategoryController extends Controller
@@ -13,9 +14,9 @@ class TransactionCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TransactionCategoryFilters $filters)
     {
-        return TransactionCategoryResource::collection(TransactionCategory::all());
+        return TransactionCategoryResource::collection(TransactionCategory::filterBy($filters)->get());
     }
 
     /**

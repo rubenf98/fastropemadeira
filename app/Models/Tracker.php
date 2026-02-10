@@ -9,21 +9,21 @@ class Tracker extends Model
 {
     use HasFactory;
 
-    public static function add($aValue, $aType)
+    public static function add($tracker, $aValue)
     {
-        $record = self::where('name', "total_balance")->first();
+        $record = self::find($tracker);
         $record->value += $aValue;
         $record->save();
 
-        $typeRecord = self::where('name', $aType)->first();
-        $typeRecord->value += $aValue;
-        $typeRecord->save();
+        // $typeRecord = self::where('name', $aType)->first();
+        // $typeRecord->value += $aValue;
+        // $typeRecord->save();
     }
 
-    public static function updateValues($oldValue, $newValue, $oldType, $newType)
+    public static function updateValues($tracker, $oldValue, $newValue, $oldType, $newType)
     {
-        $record = self::where('name', "total_balance")->first();
-        $record->value += ((float)$newValue - (float)$oldValue);
+        $record = self::where('name', $tracker)->first();
+        $record->value += ((float) $newValue - (float) $oldValue);
         $record->save();
 
         $oldTypeRecord = self::where('name', $oldType)->first();
@@ -33,5 +33,10 @@ class Tracker extends Model
         $newTypeRecord = self::where('name', $newType)->first();
         $newTypeRecord->value += $newValue;
         $newTypeRecord->save();
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

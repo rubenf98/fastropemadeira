@@ -16,6 +16,11 @@ class TransactionCategorySeeder extends Seeder
     public function run()
     {
         $categories = [
+            ['image' => '/images/activities/beginner.jpg', "name" => "Canyoning", 'normal_category' => false, "subcategories" => [
+                ["name" => "Nível 1 (70€)", "price" => 70],
+                ["name" => "Nível 2 (80€)", "price" => 80],
+                ["name" => "Nível 3 (150€)", "price" => 150],
+            ]],
             ['image' => '/icon/mobile/transaction_categories/activity.svg', "name" => "Atividades", "subcategories" => [
                 ["name" => "Canyoning"],
                 ["name" => "Sunset"],
@@ -73,17 +78,20 @@ class TransactionCategorySeeder extends Seeder
                 ["name" => "Doações / Apoios"],
                 ["name" => "Imprevistos"],
             ]],
+
         ];
 
         foreach ($categories as $category) {
             $record = TransactionCategory::create([
                 "name" => $category["name"],
                 "image" => $category["image"],
+                "normal_category" => $category["normal_category"] ?? true,
             ]);
 
             foreach ($category["subcategories"] as $subcategory) {
                 TransactionSubCategory::create([
                     "name" => $subcategory["name"],
+                    "price" => $subcategory["price"] ?? null,
                     "transaction_category_id" => $record->id,
                 ]);
             }

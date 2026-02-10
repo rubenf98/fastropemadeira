@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionCategoriesTable extends Migration
+class CreateTransactionPartnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTransactionCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_categories', function (Blueprint $table) {
+        Schema::create('transaction_partners', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("image");
-            $table->boolean("normal_category")->default(true);
+            $table->string('name');
+            $table->decimal('pending_payment', 8, 2)->default(0);
+            $table->decimal('pending_income', 8, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTransactionCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaction_categories');
+        Schema::dropIfExists('transaction_partners');
     }
 }

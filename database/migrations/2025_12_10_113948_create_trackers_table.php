@@ -27,12 +27,22 @@ class CreateTrackersTable extends Migration
         ]);
 
         DB::table('trackers')->insert([
-            'name' => 'income',
+            'name' => 'total_partners',
             'value' => 0.00,
         ]);
 
         DB::table('trackers')->insert([
-            'name' => 'expense',
+            'name' => 'pending_payment_partners',
+            'value' => 0.00,
+        ]);
+
+        DB::table('trackers')->insert([
+            'name' => 'pending_income_partners',
+            'value' => 0.00,
+        ]);
+
+        DB::table('trackers')->insert([
+            'name' => 'total_getyourguide',
             'value' => 0.00,
         ]);
     }

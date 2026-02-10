@@ -16,6 +16,7 @@ class CreateTransactionSubCategoriesTable extends Migration
         Schema::create('transaction_sub_categories', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->decimal("price", 8, 2)->nullable();
             $table->unsignedBigInteger("transaction_category_id");
             $table->timestamps();
 

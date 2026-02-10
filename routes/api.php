@@ -3,9 +3,11 @@
 use App\Http\Controllers\ExternalReservationController;
 use App\Http\Controllers\FetchAllBlockedDatesInvokable;
 use App\Http\Controllers\FetchPartnerFromUrlInvokable;
+use App\Http\Controllers\HandleTransactionPartnerLiquidation;
 use App\Http\Controllers\TrackerController;
 use App\Http\Controllers\TransactionCategoryController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionPartnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +52,9 @@ Route::apiResource('activity', 'App\Http\Controllers\ActivityController');
 Route::apiResource('experience', 'App\Http\Controllers\ExperienceController');
 Route::apiResource('partners', 'App\Http\Controllers\PartnerController');
 
+Route::apiResource('transaction-partners', TransactionPartnerController::class);
 Route::apiResource('transaction-categories', TransactionCategoryController::class);
 Route::apiResource('transactions', TransactionController::class);
 Route::apiResource('trackers', TrackerController::class);
+
+Route::post('/transaction-partners/liquidate/{transactionPartner}', HandleTransactionPartnerLiquidation::class);

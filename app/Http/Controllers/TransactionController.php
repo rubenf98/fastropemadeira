@@ -7,6 +7,7 @@ use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Tracker;
 use App\Models\Transaction;
+use App\Models\TransactionPartner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,11 +34,39 @@ class TransactionController extends Controller
         $validator = $request->validated();
 
         DB::beginTransaction();
-        $record = Transaction::create($validator);
-        Tracker::add($record->amount, $record->type);
+
+        $record = false;
+
+        if (array_key_exists('transaction_partner_id', $validator)) {
+            if ($validator["willPay"]) {
+                $corrected_amount = $validator["amount"] * 0.3;
+
+                $record = Transaction::create($validator);
+
+                $tracker = Tracker::where('name', 'pending_payment_partners')->first();
+                Tracker::add($tracker->id, $corrected_amount); // pending_payment_partners
+                Tracker::add($validator["tracker_id"], $corrected_amount); // total_partners
+                $tracker = Tracker::where('name', 'total_balance')->first();
+                Tracker::add($tracker->id, $record->amount);
+                TransactionPartner::find($validator["transaction_partner_id"])->increment('pending_payment', $corrected_amount);
+            } else {
+                $corrected_amount = $validator["amount"] * 0.7;
+
+                $tracker = Tracker::where('name', 'pending_income_partners')->first();
+                Tracker::add($tracker->id, $corrected_amount); // pending_income_partners
+                Tracker::add($validator["tracker_id"], $corrected_amount); // total_partners
+
+                TransactionPartner::find($validator["transaction_partner_id"])->increment('pending_income', $corrected_amount);
+            }
+        }
+
         DB::commit();
 
-        return new TransactionResource($record);
+        if ($record) {
+            return new TransactionResource($record);
+        } else {
+            return response()->json(null, 201);
+        }
     }
 
     /**
@@ -65,8 +94,11 @@ class TransactionController extends Controller
         $rows = Transaction::query()
             ->selectRaw("
             DATE_FORMAT(date, '%Y-%m') as month,
-            SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) as total_income,
-            SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) as total_expense
+            SUM(CASE WHEN tracker_id = 1 THEN amount ELSE 0 END) as total_balance,
+            SUM(CASE WHEN tracker_id = 1 THEN n_clients ELSE 0 END) as n_clients,
+            SUM(CASE WHEN tracker_id = 2 THEN amount ELSE 0 END) as total_partners,
+            SUM(CASE WHEN tracker_id = 2 THEN n_clients ELSE 0 END) as n_client_partners,
+            SUM(CASE WHEN tracker_id = 5 THEN amount ELSE 0 END) as total_getyourguide
         ")
             ->where('date', '>=', $fiveMonthsAgo)
             ->groupBy('month')
@@ -81,8 +113,11 @@ class TransactionController extends Controller
 
             $months->put($month, (object) [
                 'month'         => $month,
-                'total_income'  => $rows[$month]->total_income ?? 0,
-                'total_expense' => $rows[$month]->total_expense ?? 0,
+                'total_balance' => $rows[$month]->total_balance ?? 0,
+                'total_partners'  => $rows[$month]->total_partners ?? 0,
+                'total_getyourguide' => $rows[$month]->total_getyourguide ?? 0,
+                'n_clients' => $rows[$month]->n_clients ?? 0,
+                'n_client_partners' => $rows[$month]->n_client_partners ?? 0,
             ]);
         }
 

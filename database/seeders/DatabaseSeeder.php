@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TransactionPartner;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ExperienceSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(TransactionCategorySeeder::class);
+        $this->call(TransactionPartnerSeeder::class);
     }
 }
