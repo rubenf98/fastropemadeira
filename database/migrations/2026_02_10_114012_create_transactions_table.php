@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->decimal("amount", 8, 2);
             $table->date("date");
             $table->integer("n_clients")->default(0);
+            $table->text("description")->nullable();
             $table->unsignedBigInteger("transaction_partner_id")->nullable();
             $table->unsignedBigInteger("transaction_category_id");
             $table->unsignedBigInteger("transaction_sub_category_id");

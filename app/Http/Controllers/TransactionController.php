@@ -44,8 +44,7 @@ class TransactionController extends Controller
                 $record = Transaction::create($validator);
 
                 $tracker = Tracker::where('name', 'pending_payment_partners')->first();
-                Tracker::add($tracker->id, $corrected_amount); // pending_payment_partners
-                Tracker::add($validator["tracker_id"], $corrected_amount); // total_partners
+                Tracker::add($tracker->id, $corrected_amount, $validator["n_clients"]); // pending_payment_partners
                 $tracker = Tracker::where('name', 'total_balance')->first();
                 Tracker::add($tracker->id, $record->amount);
                 TransactionPartner::find($validator["transaction_partner_id"])->increment('pending_payment', $corrected_amount);
@@ -53,11 +52,14 @@ class TransactionController extends Controller
                 $corrected_amount = $validator["amount"] * 0.7;
 
                 $tracker = Tracker::where('name', 'pending_income_partners')->first();
-                Tracker::add($tracker->id, $corrected_amount); // pending_income_partners
-                Tracker::add($validator["tracker_id"], $corrected_amount); // total_partners
+                Tracker::add($tracker->id, $corrected_amount, $validator["n_clients"]); // pending_income_partners
 
                 TransactionPartner::find($validator["transaction_partner_id"])->increment('pending_income', $corrected_amount);
             }
+        } else {
+            $record = Transaction::create($validator);
+            $tracker = Tracker::where('name', 'total_balance')->first();
+            Tracker::add($tracker->id, $record->amount);
         }
 
         DB::commit();
@@ -65,7 +67,7 @@ class TransactionController extends Controller
         if ($record) {
             return new TransactionResource($record);
         } else {
-            return response()->json(null, 201);
+            return response()->json(null, 400);
         }
     }
 
@@ -136,7 +138,7 @@ class TransactionController extends Controller
         $validator = $request->validated();
 
         DB::beginTransaction();
-        Tracker::updateValues($transaction->amount, $validator["amount"], $transaction->type, $validator["type"]);
+        // Tracker::updateValues($transaction->amount, $validator["amount"], $transaction->type, $validator["type"]);
         $transaction->update($validator);
 
         DB::commit();
@@ -154,7 +156,7 @@ class TransactionController extends Controller
     {
         DB::beginTransaction();
 
-        Tracker::updateValues($transaction->amount, 0, $transaction->type, $transaction->type);
+        // Tracker::updateValues($transaction->amount, 0, $transaction->type, $transaction->type);
         $transaction->delete();
         DB::commit();
         return response()->json(null, 204);

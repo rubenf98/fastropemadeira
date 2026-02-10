@@ -18,6 +18,7 @@ class CreateTrackersTable extends Migration
             $table->id();
             $table->string("name");
             $table->decimal("value", 8, 2);
+            $table->integer("n_clients")->default(0);
             $table->timestamps();
         });
 

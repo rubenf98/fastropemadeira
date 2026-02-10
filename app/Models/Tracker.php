@@ -7,12 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tracker extends Model
 {
+    protected $fillable = [
+        'name',
+        'value',
+        'n_clients',
+    ];
     use HasFactory;
 
-    public static function add($tracker, $aValue)
+    public static function add($tracker, $aValue, $nClients = null)
     {
         $record = self::find($tracker);
         $record->value += $aValue;
+        if ($nClients !== null) {
+            $record->n_clients += $nClients;
+        }
         $record->save();
 
         // $typeRecord = self::where('name', $aType)->first();
