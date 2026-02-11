@@ -17,15 +17,15 @@ class TransactionCategorySeeder extends Seeder
     {
         $categories = [
             ['image' => '/images/activities/beginner.jpg', "name" => "Canyoning", 'normal_category' => false, "subcategories" => [
-                ["name" => "Nível 1 (70€)", "price" => 70],
-                ["name" => "Nível 2 (80€)", "price" => 80],
-                ["name" => "Nível 3 (150€)", "price" => 150],
+                ["name" => "Nível 1 (70€)", "price" => 70, "extra_field" => "n_clients"],
+                ["name" => "Nível 2 (80€)", "price" => 80, "extra_field" => "n_clients"],
+                ["name" => "Nível 3 (150€)", "price" => 150, "extra_field" => "n_clients"],
             ]],
             ['image' => '/icon/mobile/transaction_categories/activity.svg', "name" => "Atividades", "subcategories" => [
-                ["name" => "Canyoning"],
-                ["name" => "Sunset"],
-                ["name" => "Outros"],
-                ["name" => "Reembolso"],
+                ["name" => "Canyoning", "extra_field" => "n_clients"],
+                ["name" => "Sunset", "extra_field" => "n_clients"],
+                ["name" => "Outros", "extra_field" => "n_clients"],
+                ["name" => "Reembolso", "extra_field" => "n_clients"],
             ]],
             ['image' => '/icon/mobile/transaction_categories/equipment.svg', "name" => "Equipamento", "subcategories" => [
                 ["name" => "Manutenção"],
@@ -36,20 +36,21 @@ class TransactionCategorySeeder extends Seeder
                 ["name" => "Uniformes"],
             ]],
             ['image' => '/icon/mobile/transaction_categories/transport.svg', "name" => "Transporte/Logística", "subcategories" => [
-                ["name" => "Transfers de Clientes"],
+                ["name" => "Transfers de Clientes", "extra_field" => "n_clients"],
                 ["name" => "Manutenção de Viaturas"],
                 ["name" => "Combustível"],
                 ["name" => "Seguros de Viaturas"],
                 ["name" => "Aluguer de Viaturas"],
                 ["name" => "Transporte de Equipamento"],
             ]],
-            ['image' => '/images/activities/beginner.jpg', "name" => "Recursos Humanos", "subcategories" => [
+            ['image' => '/icon/mobile/transaction_categories/human_resources.svg', "name" => "Recursos Humanos", "subcategories" => [
                 ["name" => "Salários"],
                 ["name" => "Formação"],
                 ["name" => "Prémios / Incentivos"],
                 ["name" => "Serviços Externos"],
+                ["name" => "Pagamento de Guia", "extra_field" => "guide_name"]
             ]],
-            ['image' => '/images/activities/beginner.jpg', "name" => "Infraestrutura & Operações", "subcategories" => [
+            ['image' => '/icon/mobile/transaction_categories/operations.svg', "name" => "Infraestrutura & Operações", "subcategories" => [
                 ["name" => "Aluguer de Espaço / Armazém"],
                 ["name" => "Manutenção Geral das Instalações"],
                 ["name" => "Limpeza"],
@@ -59,21 +60,21 @@ class TransactionCategorySeeder extends Seeder
                 ["name" => "Taxas Bancárias"],
                 ["name" => "Serviços Jurídicos / Consultoria"],
             ]],
-            ['image' => '/images/activities/beginner.jpg', "name" => "Marketing, Vendas & Parcerias", "subcategories" => [
+            ['image' => '/icon/mobile/transaction_categories/marketing.svg', "name" => "Marketing, Vendas & Parcerias", "subcategories" => [
                 ["name" => "Publicidade"],
                 ["name" => "Redes Sociais"],
                 ["name" => "Website"],
-                ["name" => "Comissões de Agências / Hotéis / Operadores"],
+                ["name" => "Comissões"],
                 ["name" => "Parcerias Comerciais"],
                 ["name" => "Vouchers / Promoções / Gift Cards"],
             ]],
 
-            ['image' => '/images/activities/beginner.jpg', "name" => "Seguros e Licenças", "subcategories" => [
+            ['image' => '/icon/mobile/transaction_categories/insurance.svg', "name" => "Seguros e Licenças", "subcategories" => [
                 ["name" => "Seguros de Atividades"],
                 ["name" => "Certificações de Segurança"],
                 ["name" => "Licenças / Autorizações Oficiais"],
             ]],
-            ['image' => '/images/activities/beginner.jpg', "name" => "Outros", "subcategories" => [
+            ['image' => '/icon/mobile/transaction_categories/others.svg', "name" => "Outros", "subcategories" => [
                 ["name" => "Ajustes / Correções"],
                 ["name" => "Doações / Apoios"],
                 ["name" => "Imprevistos"],
@@ -92,6 +93,7 @@ class TransactionCategorySeeder extends Seeder
                 TransactionSubCategory::create([
                     "name" => $subcategory["name"],
                     "price" => $subcategory["price"] ?? null,
+                    "extra_field" => $subcategory["extra_field"] ?? null,
                     "transaction_category_id" => $record->id,
                 ]);
             }

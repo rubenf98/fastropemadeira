@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
+use Cerbero\QueryFilters\FiltersRecords;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    use HasFactory;
+    use HasFactory, FiltersRecords;
 
     protected $fillable = [
         "amount", "date", "user_id", 'tracker_id', "n_clients",
         'transaction_category_id',
         'transaction_sub_category_id',
         'transaction_partner_id',
-        'description',
+        'description', "pending", "willPay", "guide_name"
     ];
 
     public function user()
@@ -35,5 +36,10 @@ class Transaction extends Model
     public function subCategory()
     {
         return $this->belongsTo(TransactionSubCategory::class, "transaction_sub_category_id");
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo(TransactionPartner::class, "transaction_partner_id");
     }
 }

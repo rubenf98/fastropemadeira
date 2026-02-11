@@ -16,8 +16,6 @@ class CreateTransactionPartnersTable extends Migration
         Schema::create('transaction_partners', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('pending_payment', 8, 2)->default(0);
-            $table->decimal('pending_income', 8, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateTransactionSubCategoriesTable extends Migration
             $table->string("name");
             $table->decimal("price", 8, 2)->nullable();
             $table->unsignedBigInteger("transaction_category_id");
+            $table->string("extra_field")->nullable();
             $table->timestamps();
 
             $table->foreign('transaction_category_id')->references('id')->on('transaction_categories')->onDelete('cascade');

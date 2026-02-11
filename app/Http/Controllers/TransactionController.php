@@ -7,8 +7,12 @@ use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Tracker;
 use App\Models\Transaction;
+use App\Models\TransactionCategory;
 use App\Models\TransactionPartner;
+use App\Models\TransactionSubCategory;
+use App\QueryFilters\TransactionFilters;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
@@ -18,9 +22,9 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TransactionFilters $filters)
     {
-        return TransactionResource::collection(Transaction::orderBy("date", "desc")->paginate(10));
+        return TransactionResource::collection(Transaction::filterBy($filters)->orderBy("updated_at", "desc")->paginate(10));
     }
 
     /**
@@ -33,42 +37,54 @@ class TransactionController extends Controller
     {
         $validator = $request->validated();
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         $record = false;
 
-        if (array_key_exists('transaction_partner_id', $validator)) {
+        if ($validator['type'] == "total_partners") {
             if ($validator["willPay"]) {
-                $corrected_amount = $validator["amount"] * 0.3;
 
-                $record = Transaction::create($validator);
+                Transaction::create([
+                    ...$validator,
+                    "pending" => 1,
+                    "amount" => -($validator["amount"] * 0.3),
+                    'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
+                    'transaction_sub_category_id' => TransactionSubCategory::where('name', "Comissões")->first()->id,
+                ]);
 
-                $tracker = Tracker::where('name', 'pending_payment_partners')->first();
-                Tracker::add($tracker->id, $corrected_amount, $validator["n_clients"]); // pending_payment_partners
-                $tracker = Tracker::where('name', 'total_balance')->first();
-                Tracker::add($tracker->id, $record->amount);
-                TransactionPartner::find($validator["transaction_partner_id"])->increment('pending_payment', $corrected_amount);
+                $totalValidator = [
+                    "amount" => $validator["amount"] * 0.7,
+                    "n_clients" => $validator["n_clients"],
+                    "date" => $validator["date"],
+                    "tracker_id" => $validator["tracker_id"],
+                    "transaction_category_id" => $validator["transaction_category_id"],
+                    "transaction_sub_category_id" => $validator["transaction_sub_category_id"],
+                ];
+
+                $record = Transaction::create($totalValidator);
             } else {
-                $corrected_amount = $validator["amount"] * 0.7;
-
-                $tracker = Tracker::where('name', 'pending_income_partners')->first();
-                Tracker::add($tracker->id, $corrected_amount, $validator["n_clients"]); // pending_income_partners
-
-                TransactionPartner::find($validator["transaction_partner_id"])->increment('pending_income', $corrected_amount);
+                $record = Transaction::create([
+                    ...$validator,
+                    "transaction_partner_id" => $validator["transaction_partner_id"],
+                    "pending" => 1,
+                    "amount" => $validator["amount"] * 0.7,
+                    'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
+                    'transaction_sub_category_id' => TransactionSubCategory::where('name', "Comissões")->first()->id,
+                ]);
             }
-        } else {
+        } else if ($validator['type'] == "total_balance") {
             $record = Transaction::create($validator);
-            $tracker = Tracker::where('name', 'total_balance')->first();
-            Tracker::add($tracker->id, $record->amount);
+        } else if ($validator['type'] == "total_getyourguide") {
+            $record = Transaction::create([
+                ...$validator,
+                "amount" => $validator["amount"] * 0.7,
+            ]);
         }
 
-        DB::commit();
+        // DB::commit();
 
-        if ($record) {
-            return new TransactionResource($record);
-        } else {
-            return response()->json(null, 400);
-        }
+
+        return new TransactionResource($record);
     }
 
     /**
@@ -88,19 +104,32 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function barChartStatistics()
+    public function barChartStatistics(Request $request)
     {
         $fiveMonthsAgo = now()->startOfMonth()->subMonths(4);
+
+        $filters = $request->only([
+            'date_from',
+            'date_to',
+        ]);
+
 
         // Eloquent query using the Transaction model
         $rows = Transaction::query()
             ->selectRaw("
             DATE_FORMAT(date, '%Y-%m') as month,
-            SUM(CASE WHEN tracker_id = 1 THEN amount ELSE 0 END) as total_balance,
-            SUM(CASE WHEN tracker_id = 1 THEN n_clients ELSE 0 END) as n_clients,
-            SUM(CASE WHEN tracker_id = 2 THEN amount ELSE 0 END) as total_partners,
-            SUM(CASE WHEN tracker_id = 2 THEN n_clients ELSE 0 END) as n_client_partners,
-            SUM(CASE WHEN tracker_id = 5 THEN amount ELSE 0 END) as total_getyourguide
+            SUM(
+                CASE
+                    WHEN pending = 0 THEN amount -- valor já recebido, por isso é o valor normal
+                    WHEN (pending = 1 AND willPay = 0) THEN 0 -- valor vai ser positivo, mas ainda não recebeu, por isso é 0
+                    WHEN (pending = 1 AND willPay = 1) THEN ABS(amount) -- valor vai ser negativo, mas ainda não pagou, por isso é absolute
+                    ELSE 0
+                END
+            ) AS total_balance,
+            SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN n_clients ELSE 0 END) as n_clients,
+            SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN amount ELSE 0 END) as total_partners,
+            SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN n_clients ELSE 0 END) as n_client_partners,
+            SUM(CASE WHEN tracker_id = 3 AND pending = 0 THEN amount ELSE 0 END) as total_getyourguide
         ")
             ->where('date', '>=', $fiveMonthsAgo)
             ->groupBy('month')
@@ -123,7 +152,58 @@ class TransactionController extends Controller
             ]);
         }
 
-        return $months->sortBy('month')->values();
+        // $allTime = Cache::remember(
+        //     'transactions:all_time_stats',
+        //     now()->addMinutes(1),
+        //     fn () => Transaction::query()
+        //         ->selectRaw("
+        //     SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN amount ELSE 0 END) as total_balance,
+        //     SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN n_clients ELSE 0 END) as n_clients,
+        //     SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN amount ELSE 0 END) as total_partners,
+        //     SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN n_clients ELSE 0 END) as n_client_partners,
+        //     SUM(CASE WHEN tracker_id = 5 AND pending = 0 THEN amount ELSE 0 END) as total_getyourguide,
+        //     SUM(CASE WHEN pending = 1 AND willPay = 0 THEN amount ELSE 0 END) as pending_income,
+        //     SUM(CASE WHEN pending = 1 AND willPay = 1 THEN amount ELSE 0 END) as pending_payment
+        // ")->first()
+        // );
+
+        $allTime = Transaction::query()
+            ->when($filters['date_from'] ?? null, function ($q, $dateFrom) {
+                $q->whereDate('date', '>=', $dateFrom);
+            })
+            ->when($filters['date_to'] ?? null, function ($q, $dateTo) {
+                $q->whereDate('date', '<=', $dateTo);
+            })
+            ->selectRaw("
+            SUM(
+                CASE
+                    WHEN pending = 0 THEN amount -- valor já recebido, por isso é o valor normal
+                    WHEN (pending = 1 AND willPay = 0) THEN 0 -- valor vai ser positivo, mas ainda não recebeu, por isso é 0
+                    WHEN (pending = 1 AND willPay = 1) THEN ABS(amount) -- valor vai ser negativo, mas ainda não pagou, por isso é absolute
+                    ELSE 0
+                END
+            ) AS total_balance,
+            SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN n_clients ELSE 0 END) as n_clients,
+            SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN amount ELSE 0 END) as total_partners,
+            SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN n_clients ELSE 0 END) as n_client_partners,
+            SUM(CASE WHEN tracker_id = 3 AND pending = 0 THEN amount ELSE 0 END) as total_getyourguide,
+            SUM(CASE WHEN pending = 1 AND willPay = 0 THEN amount ELSE 0 END) as pending_income,
+            SUM(CASE WHEN pending = 1 AND willPay = 1 THEN amount ELSE 0 END) as pending_payment
+        ")->first();
+
+
+        return response()->json([
+            'months' => $months->sortBy('month')->values(),
+            'all_time' => [
+                'total_balance' => (float) $allTime->total_balance,
+                'total_partners' => (float) $allTime->total_partners,
+                'total_getyourguide' => (float) $allTime->total_getyourguide,
+                'n_clients' => (int) $allTime->n_clients,
+                'n_client_partners' => (int) $allTime->n_client_partners,
+                'pending_income' => (float) $allTime->pending_income,
+                'pending_payment' => (float) $allTime->pending_payment,
+            ],
+        ]);
     }
 
     /**

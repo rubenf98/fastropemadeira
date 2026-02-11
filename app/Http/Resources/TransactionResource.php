@@ -22,7 +22,13 @@ class TransactionResource extends JsonResource
             'type' =>  $this->type,
             'category' => $this->category,
             'user_id' => $this->user_id,
+            'n_clients' => $this->n_clients,
+            'guide_name' => $this->guide_name,
+            'tracker' => $this->tracker,
             'subCategory' => $this->subCategory,
+            'pending' => $this->pending,
+            'willPay' => $this->willPay,
+            'partner' => $this->partner,
         ];
     }
 }

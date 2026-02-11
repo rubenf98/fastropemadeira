@@ -27,34 +27,11 @@ class HandleTransactionPartnerLiquidation extends Controller
             'type' => 'required|in:pending_payment,pending_income',
         ]);
 
-        DB::beginTransaction();
-
-        $value = $validated["type"] == "pending_payment" ? -$transactionPartner[$validated['type']] : $transactionPartner[$validated['type']];
-        $currentTracker = Tracker::where('name', $validated['type'] . "_partners")->first();
-        $totalBalance = Tracker::where('name', "total_balance")->first();
-        $totalPartners = Tracker::where('name', "total_partners")->first();
-
-        Transaction::create([
-            'amount' => $value,
-            'date' => Carbon::now(),
-            'n_clients' => $currentTracker->n_clients,
-            'description' => "Liquidação de " . ($validated["type"] == "pending_payment" ? "pagamento" : "recebimento") . " do parceiro " . TransactionPartner::find($transactionPartner->id)->name,
-            'transaction_partner_id' => $transactionPartner->id,
-            'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
-            'transaction_sub_category_id' => TransactionSubCategory::where('name', "Parcerias Comerciais")->first()->id,
-            'tracker_id' => $totalPartners->id,
-        ]);
+        Transaction::where('transaction_partner_id', $transactionPartner->id)
+            ->where('pending', 1)->where('willPay', $validated['type'] == "pending_payment" ? 1 : 0)
+            ->update(['pending' => 0]);
 
 
-        Tracker::add($totalPartners->id, $value);
-        Tracker::add($totalBalance->id, $value);
-        Tracker::add($currentTracker->id, -$transactionPartner[$validated['type']], 0);
-
-        $transactionPartner[$validated['type']] = 0;
-        $transactionPartner->save();
-
-        DB::commit();
-
-        return new TransactionPartnerResource($transactionPartner);
+        return new TransactionPartnerResource($transactionPartner->fresh());
     }
 }
