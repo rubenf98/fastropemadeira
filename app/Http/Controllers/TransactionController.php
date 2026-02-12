@@ -193,7 +193,7 @@ class TransactionController extends Controller
                 ELSE 0
             END
         ) AS total_balance,
-         SUM(CASE WHEN tracker_id = 3 THEN amount ELSE 0 END) as total_getyourguide,
+         SUM(CASE WHEN tracker_id = 3 THEN amount ELSE 0 END) as total_getyourguide
     ")->first();
 
 
