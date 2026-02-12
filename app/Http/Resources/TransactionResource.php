@@ -26,9 +26,9 @@ class TransactionResource extends JsonResource
             'guide_name' => $this->guide_name,
             'tracker' => $this->tracker,
             'subCategory' => $this->subCategory,
-            'pending' => $this->pending,
+            'pending' => (int) $this->pending,
             'willPay' => (int) $this->willPay,
-            'partner' => (int) $this->partner,
+            'partner' => $this->partner,
         ];
     }
 }
