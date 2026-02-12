@@ -133,7 +133,7 @@ class TransactionController extends Controller
                 END
             ) AS total_balance,
             SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN n_clients ELSE 0 END) as n_clients,
-            SUM(CASE WHEN pending = 1 THEN amount ELSE 0 END) as total_partners,
+            SUM(CASE WHEN tracker_id = 2 AND willPay = 0 THEN amount ELSE 0 END) as total_partners,
             SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN n_clients ELSE 0 END) as n_client_partners,
             SUM(CASE WHEN tracker_id = 3 AND pending = 0 THEN amount ELSE 0 END) as total_getyourguide
         ")
