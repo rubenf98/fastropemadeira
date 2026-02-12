@@ -44,13 +44,15 @@ class TransactionController extends Controller
         if ($validator['type'] == "total_partners") {
             if ($validator["willPay"]) {
 
-                Transaction::create([
-                    ...$validator,
-                    "pending" => 1,
-                    "amount" => -($validator["amount"] * 0.3),
-                    'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
-                    'transaction_sub_category_id' => TransactionSubCategory::where('name', "Comissões")->first()->id,
-                ]);
+                Transaction::create(array_merge(
+                    $validator,
+                    [
+                        'pending' => 1,
+                        'amount' => -($validator['amount'] * 0.3),
+                        'transaction_category_id' => TransactionCategory::where('name', 'Marketing, Vendas & Parcerias')->first()->id,
+                        'transaction_sub_category_id' => TransactionSubCategory::where('name', 'Comissões')->first()->id,
+                    ]
+                ));
 
                 $totalValidator = [
                     "amount" => $validator["amount"] * 0.7,
@@ -63,14 +65,17 @@ class TransactionController extends Controller
 
                 $record = Transaction::create($totalValidator);
             } else {
-                $record = Transaction::create([
-                    ...$validator,
-                    "transaction_partner_id" => $validator["transaction_partner_id"],
-                    "pending" => 1,
-                    "amount" => $validator["amount"] * 0.7,
-                    'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
-                    'transaction_sub_category_id' => TransactionSubCategory::where('name', "Comissões")->first()->id,
-                ]);
+                $record = Transaction::create(array_merge(
+                    $validator,
+                    [
+                        ...$validator,
+                        "transaction_partner_id" => $validator["transaction_partner_id"],
+                        "pending" => 1,
+                        "amount" => $validator["amount"] * 0.7,
+                        'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
+                        'transaction_sub_category_id' => TransactionSubCategory::where('name', "Comissões")->first()->id,
+                    ]
+                ));
             }
         } else if ($validator['type'] == "total_balance") {
             $record = Transaction::create($validator);
