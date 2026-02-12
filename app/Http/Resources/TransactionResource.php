@@ -29,6 +29,7 @@ class TransactionResource extends JsonResource
             'pending' => (int) $this->pending,
             'willPay' => (int) $this->willPay,
             'partner' => $this->partner,
+            'description' => $this->description,
         ];
     }
 }
