@@ -37,7 +37,7 @@ class TransactionController extends Controller
     {
         $validator = $request->validated();
 
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
         $record = false;
 
@@ -68,7 +68,6 @@ class TransactionController extends Controller
                 $record = Transaction::create(array_merge(
                     $validator,
                     [
-                        ...$validator,
                         "transaction_partner_id" => $validator["transaction_partner_id"],
                         "pending" => 1,
                         "amount" => $validator["amount"] * 0.7,
@@ -80,13 +79,15 @@ class TransactionController extends Controller
         } else if ($validator['type'] == "total_balance") {
             $record = Transaction::create($validator);
         } else if ($validator['type'] == "total_getyourguide") {
-            $record = Transaction::create([
-                ...$validator,
-                "amount" => $validator["amount"] * 0.7,
-            ]);
+            $record = Transaction::create(array_merge(
+                $validator,
+                [
+                    "amount" => $validator["amount"] * 0.7,
+                ]
+            ));
         }
 
-        // DB::commit();
+        DB::commit();
 
 
         return new TransactionResource($record);
@@ -132,7 +133,7 @@ class TransactionController extends Controller
                 END
             ) AS total_balance,
             SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN n_clients ELSE 0 END) as n_clients,
-            SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN amount ELSE 0 END) as total_partners,
+            SUM(CASE WHEN pending = 1 THEN amount ELSE 0 END) as total_partners,
             SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN n_clients ELSE 0 END) as n_client_partners,
             SUM(CASE WHEN tracker_id = 3 AND pending = 0 THEN amount ELSE 0 END) as total_getyourguide
         ")
@@ -172,26 +173,35 @@ class TransactionController extends Controller
         // ")->first()
         // );
 
-        $allTime = Transaction::query()
-            ->when($filters['date_from'] ?? null, function ($q, $dateFrom) {
-                $q->whereDate('date', '>=', $dateFrom);
-            })
-            ->when($filters['date_to'] ?? null, function ($q, $dateTo) {
-                $q->whereDate('date', '<=', $dateTo);
-            })
+        $dateFiltered = Transaction::query()
+            ->when(
+                $filters['date_from'] ?? null,
+                fn ($q, $dateFrom) =>
+                $q->whereDate('date', '>=', $dateFrom)
+            )
+            ->when(
+                $filters['date_to'] ?? null,
+                fn ($q, $dateTo) =>
+                $q->whereDate('date', '<=', $dateTo)
+            )
             ->selectRaw("
-            SUM(
-                CASE
-                    WHEN pending = 0 THEN amount -- valor já recebido, por isso é o valor normal
-                    WHEN (pending = 1 AND willPay = 0) THEN 0 -- valor vai ser positivo, mas ainda não recebeu, por isso é 0
-                    WHEN (pending = 1 AND willPay = 1) THEN ABS(amount) -- valor vai ser negativo, mas ainda não pagou, por isso é absolute
-                    ELSE 0
-                END
-            ) AS total_balance,
+        SUM(
+            CASE
+                WHEN pending = 0 THEN amount
+                WHEN pending = 1 AND willPay = 0 THEN 0
+                WHEN pending = 1 AND willPay = 1 THEN ABS(amount)
+                ELSE 0
+            END
+        ) AS total_balance,
+         SUM(CASE WHEN tracker_id = 3 THEN amount ELSE 0 END) as total_getyourguide,
+    ")->first();
+
+
+        $allTime = Transaction::query()
+            ->selectRaw("
             SUM(CASE WHEN tracker_id = 1 AND pending = 0 THEN n_clients ELSE 0 END) as n_clients,
-            SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN amount ELSE 0 END) as total_partners,
+            SUM(CASE WHEN pending = 1 THEN amount ELSE 0 END) as total_partners,
             SUM(CASE WHEN tracker_id = 2 AND pending = 0 THEN n_clients ELSE 0 END) as n_client_partners,
-            SUM(CASE WHEN tracker_id = 3 AND pending = 0 THEN amount ELSE 0 END) as total_getyourguide,
             SUM(CASE WHEN pending = 1 AND willPay = 0 THEN amount ELSE 0 END) as pending_income,
             SUM(CASE WHEN pending = 1 AND willPay = 1 THEN amount ELSE 0 END) as pending_payment
         ")->first();
@@ -200,9 +210,9 @@ class TransactionController extends Controller
         return response()->json([
             'months' => $months->sortBy('month')->values(),
             'all_time' => [
-                'total_balance' => (float) $allTime->total_balance,
+                'total_balance' => (float) $dateFiltered->total_balance,
                 'total_partners' => (float) $allTime->total_partners,
-                'total_getyourguide' => (float) $allTime->total_getyourguide,
+                'total_getyourguide' => (float) $dateFiltered->total_getyourguide,
                 'n_clients' => (int) $allTime->n_clients,
                 'n_client_partners' => (int) $allTime->n_client_partners,
                 'pending_income' => (float) $allTime->pending_income,
