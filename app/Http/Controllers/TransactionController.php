@@ -187,9 +187,9 @@ class TransactionController extends Controller
             ->selectRaw("
         SUM(
             CASE
-                WHEN pending = 0 THEN amount
-                WHEN pending = 1 AND willPay = 0 THEN 0
-                WHEN pending = 1 AND willPay = 1 THEN ABS(amount)
+                WHEN pending = 0 AND tracker_id != 3 THEN amount
+                WHEN pending = 1 AND willPay = 0 AND tracker_id != 3 THEN 0
+                WHEN pending = 1 AND willPay = 1 AND tracker_id != 3 THEN ABS(amount)
                 ELSE 0
             END
         ) AS total_balance,
