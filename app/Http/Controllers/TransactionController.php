@@ -24,7 +24,7 @@ class TransactionController extends Controller
 	 */
 	public function index(TransactionFilters $filters)
 	{
-		return TransactionResource::collection(Transaction::filterBy($filters)->orderBy("date", "desc")->paginate(10));
+		return TransactionResource::collection(Transaction::filterBy($filters)->orderBy("date", "desc")->paginate(request()->perPage ?? 10));
 	}
 
 	/**
@@ -47,6 +47,7 @@ class TransactionController extends Controller
 				Transaction::create(array_merge(
 					$validator,
 					[
+						'n_clients' => 0, // não tem n_clients porque apenas se refere à comissão
 						'pending' => 1,
 						'amount' => -($validator['amount'] * 0.3),
 						'transaction_category_id' => TransactionCategory::where('name', 'Marketing, Vendas & Parcerias')->first()->id,

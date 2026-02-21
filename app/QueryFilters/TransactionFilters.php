@@ -15,6 +15,16 @@ class TransactionFilters extends QueryFilters
         $this->query->where("pending", $value);
     }
 
+    public function dateFrom($date)
+    {
+        $this->query->where("date", ">", $date);
+    }
+
+    public function dateTo($date)
+    {
+        $this->query->where("date", "<", $date);
+    }
+
     public function search($string)
     {
         $this->query->whereHas("category", function ($q) use ($string) {
@@ -48,5 +58,10 @@ class TransactionFilters extends QueryFilters
     public function date($date)
     {
         $this->query->where("date", $date);
+    }
+
+    public function partner($partnerId)
+    {
+        $this->query->where("transaction_partner_id", $partnerId);
     }
 }
