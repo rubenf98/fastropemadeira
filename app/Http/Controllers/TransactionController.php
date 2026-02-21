@@ -130,7 +130,7 @@ class TransactionController extends Controller
 				CASE
 					WHEN pending = 0 AND tracker_id != 3 THEN amount -- valor já recebido, por isso é o valor normal
 					WHEN (pending = 1 AND willPay = 0 AND tracker_id != 3) THEN 0 -- valor vai ser positivo, mas ainda não recebeu, por isso é 0
-					WHEN (pending = 1 AND willPay = 1 AND tracker_id != 3) THEN ABS(amount) -- valor vai ser negativo, mas ainda não pagou, por isso é absolute
+					WHEN (pending = 1 AND willPay = 1 AND tracker_id != 3) THEN 0 -- valor vai ser negativo, mas ainda não pagou, por isso é absolute
 					ELSE 0
 				END
 			) AS total_balance,
@@ -190,7 +190,7 @@ class TransactionController extends Controller
 			CASE
 				WHEN pending = 0 AND tracker_id != 3 THEN amount
 				WHEN pending = 1 AND willPay = 0 AND tracker_id != 3 THEN 0
-				WHEN pending = 1 AND willPay = 1 AND tracker_id != 3 THEN ABS(amount)
+				WHEN pending = 1 AND willPay = 1 AND tracker_id != 3 THEN 0
 				ELSE 0
 			END
 		) AS total_balance,

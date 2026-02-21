@@ -17,12 +17,12 @@ class TransactionFilters extends QueryFilters
 
     public function dateFrom($date)
     {
-        $this->query->where("date", ">", $date);
+        $this->query->where("date", ">=", $date);
     }
 
     public function dateTo($date)
     {
-        $this->query->where("date", "<", $date);
+        $this->query->where("date", "<=", $date);
     }
 
     public function search($string)
