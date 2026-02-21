@@ -15,7 +15,7 @@ class Transaction extends Model
         'transaction_category_id',
         'transaction_sub_category_id',
         'transaction_partner_id',
-        'description', "pending", "willPay", "guide_name"
+        'description', "pending", "willPay", "guide_name", "commission_to", "commission_level"
     ];
 
     public function user()
@@ -42,4 +42,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(TransactionPartner::class, "transaction_partner_id");
     }
-}
+
+    public function commissionTo()
+    {
+        return $this->belongsTo(Transaction::class, "commission_to");
+    }
+};

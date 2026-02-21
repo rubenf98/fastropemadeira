@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Transaction;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionResource extends JsonResource
@@ -30,6 +31,8 @@ class TransactionResource extends JsonResource
             'willPay' => (int) $this->willPay,
             'partner' => $this->partner,
             'description' => $this->description,
+            'commission_level' => $this->commission_level,
+            'commissionTo' => new TransactionResource($this->commissionTo),
         ];
     }
 }

@@ -44,17 +44,6 @@ class TransactionController extends Controller
 		if ($validator['type'] == "total_partners") {
 			if ($validator["willPay"]) {
 
-				Transaction::create(array_merge(
-					$validator,
-					[
-						'n_clients' => 0, // não tem n_clients porque apenas se refere à comissão
-						'pending' => 1,
-						'amount' => -($validator['amount'] * 0.3),
-						'transaction_category_id' => TransactionCategory::where('name', 'Marketing, Vendas & Parcerias')->first()->id,
-						'transaction_sub_category_id' => TransactionSubCategory::where('name', 'Comissões')->first()->id,
-					]
-				));
-
 				$totalValidator = [
 					"amount" => $validator["amount"], // valor total, ainda não pagou, por isso é o valor total
 					"n_clients" => $validator["n_clients"],
@@ -63,9 +52,22 @@ class TransactionController extends Controller
 					"transaction_partner_id" => $validator["transaction_partner_id"],
 					"transaction_category_id" => $validator["transaction_category_id"],
 					"transaction_sub_category_id" => $validator["transaction_sub_category_id"],
+					"commission_level" => TransactionSubCategory::find($validator["transaction_sub_category_id"])->name,
 				];
 
 				$record = Transaction::create($totalValidator);
+
+				Transaction::create(array_merge(
+					$validator,
+					[
+						'comission_to' => $record->id,
+						'n_clients' => 0, // não tem n_clients porque apenas se refere à comissão
+						'pending' => 1,
+						'amount' => -($validator['amount'] * 0.3),
+						'transaction_category_id' => TransactionCategory::where('name', 'Marketing, Vendas & Parcerias')->first()->id,
+						'transaction_sub_category_id' => TransactionSubCategory::where('name', 'Comissões')->first()->id,
+					]
+				));
 			} else {
 				$record = Transaction::create(array_merge(
 					$validator,
@@ -73,6 +75,7 @@ class TransactionController extends Controller
 						"transaction_partner_id" => $validator["transaction_partner_id"],
 						"pending" => 1,
 						"amount" => $validator["amount"] * 0.7,
+						"commission_level" => TransactionSubCategory::find($validator["transaction_sub_category_id"])->name,
 						'transaction_category_id' => TransactionCategory::where('name', "Marketing, Vendas & Parcerias")->first()->id,
 						'transaction_sub_category_id' => TransactionSubCategory::where('name', "Comissões")->first()->id,
 					]

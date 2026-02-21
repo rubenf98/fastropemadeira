@@ -25,5 +25,21 @@ class TransactionPartnerSeeder extends Seeder
         TransactionPartner::create([
             'name' => 'Discovery',
         ]);
+
+        TransactionPartner::create([
+            'name' => 'Madeira outdoors',
+        ]);
+
+        TransactionPartner::create([
+            'name' => 'Lido Tours',
+        ]);
+
+        TransactionPartner::create([
+            'name' => 'Rebecca Kiosk',
+        ]);
+
+        TransactionPartner::create([
+            'name' => 'Happy Tours',
+        ]);
     }
 }

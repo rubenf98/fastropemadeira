@@ -22,6 +22,8 @@ class CreateTransactionsTable extends Migration
             $table->boolean("willPay")->default(false);
             $table->text("description")->nullable();
             $table->string("guide_name")->nullable();
+            $table->string("commission_level")->nullable();
+            $table->unsignedBigInteger("commission_to")->nullable();
             $table->unsignedBigInteger("transaction_partner_id")->nullable();
             $table->unsignedBigInteger("transaction_category_id");
             $table->unsignedBigInteger("transaction_sub_category_id");
@@ -33,6 +35,7 @@ class CreateTransactionsTable extends Migration
             $table->foreign('transaction_sub_category_id')->references('id')->on('transaction_sub_categories')->onDelete('cascade');
             $table->foreign('transaction_category_id')->references('id')->on('transaction_categories')->onDelete('cascade');
             $table->foreign('transaction_partner_id')->references('id')->on('transaction_partners')->onDelete('set null');
+            $table->foreign('commission_to')->references('id')->on('transactions')->onDelete('set null');
             $table->foreign('tracker_id')->references('id')->on('trackers')->onDelete('cascade');
         });
     }
