@@ -3,6 +3,13 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' https:;
+        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com;
+        img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com;
+        connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
+        frame-src https://www.googletagmanager.com;
+    ">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
@@ -28,40 +35,26 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Mukta:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10807342386"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ124BK9TB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YQ124BK9TB');
-    </script>
+    {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10807342386"></script> --}}
     <!-- Google Tag Manager -->
     <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NJP4VFRN');
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NJP4VFRN');
     </script>
     <!-- End Google Tag Manager -->
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ124BK9TB"></script>
     <script>
-        window.dataLayer = window.dataLayer || []; function gtag() {dataLayer.push(arguments);} gtag('js', new Date());
-        gtag('config', 'AW-10807342386');
-    </script>
+        window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    <script>
-        gtag('event', 'conversion', {
-    'send_to': 'AW-10807342386/uwk0CIvjze0ZELLqq6E0', 'transaction_id':
-    }); 
+    gtag('config', 'G-YQ124BK9TB');
     </script>
-
-    <script>
-        gtag('event', 'conversion', {'send_to': 'AW-10807342386/ R6UICI7jze0ZELLqq6Eo'});
-    </script>
-
 
 
     <title>FastRope</title>
@@ -69,15 +62,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <style>
     @font-face {
-        font-family: Neutrons Demo;
-        src: url('{!! asset(' fonts/NeutronsDemoRegular.ttf') !!}');
+        font-family: 'Neutrons Demo';
+        src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
     }
 
     @font-face {
-        font-family: Palestine Border;
-        src: url('{!! asset(' fonts/PalestineBorder.ttf') !!}');
+        font-family: 'Palestine Border';
+        src: url('{!! asset('fonts/PalestineBorder.ttf') !!}');
     }
-
 
     html,
     body,
