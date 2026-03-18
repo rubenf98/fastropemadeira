@@ -271,7 +271,15 @@ const rules = {
     ],
 };
 
-function People({ incrementStep, fields, decrementStep, text, form, loading }) {
+function People({
+    incrementStep,
+    fields,
+    decrementStep,
+    text,
+    form,
+    loading,
+    language,
+}) {
     const [extra, setExtra] = useState(0);
     const [priv, setPrivate] = useState(false);
     const { experience, people } = fields;
@@ -310,16 +318,8 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                         ))}
                     </CustomCarousel>
                     <div className="experience-info">
-                        <h2>
-                            {experience.name[localStorage.getItem("language")]}
-                        </h2>
-                        <p>
-                            {
-                                experience.description[
-                                    localStorage.getItem("language")
-                                ]
-                            }
-                        </p>
+                        <h2>{experience.name[language]}</h2>
+                        <p>{experience.description[language]}</p>
                         <Row
                             type="flex"
                             justify="space-around"
@@ -328,31 +328,19 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                             {!Array.isArray(experience.duration) && (
                                 <Charateristic>
                                     <img src="/icon/form/time.svg" />{" "}
-                                    {
-                                        experience.duration[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
+                                    {experience.duration[language]}
                                 </Charateristic>
                             )}
                             {!Array.isArray(experience.height) && (
                                 <Charateristic>
                                     <img src="/icon/form/height.svg" />{" "}
-                                    {
-                                        experience.height[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
+                                    {experience.height[language]}
                                 </Charateristic>
                             )}
                             {!Array.isArray(experience.distance) && (
                                 <Charateristic>
                                     <img src="/icon/form/distance.svg" />{" "}
-                                    {
-                                        experience.distance[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
+                                    {experience.distance[language]}
                                 </Charateristic>
                             )}
                             <Charateristic>
@@ -362,11 +350,7 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                             {!Array.isArray(experience.level) && (
                                 <Charateristic>
                                     <img src="/icon/form/difficulty.svg" />{" "}
-                                    {
-                                        experience.level[
-                                            localStorage.getItem("language")
-                                        ]
-                                    }
+                                    {experience.level[language]}
                                 </Charateristic>
                             )}
                         </Row>
@@ -546,12 +530,12 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                                                                         </Select.Option>
                                                                         {[
                                                                             ...Array(
-                                                                                89
+                                                                                89,
                                                                             ),
                                                                         ].map(
                                                                             (
                                                                                 count,
-                                                                                index
+                                                                                index,
                                                                             ) => (
                                                                                 <Select.Option
                                                                                     key={
@@ -566,7 +550,7 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                                                                                         121}
                                                                                     cm
                                                                                 </Select.Option>
-                                                                            )
+                                                                            ),
                                                                         )}
                                                                         <Select.Option value="Over 210">
                                                                             &gt;
@@ -600,12 +584,12 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                                                                         </Select.Option>
                                                                         {[
                                                                             ...Array(
-                                                                                89
+                                                                                89,
                                                                             ),
                                                                         ].map(
                                                                             (
                                                                                 count,
-                                                                                index
+                                                                                index,
                                                                             ) => (
                                                                                 <Select.Option
                                                                                     key={
@@ -620,7 +604,7 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
                                                                                         31}
                                                                                     kg
                                                                                 </Select.Option>
-                                                                            )
+                                                                            ),
                                                                         )}
                                                                         <Select.Option value="Over 120kg">
                                                                             &gt;
@@ -775,6 +759,7 @@ function People({ incrementStep, fields, decrementStep, text, form, loading }) {
 const mapStateToProps = (state) => {
     return {
         fields: state.form.fields,
+        language: state.application.language,
     };
 };
 

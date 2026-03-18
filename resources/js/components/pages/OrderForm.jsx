@@ -42,14 +42,13 @@ const OrderForm = ({
     fetchPartnerFromUrl,
     currentPartner,
     resetCurrentPartner,
+    language,
 }) => {
     const [step, setStep] = useState(0);
     const [formValues, setFormValues] = useState({});
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [form] = Form.useForm();
-    const { text } = require("../../../assets/" +
-        localStorage.getItem("language") +
-        "/form");
+    const { text } = require("../../../assets/" + language + "/form");
     let query = useQuery();
 
     const stepItems = [
@@ -142,7 +141,7 @@ const OrderForm = ({
                     [
                         "Reservation has been confirmed, check your email for details",
                     ],
-                    "success"
+                    "success",
                 );
                 handleClose();
             })
@@ -150,11 +149,11 @@ const OrderForm = ({
                 setLoadingSubmit(false);
                 let messages = [];
 
-                Object.values(error.response.data.errors).map(function (
-                    message
-                ) {
-                    messages.push(message[0]);
-                });
+                Object.values(error.response.data.errors).map(
+                    function (message) {
+                        messages.push(message[0]);
+                    },
+                );
 
                 openNotification("Reservation failed", messages, "error");
             });
@@ -229,6 +228,7 @@ const mapStateToProps = (state) => {
         visible: state.form.visible,
         fields: state.form.fields,
         currentPartner: state.partner.current,
+        language: state.application.language,
     };
 };
 

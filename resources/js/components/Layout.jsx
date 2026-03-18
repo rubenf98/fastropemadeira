@@ -131,9 +131,7 @@ const Chatbot = styled.div`
 `;
 
 function Layout(props) {
-    const { text } = require("../../assets/" +
-        localStorage.getItem("language") +
-        "/chatbot");
+    const { text } = require("../../assets/" + props.language + "/chatbot");
     const [chatbot, setChatbot] = useState(false);
     let query = useQuery();
 
@@ -220,4 +218,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(Layout));
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Layout));

@@ -238,6 +238,7 @@ function Tours({
     experiences,
     setFormVisibility,
     setFormFields,
+    language,
 }) {
     useEffect(() => {
         fetchExperiences();
@@ -284,13 +285,7 @@ function Tours({
                                 />
                             )}
 
-                            <h3>
-                                {
-                                    experience.name[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
-                            </h3>
+                            <h3>{experience.name[language]}</h3>
                         </div>
                         <div className="content">
                             <div className="chars">
@@ -299,26 +294,14 @@ function Tours({
                                         src="/icon/activities/time.svg"
                                         alt="play button"
                                     />
-                                    <span>
-                                        {
-                                            experience.duration[
-                                                localStorage.getItem("language")
-                                            ]
-                                        }
-                                    </span>
+                                    <span>{experience.duration[language]}</span>
                                 </div>
                                 <div className="char side-border">
                                     <img
                                         src="/icon/activities/type.svg"
                                         alt="play button"
                                     />
-                                    <span>
-                                        {
-                                            experience.target[
-                                                localStorage.getItem("language")
-                                            ]
-                                        }
-                                    </span>
+                                    <span>{experience.target[language]}</span>
                                 </div>
                                 <div className="char">
                                     <img
@@ -335,13 +318,7 @@ function Tours({
                                 </div>
                             </div>
 
-                            <p>
-                                {
-                                    experience.description[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
-                            </p>
+                            <p>{experience.description[language]}</p>
 
                             <div className="button-container">
                                 <div className="price">
@@ -394,6 +371,7 @@ const mapStateToProps = (state) => {
     return {
         loading: state.experience.loading,
         experiences: state.experience.data,
+        language: state.application.language,
     };
 };
 

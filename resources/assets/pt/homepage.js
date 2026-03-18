@@ -1,8 +1,8 @@
 export const text = {
     header: {
         title: "Fast Rope Madeira",
-        subtitle: (<>AVENTURA<br /> EXPLORAÇÃO &<br />
-            <br /> MOMENTOS <br />INESQUECÍVEIS</>),
+        subtitle: (<>AVENTURA &
+            <br /> MOMENTOS <br />INESQUECIVEIS</>),
         form: {
             date: {
                 label: "Data",

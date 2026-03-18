@@ -159,9 +159,7 @@ const Title = styled.div`
 
 function Activity(props) {
     const [activity, setActivity] = useState("beginner");
-    const { text } = require("../../../assets/" +
-        localStorage.getItem("language") +
-        "/tour");
+    const { text } = require("../../../assets/" + props.language + "/tour");
     const { experience, blockedDates } = props;
 
     const handlePeopleChange = (participants) => {
@@ -197,7 +195,7 @@ function Activity(props) {
                 <Title>
                     <h1>
                         Canyoning <br />
-                        {experience.name[localStorage.getItem("language")]}
+                        {experience.name[props.language]}
                     </h1>
                 </Title>
             )}
@@ -219,11 +217,7 @@ function Activity(props) {
                         <div className="title">
                             <h1>
                                 Canyoning <br />
-                                {
-                                    experience.name[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {experience.name[props.language]}
                             </h1>
                         </div>
 
@@ -234,33 +228,21 @@ function Activity(props) {
                                     src="/icon/activities/activity_type.svg"
                                     alt="shoe"
                                 />
-                                {
-                                    experience.duration[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {experience.duration[props.language]}
                             </div>
                             <div>
                                 <img
                                     src="/icon/activities/activity_time.svg"
                                     alt="shoe"
                                 />
-                                {
-                                    experience.height[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {experience.height[props.language]}
                             </div>
                             <div>
                                 <img
                                     src="/icon/activities/activity_height.svg"
                                     alt="shoe"
                                 />
-                                {
-                                    experience.target[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {experience.target[props.language]}
                             </div>
                             <div>
                                 <img
@@ -274,13 +256,7 @@ function Activity(props) {
                         {text[activity].paragraphs.map((paragraph, index) => (
                             <p key={index}>{paragraph}</p>
                         ))}
-                        <p>
-                            {
-                                experience.description[
-                                    localStorage.getItem("language")
-                                ]
-                            }
-                        </p>
+                        <p>{experience.description[props.language]}</p>
 
                         <h3>{text.titles[1]}</h3>
 
@@ -318,6 +294,7 @@ const mapStateToProps = (state) => {
         blockedDates: state.date.selector,
         experience: state.experience.current,
         loading: state.experience.loading,
+        language: state.application.language,
     };
 };
 

@@ -1,16 +1,17 @@
-import { Row, Button, Cascader } from 'antd';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import { Row, Button, Cascader } from "antd";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { dimensions } from '../../../helper';
-import AnimationContainer from '../../common/AnimationContainer';
+import { dimensions } from "../../../helper";
+import AnimationContainer from "../../common/AnimationContainer";
+import { connect } from "react-redux";
 
 const Container = styled.div`
     width: 100%;
     min-height: 200px;
     padding: 32px;
 
-    @media (max-width: ${dimensions.sm}){
+    @media (max-width: ${dimensions.sm}) {
         padding: 0px 20px;
     }
 `;
@@ -22,7 +23,7 @@ const FormItem = styled(Cascader)`
     padding: 20px 30px;
     margin-top: 80px;
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         margin-top: 50px;
         width: 100%;
         padding: 10px 15px;
@@ -34,43 +35,40 @@ const FormItem = styled(Cascader)`
         font-weight: bold;
     }
 
-    
     .ant-cascader-picker-arrow > svg {
         color: #707070;
     }
 `;
 
-
 const FormContainer = styled(Row)`
-    
     width: 80%;
     margin: auto;
 
-    @media (max-width: ${dimensions.lg}){
+    @media (max-width: ${dimensions.lg}) {
         width: 80%;
     }
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100%;
     }
 `;
 
-function Reservation({ text, openForm, delaySize }) {
-    const [data, setData] = useState([])
-    const [experience, setExperience] = useState(undefined)
+function Reservation({ text, openForm, delaySize, language }) {
+    const [data, setData] = useState([]);
+    const [experience, setExperience] = useState(undefined);
 
     useEffect(() => {
-        axios.get(`${window.location.origin}/api/activity?language=${localStorage.getItem('language')}`).then((response) => {
-            setData(response.data.data);
-        })
-    }, [])
-
+        axios
+            .get(`${window.location.origin}/api/activity?language=${language}`)
+            .then((response) => {
+                setData(response.data.data);
+            });
+    }, [language]);
 
     return (
         <Container>
             <AnimationContainer delay={delaySize} animation="fadeIn">
-                <FormContainer type="flex" align='middle' justify='center'>
-
+                <FormContainer type="flex" align="middle" justify="center">
                     <FormItem
                         onChange={(value) => openForm(value)}
                         size="large"
@@ -79,11 +77,16 @@ function Reservation({ text, openForm, delaySize }) {
                         placeholder={text.reservation.formItem}
                         allowClear={false}
                     />
-
                 </FormContainer>
             </AnimationContainer>
         </Container>
-    )
+    );
 }
 
-export default Reservation
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, null)(Reservation);

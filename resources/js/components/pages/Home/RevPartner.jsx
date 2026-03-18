@@ -198,10 +198,8 @@ const Title = styled.h2`
     font-size: clamp(30px, 5vw, 70px);
 `;
 
-function RevPartner({ reviews, fetchReviews, hasReviews = true }) {
-    const { text } = require("../../../../assets/" +
-        localStorage.getItem("language") +
-        "/homepage");
+function RevPartner({ reviews, fetchReviews, language, hasReviews = true }) {
+    const { text } = require("../../../../assets/" + language + "/homepage");
 
     useEffect(() => {
         fetchReviews();
@@ -259,6 +257,7 @@ const mapStateToProps = (state) => {
     return {
         loading: state.review.loading,
         reviews: state.review.data,
+        language: state.application.language,
     };
 };
 

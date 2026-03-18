@@ -16,6 +16,7 @@ import 'antd/dist/antd.css';
 import 'react-multi-carousel/lib/styles.css';
 import "../assets/animate.css";
 import moment from 'moment';
+import { setLanguage } from './redux/application/actions';
 
 let decodedCookie = decodeURIComponent(document.cookie);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -33,6 +34,21 @@ const store = createStore(
 if (!decodedCookie.includes('language')) {
     document.cookie = "language=en; path=/; expires=" + moment().add(10, "y").format("ddd, D MMM YYYY, H:mm:ss") + " GMT";
     localStorage.setItem("language", "en");
+    store.dispatch(setLanguage("en"));
+} else {
+    let name = "language=";
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            const language = c.substring(name.length, c.length);
+            localStorage.setItem("language", language);
+            store.dispatch(setLanguage(language));
+        }
+    }
 }
 
 if (localStorage.token) {
@@ -47,19 +63,7 @@ if (localStorage.token) {
     }
 }
 
-else {
-    let name = "language=";
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            localStorage.setItem("language", c.substring(name.length, c.length));
-        }
-    }
-}
+
 
 render(
     <Provider store={store}>

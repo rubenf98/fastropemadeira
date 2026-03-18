@@ -1,7 +1,8 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
-import { Select } from 'antd';
-import moment from 'moment';
+import { Select } from "antd";
+import moment from "moment";
+import { setLanguage } from "../../redux/application/actions";
 
 const MenuContainer = styled.div`
     display: flex;
@@ -19,23 +20,22 @@ const DropdownIcon = styled.img`
     width: 10px !important;
 `;
 
-function LanguageSelector() {
-
+function LanguageSelector(props) {
     const handleLanguageChange = (e) => {
         localStorage.setItem("language", e);
-        document.cookie = "language=" + e + "; path=/; expires=" + moment().add(10, "y").format("ddd, D MMM YYYY, H:mm:ss") + " GMT";
-        //location.reload();
-        let path = window.location.pathname.split('/');
-        path.splice(0, 2);
-        let newPath = "/" + e + "/" + path.join("/");
-        window.location.href = window.location.protocol + "//" + window.location.host + newPath;
-
+        document.cookie =
+            "language=" +
+            e +
+            "; path=/; expires=" +
+            moment().add(10, "y").format("ddd, D MMM YYYY, H:mm:ss") +
+            " GMT";
+        props.setLanguage(e);
     };
     return (
         <MenuContainer>
             <CustomSelect
                 onChange={handleLanguageChange}
-                defaultValue={localStorage.getItem("language")}
+                value={props.language}
                 bordered={false}
             >
                 <Option value="en">English</Option>
@@ -44,7 +44,19 @@ function LanguageSelector() {
                 <Option value="de">Deutsch</Option>
             </CustomSelect>
         </MenuContainer>
-    )
+    );
 }
 
-export default LanguageSelector
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLanguage: (language) => dispatch(setLanguage(language)),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LanguageSelector);

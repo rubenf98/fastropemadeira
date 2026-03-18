@@ -271,8 +271,8 @@ function Header(props) {
                                         (currentDate < dayjs().endOf("day") ||
                                             blockedDates.includes(
                                                 dayjs(currentDate).format(
-                                                    "YYYY-MM-DD"
-                                                )
+                                                    "YYYY-MM-DD",
+                                                ),
                                             ))
                                     );
                                 }}

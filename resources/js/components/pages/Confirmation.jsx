@@ -1,10 +1,11 @@
-import axios from 'axios'
-import React, { Fragment, useEffect, useState } from 'react'
-import { Row, notification } from 'antd';
+import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
+import { Row, notification } from "antd";
 import styled from "styled-components";
-import { colors, dimensions } from '../../helper';
-import moment from 'moment';
-import AnimationContainer from '../common/AnimationContainer';
+import { colors, dimensions } from "../../helper";
+import moment from "moment";
+import AnimationContainer from "../common/AnimationContainer";
+import { connect } from "react-redux";
 
 const Container = styled.div`
     margin: 200px 0px;
@@ -17,8 +18,8 @@ const Summary = styled(Row)`
     position: relative;
     width: 80%;
     border: 1px solid lightgray;
-   
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,.2);
+
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
 
     .fadeInUp {
@@ -28,7 +29,7 @@ const Summary = styled(Row)`
     .fadeIn {
         width: 45%;
         min-height: 500px;
-        background: ${props => "url(" + props.image + ")"};
+        background: ${(props) => "url(" + props.image + ")"};
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -56,7 +57,8 @@ const Summary = styled(Row)`
             width: 80%;
             text-align: center;
 
-            h3, p {
+            h3,
+            p {
                 width: 100%;
                 margin: auto;
                 display: block;
@@ -158,100 +160,142 @@ const PriceContainer = styled.div`
     color: ${colors.main};
     position: absolute;
     right: 25px;
-    bottom: 25px;    
+    bottom: 25px;
 `;
 
-
-function Confirmation({ match }) {
-    const [data, setData] = useState({})
-    const [hasError, setHasError] = useState(false)
-    const { text } = require('../../../assets/' + localStorage.getItem('language') + "/confirmation");
-
+function Confirmation({ match, language }) {
+    const [data, setData] = useState({});
+    const [hasError, setHasError] = useState(false);
+    const { text } = require("../../../assets/" + language + "/confirmation");
 
     const openNotification = () => {
         notification.success({
             message: text.feedback,
-            description: text.feedbackInstruction
+            description: text.feedbackInstruction,
         });
     };
 
     useEffect(() => {
         var token = match.params.token;
 
-        axios.get(`${window.location.origin}/api/reservation/showFromToken?token=${token}`).then((response) => {
-            setData(response.data.data);
-            const before = moment().subtract(1, 'minute')
-            if (moment(response.data.data.updated_at).isAfter(before)) {
-                openNotification();
-            }
-        }).catch((error) => {
-            notification.error({
-                message: text.error,
-                description: text.errorInstruction
+        axios
+            .get(
+                `${window.location.origin}/api/reservation/showFromToken?token=${token}`,
+            )
+            .then((response) => {
+                setData(response.data.data);
+                const before = moment().subtract(1, "minute");
+                if (moment(response.data.data.updated_at).isAfter(before)) {
+                    openNotification();
+                }
+            })
+            .catch((error) => {
+                notification.error({
+                    message: text.error,
+                    description: text.errorInstruction,
+                });
+                setHasError(true);
             });
-            setHasError(true);
-        })
-
-    }, [])
+    }, []);
 
     return (
         <Container>
-            {
-                (Object.keys(data).length === 0) ?
-                    <Loading>
-                        <div className='flex-container'>
-                            <img width="250" src="/logo.svg" alt="logo" />
-                            {
-                                !hasError &&
-                                <div className="gooey">
-                                    <span className="dot"></span>
-                                    <div className="dots">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
+            {Object.keys(data).length === 0 ? (
+                <Loading>
+                    <div className="flex-container">
+                        <img width="250" src="/logo.svg" alt="logo" />
+                        {!hasError && (
+                            <div className="gooey">
+                                <span className="dot"></span>
+                                <div className="dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
                                 </div>
-                            }
-                        </div>
-                    </Loading> :
-                    <Fragment>
-                        <Summary type="flex" justify="space-between" image={data.experience.images[0].image}>
-                            <AnimationContainer animation="fadeIn">
-
-                            </AnimationContainer>
-                            <div className='details-container'>
-
-                                <h3>{data.experience.name[localStorage.getItem("language")]}</h3>
-                                <p>{data.experience.description[localStorage.getItem("language")]}</p>
-                                <AnimationContainer animation="fadeInUp">
-                                    <Detail><span>{text.details.name}: </span> {data.name} </Detail>
-                                    <Detail><span>{text.details.email}: </span> {data.email} </Detail>
-                                    <Detail><span>{text.details.phone}: </span> {data.phone} </Detail>
-                                    <Detail><span>{text.details.address}: </span> {data.address} </Detail>
-                                    <Detail><span>{text.details.private}: </span> {text.details.privateAnswer[data.private]} </Detail>
-                                    <Detail><span>{text.details.date}: </span> {data.date} {data.time}</Detail>
-                                    <Detail><span>{text.details.created_at}: </span> {data.created_at} </Detail>
-                                    <Detail><span>{text.details.participants}: </span> {data.people} </Detail>
-                                    {data.participants.map((participant, index) => (
-                                        <Detail><span>{text.details.participant} {index + 1}: </span> {participant.birthday} /  {participant.gender} /  {participant.weight} / {participant.height}cm /  {participant.shoe} EU </Detail>
-                                    ))}
-
-                                    <Detail><span>{text.details.notes}: </span> {data.notes} </Detail>
-                                </AnimationContainer>
                             </div>
+                        )}
+                    </div>
+                </Loading>
+            ) : (
+                <Fragment>
+                    <Summary
+                        type="flex"
+                        justify="space-between"
+                        image={data.experience.images[0].image}
+                    >
+                        <AnimationContainer animation="fadeIn"></AnimationContainer>
+                        <div className="details-container">
+                            <h3>{data.experience.name[language]}</h3>
+                            <p>{data.experience.description[language]}</p>
+                            <AnimationContainer animation="fadeInUp">
+                                <Detail>
+                                    <span>{text.details.name}: </span>{" "}
+                                    {data.name}{" "}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.email}: </span>{" "}
+                                    {data.email}{" "}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.phone}: </span>{" "}
+                                    {data.phone}{" "}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.address}: </span>{" "}
+                                    {data.address}{" "}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.private}: </span>{" "}
+                                    {
+                                        text.details.privateAnswer[data.private]
+                                    }{" "}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.date}: </span>{" "}
+                                    {data.date} {data.time}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.created_at}: </span>{" "}
+                                    {data.created_at}{" "}
+                                </Detail>
+                                <Detail>
+                                    <span>{text.details.participants}: </span>{" "}
+                                    {data.people}{" "}
+                                </Detail>
+                                {data.participants.map((participant, index) => (
+                                    <Detail>
+                                        <span>
+                                            {text.details.participant}{" "}
+                                            {index + 1}:{" "}
+                                        </span>{" "}
+                                        {participant.birthday} /{" "}
+                                        {participant.gender} /{" "}
+                                        {participant.weight} /{" "}
+                                        {participant.height}cm /{" "}
+                                        {participant.shoe} EU{" "}
+                                    </Detail>
+                                ))}
 
-                            <PriceContainer>
-                                {data.price == 0 ? text.price : data.price + "€"}
+                                <Detail>
+                                    <span>{text.details.notes}: </span>{" "}
+                                    {data.notes}{" "}
+                                </Detail>
+                            </AnimationContainer>
+                        </div>
 
-                            </PriceContainer>
-                        </Summary>
-
-
-                    </Fragment>
-            }
-
+                        <PriceContainer>
+                            {data.price == 0 ? text.price : data.price + "€"}
+                        </PriceContainer>
+                    </Summary>
+                </Fragment>
+            )}
         </Container>
-    )
+    );
 }
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
 
-export default Confirmation
+export default connect(mapStateToProps, null)(Confirmation);

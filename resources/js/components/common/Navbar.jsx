@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { colors, dimensions, maxWidth } from "../../helper";
 import AnimationContainer from "./AnimationContainer";
+import { connect } from "react-redux";
+import { setLanguage } from "../../redux/application/actions";
 
 const Container = styled.div`
     height: 100px;
@@ -209,12 +211,15 @@ const MenuLink = styled(Link)`
     font-family: "Caveat Brush", serif;
 
     &:hover {
-        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+        text-shadow:
+            -1px -1px 0 white,
+            1px -1px 0 white,
+            -1px 1px 0 white,
             1px 1px 0 white;
     }
 `;
 
-function Navbar({ onOrder }) {
+function Navbar({ onOrder, setLanguage, language }) {
     const [hasShadow, setHasShadow] = useState(0);
     const [visible, setVisible] = useState(0);
 
@@ -234,12 +239,7 @@ function Navbar({ onOrder }) {
             "; path=/; expires=" +
             moment().add(10, "y").format("ddd, D MMM YYYY, H:mm:ss") +
             " GMT";
-        //location.reload();
-        let path = window.location.pathname.split("/");
-        path.splice(0, 2);
-        let newPath = "/" + e + "/" + path.join("/");
-        window.location.href =
-            window.location.protocol + "//" + window.location.host + newPath;
+        setLanguage(e);
     };
 
     return (
@@ -278,7 +278,7 @@ function Navbar({ onOrder }) {
                     <CustomSelect
                         onChange={handleLanguageChange}
                         visible={visible ? 0 : 1}
-                        defaultValue={localStorage.getItem("language")}
+                        defaultValue={language}
                         suffixIcon={
                             <DropdownIcon
                                 src="/icon/down_black.svg"
@@ -333,4 +333,16 @@ function Navbar({ onOrder }) {
     );
 }
 
-export default Navbar;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLanguage: (language) => dispatch(setLanguage(language)),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

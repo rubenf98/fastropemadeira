@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import Row from "antd/es/row"
-import Form from "antd/es/form"
-import Input from "antd/es/input"
-import Button from "antd/es/button"
-import Col from "antd/es/col"
-import InputNumber from "antd/es/input-number"
+import Row from "antd/es/row";
+import Form from "antd/es/form";
+import Input from "antd/es/input";
+import Button from "antd/es/button";
+import Col from "antd/es/col";
+import InputNumber from "antd/es/input-number";
 import { social, icon, background, feedback } from "../../images";
 import { colors, dimensions } from "../../helper";
 import SubmitButton from "./Contact/SubmitButton";
 import axios from "axios";
-import { fadeInUp, fadeOut } from 'react-animations'
-import AnimationContainer from '../common/AnimationContainer';
-import RevPartner from './Home/RevPartner';
+import { fadeInUp, fadeOut } from "react-animations";
+import AnimationContainer from "../common/AnimationContainer";
+import RevPartner from "./Home/RevPartner";
+import { connect } from "react-redux";
 
 const fadeAnimation = keyframes`${fadeInUp}`;
 const fadeOutA = keyframes`${fadeOut}`;
@@ -23,26 +24,27 @@ const FeedbackContainer = styled.div`
     position: relative;
     width: 100%;
 
-    h2, p {
+    h2,
+    p {
         text-align: center;
     }
 
-    h2{
+    h2 {
         font-weight: bold;
         font-size: 3em;
         margin-bottom: 0px;
 
-        @media (max-width: ${dimensions.md}){
+        @media (max-width: ${dimensions.md}) {
             font-size: 2.5em;
         }
     }
 
-    p{
+    p {
         font-size: 1.4em;
         color: #777;
         margin: 0px auto 40px auto;
 
-        @media (max-width: ${dimensions.md}){
+        @media (max-width: ${dimensions.md}) {
             font-size: 1.2em;
         }
     }
@@ -68,9 +70,13 @@ const Overlay = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,1) 100%); 
+    content: "";
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
 `;
 
 const CustomInput = styled(Input)`
@@ -95,33 +101,32 @@ const SubContainer = styled(Row)`
     background: white;
     border-radius: 6px;
     padding: 50px;
-    box-shadow: 0px 15px 30px 0px rgba(0,0,0,.3);
+    box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.3);
 
-    @media (max-width: ${dimensions.lg}){
+    @media (max-width: ${dimensions.lg}) {
         width: 85%;
     }
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100%;
         background: transparent;
-        box-shadow:none;
+        box-shadow: none;
     }
 
     label {
         font-size: 1.2em;
         font-weight: bold;
     }
-    
 `;
 
 const FormContainer = styled(Row)`
     width: 60%;
 
-    .ant-col{
+    .ant-col {
         width: 100%;
     }
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100%;
     }
 `;
@@ -130,7 +135,7 @@ const Title = styled.div`
     z-index: 1;
     margin-bottom: 20px;
     h1 {
-        color:${colors.main};
+        color: ${colors.main};
         font-weight: bold;
         font-size: 3em;
         margin: 0px;
@@ -146,14 +151,13 @@ const InfoContainer = styled.div`
     width: 35%;
     z-index: 1;
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100%;
         display: flex;
         justify-content: space-around;
     }
 
-
-    @media (max-width: ${dimensions.sm}){
+    @media (max-width: ${dimensions.sm}) {
         width: 100%;
         display: block;
     }
@@ -164,16 +168,16 @@ const InfoContainer = styled.div`
         margin: 0px;
     }
 
-    p{
+    p {
         color: #777;
         font-size: 1.2em;
         margin: 0px 0px 15px 0px;
 
-        a{
+        a {
             text-decoration: none;
             color: inherit;
 
-            &:hover{
+            &:hover {
                 color: #424242;
             }
         }
@@ -194,7 +198,7 @@ const Logo = styled.a`
         margin: 0px;
     }
 
-    img{
+    img {
         width: 60%;
     }
 `;
@@ -205,11 +209,12 @@ const Submit = styled(Button)`
     padding: 10px;
     text-transform: uppercase;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background: ${colors.mainHover};
     }
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         margin: auto;
     }
 
@@ -223,14 +228,13 @@ const FeedbackSectionContainer = styled(Row)`
     width: 100%;
     margin: 50px auto;
 
-    @media (max-width: ${dimensions.lg}){
+    @media (max-width: ${dimensions.lg}) {
         min-width: 80% !important;
     }
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100% !important;
     }
-
 `;
 
 const FeedbackIcon = styled.img`
@@ -240,8 +244,8 @@ const FeedbackIcon = styled.img`
     height: auto;
     margin: 0px 10px;
     cursor: pointer;
-    filter: ${props => props.active ? "grayscale(0)" : "grayscale(1)"} ;
-    opacity: ${props => props.active ? 1 : .4} ;
+    filter: ${(props) => (props.active ? "grayscale(0)" : "grayscale(1)")};
+    opacity: ${(props) => (props.active ? 1 : 0.4)};
 `;
 
 const Parameter = styled.div`
@@ -250,7 +254,7 @@ const Parameter = styled.div`
     display: flex;
     justify-content: center;
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100%;
         border-bottom: 1px solid #e7e7e7;
         margin: 15px auto;
@@ -269,17 +273,20 @@ const Parameter = styled.div`
         margin: 0 5px;
 
         &:first-child {
-            filter: ${props => props.active == 1 ? "grayscale(0)" : "grayscale(1)"} ;
-            opacity: ${props => (props.active == 1 || props.active == undefined) ? 1 : .4} ;
+            filter: ${(props) =>
+                props.active == 1 ? "grayscale(0)" : "grayscale(1)"};
+            opacity: ${(props) =>
+                props.active == 1 || props.active == undefined ? 1 : 0.4};
         }
 
         &:last-child {
-            filter: ${props => props.active == 0 ? "grayscale(0)" : "grayscale(1)"} ;
-            opacity: ${props => (props.active == 0 || props.active == undefined) ? 1 : .4} ;
+            filter: ${(props) =>
+                props.active == 0 ? "grayscale(0)" : "grayscale(1)"};
+            opacity: ${(props) =>
+                props.active == 0 || props.active == undefined ? 1 : 0.4};
         }
     }
 `;
-
 
 const FormFeedback = styled.div`
     z-index: 1;
@@ -290,7 +297,7 @@ const FormFeedback = styled.div`
     margin: auto;
     border-radius: 8px;
     color: #252525;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
     animation: 1s ${fadeAnimation};
 `;
 
@@ -298,13 +305,13 @@ const rules = {
     name: [
         {
             required: true,
-            message: 'Please input your name!',
+            message: "Please input your name!",
         },
     ],
     email: [
         {
             required: true,
-            message: 'Please input your email!',
+            message: "Please input your email!",
         },
         {
             type: "email",
@@ -313,20 +320,18 @@ const rules = {
     message: [
         {
             required: true,
-            message: 'Please input your message!',
+            message: "Please input your message!",
         },
-    ]
-}
+    ],
+};
 
-function Contact() {
+function Contact(props) {
     const [active, setActive] = useState(null);
     const [feedbackFormReady, setFeedbackFormReady] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [feedbackForm] = Form.useForm();
     const [form] = Form.useForm();
-    const { text } = require('../../../assets/' + localStorage.getItem('language') + "/contact");
-
-
+    const { text } = require("../../../assets/" + props.language + "/contact");
 
     const onFinish = (values) => {
         axios.post(`${window.location.origin}/api/contact`, values);
@@ -335,29 +340,27 @@ function Contact() {
             form.resetFields();
             setSubmitted(true);
         }, 300);
-
     };
 
     const submitForm = () => {
-        feedbackForm.validateFields().then(values => {
+        feedbackForm.validateFields().then((values) => {
             axios.post(`${window.location.origin}/api/feedback`, values);
             setFeedbackFormReady(true);
             setTimeout(() => {
-                setActive(null)
+                setActive(null);
                 feedbackForm.resetFields();
             }, 1000);
 
             setTimeout(() => {
                 setFeedbackFormReady(false);
             }, 3000);
-        })
+        });
     };
 
     const handleRatingChange = (value) => {
-        feedbackForm.setFieldsValue({ "rating": value + 1 });
+        feedbackForm.setFieldsValue({ rating: value + 1 });
         setActive(value);
     };
-
 
     return (
         <div>
@@ -372,12 +375,14 @@ function Contact() {
                         </Title>
                     </AnimationContainer>
 
-                    <FormContainer type="flex" justify="space-between" align="middle">
-                        {submitted ?
-                            <FormFeedback>
-                                {text.formFeedback}
-                            </FormFeedback>
-                            :
+                    <FormContainer
+                        type="flex"
+                        justify="space-between"
+                        align="middle"
+                    >
+                        {submitted ? (
+                            <FormFeedback>{text.formFeedback}</FormFeedback>
+                        ) : (
                             <ContactForm
                                 requiredMark={false}
                                 name="basic"
@@ -410,21 +415,29 @@ function Contact() {
                                     name="message"
                                     rules={rules.message}
                                 >
-                                    <TextArea size="large" showCount maxLength={180} />
+                                    <TextArea
+                                        size="large"
+                                        showCount
+                                        maxLength={180}
+                                    />
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <Submit shape="round" size="large" type="primary" htmlType="submit">
+                                    <Submit
+                                        shape="round"
+                                        size="large"
+                                        type="primary"
+                                        htmlType="submit"
+                                    >
                                         {text.form.submit}
                                         <img src={icon.send} alt="submit" />
                                     </Submit>
                                 </Form.Item>
                             </ContactForm>
-                        }
+                        )}
                     </FormContainer>
 
-
-                    <InfoContainer >
+                    <InfoContainer>
                         <div>
                             <h3>{text.form.info[0]}</h3>
                             <p>+351 933 933 452</p>
@@ -440,24 +453,40 @@ function Contact() {
                         <div>
                             <h3>{text.form.info[1]}</h3>
                             <Row type="flex" align="middle">
-                                <Logo href="https://www.facebook.com/madeira.fastrope" target="_blank" >
+                                <Logo
+                                    href="https://www.facebook.com/madeira.fastrope"
+                                    target="_blank"
+                                >
                                     <img src={social.facebook} alt="facebook" />
                                 </Logo>
-                                <Logo href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
+                                <Logo
+                                    href="https://api.whatsapp.com/send?l=en&phone=351933933452"
+                                    target="_blank"
+                                >
                                     <img src={social.whatsapp} alt="whatsapp" />
                                 </Logo>
-                                <Logo href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
-                                    <img src={social.instagram} alt="instagram" />
+                                <Logo
+                                    href="https://www.instagram.com/fastrope_madeira/"
+                                    target="_blank"
+                                >
+                                    <img
+                                        src={social.instagram}
+                                        alt="instagram"
+                                    />
                                 </Logo>
-                                <Logo href="https://www.tripadvisor.pt/Attraction_Review-g189167-d23713035-Reviews-Fast_Rope_Madeira-Funchal_Madeira_Madeira_Islands.html" target="_blank" >
-                                    <img src={social.tripadvisor} alt="tripadvisor" />
+                                <Logo
+                                    href="https://www.tripadvisor.pt/Attraction_Review-g189167-d23713035-Reviews-Fast_Rope_Madeira-Funchal_Madeira_Madeira_Islands.html"
+                                    target="_blank"
+                                >
+                                    <img
+                                        src={social.tripadvisor}
+                                        alt="tripadvisor"
+                                    />
                                 </Logo>
                             </Row>
                         </div>
                     </InfoContainer>
-
                 </SubContainer>
-
             </Container>
             <FeedbackContainer>
                 <AnimationContainer animation="fadeInUp">
@@ -470,29 +499,40 @@ function Contact() {
                     layout="vertical"
                     form={feedbackForm}
                 >
-
-                    <Form.Item style={{ display: "none" }} name="rating" rules={[
-                        {
-                            required: true,
-                            message: 'Please input your rating!',
-                        }
-                    ]}>
+                    <Form.Item
+                        style={{ display: "none" }}
+                        name="rating"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please input your rating!",
+                            },
+                        ]}
+                    >
                         <InputNumber />
                     </Form.Item>
                     <AnimationContainer animation="zoomIn">
                         <FeedbackSectionContainer type="flex" justify="center">
                             {Object.values(feedback).map((level, index) => (
-                                <FeedbackIcon key={index} onClick={() => handleRatingChange(index)} active={active == index} src={level} alt={"level" + (index + 1)} />
+                                <FeedbackIcon
+                                    key={index}
+                                    onClick={() => handleRatingChange(index)}
+                                    active={active == index}
+                                    src={level}
+                                    alt={"level" + (index + 1)}
+                                />
                             ))}
                         </FeedbackSectionContainer>
                     </AnimationContainer>
                     <FeedbackSectionContainer type="flex" justify="center">
                         <Col xs={23} sm={16} lg={10}>
-                            <Form.Item
-                                name="message"
-                                rules={rules.message}
-                            >
-                                <TextArea style={{ width: "100%" }} showCount maxLength={180} rows={6} />
+                            <Form.Item name="message" rules={rules.message}>
+                                <TextArea
+                                    style={{ width: "100%" }}
+                                    showCount
+                                    maxLength={180}
+                                    rows={6}
+                                />
                             </Form.Item>
                         </Col>
                     </FeedbackSectionContainer>
@@ -500,11 +540,16 @@ function Contact() {
                         <SubmitButton active={feedbackFormReady} />
                     </div>
                 </Form>
-
             </FeedbackContainer>
             <RevPartner hasReviews={false} />
         </div>
-    )
+    );
 }
 
-export default Contact
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, null)(Contact);

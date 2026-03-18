@@ -3,6 +3,7 @@ import { Row, Spin } from "antd";
 import styled from "styled-components";
 import axios from "axios";
 import { dimensions } from "../../../helper";
+import { connect } from "react-redux";
 
 const Element = styled.div`
     width: 48%;
@@ -12,7 +13,9 @@ const Element = styled.div`
     justify-content: center;
     height: 500px;
     border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
     cursor: pointer;
@@ -27,7 +30,8 @@ const Element = styled.div`
     }
 
     &:hover {
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        box-shadow:
+            0 14px 28px rgba(0, 0, 0, 0.25),
             0 10px 10px rgba(0, 0, 0, 0.22);
 
         img {
@@ -108,22 +112,18 @@ const LoadingContainer = styled(Row)`
     margin: 50px auto;
 `;
 
-function Activity({ incrementStep, text }) {
+function Activity({ incrementStep, text, language }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axios
-            .get(
-                `${
-                    window.location.origin
-                }/api/activity?language=${localStorage.getItem("language")}`
-            )
+            .get(`${window.location.origin}/api/activity?language=${language}`)
             .then((response) => {
                 setData(response.data.data);
                 setLoading(false);
             });
-    }, []);
+    }, [language]);
 
     return (
         <Fragment>
@@ -163,5 +163,10 @@ function Activity({ incrementStep, text }) {
         </Fragment>
     );
 }
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
 
-export default Activity;
+export default connect(mapStateToProps, null)(withRouter(Activity));

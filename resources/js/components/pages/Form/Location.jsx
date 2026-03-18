@@ -94,7 +94,7 @@ const Price = styled.p`
     font-weight: bold;
 `;
 
-const SelectionItem = ({ element, lg, handleClick }) => (
+const SelectionItem = ({ element, lg, handleClick, language }) => (
     <SelectionContainer xs={24} lg={lg} onClick={() => handleClick(element)}>
         <div className="selection-sub-container">
             <Selection
@@ -103,36 +103,24 @@ const SelectionItem = ({ element, lg, handleClick }) => (
             />
             <Info>
                 <div>
-                    <h3>{element.name[localStorage.getItem("language")]}</h3>
+                    <h3>{element.name[language]}</h3>
                     <p>
                         {!Array.isArray(element.duration) && (
                             <>
                                 <img src="/icon/form/time.svg" />{" "}
-                                {
-                                    element.duration[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {element.duration[language]}
                             </>
                         )}
                         {!Array.isArray(element.height) && (
                             <>
                                 <img src="/icon/form/height.svg" />{" "}
-                                {
-                                    element.height[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {element.height[language]}
                             </>
                         )}
                         {!Array.isArray(element.level) && (
                             <>
                                 <img src="/icon/form/difficulty.svg" />{" "}
-                                {
-                                    element.level[
-                                        localStorage.getItem("language")
-                                    ]
-                                }
+                                {element.level[language]}
                             </>
                         )}
                     </p>
@@ -153,7 +141,7 @@ const LoadingContainer = styled(Row)`
 
 const columnSize = [12, 12, 14, 10, 12, 12, 10, 14, 12, 12, 14, 10, 12, 12];
 function Location(props) {
-    const { experiences, loading, text, fields } = props;
+    const { experiences, loading, text, fields, language } = props;
     const { date } = fields;
     useEffect(() => {
         props.fetchExperiences({ date: moment(date).format("YYYY-MM-DD") });
@@ -184,6 +172,7 @@ function Location(props) {
                     {experiences.length ? (
                         experiences.map((element, index) => (
                             <SelectionItem
+                                language={language}
                                 key={element.id}
                                 handleClick={handleClick}
                                 lg={
@@ -213,6 +202,7 @@ const mapStateToProps = (state) => {
         loading: state.experience.loading,
         experiences: state.experience.data,
         fields: state.form.fields,
+        language: state.application.language,
     };
 };
 

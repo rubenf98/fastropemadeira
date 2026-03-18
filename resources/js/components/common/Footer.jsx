@@ -1,11 +1,10 @@
-import { Row } from 'antd';
-import React from 'react'
+import { Row } from "antd";
+import React from "react";
 import styled from "styled-components";
 import moment from "moment";
-import { dimensions, maxWidth } from '../../helper';
-import {
-    Link
-} from "react-router-dom";
+import { dimensions, maxWidth } from "../../helper";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Container = styled.section`
     width: 100%;
@@ -29,8 +28,9 @@ const Container = styled.section`
 
 const Header = styled.div`
     width: 40%;
-    
-    h2, p {
+
+    h2,
+    p {
         color: white;
         margin: 0px;
     }
@@ -49,18 +49,17 @@ const Header = styled.div`
         align-items: center;
         gap: 10px;
 
-        img{
+        img {
             width: 20px;
-
         }
     }
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         width: 100%;
         margin: 30px 0px;
     }
 
-    @media (max-width: ${dimensions.sm}){
+    @media (max-width: ${dimensions.sm}) {
         margin: 20px 0px;
     }
 `;
@@ -76,17 +75,14 @@ const Content = styled.div`
     margin: 0px auto;
     border-top: 1px solid white;
 
-    @media (max-width: ${dimensions.md}){
+    @media (max-width: ${dimensions.md}) {
         flex-wrap: wrap;
         border: 0px;
-
     }
-    
 `;
 
 const LinkContainer = styled.div`
     width: 20%;
-    
 
     h3 {
         font-size: 24px;
@@ -94,7 +90,8 @@ const LinkContainer = styled.div`
         margin-bottom: 20px;
     }
 
-    a, p {
+    a,
+    p {
         display: block;
         font-size: 20px;
         color: white;
@@ -102,21 +99,19 @@ const LinkContainer = styled.div`
         margin: 5px 0px;
     }
 
-    @media (max-width: ${dimensions.md}){
-        width: ${props => props.fullWidth ? "100%" : "50%"};
+    @media (max-width: ${dimensions.md}) {
+        width: ${(props) => (props.fullWidth ? "100%" : "50%")};
         margin: 30px 0px;
     }
 
-
-    @media (max-width: ${dimensions.sm}){
+    @media (max-width: ${dimensions.sm}) {
         width: 100%;
         margin: 20px 0px;
     }
 `;
 
-
-function Footer() {
-    const { text } = require('../../../assets/' + localStorage.getItem('language') + "/footer");
+function Footer(props) {
+    const { text } = require("../../../assets/" + props.language + "/footer");
     return (
         <Container>
             <Content>
@@ -124,42 +119,68 @@ function Footer() {
                     <p>Copyright ©{moment().year()}</p>
                     <h2>Fast Rope Madeira</h2>
                     <div type="flex" align="middle">
-                        <a href="https://www.facebook.com/madeira.fastrope" target="_blank" >
-                            <img loading="lazy" src="/icon/company/facebook.png" alt="facebook" />
+                        <a
+                            href="https://www.facebook.com/madeira.fastrope"
+                            target="_blank"
+                        >
+                            <img
+                                loading="lazy"
+                                src="/icon/company/facebook.png"
+                                alt="facebook"
+                            />
                         </a>
-                        <a href="https://api.whatsapp.com/send?l=en&phone=351933933452" target="_blank" >
-                            <img loading="lazy" src="/icon/company/whatsapp.svg" alt="whatsapp" />
+                        <a
+                            href="https://api.whatsapp.com/send?l=en&phone=351933933452"
+                            target="_blank"
+                        >
+                            <img
+                                loading="lazy"
+                                src="/icon/company/whatsapp.svg"
+                                alt="whatsapp"
+                            />
                         </a>
-                        <a href="https://www.instagram.com/fastrope_madeira/" target="_blank" >
-                            <img loading="lazy" src="/icon/company/instagram.svg" alt="instagram" />
+                        <a
+                            href="https://www.instagram.com/fastrope_madeira/"
+                            target="_blank"
+                        >
+                            <img
+                                loading="lazy"
+                                src="/icon/company/instagram.svg"
+                                alt="instagram"
+                            />
                         </a>
                     </div>
                 </Header>
 
                 <LinkContainer>
-
                     <h3>{text.sections[0].title}</h3>
                     <Link to="/">{text.sections[0].items[0]}</Link>
                     <Link to="/about">{text.sections[0].items[1]}</Link>
                     <Link to="/contact">{text.sections[0].items[2]}</Link>
                 </LinkContainer>
                 <LinkContainer>
-
                     <h3>{text.sections[1].title}</h3>
                     {/* <Link to="/">{text.sections[1].items[0]}</Link> */}
                     <p>{text.sections[1].items[1]}</p>
                 </LinkContainer>
                 <LinkContainer fullWidth>
                     <h3>{text.sections[2].title}</h3>
-                    <p>Urbanização Vista Alegre, Caminho Velho da Azenha Loja A, 9125-115 Caniço</p>
+                    <p>
+                        Urbanização Vista Alegre, Caminho Velho da Azenha Loja
+                        A, 9125-115 Caniço
+                    </p>
                     <p>(351) 933 933 452</p>
                     <p>info@fastropemadeira.com</p>
                 </LinkContainer>
-
-
             </Content>
         </Container>
-    )
+    );
 }
 
-export default Footer
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, null)(Footer);

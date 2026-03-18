@@ -17,9 +17,6 @@ import PartnerForm from "./components/pages/PartnerForm";
 export const history = createBrowserHistory();
 
 function Routes() {
-    const getRoute = (route) => {
-        return "/" + localStorage.getItem("language") + route
-    };
 
     return (
 
@@ -27,22 +24,16 @@ function Routes() {
             <ScrollToTop>
                 <Switch>
 
-                    <Redirect exact from="/" to={getRoute("/")} />
-                    <Redirect exact from="/contact" to={getRoute("/contact")} />
-                    <Redirect exact from="/about" to={getRoute("/about")} />
-                    <Redirect exact from="/reservation/:partnerUrl" to={getRoute("/reservation/:partnerUrl")} />
-                    <Redirect exact from="/confirmation/:token" to={getRoute("/confirmation/:token")} />
-                    <Redirect exact from="/tour/:activity/:experience" to={getRoute("/tour/:activity/:experience")} />
                     <Route path="/login" component={Login} />
                     <Route path="/painel" component={PainelLayout} />
 
                     <Layout>
-                        <Route exact path="/:language/reservation/:partnerUrl" component={withRouter(PartnerForm)} />
-                        <Route exact path="/:language/confirmation/:token" component={withRouter(Confirmation)} />
-                        <Route exact path="/:language/tour/:activity/:experience" component={withRouter(Activity)} />
-                        <Route exact path="/:language/contact" component={Contact} />
-                        <Route exact path="/:language/about" component={About} />
-                        <Route exact path="/:language/" component={Homepage} />
+                        <Route exact path="/reservation/:partnerUrl" component={withRouter(PartnerForm)} />
+                        <Route exact path="/confirmation/:token" component={withRouter(Confirmation)} />
+                        <Route exact path="/tour/:activity/:experience" component={withRouter(Activity)} />
+                        <Route exact path="/contact" component={Contact} />
+                        <Route exact path="/about" component={About} />
+                        <Route exact path="/" component={Homepage} />
                     </Layout>
                 </Switch>
             </ScrollToTop>

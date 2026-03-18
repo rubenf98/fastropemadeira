@@ -12,9 +12,7 @@ const Container = styled.div`
 `;
 
 function About(props) {
-    const { text } = require("../../../assets/" +
-        localStorage.getItem("language") +
-        "/about");
+    const { text } = require("../../../assets/" + props.language + "/about");
     console.log(text);
     return (
         <Container>
@@ -32,4 +30,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(About);
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(About);
