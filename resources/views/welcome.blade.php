@@ -3,15 +3,6 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' https:;
-    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com;
-    font-src 'self' https://fonts.gstatic.com;
-    connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
-    frame-src https://www.googletagmanager.com;
-    ">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
@@ -56,12 +47,12 @@
 <style>
     @font-face {
         font-family: 'Neutrons Demo';
-        src: url('{!! asset(' fonts/NeutronsDemoRegular.ttf') !!}');
+        src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
     }
 
     @font-face {
         font-family: 'Palestine Border';
-        src: url('{!! asset(' fonts/PalestineBorder.ttf') !!}');
+        src: url('{!! asset('fonts/PalestineBorder.ttf') !!}');
     }
 
     html,
