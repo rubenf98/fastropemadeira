@@ -40,7 +40,7 @@ class TransactionRequest extends FormRequest
         return [
             'amount' => 'required|numeric',
             'n_clients' => 'nullable|integer',
-            'date' => 'required|date',
+            'date' => 'required|date_format:Y-m-d',
             'type' => 'required|string|exists:trackers,name',
             'tracker_id' => 'required|integer|exists:trackers,id',
             'transaction_category_id' => 'required|integer',
