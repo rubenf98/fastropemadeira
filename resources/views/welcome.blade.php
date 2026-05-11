@@ -40,6 +40,15 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ124BK9TB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQ124BK9TB');
+    </script>
+
 
     <title>FastRope</title>
 </head>
@@ -47,12 +56,12 @@
 <style>
     @font-face {
         font-family: 'Neutrons Demo';
-        src: url('{!! asset('fonts/NeutronsDemoRegular.ttf') !!}');
+        src: url('{!! asset(' fonts/NeutronsDemoRegular.ttf') !!}');
     }
 
     @font-face {
         font-family: 'Palestine Border';
-        src: url('{!! asset('fonts/PalestineBorder.ttf') !!}');
+        src: url('{!! asset(' fonts/PalestineBorder.ttf') !!}');
     }
 
     html,
